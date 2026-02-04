@@ -1,0 +1,69 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Aspect Ratio" description="Displays content within a desired ratio using pure CSS" activeComponent="aspect-ratio">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Aspect Ratio</h1>
+          <p class="mt-2 text-lg text-muted-foreground">Displays content within a desired ratio using pure CSS.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <!-- Preview: 16:9 -->
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card min-h-[200px] space-y-6">
+            <!-- 16:9 -->
+            <div>
+              <p class="text-sm font-medium mb-2">16:9</p>
+              <div class="overflow-hidden rounded-[var(--marrow-radius)]" style="aspect-ratio: 16 / 9;">
+                <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&h=450&fit=crop" alt="Photo placeholder" class="h-full w-full object-cover" />
+              </div>
+            </div>
+
+            <!-- 1:1 -->
+            <div>
+              <p class="text-sm font-medium mb-2">1:1</p>
+              <div class="max-w-[200px] overflow-hidden rounded-[var(--marrow-radius)]" style="aspect-ratio: 1 / 1;">
+                <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=400&h=400&fit=crop" alt="Photo placeholder" class="h-full w-full object-cover" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;!-- 16:9 Aspect Ratio --&gt;
+&lt;div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 16 / 9;"&gt;
+  &lt;img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" /&gt;
+&lt;/div&gt;
+
+&lt;!-- 1:1 Aspect Ratio --&gt;
+&lt;div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 1 / 1;"&gt;
+  &lt;img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" /&gt;
+&lt;/div&gt;
+
+&lt;!-- 4:3 Aspect Ratio --&gt;
+&lt;div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 4 / 3;"&gt;
+  &lt;img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" /&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

@@ -1,0 +1,41 @@
+<!-- Marrow UI: Sheet -->
+<!-- A side panel that slides in from the edge of the screen -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwSheet()">
+  <button @click="show()" class="mw-btn mw-btn-outline">Open Sheet</button>
+
+  <template x-if="open">
+    <div>
+      <!-- Overlay -->
+      <div class="mw-overlay" @click="close()"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"></div>
+
+      <!-- Sheet Panel (right side) -->
+      <div class="mw-sheet mw-sheet-right"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="translate-x-full"
+           x-transition:enter-end="translate-x-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="translate-x-0"
+           x-transition:leave-end="translate-x-full">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-heading text-lg font-semibold">Sheet Title</h3>
+            <p class="text-sm text-muted-foreground">Sheet description.</p>
+          </div>
+          <button @click="close()" class="mw-btn mw-btn-ghost mw-btn-icon">
+            &times;
+          </button>
+        </div>
+        <div class="mw-separator"></div>
+        <!-- Sheet content here -->
+      </div>
+    </div>
+  </template>
+</div>

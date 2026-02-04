@@ -1,0 +1,28 @@
+<!-- Marrow UI: Kbd -->
+<!-- Keyboard shortcut indicator for displaying key combinations -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Single key -->
+<kbd class="mw-kbd">K</kbd>
+
+<!-- Key combination -->
+<span class="flex items-center gap-1">
+  <kbd class="mw-kbd">Ctrl</kbd>
+  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">K</kbd>
+</span>
+
+<!-- Three-key combination -->
+<span class="flex items-center gap-1">
+  <kbd class="mw-kbd">Ctrl</kbd>
+  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">Shift</kbd>
+  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">P</kbd>
+</span>
+
+<!-- Inline with text -->
+<p>Press <kbd class="mw-kbd">Ctrl</kbd>
+  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">K</kbd> to open the command palette.
+</p>

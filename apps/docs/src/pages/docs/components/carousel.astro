@@ -1,0 +1,115 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Carousel" description="A slideshow component for cycling through content with navigation controls" activeComponent="carousel">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Carousel</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A slideshow component for cycling through content with navigation controls.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card flex items-center justify-center min-h-[200px]">
+            <div class="w-full max-w-lg" x-data="mwCarousel(3)">
+              <div class="relative overflow-hidden rounded-marrow border border-border">
+                <!-- Slides -->
+                <div class="relative min-h-[200px]">
+                  <div x-show="current === 0" class="flex items-center justify-center h-[200px] bg-muted/30">
+                    <div class="text-center">
+                      <p class="text-lg font-semibold">Slide 1</p>
+                      <p class="text-sm text-muted-foreground">First slide content</p>
+                    </div>
+                  </div>
+                  <div x-show="current === 1" class="flex items-center justify-center h-[200px] bg-muted/30">
+                    <div class="text-center">
+                      <p class="text-lg font-semibold">Slide 2</p>
+                      <p class="text-sm text-muted-foreground">Second slide content</p>
+                    </div>
+                  </div>
+                  <div x-show="current === 2" class="flex items-center justify-center h-[200px] bg-muted/30">
+                    <div class="text-center">
+                      <p class="text-lg font-semibold">Slide 3</p>
+                      <p class="text-sm text-muted-foreground">Third slide content</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Prev/Next Buttons -->
+                <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Previous slide">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Next slide">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </div>
+
+              <!-- Dot Indicators -->
+              <div class="flex justify-center gap-2 mt-3">
+                <template x-for="i in count" :key="i">
+                  <button @click="goTo(i - 1)"
+                    :class="current === i - 1 ? 'bg-primary' : 'bg-muted-foreground/30'"
+                    class="w-2 h-2 rounded-full transition-colors"
+                    :aria-label="'Go to slide ' + i"></button>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwCarousel(3)"&gt;
+  &lt;div class="relative overflow-hidden rounded-marrow border border-border"&gt;
+    &lt;!-- Slides --&gt;
+    &lt;div class="relative min-h-[200px]"&gt;
+      &lt;div x-show="current === 0" class="flex items-center justify-center h-[200px] bg-muted/30"&gt;
+        &lt;div class="text-center"&gt;
+          &lt;p class="text-lg font-semibold"&gt;Slide 1&lt;/p&gt;
+          &lt;p class="text-sm text-muted-foreground"&gt;First slide content&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div x-show="current === 1" class="flex items-center justify-center h-[200px] bg-muted/30"&gt;
+        &lt;div class="text-center"&gt;
+          &lt;p class="text-lg font-semibold"&gt;Slide 2&lt;/p&gt;
+          &lt;p class="text-sm text-muted-foreground"&gt;Second slide content&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div x-show="current === 2" class="flex items-center justify-center h-[200px] bg-muted/30"&gt;
+        &lt;div class="text-center"&gt;
+          &lt;p class="text-lg font-semibold"&gt;Slide 3&lt;/p&gt;
+          &lt;p class="text-sm text-muted-foreground"&gt;Third slide content&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Prev/Next Buttons --&gt;
+    &lt;button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Previous slide"&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="m15 18-6-6 6-6"/&gt;&lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Next slide"&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="m9 18 6-6-6-6"/&gt;&lt;/svg&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Dot Indicators --&gt;
+  &lt;div class="flex justify-center gap-2 mt-3"&gt;
+    &lt;template x-for="i in count" :key="i"&gt;
+      &lt;button @click="goTo(i - 1)"
+        :class="current === i - 1 ? 'bg-primary' : 'bg-muted-foreground/30'"
+        class="w-2 h-2 rounded-full transition-colors"
+        :aria-label="'Go to slide ' + i"&gt;&lt;/button&gt;
+    &lt;/template&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

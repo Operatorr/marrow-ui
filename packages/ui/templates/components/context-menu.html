@@ -1,0 +1,38 @@
+<!-- Marrow UI: Context Menu -->
+<!-- A menu that appears on right-click, providing contextual actions for an element -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwContextMenu()">
+  <!-- Right-click trigger area -->
+  <div @contextmenu="show($event)"
+    class="flex items-center justify-center h-[150px] border-2 border-dashed border-border rounded-marrow text-sm text-muted-foreground">
+    Right-click here to open context menu
+  </div>
+
+  <!-- Context Menu -->
+  <div x-show="open" x-cloak
+    @click.away="close()"
+    @keydown.escape.window="close()"
+    :style="'position: fixed; left: ' + x + 'px; top: ' + y + 'px; z-index: 50;'"
+    class="mw-popover w-48">
+    <button @click="close()" class="mw-menu-item">
+      Share
+    </button>
+    <button @click="close()" class="mw-menu-item">
+      Copy
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+C</span>
+    </button>
+    <button @click="close()" class="mw-menu-item">
+      Edit
+    </button>
+    <div class="mw-menu-separator"></div>
+    <button @click="close()" class="mw-menu-item">
+      Rename
+    </button>
+    <div class="mw-menu-separator"></div>
+    <button @click="close()" class="mw-menu-item text-destructive">
+      Delete
+      <span class="ml-auto text-xs text-muted-foreground">Del</span>
+    </button>
+  </div>
+</div>

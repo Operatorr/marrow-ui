@@ -1,0 +1,49 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Sidebar from "../components/Sidebar.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  activeSection?: string;
+  activeComponent?: string;
+}
+
+const { title = "Docs", description = "Marrow UI Documentation", activeSection = "", activeComponent = "" } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div x-data="{ mobileSidebar: false }">
+    <Navbar showMenuButton />
+
+    <div class="flex">
+      <!-- Mobile overlay -->
+      <div
+        x-show="mobileSidebar"
+        @click="mobileSidebar = false"
+        class="fixed inset-0 z-30 bg-black/50 md:hidden"
+        x-cloak
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+      ></div>
+
+      <!-- Sidebar -->
+      <aside
+        x-bind:class="mobileSidebar ? 'translate-x-0' : '-translate-x-full md:translate-x-0'"
+        class="fixed md:sticky top-14 z-30 h-[calc(100vh-3.5rem)] w-64 shrink-0 border-r bg-background overflow-y-auto transition-transform duration-200 md:block"
+      >
+        <Sidebar activeSection={activeSection} activeComponent={activeComponent} />
+      </aside>
+
+      <!-- Main content -->
+      <main class="flex-1 min-w-0 px-6 py-8 md:px-10 lg:px-16 max-w-4xl">
+        <slot />
+      </main>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,52 @@
+<!-- Marrow UI: Switch -->
+<!-- A toggle switch for on/off states -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Switch (off by default) -->
+<div class="flex items-center gap-3" x-data="mwSwitch()">
+  <button class="mw-switch"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          @click="toggle()"
+          role="switch"
+          :aria-checked="checked">
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
+</div>
+
+<!-- Switch (on by default) -->
+<div class="flex items-center gap-3" x-data="mwSwitch(true)">
+  <button class="mw-switch"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          @click="toggle()"
+          role="switch"
+          :aria-checked="checked">
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
+</div>
+
+<!-- Switch with label -->
+<div class="flex items-center gap-3" x-data="mwSwitch()">
+  <button class="mw-switch"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          @click="toggle()"
+          role="switch"
+          :aria-checked="checked"
+          id="airplane-mode">
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <label for="airplane-mode" class="mw-label cursor-pointer">Airplane Mode</label>
+</div>
+
+<!-- Disabled switch -->
+<div class="flex items-center gap-3" x-data="mwSwitch()">
+  <button class="mw-switch opacity-50 pointer-events-none"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          role="switch"
+          :aria-checked="checked"
+          disabled>
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <span class="text-sm text-muted-foreground">Disabled</span>
+</div>

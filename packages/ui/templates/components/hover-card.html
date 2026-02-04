@@ -1,0 +1,38 @@
+<!-- Marrow UI: Hover Card -->
+<!-- A card that appears when hovering over a trigger element for previewing content -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwHoverCard()" class="relative inline-block">
+  <!-- Trigger -->
+  <a href="#"
+     @mouseenter="enter()"
+     @mouseleave="leave()"
+     class="text-primary font-medium underline underline-offset-4">
+    @marrow-ui
+  </a>
+
+  <!-- Hover Card -->
+  <div x-show="show" x-cloak
+       @mouseenter="enter()" @mouseleave="leave()"
+       x-transition:enter="transition ease-out duration-150"
+       x-transition:enter-start="opacity-0 translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-100"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-1"
+       class="absolute left-0 top-full mt-2 z-50 w-80 mw-card">
+    <div class="flex gap-4">
+      <div class="mw-avatar mw-avatar-lg flex-shrink-0">MU</div>
+      <div class="space-y-1">
+        <h4 class="font-heading text-sm font-semibold">Marrow UI</h4>
+        <p class="text-sm text-muted-foreground">
+          A copy-paste UI kit built with Tailwind CSS and Alpine.js.
+        </p>
+        <div class="flex items-center gap-4 pt-1">
+          <span class="text-xs text-muted-foreground">Joined Dec 2024</span>
+          <span class="text-xs text-muted-foreground">1.2k followers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

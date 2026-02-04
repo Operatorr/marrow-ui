@@ -1,0 +1,49 @@
+<!-- Marrow UI: Input Group -->
+<!-- An input with prefix or suffix addons for contextual information -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- With Text Prefix -->
+<div class="flex">
+  <span class="inline-flex items-center px-3 text-sm text-muted-foreground
+    border border-r-0 rounded-l-[var(--marrow-radius)]"
+    style="border-color: hsl(var(--marrow-input));
+           background: hsl(var(--marrow-muted));">
+    https://
+  </span>
+  <input type="text" class="mw-input rounded-l-none"
+         placeholder="example.com" />
+</div>
+
+<!-- With Text Suffix -->
+<div class="flex">
+  <input type="text" class="mw-input rounded-r-none"
+         placeholder="username" />
+  <span class="inline-flex items-center px-3 text-sm text-muted-foreground
+    border border-l-0 rounded-r-[var(--marrow-radius)]"
+    style="border-color: hsl(var(--marrow-input));
+           background: hsl(var(--marrow-muted));">
+    @gmail.com
+  </span>
+</div>
+
+<!-- With Icon Prefix -->
+<div class="flex">
+  <span class="inline-flex items-center justify-center w-10
+    border border-r-0 rounded-l-[var(--marrow-radius)] text-muted-foreground"
+    style="border-color: hsl(var(--marrow-input));
+           background: hsl(var(--marrow-muted));">
+    <svg ...>...</svg>
+  </span>
+  <input type="email" class="mw-input rounded-l-none"
+         placeholder="you@example.com" />
+</div>
+
+<!-- With Button Suffix -->
+<div class="flex">
+  <input type="text" class="mw-input rounded-r-none"
+         placeholder="Search..." />
+  <button class="mw-btn mw-btn-primary"
+    style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+    <svg ...>...</svg>
+  </button>
+</div>

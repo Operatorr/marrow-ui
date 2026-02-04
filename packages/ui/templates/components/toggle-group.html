@@ -1,0 +1,43 @@
+<!-- Marrow UI: Toggle Group -->
+<!-- A group of toggle buttons where one or multiple can be selected -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Single selection toggle group -->
+<div x-data="mwToggleGroup('single', 'center')"
+     class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
+  <button class="mw-toggle"
+          :data-state="isSelected('left') ? 'on' : 'off'"
+          @click="select('left')">
+    <svg ...>Align Left</svg>
+  </button>
+  <button class="mw-toggle"
+          :data-state="isSelected('center') ? 'on' : 'off'"
+          @click="select('center')">
+    <svg ...>Align Center</svg>
+  </button>
+  <button class="mw-toggle"
+          :data-state="isSelected('right') ? 'on' : 'off'"
+          @click="select('right')">
+    <svg ...>Align Right</svg>
+  </button>
+</div>
+
+<!-- Multiple selection toggle group -->
+<div x-data="mwToggleGroup('multiple', ['bold'])"
+     class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
+  <button class="mw-toggle"
+          :data-state="isSelected('bold') ? 'on' : 'off'"
+          @click="select('bold')">
+    <svg ...>Bold</svg>
+  </button>
+  <button class="mw-toggle"
+          :data-state="isSelected('italic') ? 'on' : 'off'"
+          @click="select('italic')">
+    <svg ...>Italic</svg>
+  </button>
+  <button class="mw-toggle"
+          :data-state="isSelected('underline') ? 'on' : 'off'"
+          @click="select('underline')">
+    <svg ...>Underline</svg>
+  </button>
+</div>

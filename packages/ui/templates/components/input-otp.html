@@ -1,0 +1,33 @@
+<!-- Marrow UI: Input OTP -->
+<!-- A one-time password input with separate boxes for each digit -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwInputOTP(6)">
+  <p class="text-sm text-muted-foreground mb-4">
+    Enter the 6-digit code sent to your email.
+  </p>
+
+  <div class="flex items-center gap-2 justify-center">
+    <template x-for="(val, index) in values" :key="index">
+      <div class="flex items-center">
+        <input
+          :x-ref="'otp' + index"
+          type="text"
+          inputmode="numeric"
+          maxlength="1"
+          class="mw-input w-10 h-12 text-center text-lg font-semibold"
+          :value="values[index]"
+          @input="handleInput(index, $event)"
+          @keydown="handleKeydown(index, $event)"
+        />
+        <!-- Optional separator after 3rd digit -->
+        <template x-if="index === 2">
+          <div class="mx-1 text-muted-foreground">-</div>
+        </template>
+      </div>
+    </template>
+  </div>
+
+  <!-- Access the full code with: -->
+  <p x-text="code"></p>
+</div>

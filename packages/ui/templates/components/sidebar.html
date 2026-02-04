@@ -1,0 +1,32 @@
+<!-- Marrow UI: Sidebar -->
+<!-- A collapsible sidebar navigation component -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwSidebar(true)" class="flex min-h-screen">
+  <aside class="border-r bg-card transition-all duration-300 overflow-hidden shrink-0"
+         :style="open ? 'width: 16rem' : 'width: 3.5rem'">
+    <div class="p-3 flex items-center justify-between border-b">
+      <span x-show="open" class="font-heading font-semibold text-sm">Workspace</span>
+      <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon p-1">
+        <!-- Chevron icon -->
+      </button>
+    </div>
+    <nav class="p-2 space-y-1">
+      <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
+                         bg-accent text-accent-foreground font-medium">
+        <!-- Icon (shrink-0) -->
+        <span x-show="open" x-transition class="truncate">Dashboard</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
+                         text-muted-foreground hover:bg-accent transition-colors">
+        <!-- Icon (shrink-0) -->
+        <span x-show="open" x-transition class="truncate">Team</span>
+      </a>
+      <!-- More nav items... -->
+    </nav>
+  </aside>
+
+  <div class="flex-1 p-6">
+    <!-- Main content -->
+  </div>
+</div>

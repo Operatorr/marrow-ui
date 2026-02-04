@@ -1,0 +1,41 @@
+<!-- Marrow UI: Checkbox -->
+<!-- A toggleable checkbox control with label and checked state indicator -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Unchecked by default -->
+<div x-data="mwCheckbox()" class="flex items-center gap-2">
+  <button @click="toggle()"
+    :data-state="checked ? 'checked' : 'unchecked'"
+    class="mw-checkbox"
+    role="checkbox"
+    :aria-checked="checked">
+    <svg x-show="checked"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+  </button>
+  <label @click="toggle()" class="mw-label cursor-pointer select-none">
+    Accept terms and conditions
+  </label>
+</div>
+
+<!-- Checked by default -->
+<div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+  <button @click="toggle()"
+    :data-state="checked ? 'checked' : 'unchecked'"
+    class="mw-checkbox"
+    role="checkbox"
+    :aria-checked="checked">
+    <svg x-show="checked"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+  </button>
+  <label @click="toggle()" class="mw-label cursor-pointer select-none">
+    Send me email notifications
+  </label>
+</div>

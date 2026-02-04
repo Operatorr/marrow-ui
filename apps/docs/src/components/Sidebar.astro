@@ -1,0 +1,64 @@
+---
+interface Props {
+  activeSection?: string;
+  activeComponent?: string;
+}
+
+const { activeSection = "", activeComponent = "" } = Astro.props;
+
+const gettingStarted = [
+  { label: "Home", href: "/docs/", id: "home" },
+  { label: "Introduction", href: "/docs/introduction/", id: "introduction" },
+  { label: "Installation", href: "/docs/installation/", id: "installation" },
+  { label: "Customization", href: "/docs/customization/", id: "customization" },
+];
+
+const components = [
+  "Accordion", "Alert", "Alert Dialog", "Aspect Ratio", "Avatar", "Badge",
+  "Breadcrumb", "Button", "Button Group", "Calendar", "Card", "Carousel",
+  "Chart", "Checkbox", "Collapsible", "Combobox", "Command", "Context Menu",
+  "Data Table", "Date Picker", "Dialog", "Direction", "Drawer", "Dropdown Menu",
+  "Empty", "Field", "Hover Card", "Input", "Input Group", "Input OTP",
+  "Item", "Kbd", "Label", "Menubar", "Native Select", "Navigation Menu",
+  "Pagination", "Popover", "Progress", "Radio Group", "Resizable",
+  "Scroll Area", "Select", "Separator", "Sheet", "Sidebar", "Skeleton",
+  "Slider", "Sonner", "Spinner", "Switch", "Table", "Tabs", "Textarea",
+  "Toast", "Toggle", "Toggle Group", "Tooltip", "Typography",
+];
+
+function toSlug(name: string) {
+  return name.toLowerCase().replace(/\s+/g, "-");
+}
+---
+
+<nav class="py-4 space-y-1">
+  <div class="px-3 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-2">Getting Started</div>
+  {gettingStarted.map((item) => (
+    <a
+      href={item.href}
+      class:list={[
+        "block px-3 py-1.5 text-sm rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors",
+        activeSection === item.id && "bg-accent text-foreground font-medium",
+      ]}
+    >
+      {item.label}
+    </a>
+  ))}
+
+  <div class="px-3 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-4">Components</div>
+  {components.map((name) => {
+    const slug = toSlug(name);
+    return (
+      <a
+        href={`/docs/components/${slug}/`}
+        class:list={[
+          "block px-3 py-1.5 text-sm rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors",
+          activeComponent === slug && "bg-accent text-foreground font-medium",
+        ]}
+      >
+        {name}
+      </a>
+    );
+  })}
+  <div class="h-8"></div>
+</nav>

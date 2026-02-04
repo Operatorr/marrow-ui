@@ -1,0 +1,41 @@
+{
+  "name": "marrow-ui",
+  "version": "0.1.0",
+  "description": "A sleek, opinionated UI kit built with Tailwind CSS and Alpine.js",
+  "license": "MIT",
+  "author": "Alexander",
+  "type": "module",
+  "bin": {
+    "marrow-ui": "./bin/cli.js"
+  },
+  "main": "./src/js/marrow.js",
+  "exports": {
+    ".": "./src/js/marrow.js",
+    "./css": "./src/css/marrow.css",
+    "./css/marrow.css": "./src/css/marrow.css",
+    "./js/marrow.js": "./src/js/marrow.js",
+    "./config": "./templates/marrow.config.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "templates/"
+  ],
+  "keywords": [
+    "ui",
+    "components",
+    "tailwindcss",
+    "alpinejs",
+    "alpine",
+    "css",
+    "design-system",
+    "ui-kit"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Operatorr/marrow-ui"
+  },
+  "scripts": {
+    "build": "node src/build-theme.js"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Marrow UI",
+  "description": "A sleek, opinionated UI kit built with Tailwind CSS and Alpine.js. 59 copy-paste components with a single config file for theme control.",
+  "branch": "main",
+  "folders": [
+    "packages/ui/src",
+    "packages/ui/templates",
+    "apps/docs/public"
+  ],
+  "excludeFolders": [
+    "node_modules",
+    "dist",
+    ".git",
+    ".turbo",
+    ".astro",
+    ".vercel",
+    "scripts"
+  ],
+  "rules": [
+    "All Marrow UI component classes use the 'mw-' prefix (e.g., mw-btn, mw-card, mw-input)",
+    "Interactive components require Alpine.js x-data attributes with registered data components (e.g., x-data=\"mwDialog()\")",
+    "Styling is done via Tailwind CSS utility classes combined with mw-* component classes",
+    "Theme customization is done via marrow.config.js — do not edit generated CSS files directly",
+    "Button variants: mw-btn-primary, mw-btn-secondary, mw-btn-outline, mw-btn-ghost, mw-btn-destructive, mw-btn-link",
+    "Button sizes: mw-btn-sm (small), default, mw-btn-lg (large), mw-btn-icon (square icon button)",
+    "Form inputs use: mw-input, mw-textarea, mw-select, mw-label, mw-checkbox, mw-radio, mw-switch",
+    "Modals use Alpine.js data components: mwDialog(), mwSheet(), mwAlertDialog(), mwDrawer()",
+    "State is communicated via data-state attributes: 'checked'/'unchecked' for checkboxes/switches, 'active' for tabs, 'on' for toggles",
+    "Toast notifications use Alpine.store('toasts').add({ title, description, variant, duration })",
+    "CSS custom properties are available for custom styling: --marrow-primary, --marrow-radius, --marrow-duration, etc.",
+    "Include marrow.js BEFORE Alpine.js in the HTML <head> to register all data components"
+  ]
+}

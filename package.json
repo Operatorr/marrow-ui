@@ -1,12 +1,13 @@
 {
-  "name": "marrow-ui",
-  "version": "0.1.0",
-  "description": "A sleek, opinionated UI kit built with Tailwind CSS and Alpine.js",
+  "name": "marrow-ui-monorepo",
+  "private": true,
   "scripts": {
-    "build": "node build.js",
-    "dev": "node build.js && serve dist -l 3000",
-    "preview": "serve dist -l 3000"
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint"
   },
-  "license": "MIT",
-  "author": "Alexander"
+  "devDependencies": {
+    "turbo": "^2.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
 }

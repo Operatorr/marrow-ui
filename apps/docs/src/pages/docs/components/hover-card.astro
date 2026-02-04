@@ -1,0 +1,95 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Hover Card" description="A card that appears when hovering over a trigger element for previewing content" activeComponent="hover-card">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Hover Card</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A card that appears when hovering over a trigger element for previewing content.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card flex items-center justify-center min-h-[200px]">
+            <div x-data="mwHoverCard()" class="relative inline-block">
+              <a href="#" @mouseenter="enter()" @mouseleave="leave()" class="text-primary font-medium underline underline-offset-4 decoration-primary/40 hover:decoration-primary">
+                @marrow-ui
+              </a>
+              <div x-show="show" x-cloak
+                   @mouseenter="enter()" @mouseleave="leave()"
+                   x-transition:enter="transition ease-out duration-150"
+                   x-transition:enter-start="opacity-0 translate-y-1"
+                   x-transition:enter-end="opacity-100 translate-y-0"
+                   x-transition:leave="transition ease-in duration-100"
+                   x-transition:leave-start="opacity-100 translate-y-0"
+                   x-transition:leave-end="opacity-0 translate-y-1"
+                   class="absolute left-0 top-full mt-2 z-50 w-80 mw-card">
+                <div class="flex gap-4">
+                  <div class="mw-avatar mw-avatar-lg flex-shrink-0">MU</div>
+                  <div class="space-y-1">
+                    <h4 class="font-heading text-sm font-semibold">Marrow UI</h4>
+                    <p class="text-sm text-muted-foreground">A copy-paste UI kit built with Tailwind CSS and Alpine.js. No framework lock-in.</p>
+                    <div class="flex items-center gap-4 pt-1">
+                      <div class="flex items-center gap-1 text-xs text-muted-foreground">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                        Joined Dec 2024
+                      </div>
+                      <div class="flex items-center gap-1 text-xs text-muted-foreground">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                        1.2k followers
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwHoverCard()" class="relative inline-block"&gt;
+  &lt;!-- Trigger --&gt;
+  &lt;a href="#"
+     @mouseenter="enter()"
+     @mouseleave="leave()"
+     class="text-primary font-medium underline underline-offset-4"&gt;
+    @marrow-ui
+  &lt;/a&gt;
+
+  &lt;!-- Hover Card --&gt;
+  &lt;div x-show="show" x-cloak
+       @mouseenter="enter()" @mouseleave="leave()"
+       x-transition:enter="transition ease-out duration-150"
+       x-transition:enter-start="opacity-0 translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-100"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-1"
+       class="absolute left-0 top-full mt-2 z-50 w-80 mw-card"&gt;
+    &lt;div class="flex gap-4"&gt;
+      &lt;div class="mw-avatar mw-avatar-lg flex-shrink-0"&gt;MU&lt;/div&gt;
+      &lt;div class="space-y-1"&gt;
+        &lt;h4 class="font-heading text-sm font-semibold"&gt;Marrow UI&lt;/h4&gt;
+        &lt;p class="text-sm text-muted-foreground"&gt;
+          A copy-paste UI kit built with Tailwind CSS and Alpine.js.
+        &lt;/p&gt;
+        &lt;div class="flex items-center gap-4 pt-1"&gt;
+          &lt;span class="text-xs text-muted-foreground"&gt;Joined Dec 2024&lt;/span&gt;
+          &lt;span class="text-xs text-muted-foreground"&gt;1.2k followers&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

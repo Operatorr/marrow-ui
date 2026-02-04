@@ -1,0 +1,2847 @@
+# Marrow UI – Complete Documentation
+
+> A sleek, opinionated UI kit built with Tailwind CSS and Alpine.js.
+> No React, no build step required. 59 copy-paste components with a single config file for complete theme control.
+
+## Overview
+
+Marrow UI is a UI component library that works with any HTML-based project. It uses:
+- **Tailwind CSS** for utility-based styling
+- **Alpine.js** for lightweight interactivity (no virtual DOM)
+- **CSS custom properties** for theming (generated from marrow.config.js)
+
+All component classes use the `mw-` prefix (e.g., `mw-btn`, `mw-card`, `mw-input`).
+Interactive components use Alpine.js `x-data` directives with registered data components (e.g., `x-data="mwDialog()"`).
+
+### Installation
+
+**CDN (quickest):**
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/marrow-ui@latest/src/css/marrow.css">
+<script src="https://cdn.jsdelivr.net/npm/marrow-ui@latest/src/js/marrow.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+```
+
+**CLI:**
+```bash
+npx marrow-ui init          # Creates marrow.config.js, marrow.css, marrow.js, marrow-theme.css
+npx marrow-ui add button    # Copies button template to components/ui/button.html
+npx marrow-ui add --all     # Copies all 59 component templates
+npx marrow-ui build         # Regenerates marrow-theme.css from marrow.config.js
+npx marrow-ui list          # Lists all available components
+```
+
+## Configuration Reference
+
+The `marrow.config.js` file controls all theme settings:
+
+```javascript
+/**
+ * Marrow UI Configuration
+ * =======================
+ * This is your single source of truth for customizing Marrow UI.
+ * Every setting is documented with its available options.
+ *
+ * After changing settings, rebuild with: npm run build
+ */
+
+module.exports = {
+
+  // ─── THEME MODE ─────────────────────────────────────────────────────
+  // Controls the default color scheme.
+  // Options: "light" | "dark"
+  theme: "light",
+
+  // ─── COLORS ─────────────────────────────────────────────────────────
+  // All colors use HSL format: "H S% L%"
+  // This allows easy opacity manipulation via Tailwind (e.g. bg-primary/50).
+  //
+  // You can use any HSL value. Some popular palettes:
+  //   Blue:   "220 90% 56%"    Indigo: "234 89% 74%"
+  //   Violet: "263 70% 50%"    Rose:   "347 77% 50%"
+  //   Green:  "142 71% 45%"    Orange: "24 95% 53%"
+  //   Slate:  "215 16% 47%"    Zinc:   "240 4% 46%"
+  colors: {
+    light: {
+      // Primary brand color (buttons, links, active states)
+      primary:            "220 90% 56%",
+      primaryForeground:  "0 0% 100%",
+
+      // Secondary color (secondary buttons, subtle accents)
+      secondary:          "220 14% 96%",
+      secondaryForeground:"220 9% 46%",
+
+      // Accent color (highlights, hover states, decorative elements)
+      accent:             "220 14% 96%",
+      accentForeground:   "220 9% 46%",
+
+      // Base color (page background)
+      background:         "0 0% 100%",
+      foreground:         "222 47% 11%",
+
+      // Muted color (disabled states, placeholder text, subtle backgrounds)
+      muted:              "220 14% 96%",
+      mutedForeground:    "220 9% 46%",
+
+      // Card backgrounds
+      card:               "0 0% 100%",
+      cardForeground:     "222 47% 11%",
+
+      // Popover/dropdown backgrounds
+      popover:            "0 0% 100%",
+      popoverForeground:  "222 47% 11%",
+
+      // Destructive/danger color (delete buttons, error states)
+      destructive:        "0 84% 60%",
+      destructiveForeground: "0 0% 100%",
+
+      // Border and divider color
+      border:             "220 13% 91%",
+
+      // Input border color
+      input:              "220 13% 91%",
+
+      // Focus ring color
+      ring:               "220 90% 56%",
+
+      // Sidebar-specific colors (optional overrides)
+      sidebarBackground:   "0 0% 98%",
+      sidebarForeground:   "240 5% 34%",
+      sidebarBorder:       "220 13% 91%",
+      sidebarAccent:       "220 14% 96%",
+      sidebarAccentForeground: "222 47% 11%",
+      sidebarRing:         "220 90% 56%",
+    },
+    dark: {
+      primary:            "220 90% 56%",
+      primaryForeground:  "0 0% 100%",
+
+      secondary:          "217 33% 17%",
+      secondaryForeground:"210 40% 98%",
+
+      accent:             "217 33% 17%",
+      accentForeground:   "210 40% 98%",
+
+      background:         "222 47% 6%",
+      foreground:         "210 40% 98%",
+
+      muted:              "217 33% 17%",
+      mutedForeground:    "215 20% 65%",
+
+      card:               "222 47% 8%",
+      cardForeground:     "210 40% 98%",
+
+      popover:            "222 47% 8%",
+      popoverForeground:  "210 40% 98%",
+
+      destructive:        "0 63% 31%",
+      destructiveForeground: "0 0% 100%",
+
+      border:             "217 33% 17%",
+      input:              "217 33% 17%",
+      ring:               "224 76% 48%",
+
+      sidebarBackground:   "222 47% 8%",
+      sidebarForeground:   "215 20% 65%",
+      sidebarBorder:       "217 33% 17%",
+      sidebarAccent:       "217 33% 17%",
+      sidebarAccentForeground: "210 40% 98%",
+      sidebarRing:         "224 76% 48%",
+    },
+  },
+
+  // ─── BORDER RADIUS ──────────────────────────────────────────────────
+  // Controls the roundness of all components.
+  // Options:
+  //   "none"   -> 0px      (sharp square corners)
+  //   "sm"     -> 0.25rem  (subtle rounding)
+  //   "md"     -> 0.375rem (moderate rounding)
+  //   "lg"     -> 0.5rem   (default, balanced)
+  //   "xl"     -> 0.75rem  (more rounded)
+  //   "2xl"    -> 1rem     (very rounded)
+  //   "full"   -> 9999px   (pill shapes)
+  //   Or any CSS value like "0.625rem"
+  radius: "lg",
+
+  // ─── COMPACTNESS / SIZING ───────────────────────────────────────────
+  // Controls the overall density of the UI.
+  // This adjusts font sizes, padding, margins, and component sizes globally.
+  //
+  // Options:
+  //   "minimal"  -> text-xs, tight padding    (dashboards, data-heavy UIs)
+  //   "compact"  -> text-sm, small padding     (admin panels, productivity tools)
+  //   "normal"   -> text-base, standard        (general purpose, default)
+  //   "relaxed"  -> text-lg, generous padding  (marketing sites, landing pages)
+  //   "spacious" -> text-xl, large padding     (hero sections, editorial)
+  compactness: "normal",
+
+  // ─── TYPOGRAPHY ─────────────────────────────────────────────────────
+  // Font families for headings and body text.
+  // Use any Google Font name or system font stack.
+  //
+  // Popular combinations:
+  //   Heading: "Inter"       Body: "Inter"          (clean, modern)
+  //   Heading: "Cal Sans"    Body: "Inter"          (bold + clean)
+  //   Heading: "Playfair"    Body: "Source Sans 3"  (editorial)
+  //   Heading: "Space Grotesk" Body: "DM Sans"      (techy)
+  //   Heading: "system-ui"   Body: "system-ui"      (native, fast)
+  fonts: {
+    heading: "Inter",
+    body: "Inter",
+  },
+
+  // ─── MENU ACCENT STYLE ─────────────────────────────────────────────
+  // Controls the visual weight of active/selected menu items.
+  // Options:
+  //   "subtle"  -> Light background highlight only
+  //   "bold"    -> Strong background with primary color
+  //   "border"  -> Left border accent indicator
+  menuAccent: "subtle",
+
+  // ─── ICON LIBRARY ───────────────────────────────────────────────────
+  // Which Iconify icon set to use by default.
+  // Options (from iconify.design):
+  //   "lucide"          -> Clean, consistent (shadcn default)
+  //   "heroicons"       -> Tailwind's official icons
+  //   "phosphor"        -> Flexible, 6 weights
+  //   "tabler"          -> 4000+ icons, clean
+  //   "solar"           -> Modern, bold
+  //   "radix-icons"     -> Minimalist
+  //   "mdi"             -> Material Design Icons
+  //   "carbon"          -> IBM Carbon Design
+  //   Or any Iconify set: https://icon-sets.iconify.design/
+  iconLibrary: "lucide",
+
+  // ─── TRANSITIONS ────────────────────────────────────────────────────
+  // Default transition duration for animations.
+  // Options:
+  //   "none"  -> 0ms   (no animations)
+  //   "fast"  -> 100ms (snappy)
+  //   "base"  -> 150ms (default)
+  //   "slow"  -> 300ms (smooth)
+  //   "lazy"  -> 500ms (dramatic)
+  //   Or any CSS duration: "200ms", "0.25s"
+  transitionDuration: "base",
+
+  // ─── SHADOW STYLE ───────────────────────────────────────────────────
+  // Controls the shadow depth across components.
+  // Options:
+  //   "none"   -> No shadows (flat design)
+  //   "sm"     -> Subtle shadows
+  //   "md"     -> Medium shadows (default)
+  //   "lg"     -> Pronounced shadows
+  //   "xl"     -> Deep shadows (elevated look)
+  shadow: "sm",
+};
+
+```
+
+### Configuration Options
+
+| Setting | Options | Default |
+|---------|---------|---------|
+| theme | "light", "dark" | "light" |
+| radius | "none", "sm", "md", "lg", "xl", "2xl", "full" | "lg" |
+| compactness | "minimal", "compact", "normal", "relaxed", "spacious" | "normal" |
+| menuAccent | "subtle", "bold", "border" | "subtle" |
+| iconLibrary | "lucide", "heroicons", "phosphor", "tabler", etc. | "lucide" |
+| transitionDuration | "none", "fast", "base", "slow", "lazy" | "base" |
+| shadow | "none", "sm", "md", "lg", "xl" | "sm" |
+
+### Compactness Levels
+
+| Level | Font Size | Button Padding | Card Padding | Best For |
+|-------|-----------|---------------|-------------|----------|
+| minimal | 0.75rem | 0.25rem 0.5rem | 0.75rem | Data-dense dashboards |
+| compact | 0.875rem | 0.375rem 0.75rem | 1rem | Admin panels |
+| normal | 1rem | 0.5rem 1rem | 1.5rem | General purpose |
+| relaxed | 1.125rem | 0.625rem 1.25rem | 2rem | Marketing sites |
+| spacious | 1.25rem | 0.75rem 1.5rem | 2.5rem | Hero sections |
+
+### CSS Custom Properties
+
+All theme values are exposed as CSS custom properties:
+
+| Property | Description |
+|----------|-------------|
+| --marrow-primary | Primary brand color (HSL) |
+| --marrow-background | Page background (HSL) |
+| --marrow-foreground | Default text color (HSL) |
+| --marrow-muted | Muted/disabled color (HSL) |
+| --marrow-border | Border color (HSL) |
+| --marrow-radius | Border radius |
+| --marrow-text | Base font size |
+| --marrow-duration | Transition duration |
+| --marrow-shadow | Box shadow |
+| --marrow-font-heading | Heading font family |
+| --marrow-font-body | Body font family |
+| --marrow-btn-py / --marrow-btn-px | Button padding |
+| --marrow-input-py / --marrow-input-px | Input padding |
+| --marrow-card-p | Card padding |
+
+## Alpine.js Components
+
+Interactive components are registered as Alpine.js data components. Include `marrow.js` before Alpine.js in your HTML.
+
+### Available Data Components
+
+| Component | Usage | Description |
+|-----------|-------|-------------|
+| mwAccordion | `x-data="mwAccordion()"` | Single-open accordion |
+| mwAccordionMulti | `x-data="mwAccordionMulti()"` | Multi-open accordion |
+| mwTabs | `x-data="mwTabs('tab1')"` | Tab navigation |
+| mwDialog | `x-data="mwDialog()"` | Modal dialog |
+| mwSheet | `x-data="mwSheet()"` | Side panel |
+| mwDropdown | `x-data="mwDropdown()"` | Dropdown menu |
+| mwPopover | `x-data="mwPopover()"` | Popover panel |
+| mwCollapsible | `x-data="mwCollapsible()"` | Collapsible section |
+| mwSwitch | `x-data="mwSwitch()"` | Toggle switch |
+| mwCheckbox | `x-data="mwCheckbox()"` | Checkbox |
+| mwRadioGroup | `x-data="mwRadioGroup()"` | Radio button group |
+| mwTooltip | `x-data="mwTooltip()"` | Tooltip |
+| mwHoverCard | `x-data="mwHoverCard()"` | Hover card |
+| mwCommand | `x-data="mwCommand()"` | Command palette |
+| mwSlider | `x-data="mwSlider(0, 100, 50)"` | Range slider |
+| mwPagination | `x-data="mwPagination(10, 1)"` | Pagination |
+| mwToggle | `x-data="mwToggle()"` | Toggle button |
+| mwToggleGroup | `x-data="mwToggleGroup('single')"` | Toggle group |
+| mwAlertDialog | `x-data="mwAlertDialog()"` | Alert dialog |
+| mwContextMenu | `x-data="mwContextMenu()"` | Context menu |
+| mwCombobox | `x-data="mwCombobox(items)"` | Combobox |
+| mwCarousel | `x-data="mwCarousel(count)"` | Carousel |
+| mwResizable | `x-data="mwResizable(50)"` | Resizable panels |
+| mwInputOTP | `x-data="mwInputOTP(6)"` | OTP input |
+| mwProgress | `x-data="mwProgress(0)"` | Progress bar |
+| mwDatePicker | `x-data="mwDatePicker()"` | Date picker |
+| mwCalendar | `x-data="mwCalendar()"` | Calendar |
+| mwSidebar | `x-data="mwSidebar()"` | Sidebar |
+
+### Toast Store
+
+Toasts use an Alpine.js store:
+```javascript
+Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'default', duration: 4000 });
+```
+
+## Component Reference
+
+### Accordion
+
+```html
+<!-- Marrow UI: Accordion -->
+<!-- A vertically stacked set of interactive headings that reveal content -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwAccordion()">
+  <!-- Item 1 -->
+  <div class="border-b border-border">
+    <button @click="toggle('item-1')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
+      Is it accessible?
+      <svg :class="isOpen('item-1') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('item-1')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground">
+        Yes. It adheres to the WAI-ARIA design pattern.
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 2 -->
+  <div class="border-b border-border">
+    <button @click="toggle('item-2')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
+      Is it styled?
+      <svg :class="isOpen('item-2') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('item-2')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground">
+        Yes. It comes with default styles that match the other components.
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 3 -->
+  <div class="border-b border-border">
+    <button @click="toggle('item-3')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
+      Is it animated?
+      <svg :class="isOpen('item-3') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('item-3')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground">
+        Yes. It uses Alpine.js x-collapse for smooth animations.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Alert Dialog
+
+```html
+<!-- Marrow UI: Alert Dialog -->
+<!-- A modal dialog that interrupts the user with important content and expects a response -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwAlertDialog()">
+  <button @click="show()" class="mw-btn mw-btn-outline">
+    Delete Account
+  </button>
+
+  <template x-if="open">
+    <div class="fixed inset-0 z-50" @keydown.escape.window="cancel()">
+      <!-- Overlay -->
+      <div class="mw-overlay" @click="cancel()"></div>
+
+      <!-- Dialog -->
+      <div class="mw-dialog max-w-md">
+        <h2 class="font-heading text-lg font-semibold">
+          Are you absolutely sure?
+        </h2>
+        <p class="mt-2 text-sm text-muted-foreground">
+          This action cannot be undone. This will permanently
+          delete your account and remove your data from our servers.
+        </p>
+        <div class="mt-6 flex justify-end gap-2">
+          <button @click="cancel()" class="mw-btn mw-btn-outline">
+            Cancel
+          </button>
+          <button @click="confirm()" class="mw-btn mw-btn-destructive">
+            Yes, delete account
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
+```
+
+### Alert
+
+```html
+<!-- Marrow UI: Alert -->
+<!-- Displays a callout for important information or feedback -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Default Alert -->
+<div class="mw-alert">
+  <div class="flex items-start gap-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         class="mt-0.5 shrink-0">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M12 16v-4"/>
+      <path d="M12 8h.01"/>
+    </svg>
+    <div>
+      <h5 class="font-medium leading-none tracking-tight">Heads up!</h5>
+      <p class="mt-1 text-sm text-muted-foreground">
+        You can add components to your app using the CLI.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Destructive Alert -->
+<div class="mw-alert mw-alert-destructive">
+  <div class="flex items-start gap-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         class="mt-0.5 shrink-0">
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+      <path d="M12 9v4"/>
+      <path d="M12 17h.01"/>
+    </svg>
+    <div>
+      <h5 class="font-medium leading-none tracking-tight">Error</h5>
+      <p class="mt-1 text-sm">
+        Your session has expired. Please log in again.
+      </p>
+    </div>
+  </div>
+</div>
+```
+
+### Aspect Ratio
+
+```html
+<!-- Marrow UI: Aspect Ratio -->
+<!-- Displays content within a desired ratio using pure CSS -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- 16:9 Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 16 / 9;">
+  <img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 1:1 Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 1 / 1;">
+  <img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 4:3 Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 4 / 3;">
+  <img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" />
+</div>
+```
+
+### Avatar
+
+```html
+<!-- Marrow UI: Avatar -->
+<!-- An image element with a fallback for representing the user -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Image Avatar -->
+<div class="mw-avatar">
+  <img src="https://i.pravatar.cc/150?img=32" alt="User avatar" />
+</div>
+
+<!-- Fallback Initials -->
+<div class="mw-avatar">
+  <span>JD</span>
+</div>
+
+<!-- Small -->
+<div class="mw-avatar mw-avatar-sm">
+  <img src="avatar.jpg" alt="User avatar" />
+</div>
+
+<!-- Default -->
+<div class="mw-avatar">
+  <img src="avatar.jpg" alt="User avatar" />
+</div>
+
+<!-- Large -->
+<div class="mw-avatar mw-avatar-lg">
+  <img src="avatar.jpg" alt="User avatar" />
+</div>
+
+<!-- Large with Fallback -->
+<div class="mw-avatar mw-avatar-lg">
+  <span>AB</span>
+</div>
+```
+
+### Badge
+
+```html
+<!-- Marrow UI: Badge -->
+<!-- Displays a small label or status indicator -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Default -->
+<span class="mw-badge mw-badge-default">Default</span>
+
+<!-- Secondary -->
+<span class="mw-badge mw-badge-secondary">Secondary</span>
+
+<!-- Outline -->
+<span class="mw-badge mw-badge-outline">Outline</span>
+
+<!-- Destructive -->
+<span class="mw-badge mw-badge-destructive">Destructive</span>
+```
+
+### Breadcrumb
+
+```html
+<!-- Marrow UI: Breadcrumb -->
+<!-- Displays a hierarchical navigation trail for the current page -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<nav class="mw-breadcrumb">
+  <a href="#">Home</a>
+
+  <!-- Separator -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <a href="#">Components</a>
+
+  <!-- Separator -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <!-- Current page (no link) -->
+  <span class="mw-breadcrumb-current">Breadcrumb</span>
+</nav>
+```
+
+### Button Group
+
+```html
+<!-- Marrow UI: Button Group -->
+<!-- Group multiple buttons together as a connected set of actions -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Outline Button Group -->
+<div class="inline-flex -space-x-px">
+  <button class="mw-btn mw-btn-outline rounded-r-none">Left</button>
+  <button class="mw-btn mw-btn-outline rounded-none border-x-0">Center</button>
+  <button class="mw-btn mw-btn-outline rounded-l-none">Right</button>
+</div>
+
+<!-- Icon-only Button Group -->
+<div class="inline-flex -space-x-px">
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none">
+    <!-- Icon SVG -->
+  </button>
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-none border-x-0">
+    <!-- Icon SVG -->
+  </button>
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-l-none">
+    <!-- Icon SVG -->
+  </button>
+</div>
+
+<!-- Primary Button Group -->
+<div class="inline-flex -space-x-px">
+  <button class="mw-btn mw-btn-primary rounded-r-none">Bold</button>
+  <button class="mw-btn mw-btn-primary rounded-none"
+          style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
+    Italic
+  </button>
+  <button class="mw-btn mw-btn-primary rounded-l-none"
+          style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
+    Underline
+  </button>
+</div>
+```
+
+### Button
+
+```html
+<!-- Marrow UI: Button -->
+<!-- Displays a button or a component that looks like a button -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Variants -->
+<button class="mw-btn mw-btn-primary">Primary</button>
+<button class="mw-btn mw-btn-secondary">Secondary</button>
+<button class="mw-btn mw-btn-outline">Outline</button>
+<button class="mw-btn mw-btn-ghost">Ghost</button>
+<button class="mw-btn mw-btn-destructive">Destructive</button>
+<button class="mw-btn mw-btn-link">Link</button>
+
+<!-- Sizes -->
+<button class="mw-btn mw-btn-primary mw-btn-sm">Small</button>
+<button class="mw-btn mw-btn-primary">Default</button>
+<button class="mw-btn mw-btn-primary mw-btn-lg">Large</button>
+
+<!-- Icon Button -->
+<button class="mw-btn mw-btn-outline mw-btn-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12h14"/>
+    <path d="M12 5v14"/>
+  </svg>
+</button>
+
+<!-- With Icon -->
+<button class="mw-btn mw-btn-primary">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" x2="12" y1="15" y2="3"/>
+  </svg>
+  Download
+</button>
+
+<!-- Disabled -->
+<button class="mw-btn mw-btn-primary" disabled>Disabled</button>
+```
+
+### Calendar
+
+```html
+<!-- Marrow UI: Calendar -->
+<!-- An inline date calendar for selecting dates -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCalendar()" class="mw-card w-[280px] p-3">
+  <!-- Month Navigation -->
+  <div class="flex items-center justify-between mb-4">
+    <button @click="prevMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+    </button>
+    <span class="text-sm font-medium"
+          x-text="monthName + ' ' + currentYear"></span>
+    <button @click="nextMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Day of week headers -->
+  <div class="grid grid-cols-7 mb-1">
+    <template x-for="day in ['Su','Mo','Tu','We','Th','Fr','Sa']" :key="day">
+      <div class="text-center text-xs font-medium text-muted-foreground py-1"
+           x-text="day"></div>
+    </template>
+  </div>
+
+  <!-- Day grid -->
+  <div class="grid grid-cols-7">
+    <template x-for="(day, index) in days" :key="index">
+      <button
+        @click="selectDate(day)"
+        :disabled="!day"
+        :class="{
+          'bg-primary text-primary-foreground hover:bg-primary/90': isSelected(day),
+          'bg-accent': isToday(day) && !isSelected(day),
+          'hover:bg-accent': day && !isSelected(day),
+          'opacity-0 pointer-events-none': !day
+        }"
+        class="h-8 w-8 mx-auto rounded-[var(--marrow-radius)] text-sm
+               flex items-center justify-center transition-colors"
+        x-text="day || ''">
+      </button>
+    </template>
+  </div>
+</div>
+```
+
+### Card
+
+```html
+<!-- Marrow UI: Card -->
+<!-- A container component for grouping related content with header, body, and footer sections -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="mw-card">
+  <div class="pb-3 mb-3 border-b border-border">
+    <h3 class="font-heading text-lg font-semibold">Card Title</h3>
+    <p class="text-sm text-muted-foreground mt-1">Card description goes here.</p>
+  </div>
+  <div class="py-2">
+    <p class="text-sm text-muted-foreground">This is the card content area.</p>
+  </div>
+  <div class="pt-3 mt-3 border-t border-border flex justify-end gap-2">
+    <button class="mw-btn mw-btn-outline mw-btn-sm">Cancel</button>
+    <button class="mw-btn mw-btn-primary mw-btn-sm">Save</button>
+  </div>
+</div>
+```
+
+### Carousel
+
+```html
+<!-- Marrow UI: Carousel -->
+<!-- A slideshow component for cycling through content with navigation controls -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCarousel(3)">
+  <div class="relative overflow-hidden rounded-marrow border border-border">
+    <!-- Slides -->
+    <div class="relative min-h-[200px]">
+      <div x-show="current === 0" class="flex items-center justify-center h-[200px] bg-muted/30">
+        <div class="text-center">
+          <p class="text-lg font-semibold">Slide 1</p>
+          <p class="text-sm text-muted-foreground">First slide content</p>
+        </div>
+      </div>
+      <div x-show="current === 1" class="flex items-center justify-center h-[200px] bg-muted/30">
+        <div class="text-center">
+          <p class="text-lg font-semibold">Slide 2</p>
+          <p class="text-sm text-muted-foreground">Second slide content</p>
+        </div>
+      </div>
+      <div x-show="current === 2" class="flex items-center justify-center h-[200px] bg-muted/30">
+        <div class="text-center">
+          <p class="text-lg font-semibold">Slide 3</p>
+          <p class="text-sm text-muted-foreground">Third slide content</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prev/Next Buttons -->
+    <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Previous slide">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Next slide">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <!-- Dot Indicators -->
+  <div class="flex justify-center gap-2 mt-3">
+    <template x-for="i in count" :key="i">
+      <button @click="goTo(i - 1)"
+        :class="current === i - 1 ? 'bg-primary' : 'bg-muted-foreground/30'"
+        class="w-2 h-2 rounded-full transition-colors"
+        :aria-label="'Go to slide ' + i"></button>
+    </template>
+  </div>
+</div>
+```
+
+### Chart
+
+```html
+<!-- Marrow UI: Chart -->
+<!-- Simple CSS-based bar chart for visualizing data, with guidance for production charting libraries -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="mw-card">
+  <h3 class="font-heading font-semibold mb-1">Monthly Revenue</h3>
+  <p class="text-sm text-muted-foreground mb-4">Jan &ndash; Jun 2025</p>
+  <div class="space-y-3">
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Jan</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 65%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$6,500</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Feb</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 78%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$7,800</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Mar</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 52%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$5,200</span>
+    </div>
+    <!-- Add more bars as needed -->
+  </div>
+</div>
+```
+
+### Checkbox
+
+```html
+<!-- Marrow UI: Checkbox -->
+<!-- A toggleable checkbox control with label and checked state indicator -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Unchecked by default -->
+<div x-data="mwCheckbox()" class="flex items-center gap-2">
+  <button @click="toggle()"
+    :data-state="checked ? 'checked' : 'unchecked'"
+    class="mw-checkbox"
+    role="checkbox"
+    :aria-checked="checked">
+    <svg x-show="checked"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+  </button>
+  <label @click="toggle()" class="mw-label cursor-pointer select-none">
+    Accept terms and conditions
+  </label>
+</div>
+
+<!-- Checked by default -->
+<div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+  <button @click="toggle()"
+    :data-state="checked ? 'checked' : 'unchecked'"
+    class="mw-checkbox"
+    role="checkbox"
+    :aria-checked="checked">
+    <svg x-show="checked"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+  </button>
+  <label @click="toggle()" class="mw-label cursor-pointer select-none">
+    Send me email notifications
+  </label>
+</div>
+```
+
+### Collapsible
+
+```html
+<!-- Marrow UI: Collapsible -->
+<!-- A component that can be expanded or collapsed to show or hide content -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCollapsible()">
+  <div class="flex items-center justify-between">
+    <h4 class="text-sm font-semibold">@marrow-ui/components</h4>
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        :class="open ? 'rotate-180' : ''" class="transition-transform">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Always visible item -->
+  <div class="mt-2 rounded-marrow border border-border px-3 py-2 text-sm">
+    <span class="text-muted-foreground">marrow-ui/card.html</span>
+  </div>
+
+  <!-- Collapsible content -->
+  <div x-show="open" x-collapse class="mt-1 space-y-1">
+    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
+      <span class="text-muted-foreground">marrow-ui/button.html</span>
+    </div>
+    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
+      <span class="text-muted-foreground">marrow-ui/dialog.html</span>
+    </div>
+    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
+      <span class="text-muted-foreground">marrow-ui/tabs.html</span>
+    </div>
+  </div>
+</div>
+```
+
+### Combobox
+
+```html
+<!-- Marrow UI: Combobox -->
+<!-- An autocomplete input that combines a text field with a filterable dropdown list -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCombobox([
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'angular', label: 'Angular' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'solid', label: 'Solid' },
+  { value: 'alpine', label: 'Alpine.js' }
+])">
+  <div class="relative">
+    <div class="relative">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input type="text"
+        class="mw-input pl-9"
+        placeholder="Search framework..."
+        x-model="search"
+        @focus="open = true"
+        @click="open = true">
+    </div>
+
+    <div x-show="open" @click.away="open = false"
+      class="absolute z-10 mt-1 w-full mw-popover max-h-[200px] overflow-y-auto">
+      <template x-for="item in filtered" :key="item.value">
+        <button @click="select(item)" class="mw-menu-item"
+          :class="selected?.value === item.value ? 'bg-accent' : ''">
+          <svg x-show="selected?.value === item.value"
+            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+          <span x-show="selected?.value !== item.value" class="w-[14px]"></span>
+          <span x-text="item.label"></span>
+        </button>
+      </template>
+      <div x-show="filtered.length === 0" class="px-3 py-2 text-sm text-muted-foreground">
+        No results found.
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Command
+
+```html
+<!-- Marrow UI: Command -->
+<!-- A command palette overlay for quick navigation and actions, triggered with Ctrl+K -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCommand()" @keydown.window.ctrl.k.prevent="show()">
+  <!-- Trigger Button -->
+  <button @click="show()" class="mw-btn mw-btn-outline gap-2">
+    Search...
+    <span class="flex items-center gap-0.5 ml-2">
+      <span class="mw-kbd">Ctrl</span>
+      <span class="mw-kbd">K</span>
+    </span>
+  </button>
+
+  <!-- Command Palette Overlay -->
+  <template x-teleport="body">
+    <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+      <div class="mw-overlay" @click="close()"></div>
+      <div class="fixed top-[20%] left-1/2 -translate-x-1/2 z-51 w-full max-w-lg"
+        @keydown.escape.window="close()">
+        <div class="bg-popover border border-border rounded-marrow shadow-lg overflow-hidden">
+          <!-- Search Input -->
+          <div class="flex items-center border-b border-border px-3">
+            <svg ...search icon.../>
+            <input type="text" x-model="search"
+              class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none"
+              placeholder="Type a command or search...">
+          </div>
+
+          <!-- Results -->
+          <div class="max-h-[300px] overflow-y-auto p-1">
+            <div class="mw-menu-label">Suggestions</div>
+            <button x-show="matchesSearch('Calendar')" class="mw-menu-item">
+              Calendar
+            </button>
+            <button x-show="matchesSearch('Settings')" class="mw-menu-item">
+              Settings
+            </button>
+
+            <div class="mw-menu-separator"></div>
+
+            <div class="mw-menu-label">Account</div>
+            <button x-show="matchesSearch('Profile')" class="mw-menu-item">
+              Profile
+            </button>
+            <button x-show="matchesSearch('Billing')" class="mw-menu-item">
+              Billing
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
+```
+
+### Context Menu
+
+```html
+<!-- Marrow UI: Context Menu -->
+<!-- A menu that appears on right-click, providing contextual actions for an element -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwContextMenu()">
+  <!-- Right-click trigger area -->
+  <div @contextmenu="show($event)"
+    class="flex items-center justify-center h-[150px] border-2 border-dashed border-border rounded-marrow text-sm text-muted-foreground">
+    Right-click here to open context menu
+  </div>
+
+  <!-- Context Menu -->
+  <div x-show="open" x-cloak
+    @click.away="close()"
+    @keydown.escape.window="close()"
+    :style="'position: fixed; left: ' + x + 'px; top: ' + y + 'px; z-index: 50;'"
+    class="mw-popover w-48">
+    <button @click="close()" class="mw-menu-item">
+      Share
+    </button>
+    <button @click="close()" class="mw-menu-item">
+      Copy
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+C</span>
+    </button>
+    <button @click="close()" class="mw-menu-item">
+      Edit
+    </button>
+    <div class="mw-menu-separator"></div>
+    <button @click="close()" class="mw-menu-item">
+      Rename
+    </button>
+    <div class="mw-menu-separator"></div>
+    <button @click="close()" class="mw-menu-item text-destructive">
+      Delete
+      <span class="ml-auto text-xs text-muted-foreground">Del</span>
+    </button>
+  </div>
+</div>
+```
+
+### Data Table
+
+```html
+<!-- Marrow UI: Data Table -->
+<!-- A structured table component with sortable headers for displaying tabular data -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="{
+  sortCol: 'name',
+  sortAsc: true,
+  rows: [
+    { name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin', status: 'Active' },
+    { name: 'Bob Smith', email: 'bob@example.com', role: 'Editor', status: 'Active' },
+    { name: 'Carol White', email: 'carol@example.com', role: 'Viewer', status: 'Inactive' },
+    { name: 'David Brown', email: 'david@example.com', role: 'Editor', status: 'Active' },
+    { name: 'Eva Martinez', email: 'eva@example.com', role: 'Admin', status: 'Active' }
+  ],
+  sort(col) {
+    if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
+    else { this.sortCol = col; this.sortAsc = true; }
+  },
+  get sorted() {
+    return [...this.rows].sort((a, b) => {
+      const valA = a[this.sortCol].toLowerCase();
+      const valB = b[this.sortCol].toLowerCase();
+      return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    });
+  }
+}">
+  <div class="overflow-x-auto">
+    <table class="mw-table">
+      <thead>
+        <tr>
+          <th class="cursor-pointer select-none" @click="sort('name')">
+            <span class="inline-flex items-center gap-1">
+              Name
+              <svg x-show="sortCol === 'name'" ...chevron icon...
+                :class="sortAsc ? '' : 'rotate-180'"></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none" @click="sort('email')">Email</th>
+          <th class="cursor-pointer select-none" @click="sort('role')">Role</th>
+          <th class="cursor-pointer select-none" @click="sort('status')">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="row in sorted" :key="row.email">
+          <tr>
+            <td class="font-medium" x-text="row.name"></td>
+            <td class="text-muted-foreground" x-text="row.email"></td>
+            <td><span class="mw-badge mw-badge-secondary" x-text="row.role"></span></td>
+            <td>
+              <span class="mw-badge"
+                :class="row.status === 'Active' ? 'mw-badge-default' : 'mw-badge-outline'"
+                x-text="row.status"></span>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+</div>
+```
+
+### Date Picker
+
+```html
+<!-- Marrow UI: Date Picker -->
+<!-- An input with a calendar dropdown for selecting dates -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwDatePicker()">
+  <div class="relative">
+    <!-- Trigger Button -->
+    <button @click="toggle()" class="mw-input flex items-center justify-between text-left cursor-pointer">
+      <span :class="selected ? 'text-foreground' : 'text-muted-foreground'"
+        x-text="formatted"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="text-muted-foreground">
+        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+        <line x1="16" x2="16" y1="2" y2="6"/>
+        <line x1="8" x2="8" y1="2" y2="6"/>
+        <line x1="3" x2="21" y1="10" y2="10"/>
+      </svg>
+    </button>
+
+    <!-- Calendar Dropdown -->
+    <div x-show="open" @click.away="open = false" x-cloak
+      class="absolute z-10 mt-1 mw-popover p-3 w-[280px]">
+
+      <!-- Month Navigation -->
+      <div class="flex items-center justify-between mb-3">
+        <button @click="prevMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+          <svg ...left chevron.../>
+        </button>
+        <span class="text-sm font-medium" x-text="monthName + ' ' + currentYear"></span>
+        <button @click="nextMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+          <svg ...right chevron.../>
+        </button>
+      </div>
+
+      <!-- Day Labels -->
+      <div class="grid grid-cols-7 gap-0 mb-1">
+        <template x-for="day in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']">
+          <div class="text-center text-xs text-muted-foreground py-1" x-text="day"></div>
+        </template>
+      </div>
+
+      <!-- Day Grid -->
+      <div class="grid grid-cols-7 gap-0">
+        <template x-for="(day, index) in days" :key="index">
+          <button
+            @click="selectDate(day)"
+            :disabled="!day"
+            :class="{
+              'bg-primary text-primary-foreground': isSelected(day),
+              'hover:bg-accent': day && !isSelected(day),
+              'invisible': !day
+            }"
+            class="w-8 h-8 text-sm rounded-marrow flex items-center justify-center"
+            x-text="day || ''">
+          </button>
+        </template>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Dialog
+
+```html
+<!-- Marrow UI: Dialog -->
+<!-- A modal dialog that interrupts the user with important content and expects a response -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwDialog()">
+  <button @click="show()" class="mw-btn mw-btn-outline">Open Dialog</button>
+
+  <template x-if="open">
+    <div>
+      <div class="mw-overlay" @click="close()"></div>
+      <div class="mw-dialog" @keydown.escape.window="close()">
+        <div class="flex flex-col space-y-1.5 mb-4">
+          <h3 class="font-heading text-lg font-semibold">Edit Profile</h3>
+          <p class="text-sm text-muted-foreground">
+            Make changes to your profile here. Click save when you're done.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <label class="mw-label">Name</label>
+            <input type="text" class="mw-input" value="John Doe" />
+          </div>
+          <div class="space-y-2">
+            <label class="mw-label">Email</label>
+            <input type="email" class="mw-input" value="john@example.com" />
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-2 mt-6">
+          <button @click="close()" class="mw-btn mw-btn-outline">Cancel</button>
+          <button @click="close()" class="mw-btn mw-btn-primary">Save changes</button>
+        </div>
+
+        <button @click="close()" class="absolute top-3 right-3 mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+    </div>
+  </template>
+</div>
+```
+
+### Direction
+
+```html
+<!-- Marrow UI: Direction -->
+<!-- Support for right-to-left (RTL) layouts using the dir attribute -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- LTR (default) -->
+<div class="mw-card" dir="ltr">
+  <div class="flex items-center gap-3 mb-2">
+    <div class="mw-avatar">LR</div>
+    <div>
+      <h4 class="font-heading font-semibold text-sm">Left-to-Right</h4>
+      <p class="text-xs text-muted-foreground">This card uses the default LTR direction.</p>
+    </div>
+  </div>
+  <p class="text-sm text-muted-foreground">
+    Content flows from left to right.
+  </p>
+</div>
+
+<!-- RTL -->
+<div class="mw-card" dir="rtl">
+  <div class="flex items-center gap-3 mb-2">
+    <div class="mw-avatar">RL</div>
+    <div>
+      <h4 class="font-heading font-semibold text-sm">من اليمين إلى اليسار</h4>
+      <p class="text-xs text-muted-foreground">هذه البطاقة تستخدم اتجاه RTL.</p>
+    </div>
+  </div>
+  <p class="text-sm text-muted-foreground">
+    المحتوى يتدفق من اليمين إلى اليسار.
+  </p>
+</div>
+
+<!-- Apply RTL to the entire page -->
+<html dir="rtl">
+  ...
+</html>
+```
+
+### Drawer
+
+```html
+<!-- Marrow UI: Drawer -->
+<!-- A bottom sheet drawer that slides up from the bottom of the screen -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwSheet()">
+  <button @click="show()" class="mw-btn mw-btn-outline">Open Drawer</button>
+
+  <template x-if="open">
+    <div>
+      <div class="mw-overlay" @click="close()"></div>
+      <div class="mw-sheet mw-sheet-bottom rounded-t-lg"
+           @keydown.escape.window="close()"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="translate-y-full"
+           x-transition:enter-end="translate-y-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="translate-y-0"
+           x-transition:leave-end="translate-y-full">
+
+        <!-- Drag handle -->
+        <div class="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted-foreground/20 mb-4 mt-1"></div>
+
+        <div class="space-y-2 text-center mb-6">
+          <h3 class="font-heading text-lg font-semibold">Edit Profile</h3>
+          <p class="text-sm text-muted-foreground">
+            Make changes to your profile. Click save when you're done.
+          </p>
+        </div>
+
+        <div class="space-y-4 max-w-sm mx-auto">
+          <div class="space-y-2">
+            <label class="mw-label">Name</label>
+            <input type="text" class="mw-input" value="John Doe" />
+          </div>
+          <div class="space-y-2">
+            <label class="mw-label">Username</label>
+            <input type="text" class="mw-input" value="@johndoe" />
+          </div>
+          <button @click="close()" class="mw-btn mw-btn-primary w-full">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
+```
+
+### Dropdown Menu
+
+```html
+<!-- Marrow UI: Dropdown Menu -->
+<!-- A menu that appears below a trigger button with actions and options -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwDropdown()" @click.outside="close()" class="relative">
+  <button @click="toggle()" class="mw-btn mw-btn-outline">
+    Options
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+
+  <div x-show="open" x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 scale-95"
+       x-transition:enter-end="opacity-100 scale-100"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 scale-100"
+       x-transition:leave-end="opacity-0 scale-95"
+       class="mw-popover absolute left-0 mt-1 z-50 w-56">
+
+    <div class="mw-menu-label">My Account</div>
+    <div class="mw-menu-separator"></div>
+
+    <button class="mw-menu-item" @click="close()">Profile</button>
+    <button class="mw-menu-item" @click="close()">Settings</button>
+    <button class="mw-menu-item" @click="close()">Billing</button>
+
+    <div class="mw-menu-separator"></div>
+    <div class="mw-menu-label">Team</div>
+
+    <button class="mw-menu-item" @click="close()">Invite members</button>
+
+    <div class="mw-menu-separator"></div>
+    <button class="mw-menu-item text-destructive" @click="close()">Log out</button>
+  </div>
+</div>
+```
+
+### Empty
+
+```html
+<!-- Marrow UI: Empty -->
+<!-- An empty state placeholder to display when there is no content to show -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="mw-empty">
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+       class="mb-4 opacity-50">
+    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+    <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+    <path d="M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1"/>
+    <path d="M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1"/>
+  </svg>
+
+  <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+
+  <p class="text-sm text-muted-foreground max-w-sm mb-4">
+    There are no items to display right now. Try adjusting your
+    filters or create a new item to get started.
+  </p>
+
+  <button class="mw-btn mw-btn-primary">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"/>
+      <path d="M12 5v14"/>
+    </svg>
+    Create new item
+  </button>
+</div>
+```
+
+### Field
+
+```html
+<!-- Marrow UI: Field -->
+<!-- A complete form field pattern combining label, input, and helper text -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Default field -->
+<div class="space-y-2">
+  <label for="field-name" class="mw-label">Name</label>
+  <input id="field-name" type="text" class="mw-input"
+         placeholder="Enter your name" />
+  <p class="text-sm text-muted-foreground">
+    This is your public display name.
+  </p>
+</div>
+
+<!-- Required field -->
+<div class="space-y-2">
+  <label for="field-email" class="mw-label">
+    Email <span class="text-destructive">*</span>
+  </label>
+  <input id="field-email" type="email" class="mw-input"
+         placeholder="you@example.com" />
+  <p class="text-sm text-muted-foreground">
+    We will never share your email.
+  </p>
+</div>
+
+<!-- Error state -->
+<div class="space-y-2">
+  <label for="field-error" class="mw-label">Username</label>
+  <input id="field-error" type="text" class="mw-input" value="ab"
+         style="border-color: hsl(var(--marrow-destructive));" />
+  <p class="text-sm" style="color: hsl(var(--marrow-destructive));">
+    Username must be at least 3 characters.
+  </p>
+</div>
+```
+
+### Hover Card
+
+```html
+<!-- Marrow UI: Hover Card -->
+<!-- A card that appears when hovering over a trigger element for previewing content -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwHoverCard()" class="relative inline-block">
+  <!-- Trigger -->
+  <a href="#"
+     @mouseenter="enter()"
+     @mouseleave="leave()"
+     class="text-primary font-medium underline underline-offset-4">
+    @marrow-ui
+  </a>
+
+  <!-- Hover Card -->
+  <div x-show="show" x-cloak
+       @mouseenter="enter()" @mouseleave="leave()"
+       x-transition:enter="transition ease-out duration-150"
+       x-transition:enter-start="opacity-0 translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-100"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-1"
+       class="absolute left-0 top-full mt-2 z-50 w-80 mw-card">
+    <div class="flex gap-4">
+      <div class="mw-avatar mw-avatar-lg flex-shrink-0">MU</div>
+      <div class="space-y-1">
+        <h4 class="font-heading text-sm font-semibold">Marrow UI</h4>
+        <p class="text-sm text-muted-foreground">
+          A copy-paste UI kit built with Tailwind CSS and Alpine.js.
+        </p>
+        <div class="flex items-center gap-4 pt-1">
+          <span class="text-xs text-muted-foreground">Joined Dec 2024</span>
+          <span class="text-xs text-muted-foreground">1.2k followers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Input Group
+
+```html
+<!-- Marrow UI: Input Group -->
+<!-- An input with prefix or suffix addons for contextual information -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- With Text Prefix -->
+<div class="flex">
+  <span class="inline-flex items-center px-3 text-sm text-muted-foreground
+    border border-r-0 rounded-l-[var(--marrow-radius)]"
+    style="border-color: hsl(var(--marrow-input));
+           background: hsl(var(--marrow-muted));">
+    https://
+  </span>
+  <input type="text" class="mw-input rounded-l-none"
+         placeholder="example.com" />
+</div>
+
+<!-- With Text Suffix -->
+<div class="flex">
+  <input type="text" class="mw-input rounded-r-none"
+         placeholder="username" />
+  <span class="inline-flex items-center px-3 text-sm text-muted-foreground
+    border border-l-0 rounded-r-[var(--marrow-radius)]"
+    style="border-color: hsl(var(--marrow-input));
+           background: hsl(var(--marrow-muted));">
+    @gmail.com
+  </span>
+</div>
+
+<!-- With Icon Prefix -->
+<div class="flex">
+  <span class="inline-flex items-center justify-center w-10
+    border border-r-0 rounded-l-[var(--marrow-radius)] text-muted-foreground"
+    style="border-color: hsl(var(--marrow-input));
+           background: hsl(var(--marrow-muted));">
+    <svg ...>...</svg>
+  </span>
+  <input type="email" class="mw-input rounded-l-none"
+         placeholder="you@example.com" />
+</div>
+
+<!-- With Button Suffix -->
+<div class="flex">
+  <input type="text" class="mw-input rounded-r-none"
+         placeholder="Search..." />
+  <button class="mw-btn mw-btn-primary"
+    style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+    <svg ...>...</svg>
+  </button>
+</div>
+```
+
+### Input Otp
+
+```html
+<!-- Marrow UI: Input OTP -->
+<!-- A one-time password input with separate boxes for each digit -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwInputOTP(6)">
+  <p class="text-sm text-muted-foreground mb-4">
+    Enter the 6-digit code sent to your email.
+  </p>
+
+  <div class="flex items-center gap-2 justify-center">
+    <template x-for="(val, index) in values" :key="index">
+      <div class="flex items-center">
+        <input
+          :x-ref="'otp' + index"
+          type="text"
+          inputmode="numeric"
+          maxlength="1"
+          class="mw-input w-10 h-12 text-center text-lg font-semibold"
+          :value="values[index]"
+          @input="handleInput(index, $event)"
+          @keydown="handleKeydown(index, $event)"
+        />
+        <!-- Optional separator after 3rd digit -->
+        <template x-if="index === 2">
+          <div class="mx-1 text-muted-foreground">-</div>
+        </template>
+      </div>
+    </template>
+  </div>
+
+  <!-- Access the full code with: -->
+  <p x-text="code"></p>
+</div>
+```
+
+### Input
+
+```html
+<!-- Marrow UI: Input -->
+<!-- A text input field for collecting user data -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Default -->
+<input type="text" class="mw-input" />
+
+<!-- With Placeholder -->
+<input type="email" class="mw-input" placeholder="you@example.com" />
+
+<!-- Disabled -->
+<input type="text" class="mw-input" disabled value="Disabled input" />
+
+<!-- With Icon -->
+<div class="relative">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+    <circle cx="11" cy="11" r="8"/>
+    <path d="m21 21-4.3-4.3"/>
+  </svg>
+  <input type="text" class="mw-input" style="padding-left: 2.25rem;"
+         placeholder="Search..." />
+</div>
+```
+
+### Item
+
+```html
+<!-- Marrow UI: Item -->
+<!-- A list item component with icon, title, description, and optional trailing content -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="divide-y divide-border">
+  <!-- Item with badge -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Project Roadmap</div>
+      <div class="text-xs text-muted-foreground">Updated 2 hours ago</div>
+    </div>
+    <span class="mw-badge mw-badge-default">New</span>
+  </div>
+
+  <!-- Item with chevron -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Team Members</div>
+      <div class="text-xs text-muted-foreground">Manage your team and permissions</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  </div>
+
+  <!-- Item with count badge -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Activity Log</div>
+      <div class="text-xs text-muted-foreground">View recent actions and events</div>
+    </div>
+    <span class="mw-badge mw-badge-secondary">12</span>
+  </div>
+</div>
+```
+
+### Kbd
+
+```html
+<!-- Marrow UI: Kbd -->
+<!-- Keyboard shortcut indicator for displaying key combinations -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Single key -->
+<kbd class="mw-kbd">K</kbd>
+
+<!-- Key combination -->
+<span class="flex items-center gap-1">
+  <kbd class="mw-kbd">Ctrl</kbd>
+  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">K</kbd>
+</span>
+
+<!-- Three-key combination -->
+<span class="flex items-center gap-1">
+  <kbd class="mw-kbd">Ctrl</kbd>
+  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">Shift</kbd>
+  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">P</kbd>
+</span>
+
+<!-- Inline with text -->
+<p>Press <kbd class="mw-kbd">Ctrl</kbd>
+  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">K</kbd> to open the command palette.
+</p>
+```
+
+### Label
+
+```html
+<!-- Marrow UI: Label -->
+<!-- Label component for form inputs with optional required indicator -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Basic label with input -->
+<div class="space-y-2">
+  <label class="mw-label" for="email-input">Email address</label>
+  <input type="email" id="email-input" class="mw-input" placeholder="you@example.com">
+</div>
+
+<!-- Label with required indicator -->
+<div class="space-y-2">
+  <label class="mw-label" for="name-input">
+    Full name <span class="text-destructive">*</span>
+  </label>
+  <input type="text" id="name-input" class="mw-input" placeholder="Enter your full name">
+</div>
+
+<!-- Label with description text -->
+<div class="space-y-2">
+  <label class="mw-label" for="username-input">Username</label>
+  <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
+  <p class="text-xs text-muted-foreground">This will be your public display name.</p>
+</div>
+```
+
+### Menubar
+
+```html
+<!-- Marrow UI: Menubar -->
+<!-- A horizontal menu bar with dropdown menus for application-level navigation -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="flex items-center gap-1 border rounded-md border-border p-1 bg-background">
+  <!-- File Menu -->
+  <div class="relative" x-data="mwDropdown()">
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">File</button>
+    <div x-show="open" @click.outside="close()" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+      <div class="mw-menu-item justify-between">
+        <span>New File</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">N</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Open</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">O</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Save</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">S</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-separator"></div>
+      <div class="mw-menu-item">Exit</div>
+    </div>
+  </div>
+
+  <!-- Edit Menu -->
+  <div class="relative" x-data="mwDropdown()">
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">Edit</button>
+    <div x-show="open" @click.outside="close()" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+      <div class="mw-menu-item justify-between">
+        <span>Undo</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">Z</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-separator"></div>
+      <div class="mw-menu-item">Cut</div>
+      <div class="mw-menu-item">Copy</div>
+      <div class="mw-menu-item">Paste</div>
+    </div>
+  </div>
+
+  <!-- View Menu -->
+  <div class="relative" x-data="mwDropdown()">
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">View</button>
+    <div x-show="open" @click.outside="close()" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+      <div class="mw-menu-item">Zoom In</div>
+      <div class="mw-menu-item">Zoom Out</div>
+      <div class="mw-menu-separator"></div>
+      <div class="mw-menu-item">Full Screen</div>
+      <div class="mw-menu-item">Toggle Sidebar</div>
+    </div>
+  </div>
+</div>
+```
+
+### Native Select
+
+```html
+<!-- Marrow UI: Native Select -->
+<!-- A styled native HTML select element for simple dropdowns -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="space-y-2">
+  <label class="mw-label" for="framework-select">Framework</label>
+  <select id="framework-select" class="mw-select">
+    <option value="" disabled selected>Select a framework</option>
+    <option value="django">Django</option>
+    <option value="laravel">Laravel</option>
+    <option value="rails">Ruby on Rails</option>
+    <option value="express">Express</option>
+    <option value="flask">Flask</option>
+  </select>
+</div>
+```
+
+### Navigation Menu
+
+```html
+<!-- Marrow UI: Navigation Menu -->
+<!-- A horizontal navigation menu with links and active state indicator -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<nav class="flex items-center gap-1">
+  <!-- Active link -->
+  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Dashboard</a>
+
+  <!-- Inactive links -->
+  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Projects</a>
+  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Team</a>
+  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Settings</a>
+</nav>
+```
+
+### Pagination
+
+```html
+<!-- Marrow UI: Pagination -->
+<!-- Pagination component with page numbers, previous and next buttons -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwPagination(10)" class="flex flex-col items-center gap-4">
+  <p class="text-sm text-muted-foreground">
+    Page <span x-text="current" class="font-medium text-foreground"></span>
+    of <span x-text="totalPages"></span>
+  </p>
+
+  <div class="mw-pagination">
+    <!-- Previous button -->
+    <button @click="prev()" :disabled="current === 1"
+            class="mw-pagination-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round"
+           stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <!-- Page numbers -->
+    <template x-for="page in pages" :key="page">
+      <button @click="goTo(page)"
+              :data-active="current === page ? '' : undefined"
+              class="mw-pagination-item"
+              x-text="page">
+      </button>
+    </template>
+
+    <!-- Next button -->
+    <button @click="next()" :disabled="current === totalPages"
+            class="mw-pagination-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round"
+           stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </button>
+  </div>
+</div>
+```
+
+### Popover
+
+```html
+<!-- Marrow UI: Popover -->
+<!-- A floating popover panel anchored to a trigger button -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="relative" x-data="mwPopover()">
+  <!-- Trigger -->
+  <button @click="toggle()" class="mw-btn mw-btn-outline">
+    Open Popover
+  </button>
+
+  <!-- Popover Content -->
+  <div x-show="open" @click.outside="close()" x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 scale-95"
+       x-transition:enter-end="opacity-100 scale-100"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 scale-100"
+       x-transition:leave-end="opacity-0 scale-95"
+       class="absolute left-0 top-full mt-2 z-50 w-72 rounded-md border border-border bg-popover p-4 shadow-md">
+    <div class="space-y-3">
+      <div>
+        <h4 class="font-medium text-sm">Dimensions</h4>
+        <p class="text-xs text-muted-foreground">Set the dimensions for the layer.</p>
+      </div>
+      <div class="grid gap-2">
+        <div class="grid grid-cols-3 items-center gap-3">
+          <label class="mw-label text-xs">Width</label>
+          <input type="text" class="mw-input col-span-2" value="100%">
+        </div>
+        <div class="grid grid-cols-3 items-center gap-3">
+          <label class="mw-label text-xs">Height</label>
+          <input type="text" class="mw-input col-span-2" value="25px">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Progress
+
+```html
+<!-- Marrow UI: Progress -->
+<!-- A progress bar component for displaying completion status -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwProgress(60)" class="space-y-2">
+  <div class="flex justify-between text-sm">
+    <span class="text-muted-foreground">Progress</span>
+    <span class="font-medium" x-text="value + '%'"></span>
+  </div>
+  <div class="mw-progress">
+    <div class="mw-progress-bar" :style="'width: ' + value + '%'"></div>
+  </div>
+</div>
+```
+
+### Radio Group
+
+```html
+<!-- Marrow UI: Radio Group -->
+<!-- A group of radio buttons for selecting a single option from a set -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwRadioGroup('option1')" class="space-y-3">
+  <label class="mw-label">Notification preference</label>
+
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('option1')">
+    <div class="mw-radio"
+         :data-state="isSelected('option1') ? 'checked' : 'unchecked'">
+    </div>
+    <label class="text-sm cursor-pointer">All notifications</label>
+  </div>
+
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('option2')">
+    <div class="mw-radio"
+         :data-state="isSelected('option2') ? 'checked' : 'unchecked'">
+    </div>
+    <label class="text-sm cursor-pointer">Important only</label>
+  </div>
+
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('option3')">
+    <div class="mw-radio"
+         :data-state="isSelected('option3') ? 'checked' : 'unchecked'">
+    </div>
+    <label class="text-sm cursor-pointer">None</label>
+  </div>
+</div>
+```
+
+### Resizable
+
+```html
+<!-- Marrow UI: Resizable -->
+<!-- Resizable panels with a draggable divider -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwResizable(50)" class="flex h-64 select-none border rounded-md overflow-hidden">
+  <!-- Left Panel -->
+  <div class="overflow-auto p-4" :style="'width:' + split + '%'">
+    <h3 class="font-semibold mb-2">Left Panel</h3>
+    <p class="text-sm text-muted-foreground">Resizable content here.</p>
+  </div>
+
+  <!-- Drag Handle -->
+  <div class="mw-resizable-handle"
+       @mousedown="startDrag($event)"
+       @touchstart.prevent="startDrag($event)"></div>
+
+  <!-- Right Panel -->
+  <div class="overflow-auto p-4 flex-1">
+    <h3 class="font-semibold mb-2">Right Panel</h3>
+    <p class="text-sm text-muted-foreground">This fills the remaining space.</p>
+  </div>
+</div>
+```
+
+### Scroll Area
+
+```html
+<!-- Marrow UI: Scroll Area -->
+<!-- A scrollable content area with styled scrollbars -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="mw-scroll-area rounded-md border p-4" style="max-height: 200px;">
+  <h4 class="font-semibold mb-3">Scrollable Content</h4>
+  <p class="text-sm text-muted-foreground mb-3">
+    Your scrollable content goes here. The container will
+    show a styled scrollbar when content overflows.
+  </p>
+  <!-- Add more content to trigger scrolling -->
+</div>
+```
+
+### Select
+
+```html
+<!-- Marrow UI: Select -->
+<!-- A custom styled select dropdown with keyboard-friendly options -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwDropdown()" class="relative w-64">
+  <!-- Trigger -->
+  <button @click="toggle()" class="mw-input flex items-center justify-between cursor-pointer" type="button">
+    <span x-text="$data._selected || 'Select a fruit...'"
+          :class="!$data._selected && 'text-muted-foreground'"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" class="text-muted-foreground">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </button>
+
+  <!-- Options -->
+  <div x-show="open" @click.outside="close()" x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 -translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 -translate-y-1"
+       class="mw-popover absolute z-10 mt-1 w-full">
+    <button class="mw-menu-item" @click="$data._selected = 'Apple'; close()">Apple</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Banana'; close()">Banana</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Blueberry'; close()">Blueberry</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Cherry'; close()">Cherry</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Grape'; close()">Grape</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Mango'; close()">Mango</button>
+  </div>
+</div>
+```
+
+### Separator
+
+```html
+<!-- Marrow UI: Separator -->
+<!-- A visual divider to separate content sections -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div>
+  <h3 class="font-semibold">Marrow UI</h3>
+  <p class="text-sm text-muted-foreground">An open-source UI component library.</p>
+</div>
+
+<div class="mw-separator"></div>
+
+<div class="flex gap-4 text-sm">
+  <span>Documentation</span>
+  <span>Components</span>
+  <span>Themes</span>
+</div>
+```
+
+### Sheet
+
+```html
+<!-- Marrow UI: Sheet -->
+<!-- A side panel that slides in from the edge of the screen -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwSheet()">
+  <button @click="show()" class="mw-btn mw-btn-outline">Open Sheet</button>
+
+  <template x-if="open">
+    <div>
+      <!-- Overlay -->
+      <div class="mw-overlay" @click="close()"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"></div>
+
+      <!-- Sheet Panel (right side) -->
+      <div class="mw-sheet mw-sheet-right"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="translate-x-full"
+           x-transition:enter-end="translate-x-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="translate-x-0"
+           x-transition:leave-end="translate-x-full">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-heading text-lg font-semibold">Sheet Title</h3>
+            <p class="text-sm text-muted-foreground">Sheet description.</p>
+          </div>
+          <button @click="close()" class="mw-btn mw-btn-ghost mw-btn-icon">
+            &times;
+          </button>
+        </div>
+        <div class="mw-separator"></div>
+        <!-- Sheet content here -->
+      </div>
+    </div>
+  </template>
+</div>
+```
+
+### Sidebar
+
+```html
+<!-- Marrow UI: Sidebar -->
+<!-- A collapsible sidebar navigation component -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwSidebar(true)" class="flex min-h-screen">
+  <aside class="border-r bg-card transition-all duration-300 overflow-hidden shrink-0"
+         :style="open ? 'width: 16rem' : 'width: 3.5rem'">
+    <div class="p-3 flex items-center justify-between border-b">
+      <span x-show="open" class="font-heading font-semibold text-sm">Workspace</span>
+      <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon p-1">
+        <!-- Chevron icon -->
+      </button>
+    </div>
+    <nav class="p-2 space-y-1">
+      <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
+                         bg-accent text-accent-foreground font-medium">
+        <!-- Icon (shrink-0) -->
+        <span x-show="open" x-transition class="truncate">Dashboard</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
+                         text-muted-foreground hover:bg-accent transition-colors">
+        <!-- Icon (shrink-0) -->
+        <span x-show="open" x-transition class="truncate">Team</span>
+      </a>
+      <!-- More nav items... -->
+    </nav>
+  </aside>
+
+  <div class="flex-1 p-6">
+    <!-- Main content -->
+  </div>
+</div>
+```
+
+### Skeleton
+
+```html
+<!-- Marrow UI: Skeleton -->
+<!-- Placeholder loading animations for content that is not yet available -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="mw-card">
+  <div class="flex items-center gap-4">
+    <!-- Avatar placeholder -->
+    <div class="mw-skeleton rounded-full" style="width: 3rem; height: 3rem;"></div>
+    <div class="flex-1 space-y-2">
+      <div class="mw-skeleton" style="height: 0.875rem; width: 60%;"></div>
+      <div class="mw-skeleton" style="height: 0.75rem; width: 40%;"></div>
+    </div>
+  </div>
+  <div class="mt-4 space-y-2">
+    <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 90%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 75%;"></div>
+  </div>
+</div>
+```
+
+### Slider
+
+```html
+<!-- Marrow UI: Slider -->
+<!-- A range slider input for selecting numeric values -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwSlider(0, 100, 50)" class="space-y-4">
+  <div class="flex items-center justify-between">
+    <label class="mw-label">Volume</label>
+    <span class="text-sm text-muted-foreground" x-text="value + '%'"></span>
+  </div>
+
+  <div class="relative pt-1">
+    <!-- Visual track -->
+    <div class="mw-slider-track">
+      <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+    </div>
+    <!-- Invisible native range input -->
+    <input type="range" :min="min" :max="max"
+           x-model="value" @input="handleInput($event)"
+           class="absolute inset-0 w-full opacity-0 cursor-pointer"
+           style="margin: 0; height: 0.375rem;">
+  </div>
+</div>
+```
+
+### Sonner
+
+```html
+<!-- Marrow UI: Sonner -->
+<!-- Toast notifications with auto-dismiss and multiple variants -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<button class="mw-btn mw-btn-primary"
+  @click="$store.toasts.add({
+    title: 'Success!',
+    description: 'Your changes have been saved.',
+    type: 'success'
+  })">
+  Show Toast
+</button>
+```
+
+### Spinner
+
+```html
+<!-- Marrow UI: Spinner -->
+<!-- A loading spinner indicator for asynchronous operations -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Small -->
+<div class="mw-spinner" style="width: 1rem; height: 1rem;"></div>
+
+<!-- Default -->
+<div class="mw-spinner"></div>
+
+<!-- Large -->
+<div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"></div>
+
+<!-- Inline with text -->
+<div class="flex items-center gap-3">
+  <div class="mw-spinner"></div>
+  <span class="text-sm text-muted-foreground">Loading data...</span>
+</div>
+
+<!-- Inside a button -->
+<button class="mw-btn mw-btn-primary" disabled>
+  <div class="mw-spinner"
+       style="width: 1rem; height: 1rem;
+              border-color: hsl(var(--marrow-primary-foreground) / 0.3);
+              border-top-color: hsl(var(--marrow-primary-foreground));"></div>
+  Submitting...
+</button>
+```
+
+### Switch
+
+```html
+<!-- Marrow UI: Switch -->
+<!-- A toggle switch for on/off states -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Switch (off by default) -->
+<div class="flex items-center gap-3" x-data="mwSwitch()">
+  <button class="mw-switch"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          @click="toggle()"
+          role="switch"
+          :aria-checked="checked">
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
+</div>
+
+<!-- Switch (on by default) -->
+<div class="flex items-center gap-3" x-data="mwSwitch(true)">
+  <button class="mw-switch"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          @click="toggle()"
+          role="switch"
+          :aria-checked="checked">
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
+</div>
+
+<!-- Switch with label -->
+<div class="flex items-center gap-3" x-data="mwSwitch()">
+  <button class="mw-switch"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          @click="toggle()"
+          role="switch"
+          :aria-checked="checked"
+          id="airplane-mode">
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <label for="airplane-mode" class="mw-label cursor-pointer">Airplane Mode</label>
+</div>
+
+<!-- Disabled switch -->
+<div class="flex items-center gap-3" x-data="mwSwitch()">
+  <button class="mw-switch opacity-50 pointer-events-none"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          role="switch"
+          :aria-checked="checked"
+          disabled>
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <span class="text-sm text-muted-foreground">Disabled</span>
+</div>
+```
+
+### Table
+
+```html
+<!-- Marrow UI: Table -->
+<!-- A data table for displaying structured information -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="overflow-x-auto">
+  <table class="mw-table">
+    <thead>
+      <tr>
+        <th>Invoice</th>
+        <th>Status</th>
+        <th>Method</th>
+        <th class="text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="font-medium">INV-001</td>
+        <td><span class="mw-badge mw-badge-default">Paid</span></td>
+        <td class="text-muted-foreground">Credit Card</td>
+        <td class="text-right">$250.00</td>
+      </tr>
+      <tr>
+        <td class="font-medium">INV-002</td>
+        <td><span class="mw-badge mw-badge-outline">Pending</span></td>
+        <td class="text-muted-foreground">PayPal</td>
+        <td class="text-right">$150.00</td>
+      </tr>
+      <tr>
+        <td class="font-medium">INV-003</td>
+        <td><span class="mw-badge mw-badge-default">Paid</span></td>
+        <td class="text-muted-foreground">Bank Transfer</td>
+        <td class="text-right">$350.00</td>
+      </tr>
+      <tr>
+        <td class="font-medium">INV-004</td>
+        <td><span class="mw-badge mw-badge-destructive">Overdue</span></td>
+        <td class="text-muted-foreground">Credit Card</td>
+        <td class="text-right">$450.00</td>
+      </tr>
+      <tr>
+        <td class="font-medium">INV-005</td>
+        <td><span class="mw-badge mw-badge-default">Paid</span></td>
+        <td class="text-muted-foreground">PayPal</td>
+        <td class="text-right">$550.00</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+### Tabs
+
+```html
+<!-- Marrow UI: Tabs -->
+<!-- Tabbed navigation for switching between content panels -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwTabs('tab1')">
+  <!-- Tab triggers -->
+  <div class="mw-tabs-list">
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab1') ? 'active' : ''"
+            @click="setActive('tab1')">Account</button>
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab2') ? 'active' : ''"
+            @click="setActive('tab2')">Password</button>
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab3') ? 'active' : ''"
+            @click="setActive('tab3')">Notifications</button>
+  </div>
+
+  <!-- Tab panels -->
+  <div class="mt-4">
+    <div x-show="isActive('tab1')">
+      <h3 class="font-heading font-semibold">Account Settings</h3>
+      <p class="text-sm text-muted-foreground">Update your account information.</p>
+      <!-- Panel content -->
+    </div>
+
+    <div x-show="isActive('tab2')" x-cloak>
+      <h3 class="font-heading font-semibold">Change Password</h3>
+      <p class="text-sm text-muted-foreground">Update your password.</p>
+      <!-- Panel content -->
+    </div>
+
+    <div x-show="isActive('tab3')" x-cloak>
+      <h3 class="font-heading font-semibold">Notification Preferences</h3>
+      <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
+      <!-- Panel content -->
+    </div>
+  </div>
+</div>
+```
+
+### Textarea
+
+```html
+<!-- Marrow UI: Textarea -->
+<!-- A multi-line text input field -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Default textarea -->
+<div class="space-y-2">
+  <label class="mw-label">Message</label>
+  <textarea class="mw-textarea"></textarea>
+</div>
+
+<!-- With placeholder -->
+<div class="space-y-2">
+  <label class="mw-label">Message</label>
+  <textarea class="mw-textarea" placeholder="Type your message here..."></textarea>
+</div>
+
+<!-- Disabled -->
+<div class="space-y-2">
+  <label class="mw-label">Message</label>
+  <textarea class="mw-textarea" disabled placeholder="This textarea is disabled..."></textarea>
+</div>
+```
+
+### Toast
+
+```html
+<!-- Marrow UI: Toast -->
+<!-- Temporary notification messages that appear at the bottom-right -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Trigger buttons -->
+<button class="mw-btn mw-btn-primary"
+        @click="$store.toasts.add({ type: 'success', title: 'Success', message: 'Your changes have been saved.' })">
+  Success Toast
+</button>
+
+<button class="mw-btn mw-btn-destructive"
+        @click="$store.toasts.add({ type: 'error', title: 'Error', message: 'Something went wrong.' })">
+  Error Toast
+</button>
+
+<button class="mw-btn mw-btn-outline"
+        @click="$store.toasts.add({ type: 'info', title: 'Info', message: 'A new update is available.' })">
+  Info Toast
+</button>
+
+<!-- Toast container (place once, at the bottom of your page) -->
+<div x-data
+     class="fixed bottom-4 right-4 z-50 flex flex-col gap-2"
+     style="pointer-events: none;">
+  <template x-for="toast in $store.toasts.items" :key="toast.id">
+    <div class="mw-card flex items-start gap-3 min-w-[20rem] max-w-sm shadow-lg"
+         style="pointer-events: auto;"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 translate-y-2">
+      <!-- Icon (conditional on toast.type) -->
+      <template x-if="toast.type === 'success'">
+        <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" ...></svg>
+      </template>
+      <template x-if="toast.type === 'error'">
+        <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" ...></svg>
+      </template>
+      <template x-if="toast.type === 'info'">
+        <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" ...></svg>
+      </template>
+      <!-- Content -->
+      <div class="flex-1 min-w-0">
+        <p class="font-medium text-sm" x-text="toast.title"></p>
+        <p class="text-sm text-muted-foreground" x-text="toast.message"></p>
+      </div>
+      <!-- Close button -->
+      <button @click="$store.toasts.remove(toast.id)"
+              class="shrink-0 text-muted-foreground hover:text-foreground">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+  </template>
+</div>
+```
+
+### Toggle Group
+
+```html
+<!-- Marrow UI: Toggle Group -->
+<!-- A group of toggle buttons where one or multiple can be selected -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Single selection toggle group -->
+<div x-data="mwToggleGroup('single', 'center')"
+     class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
+  <button class="mw-toggle"
+          :data-state="isSelected('left') ? 'on' : 'off'"
+          @click="select('left')">
+    <svg ...>Align Left</svg>
+  </button>
+  <button class="mw-toggle"
+          :data-state="isSelected('center') ? 'on' : 'off'"
+          @click="select('center')">
+    <svg ...>Align Center</svg>
+  </button>
+  <button class="mw-toggle"
+          :data-state="isSelected('right') ? 'on' : 'off'"
+          @click="select('right')">
+    <svg ...>Align Right</svg>
+  </button>
+</div>
+
+<!-- Multiple selection toggle group -->
+<div x-data="mwToggleGroup('multiple', ['bold'])"
+     class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
+  <button class="mw-toggle"
+          :data-state="isSelected('bold') ? 'on' : 'off'"
+          @click="select('bold')">
+    <svg ...>Bold</svg>
+  </button>
+  <button class="mw-toggle"
+          :data-state="isSelected('italic') ? 'on' : 'off'"
+          @click="select('italic')">
+    <svg ...>Italic</svg>
+  </button>
+  <button class="mw-toggle"
+          :data-state="isSelected('underline') ? 'on' : 'off'"
+          @click="select('underline')">
+    <svg ...>Underline</svg>
+  </button>
+</div>
+```
+
+### Toggle
+
+```html
+<!-- Marrow UI: Toggle -->
+<!-- A two-state button that can be pressed or unpressed -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Toggle (unpressed by default) -->
+<div x-data="mwToggle()">
+  <button class="mw-toggle"
+          :data-state="pressed ? 'on' : 'off'"
+          @click="toggle()"
+          :aria-pressed="pressed">
+    <svg ...>Bold icon</svg>
+  </button>
+</div>
+
+<!-- Toggle (pressed by default) -->
+<div x-data="mwToggle(true)">
+  <button class="mw-toggle"
+          :data-state="pressed ? 'on' : 'off'"
+          @click="toggle()"
+          :aria-pressed="pressed">
+    <svg ...>Italic icon</svg>
+  </button>
+</div>
+
+<!-- Toggle with text label -->
+<div x-data="mwToggle()">
+  <button class="mw-toggle !aspect-auto px-3 gap-2"
+          :data-state="pressed ? 'on' : 'off'"
+          @click="toggle()"
+          :aria-pressed="pressed">
+    <svg ...>Icon</svg>
+    <span class="text-sm">Wrap</span>
+  </button>
+</div>
+```
+
+### Tooltip
+
+```html
+<!-- Marrow UI: Tooltip -->
+<!-- A popup that displays information on hover -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Tooltip on a button -->
+<div x-data="mwTooltip()" class="relative inline-block">
+  <button class="mw-btn mw-btn-outline"
+          @mouseenter="enter()"
+          @mouseleave="leave()">
+    Hover me
+  </button>
+  <div x-show="show"
+       x-cloak
+       x-transition:enter="transition ease-out duration-150"
+       x-transition:enter-start="opacity-0 translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-100"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-1"
+       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+    This is a tooltip
+  </div>
+</div>
+
+<!-- Tooltip on an icon button -->
+<div x-data="mwTooltip()" class="relative inline-block">
+  <button class="mw-btn mw-btn-ghost mw-btn-icon"
+          @mouseenter="enter()"
+          @mouseleave="leave()">
+    <svg ...>Icon</svg>
+  </button>
+  <div x-show="show"
+       x-cloak
+       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+    More information
+  </div>
+</div>
+
+<!-- Tooltip on text -->
+<div x-data="mwTooltip()" class="relative inline-block">
+  <span class="underline decoration-dashed underline-offset-4 cursor-help"
+        @mouseenter="enter()"
+        @mouseleave="leave()">
+    What is this?
+  </span>
+  <div x-show="show"
+       x-cloak
+       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+    A helpful explanation
+  </div>
+</div>
+```
+
+### Typography
+
+```html
+<!-- Marrow UI: Typography -->
+<!-- Heading levels, body text, inline code, blockquotes, and lists -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Headings -->
+<h1 class="font-heading text-4xl font-extrabold tracking-tight lg:text-5xl">Heading 1</h1>
+<h2 class="font-heading text-3xl font-semibold tracking-tight border-b pb-2">Heading 2</h2>
+<h3 class="font-heading text-2xl font-semibold tracking-tight">Heading 3</h3>
+<h4 class="font-heading text-xl font-semibold tracking-tight">Heading 4</h4>
+<h5 class="font-heading text-lg font-semibold tracking-tight">Heading 5</h5>
+<h6 class="font-heading text-base font-semibold tracking-tight">Heading 6</h6>
+
+<!-- Paragraph -->
+<p class="leading-7">Standard body text with comfortable line height.</p>
+
+<!-- Lead paragraph -->
+<p class="text-lg text-muted-foreground leading-relaxed">A lead paragraph for introductions.</p>
+
+<!-- Small text -->
+<p class="text-sm text-muted-foreground">Small muted text for secondary info.</p>
+
+<!-- Inline code -->
+<p>Use the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn</code> class.</p>
+
+<!-- Blockquote -->
+<blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground">
+  "A meaningful quote goes here."
+  <footer class="mt-2 text-sm not-italic">&mdash; Author Name</footer>
+</blockquote>
+
+<!-- Unordered list -->
+<ul class="list-disc pl-6 space-y-1 leading-7">
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ul>
+
+<!-- Ordered list -->
+<ol class="list-decimal pl-6 space-y-1 leading-7">
+  <li>Step one</li>
+  <li>Step two</li>
+  <li>Step three</li>
+</ol>
+```
+
+
+## CSS Classes Reference
+
+### Buttons
+| Class | Description |
+|-------|-------------|
+| .mw-btn | Base button |
+| .mw-btn-primary | Primary variant |
+| .mw-btn-secondary | Secondary variant |
+| .mw-btn-outline | Outline variant |
+| .mw-btn-ghost | Ghost variant |
+| .mw-btn-destructive | Destructive/danger variant |
+| .mw-btn-link | Link-style variant |
+| .mw-btn-sm | Small size |
+| .mw-btn-lg | Large size |
+| .mw-btn-icon | Icon-only square button |
+
+### Form Controls
+| Class | Description |
+|-------|-------------|
+| .mw-input | Text input |
+| .mw-textarea | Multi-line input |
+| .mw-select | Custom select |
+| .mw-label | Form label |
+| .mw-checkbox | Checkbox |
+| .mw-radio | Radio button |
+| .mw-switch | Toggle switch |
+| .mw-switch-thumb | Switch thumb element |
+| .mw-slider-track | Slider track |
+| .mw-slider-range | Slider filled range |
+| .mw-slider-thumb | Slider thumb |
+
+### Layout
+| Class | Description |
+|-------|-------------|
+| .mw-card | Card container |
+| .mw-separator | Horizontal divider |
+| .mw-separator-vertical | Vertical divider |
+| .mw-scroll-area | Custom scrollbar container |
+| .mw-resizable-handle | Panel resize handle |
+
+### Feedback
+| Class | Description |
+|-------|-------------|
+| .mw-badge | Status badge |
+| .mw-badge-default | Default badge variant |
+| .mw-badge-secondary | Secondary badge variant |
+| .mw-badge-outline | Outline badge variant |
+| .mw-badge-destructive | Destructive badge variant |
+| .mw-alert | Alert message |
+| .mw-progress | Progress bar container |
+| .mw-progress-bar | Progress bar fill |
+| .mw-skeleton | Loading skeleton |
+| .mw-spinner | Loading spinner |
+
+### Overlays
+| Class | Description |
+|-------|-------------|
+| .mw-overlay | Modal backdrop |
+| .mw-dialog | Dialog container |
+| .mw-sheet | Sheet panel |
+| .mw-popover | Popover container |
+| .mw-tooltip | Tooltip container |
+
+### Navigation
+| Class | Description |
+|-------|-------------|
+| .mw-tabs-list | Tab list container |
+| .mw-tab-trigger | Tab button |
+| .mw-breadcrumb | Breadcrumb nav |
+| .mw-pagination-item | Pagination button |
+| .mw-menu-item | Dropdown menu item |
+
+### Other
+| Class | Description |
+|-------|-------------|
+| .mw-avatar | Avatar container |
+| .mw-avatar-sm | Small avatar |
+| .mw-avatar-lg | Large avatar |
+| .mw-kbd | Keyboard shortcut |
+| .mw-toggle | Toggle button |
+| .mw-empty | Empty state |
+| .mw-code-block | Code block container |
+
+### Data Attributes
+| Attribute | Usage |
+|-----------|-------|
+| data-state="checked" | Checked state for checkbox, switch |
+| data-state="unchecked" | Unchecked state for checkbox, switch |
+| data-state="active" | Active tab trigger |
+| data-state="on" | Toggle pressed state |

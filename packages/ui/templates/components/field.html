@@ -1,0 +1,35 @@
+<!-- Marrow UI: Field -->
+<!-- A complete form field pattern combining label, input, and helper text -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Default field -->
+<div class="space-y-2">
+  <label for="field-name" class="mw-label">Name</label>
+  <input id="field-name" type="text" class="mw-input"
+         placeholder="Enter your name" />
+  <p class="text-sm text-muted-foreground">
+    This is your public display name.
+  </p>
+</div>
+
+<!-- Required field -->
+<div class="space-y-2">
+  <label for="field-email" class="mw-label">
+    Email <span class="text-destructive">*</span>
+  </label>
+  <input id="field-email" type="email" class="mw-input"
+         placeholder="you@example.com" />
+  <p class="text-sm text-muted-foreground">
+    We will never share your email.
+  </p>
+</div>
+
+<!-- Error state -->
+<div class="space-y-2">
+  <label for="field-error" class="mw-label">Username</label>
+  <input id="field-error" type="text" class="mw-input" value="ab"
+         style="border-color: hsl(var(--marrow-destructive));" />
+  <p class="text-sm" style="color: hsl(var(--marrow-destructive));">
+    Username must be at least 3 characters.
+  </p>
+</div>

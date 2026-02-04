@@ -1,0 +1,33 @@
+<!-- Marrow UI: Select -->
+<!-- A custom styled select dropdown with keyboard-friendly options -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwDropdown()" class="relative w-64">
+  <!-- Trigger -->
+  <button @click="toggle()" class="mw-input flex items-center justify-between cursor-pointer" type="button">
+    <span x-text="$data._selected || 'Select a fruit...'"
+          :class="!$data._selected && 'text-muted-foreground'"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" class="text-muted-foreground">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </button>
+
+  <!-- Options -->
+  <div x-show="open" @click.outside="close()" x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 -translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 -translate-y-1"
+       class="mw-popover absolute z-10 mt-1 w-full">
+    <button class="mw-menu-item" @click="$data._selected = 'Apple'; close()">Apple</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Banana'; close()">Banana</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Blueberry'; close()">Blueberry</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Cherry'; close()">Cherry</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Grape'; close()">Grape</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Mango'; close()">Mango</button>
+  </div>
+</div>

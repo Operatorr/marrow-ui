@@ -1,0 +1,133 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Tabs" description="Tabbed navigation for switching between content panels" activeComponent="tabs">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Tabs</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A set of layered content sections, displayed one at a time via tabbed navigation.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+          <div class="mw-card p-6">
+            <div x-data="mwTabs('tab1')">
+              <!-- Tab triggers -->
+              <div class="mw-tabs-list">
+                <button class="mw-tab-trigger"
+                        :data-state="isActive('tab1') ? 'active' : ''"
+                        @click="setActive('tab1')">Account</button>
+                <button class="mw-tab-trigger"
+                        :data-state="isActive('tab2') ? 'active' : ''"
+                        @click="setActive('tab2')">Password</button>
+                <button class="mw-tab-trigger"
+                        :data-state="isActive('tab3') ? 'active' : ''"
+                        @click="setActive('tab3')">Notifications</button>
+              </div>
+
+              <!-- Tab panels -->
+              <div class="mt-4">
+                <div x-show="isActive('tab1')" class="space-y-4">
+                  <h3 class="font-heading font-semibold">Account Settings</h3>
+                  <p class="text-sm text-muted-foreground">Update your account information and preferences.</p>
+                  <div class="space-y-2">
+                    <label class="mw-label">Name</label>
+                    <input type="text" class="mw-input max-w-sm" placeholder="Your name" value="John Doe">
+                  </div>
+                  <div class="space-y-2">
+                    <label class="mw-label">Email</label>
+                    <input type="email" class="mw-input max-w-sm" placeholder="Your email" value="john@example.com">
+                  </div>
+                </div>
+
+                <div x-show="isActive('tab2')" x-cloak class="space-y-4">
+                  <h3 class="font-heading font-semibold">Change Password</h3>
+                  <p class="text-sm text-muted-foreground">Update your password to keep your account secure.</p>
+                  <div class="space-y-2">
+                    <label class="mw-label">Current Password</label>
+                    <input type="password" class="mw-input max-w-sm" placeholder="Current password">
+                  </div>
+                  <div class="space-y-2">
+                    <label class="mw-label">New Password</label>
+                    <input type="password" class="mw-input max-w-sm" placeholder="New password">
+                  </div>
+                </div>
+
+                <div x-show="isActive('tab3')" x-cloak class="space-y-4">
+                  <h3 class="font-heading font-semibold">Notification Preferences</h3>
+                  <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
+                  <div class="flex items-center gap-3" x-data="mwSwitch(true)">
+                    <button class="mw-switch"
+                            :data-state="checked ? 'checked' : 'unchecked'"
+                            @click="toggle()"
+                            role="switch">
+                      <span class="mw-switch-thumb"></span>
+                    </button>
+                    <span class="text-sm">Email notifications</span>
+                  </div>
+                  <div class="flex items-center gap-3" x-data="mwSwitch()">
+                    <button class="mw-switch"
+                            :data-state="checked ? 'checked' : 'unchecked'"
+                            @click="toggle()"
+                            role="switch">
+                      <span class="mw-switch-thumb"></span>
+                    </button>
+                    <span class="text-sm">Push notifications</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwTabs('tab1')"&gt;
+  &lt;!-- Tab triggers --&gt;
+  &lt;div class="mw-tabs-list"&gt;
+    &lt;button class="mw-tab-trigger"
+            :data-state="isActive('tab1') ? 'active' : ''"
+            @click="setActive('tab1')"&gt;Account&lt;/button&gt;
+    &lt;button class="mw-tab-trigger"
+            :data-state="isActive('tab2') ? 'active' : ''"
+            @click="setActive('tab2')"&gt;Password&lt;/button&gt;
+    &lt;button class="mw-tab-trigger"
+            :data-state="isActive('tab3') ? 'active' : ''"
+            @click="setActive('tab3')"&gt;Notifications&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Tab panels --&gt;
+  &lt;div class="mt-4"&gt;
+    &lt;div x-show="isActive('tab1')"&gt;
+      &lt;h3 class="font-heading font-semibold"&gt;Account Settings&lt;/h3&gt;
+      &lt;p class="text-sm text-muted-foreground"&gt;Update your account information.&lt;/p&gt;
+      &lt;!-- Panel content --&gt;
+    &lt;/div&gt;
+
+    &lt;div x-show="isActive('tab2')" x-cloak&gt;
+      &lt;h3 class="font-heading font-semibold"&gt;Change Password&lt;/h3&gt;
+      &lt;p class="text-sm text-muted-foreground"&gt;Update your password.&lt;/p&gt;
+      &lt;!-- Panel content --&gt;
+    &lt;/div&gt;
+
+    &lt;div x-show="isActive('tab3')" x-cloak&gt;
+      &lt;h3 class="font-heading font-semibold"&gt;Notification Preferences&lt;/h3&gt;
+      &lt;p class="text-sm text-muted-foreground"&gt;Choose how you want to be notified.&lt;/p&gt;
+      &lt;!-- Panel content --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

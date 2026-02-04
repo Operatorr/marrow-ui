@@ -1,0 +1,39 @@
+<!-- Marrow UI: Tabs -->
+<!-- Tabbed navigation for switching between content panels -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwTabs('tab1')">
+  <!-- Tab triggers -->
+  <div class="mw-tabs-list">
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab1') ? 'active' : ''"
+            @click="setActive('tab1')">Account</button>
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab2') ? 'active' : ''"
+            @click="setActive('tab2')">Password</button>
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab3') ? 'active' : ''"
+            @click="setActive('tab3')">Notifications</button>
+  </div>
+
+  <!-- Tab panels -->
+  <div class="mt-4">
+    <div x-show="isActive('tab1')">
+      <h3 class="font-heading font-semibold">Account Settings</h3>
+      <p class="text-sm text-muted-foreground">Update your account information.</p>
+      <!-- Panel content -->
+    </div>
+
+    <div x-show="isActive('tab2')" x-cloak>
+      <h3 class="font-heading font-semibold">Change Password</h3>
+      <p class="text-sm text-muted-foreground">Update your password.</p>
+      <!-- Panel content -->
+    </div>
+
+    <div x-show="isActive('tab3')" x-cloak>
+      <h3 class="font-heading font-semibold">Notification Preferences</h3>
+      <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
+      <!-- Panel content -->
+    </div>
+  </div>
+</div>

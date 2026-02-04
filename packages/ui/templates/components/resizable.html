@@ -1,0 +1,22 @@
+<!-- Marrow UI: Resizable -->
+<!-- Resizable panels with a draggable divider -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwResizable(50)" class="flex h-64 select-none border rounded-md overflow-hidden">
+  <!-- Left Panel -->
+  <div class="overflow-auto p-4" :style="'width:' + split + '%'">
+    <h3 class="font-semibold mb-2">Left Panel</h3>
+    <p class="text-sm text-muted-foreground">Resizable content here.</p>
+  </div>
+
+  <!-- Drag Handle -->
+  <div class="mw-resizable-handle"
+       @mousedown="startDrag($event)"
+       @touchstart.prevent="startDrag($event)"></div>
+
+  <!-- Right Panel -->
+  <div class="overflow-auto p-4 flex-1">
+    <h3 class="font-semibold mb-2">Right Panel</h3>
+    <p class="text-sm text-muted-foreground">This fills the remaining space.</p>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<!-- Marrow UI: Carousel -->
+<!-- A slideshow component for cycling through content with navigation controls -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCarousel(3)">
+  <div class="relative overflow-hidden rounded-marrow border border-border">
+    <!-- Slides -->
+    <div class="relative min-h-[200px]">
+      <div x-show="current === 0" class="flex items-center justify-center h-[200px] bg-muted/30">
+        <div class="text-center">
+          <p class="text-lg font-semibold">Slide 1</p>
+          <p class="text-sm text-muted-foreground">First slide content</p>
+        </div>
+      </div>
+      <div x-show="current === 1" class="flex items-center justify-center h-[200px] bg-muted/30">
+        <div class="text-center">
+          <p class="text-lg font-semibold">Slide 2</p>
+          <p class="text-sm text-muted-foreground">Second slide content</p>
+        </div>
+      </div>
+      <div x-show="current === 2" class="flex items-center justify-center h-[200px] bg-muted/30">
+        <div class="text-center">
+          <p class="text-lg font-semibold">Slide 3</p>
+          <p class="text-sm text-muted-foreground">Third slide content</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prev/Next Buttons -->
+    <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Previous slide">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Next slide">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <!-- Dot Indicators -->
+  <div class="flex justify-center gap-2 mt-3">
+    <template x-for="i in count" :key="i">
+      <button @click="goTo(i - 1)"
+        :class="current === i - 1 ? 'bg-primary' : 'bg-muted-foreground/30'"
+        class="w-2 h-2 rounded-full transition-colors"
+        :aria-label="'Go to slide ' + i"></button>
+    </template>
+  </div>
+</div>

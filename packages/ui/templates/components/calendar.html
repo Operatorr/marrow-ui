@@ -1,0 +1,52 @@
+<!-- Marrow UI: Calendar -->
+<!-- An inline date calendar for selecting dates -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCalendar()" class="mw-card w-[280px] p-3">
+  <!-- Month Navigation -->
+  <div class="flex items-center justify-between mb-4">
+    <button @click="prevMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+    </button>
+    <span class="text-sm font-medium"
+          x-text="monthName + ' ' + currentYear"></span>
+    <button @click="nextMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Day of week headers -->
+  <div class="grid grid-cols-7 mb-1">
+    <template x-for="day in ['Su','Mo','Tu','We','Th','Fr','Sa']" :key="day">
+      <div class="text-center text-xs font-medium text-muted-foreground py-1"
+           x-text="day"></div>
+    </template>
+  </div>
+
+  <!-- Day grid -->
+  <div class="grid grid-cols-7">
+    <template x-for="(day, index) in days" :key="index">
+      <button
+        @click="selectDate(day)"
+        :disabled="!day"
+        :class="{
+          'bg-primary text-primary-foreground hover:bg-primary/90': isSelected(day),
+          'bg-accent': isToday(day) && !isSelected(day),
+          'hover:bg-accent': day && !isSelected(day),
+          'opacity-0 pointer-events-none': !day
+        }"
+        class="h-8 w-8 mx-auto rounded-[var(--marrow-radius)] text-sm
+               flex items-center justify-center transition-colors"
+        x-text="day || ''">
+      </button>
+    </template>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Direction" description="Support for right-to-left (RTL) layouts using the dir attribute" activeComponent="direction">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Direction</h1>
+          <p class="mt-2 text-lg text-muted-foreground">Support for right-to-left (RTL) layouts using the dir attribute.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card flex flex-col items-center justify-center min-h-[200px] gap-6">
+            <div class="w-full max-w-md">
+              <div class="mw-card" dir="ltr">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="mw-avatar">LR</div>
+                  <div>
+                    <h4 class="font-heading font-semibold text-sm">Left-to-Right</h4>
+                    <p class="text-xs text-muted-foreground">This card uses the default LTR direction.</p>
+                  </div>
+                </div>
+                <p class="text-sm text-muted-foreground">Content flows from left to right, which is the default for most Western languages like English, French, and Spanish.</p>
+              </div>
+            </div>
+            <div class="w-full max-w-md">
+              <div class="mw-card" dir="rtl">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="mw-avatar">RL</div>
+                  <div>
+                    <h4 class="font-heading font-semibold text-sm">من اليمين إلى اليسار</h4>
+                    <p class="text-xs text-muted-foreground">هذه البطاقة تستخدم اتجاه RTL.</p>
+                  </div>
+                </div>
+                <p class="text-sm text-muted-foreground">المحتوى يتدفق من اليمين إلى اليسار، وهو الاتجاه المستخدم في اللغات مثل العربية والعبرية والفارسية.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;!-- LTR (default) --&gt;
+&lt;div class="mw-card" dir="ltr"&gt;
+  &lt;div class="flex items-center gap-3 mb-2"&gt;
+    &lt;div class="mw-avatar"&gt;LR&lt;/div&gt;
+    &lt;div&gt;
+      &lt;h4 class="font-heading font-semibold text-sm"&gt;Left-to-Right&lt;/h4&gt;
+      &lt;p class="text-xs text-muted-foreground"&gt;This card uses the default LTR direction.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;p class="text-sm text-muted-foreground"&gt;
+    Content flows from left to right.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- RTL --&gt;
+&lt;div class="mw-card" dir="rtl"&gt;
+  &lt;div class="flex items-center gap-3 mb-2"&gt;
+    &lt;div class="mw-avatar"&gt;RL&lt;/div&gt;
+    &lt;div&gt;
+      &lt;h4 class="font-heading font-semibold text-sm"&gt;من اليمين إلى اليسار&lt;/h4&gt;
+      &lt;p class="text-xs text-muted-foreground"&gt;هذه البطاقة تستخدم اتجاه RTL.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;p class="text-sm text-muted-foreground"&gt;
+    المحتوى يتدفق من اليمين إلى اليسار.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Apply RTL to the entire page --&gt;
+&lt;html dir="rtl"&gt;
+  ...
+&lt;/html&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

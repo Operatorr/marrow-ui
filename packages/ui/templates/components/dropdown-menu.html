@@ -1,0 +1,35 @@
+<!-- Marrow UI: Dropdown Menu -->
+<!-- A menu that appears below a trigger button with actions and options -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwDropdown()" @click.outside="close()" class="relative">
+  <button @click="toggle()" class="mw-btn mw-btn-outline">
+    Options
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+
+  <div x-show="open" x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 scale-95"
+       x-transition:enter-end="opacity-100 scale-100"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 scale-100"
+       x-transition:leave-end="opacity-0 scale-95"
+       class="mw-popover absolute left-0 mt-1 z-50 w-56">
+
+    <div class="mw-menu-label">My Account</div>
+    <div class="mw-menu-separator"></div>
+
+    <button class="mw-menu-item" @click="close()">Profile</button>
+    <button class="mw-menu-item" @click="close()">Settings</button>
+    <button class="mw-menu-item" @click="close()">Billing</button>
+
+    <div class="mw-menu-separator"></div>
+    <div class="mw-menu-label">Team</div>
+
+    <button class="mw-menu-item" @click="close()">Invite members</button>
+
+    <div class="mw-menu-separator"></div>
+    <button class="mw-menu-item text-destructive" @click="close()">Log out</button>
+  </div>
+</div>
