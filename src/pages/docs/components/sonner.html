@@ -1,0 +1,129 @@
+---
+layout: docs
+title: Sonner
+description: Toast notifications with auto-dismiss and multiple variants
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Sonner</h1>
+          <p class="mt-2 text-lg text-muted-foreground">Lightweight toast notifications that appear briefly and dismiss automatically, inspired by the Sonner library.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+          <div class="mw-card">
+            <div class="flex flex-wrap gap-2">
+              <button class="mw-btn mw-btn-outline"
+                      @click="$store.toasts.add({ title: 'Event created', description: 'Your event has been scheduled successfully.', type: 'default' })">
+                Default Toast
+              </button>
+              <button class="mw-btn mw-btn-primary"
+                      @click="$store.toasts.add({ title: 'Success!', description: 'Your changes have been saved.', type: 'success' })">
+                Success Toast
+              </button>
+              <button class="mw-btn mw-btn-destructive"
+                      @click="$store.toasts.add({ title: 'Error', description: 'Something went wrong. Please try again.', type: 'error' })">
+                Error Toast
+              </button>
+              <button class="mw-btn mw-btn-secondary"
+                      @click="$store.toasts.add({ title: 'Heads up!', description: 'This action cannot be undone.', type: 'warning' })">
+                Warning Toast
+              </button>
+            </div>
+          </div>
+
+          <!-- Toast Container -->
+          <div x-data class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 w-80" style="pointer-events: none;">
+            <template x-for="toast in $store.toasts.items" :key="toast.id">
+              <div class="mw-card border shadow-lg flex items-start gap-3 p-4"
+                   style="pointer-events: auto;"
+                   x-transition:enter="transition ease-out duration-300"
+                   x-transition:enter-start="opacity-0 translate-y-2"
+                   x-transition:enter-end="opacity-100 translate-y-0"
+                   x-transition:leave="transition ease-in duration-200"
+                   x-transition:leave-start="opacity-100 translate-y-0"
+                   x-transition:leave-end="opacity-0 translate-y-2">
+                <!-- Icon -->
+                <template x-if="toast.type === 'success'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(142 71% 45%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5"><path d="M20 6 9 17l-5-5"/></svg>
+                </template>
+                <template x-if="toast.type === 'error'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(0 84% 60%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                </template>
+                <template x-if="toast.type === 'warning'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(38 92% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                </template>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-semibold" x-text="toast.title"></p>
+                  <p class="text-xs text-muted-foreground mt-0.5" x-text="toast.description"></p>
+                </div>
+                <button @click="$store.toasts.remove(toast.id)" class="shrink-0 text-muted-foreground hover:text-foreground transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+
+          <h3 class="font-heading text-lg font-semibold">Trigger a Toast</h3>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;button class="mw-btn mw-btn-primary"
+  @click="$store.toasts.add({
+    title: 'Success!',
+    description: 'Your changes have been saved.',
+    type: 'success'
+  })"&gt;
+  Show Toast
+&lt;/button&gt;</code></pre>
+          </div>
+
+          <h3 class="font-heading text-lg font-semibold mt-6">Toast Container</h3>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;!-- Place once in your layout --&gt;
+&lt;div x-data class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 w-80"
+     style="pointer-events: none;"&gt;
+  &lt;template x-for="toast in $store.toasts.items" :key="toast.id"&gt;
+    &lt;div class="mw-card border shadow-lg flex items-start gap-3 p-4"
+         style="pointer-events: auto;"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 translate-y-2"&gt;
+      &lt;div class="flex-1 min-w-0"&gt;
+        &lt;p class="text-sm font-semibold" x-text="toast.title"&gt;&lt;/p&gt;
+        &lt;p class="text-xs text-muted-foreground mt-0.5"
+           x-text="toast.description"&gt;&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;button @click="$store.toasts.remove(toast.id)"
+              class="shrink-0 text-muted-foreground hover:text-foreground"&gt;
+        &amp;times;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Usage Notes -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+          <p class="text-muted-foreground leading-relaxed">Toasts use the Alpine.js global store <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Alpine.store('toasts')</code>. Call <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">$store.toasts.add({ title, description, type })</code> from any component to show a notification.</p>
+          <p class="text-muted-foreground leading-relaxed">Toasts auto-dismiss after 4 seconds by default. Pass <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">duration: 6000</code> to change the timeout, or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">duration: 0</code> to keep the toast until manually dismissed. Supported types are <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">default</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">success</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">error</code>, and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">warning</code>.</p>
+          <p class="text-muted-foreground leading-relaxed">Place the toast container once in your page layout. It will render all active toasts as a stacked list in the bottom-right corner.</p>
+        </div>
+      </div>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} – Marrow UI</title>
+  <meta name="description" content="{{description}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="/css/marrow-theme.css">
+  <link rel="stylesheet" href="/css/marrow.css">
+  <script src="/js/marrow.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: 'hsl(var(--marrow-primary) / <alpha-value>)',
+            'primary-foreground': 'hsl(var(--marrow-primary-foreground) / <alpha-value>)',
+            secondary: 'hsl(var(--marrow-secondary) / <alpha-value>)',
+            'secondary-foreground': 'hsl(var(--marrow-secondary-foreground) / <alpha-value>)',
+            accent: 'hsl(var(--marrow-accent) / <alpha-value>)',
+            'accent-foreground': 'hsl(var(--marrow-accent-foreground) / <alpha-value>)',
+            background: 'hsl(var(--marrow-background) / <alpha-value>)',
+            foreground: 'hsl(var(--marrow-foreground) / <alpha-value>)',
+            muted: 'hsl(var(--marrow-muted) / <alpha-value>)',
+            'muted-foreground': 'hsl(var(--marrow-muted-foreground) / <alpha-value>)',
+            card: 'hsl(var(--marrow-card) / <alpha-value>)',
+            'card-foreground': 'hsl(var(--marrow-card-foreground) / <alpha-value>)',
+            popover: 'hsl(var(--marrow-popover) / <alpha-value>)',
+            'popover-foreground': 'hsl(var(--marrow-popover-foreground) / <alpha-value>)',
+            destructive: 'hsl(var(--marrow-destructive) / <alpha-value>)',
+            'destructive-foreground': 'hsl(var(--marrow-destructive-foreground) / <alpha-value>)',
+            border: 'hsl(var(--marrow-border) / <alpha-value>)',
+            input: 'hsl(var(--marrow-input) / <alpha-value>)',
+            ring: 'hsl(var(--marrow-ring) / <alpha-value>)',
+          },
+          borderRadius: {
+            marrow: 'var(--marrow-radius)',
+          },
+          fontFamily: {
+            heading: 'var(--marrow-font-heading)',
+            body: 'var(--marrow-font-body)',
+          },
+        },
+      },
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      * { @apply border-border; }
+      body { @apply bg-background text-foreground; }
+    }
+    .sidebar-link {
+      @apply block px-3 py-1.5 text-sm rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors;
+    }
+    .sidebar-link-active {
+      @apply bg-accent text-foreground font-medium;
+    }
+    .sidebar-heading {
+      @apply px-3 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider;
+    }
+  </style>
+</head>
+<body class="min-h-screen font-body antialiased" x-data="{ mobileSidebar: false }">
+  <!-- Top Navigation -->
+  <header class="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div class="flex h-14 items-center px-4 md:px-6">
+      <button @click="mobileSidebar = !mobileSidebar" class="mr-2 md:hidden mw-btn mw-btn-ghost mw-btn-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+      <a href="/" class="flex items-center gap-2 font-heading font-bold text-lg mr-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l3 3 5-5"/></svg>
+        Marrow UI
+      </a>
+      <nav class="hidden md:flex items-center gap-1 text-sm">
+        <a href="/docs/index.html" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Docs</a>
+        <a href="/docs/components/button.html" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Components</a>
+      </nav>
+      <div class="flex-1"></div>
+      <div class="flex items-center gap-2">
+        <a href="https://github.com" target="_blank" class="mw-btn mw-btn-ghost mw-btn-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex">
+    <!-- Sidebar (mobile overlay) -->
+    <div x-show="mobileSidebar" @click="mobileSidebar = false" class="fixed inset-0 z-30 bg-black/50 md:hidden" x-cloak
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"></div>
+
+    <!-- Sidebar -->
+    <aside :class="mobileSidebar ? 'translate-x-0' : '-translate-x-full md:translate-x-0'"
+           class="fixed md:sticky top-14 z-30 h-[calc(100vh-3.5rem)] w-64 shrink-0 border-r bg-background overflow-y-auto transition-transform duration-200 md:block">
+      <nav class="py-4 space-y-1">
+        <!-- Getting Started -->
+        <div class="sidebar-heading mt-2">Getting Started</div>
+        <a href="/docs/index.html" class="sidebar-link {{activeSection}}__home">Home</a>
+        <a href="/docs/introduction.html" class="sidebar-link {{activeSection}}__introduction">Introduction</a>
+        <a href="/docs/installation.html" class="sidebar-link {{activeSection}}__installation">Installation</a>
+        <a href="/docs/customization.html" class="sidebar-link {{activeSection}}__customization">Customization</a>
+
+        <!-- Components -->
+        <div class="sidebar-heading mt-4">Components</div>
+        <a href="/docs/components/accordion.html" class="sidebar-link {{activeComponent}}__accordion">Accordion</a>
+        <a href="/docs/components/alert.html" class="sidebar-link {{activeComponent}}__alert">Alert</a>
+        <a href="/docs/components/alert-dialog.html" class="sidebar-link {{activeComponent}}__alert-dialog">Alert Dialog</a>
+        <a href="/docs/components/aspect-ratio.html" class="sidebar-link {{activeComponent}}__aspect-ratio">Aspect Ratio</a>
+        <a href="/docs/components/avatar.html" class="sidebar-link {{activeComponent}}__avatar">Avatar</a>
+        <a href="/docs/components/badge.html" class="sidebar-link {{activeComponent}}__badge">Badge</a>
+        <a href="/docs/components/breadcrumb.html" class="sidebar-link {{activeComponent}}__breadcrumb">Breadcrumb</a>
+        <a href="/docs/components/button.html" class="sidebar-link {{activeComponent}}__button">Button</a>
+        <a href="/docs/components/button-group.html" class="sidebar-link {{activeComponent}}__button-group">Button Group</a>
+        <a href="/docs/components/calendar.html" class="sidebar-link {{activeComponent}}__calendar">Calendar</a>
+        <a href="/docs/components/card.html" class="sidebar-link {{activeComponent}}__card">Card</a>
+        <a href="/docs/components/carousel.html" class="sidebar-link {{activeComponent}}__carousel">Carousel</a>
+        <a href="/docs/components/chart.html" class="sidebar-link {{activeComponent}}__chart">Chart</a>
+        <a href="/docs/components/checkbox.html" class="sidebar-link {{activeComponent}}__checkbox">Checkbox</a>
+        <a href="/docs/components/collapsible.html" class="sidebar-link {{activeComponent}}__collapsible">Collapsible</a>
+        <a href="/docs/components/combobox.html" class="sidebar-link {{activeComponent}}__combobox">Combobox</a>
+        <a href="/docs/components/command.html" class="sidebar-link {{activeComponent}}__command">Command</a>
+        <a href="/docs/components/context-menu.html" class="sidebar-link {{activeComponent}}__context-menu">Context Menu</a>
+        <a href="/docs/components/data-table.html" class="sidebar-link {{activeComponent}}__data-table">Data Table</a>
+        <a href="/docs/components/date-picker.html" class="sidebar-link {{activeComponent}}__date-picker">Date Picker</a>
+        <a href="/docs/components/dialog.html" class="sidebar-link {{activeComponent}}__dialog">Dialog</a>
+        <a href="/docs/components/direction.html" class="sidebar-link {{activeComponent}}__direction">Direction</a>
+        <a href="/docs/components/drawer.html" class="sidebar-link {{activeComponent}}__drawer">Drawer</a>
+        <a href="/docs/components/dropdown-menu.html" class="sidebar-link {{activeComponent}}__dropdown-menu">Dropdown Menu</a>
+        <a href="/docs/components/empty.html" class="sidebar-link {{activeComponent}}__empty">Empty</a>
+        <a href="/docs/components/field.html" class="sidebar-link {{activeComponent}}__field">Field</a>
+        <a href="/docs/components/hover-card.html" class="sidebar-link {{activeComponent}}__hover-card">Hover Card</a>
+        <a href="/docs/components/input.html" class="sidebar-link {{activeComponent}}__input">Input</a>
+        <a href="/docs/components/input-group.html" class="sidebar-link {{activeComponent}}__input-group">Input Group</a>
+        <a href="/docs/components/input-otp.html" class="sidebar-link {{activeComponent}}__input-otp">Input OTP</a>
+        <a href="/docs/components/item.html" class="sidebar-link {{activeComponent}}__item">Item</a>
+        <a href="/docs/components/kbd.html" class="sidebar-link {{activeComponent}}__kbd">Kbd</a>
+        <a href="/docs/components/label.html" class="sidebar-link {{activeComponent}}__label">Label</a>
+        <a href="/docs/components/menubar.html" class="sidebar-link {{activeComponent}}__menubar">Menubar</a>
+        <a href="/docs/components/native-select.html" class="sidebar-link {{activeComponent}}__native-select">Native Select</a>
+        <a href="/docs/components/navigation-menu.html" class="sidebar-link {{activeComponent}}__navigation-menu">Navigation Menu</a>
+        <a href="/docs/components/pagination.html" class="sidebar-link {{activeComponent}}__pagination">Pagination</a>
+        <a href="/docs/components/popover.html" class="sidebar-link {{activeComponent}}__popover">Popover</a>
+        <a href="/docs/components/progress.html" class="sidebar-link {{activeComponent}}__progress">Progress</a>
+        <a href="/docs/components/radio-group.html" class="sidebar-link {{activeComponent}}__radio-group">Radio Group</a>
+        <a href="/docs/components/resizable.html" class="sidebar-link {{activeComponent}}__resizable">Resizable</a>
+        <a href="/docs/components/scroll-area.html" class="sidebar-link {{activeComponent}}__scroll-area">Scroll Area</a>
+        <a href="/docs/components/select.html" class="sidebar-link {{activeComponent}}__select">Select</a>
+        <a href="/docs/components/separator.html" class="sidebar-link {{activeComponent}}__separator">Separator</a>
+        <a href="/docs/components/sheet.html" class="sidebar-link {{activeComponent}}__sheet">Sheet</a>
+        <a href="/docs/components/sidebar.html" class="sidebar-link {{activeComponent}}__sidebar">Sidebar</a>
+        <a href="/docs/components/skeleton.html" class="sidebar-link {{activeComponent}}__skeleton">Skeleton</a>
+        <a href="/docs/components/slider.html" class="sidebar-link {{activeComponent}}__slider">Slider</a>
+        <a href="/docs/components/sonner.html" class="sidebar-link {{activeComponent}}__sonner">Sonner</a>
+        <a href="/docs/components/spinner.html" class="sidebar-link {{activeComponent}}__spinner">Spinner</a>
+        <a href="/docs/components/switch.html" class="sidebar-link {{activeComponent}}__switch">Switch</a>
+        <a href="/docs/components/table.html" class="sidebar-link {{activeComponent}}__table">Table</a>
+        <a href="/docs/components/tabs.html" class="sidebar-link {{activeComponent}}__tabs">Tabs</a>
+        <a href="/docs/components/textarea.html" class="sidebar-link {{activeComponent}}__textarea">Textarea</a>
+        <a href="/docs/components/toast.html" class="sidebar-link {{activeComponent}}__toast">Toast</a>
+        <a href="/docs/components/toggle.html" class="sidebar-link {{activeComponent}}__toggle">Toggle</a>
+        <a href="/docs/components/toggle-group.html" class="sidebar-link {{activeComponent}}__toggle-group">Toggle Group</a>
+        <a href="/docs/components/tooltip.html" class="sidebar-link {{activeComponent}}__tooltip">Tooltip</a>
+        <a href="/docs/components/typography.html" class="sidebar-link {{activeComponent}}__typography">Typography</a>
+        <div class="h-8"></div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 min-w-0 px-6 py-8 md:px-10 lg:px-16 max-w-4xl">
+{{slot}}
+    </main>
+  </div>
+
+  <script>
+    // Highlight active sidebar link
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      if (link.classList.toString().includes('sidebar-link-active')) return;
+      if (link.getAttribute('href') === window.location.pathname) {
+        link.classList.add('sidebar-link-active');
+      }
+    });
+  </script>
+</body>
+</html>

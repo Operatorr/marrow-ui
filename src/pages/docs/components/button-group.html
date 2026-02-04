@@ -1,0 +1,106 @@
+---
+layout: docs
+title: Button Group
+description: Group multiple buttons together as a connected set of actions
+component: sidebar-link-active
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Button Group</h1>
+          <p class="mt-2 text-lg text-muted-foreground">Group multiple buttons together as a connected set of actions.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card flex flex-col items-center justify-center min-h-[200px] gap-6">
+            <!-- Outline group -->
+            <div>
+              <p class="text-sm font-medium mb-3 text-center">Outline Group</p>
+              <div class="inline-flex -space-x-px">
+                <button class="mw-btn mw-btn-outline rounded-r-none">Left</button>
+                <button class="mw-btn mw-btn-outline rounded-none border-x-0">Center</button>
+                <button class="mw-btn mw-btn-outline rounded-l-none">Right</button>
+              </div>
+            </div>
+
+            <!-- Primary group -->
+            <div>
+              <p class="text-sm font-medium mb-3 text-center">Primary Group</p>
+              <div class="inline-flex -space-x-px">
+                <button class="mw-btn mw-btn-primary rounded-r-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
+                  Bold
+                </button>
+                <button class="mw-btn mw-btn-primary rounded-none" style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
+                  Italic
+                </button>
+                <button class="mw-btn mw-btn-primary rounded-l-none" style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16"/><path d="M14 4v16"/><path d="M6 12h8"/></svg>
+                  Underline
+                </button>
+              </div>
+            </div>
+
+            <!-- Icon-only group -->
+            <div>
+              <p class="text-sm font-medium mb-3 text-center">Icon Group</p>
+              <div class="inline-flex -space-x-px">
+                <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="21" x2="3" y1="12" y2="12"/><line x1="21" x2="3" y1="18" y2="18"/></svg>
+                </button>
+                <button class="mw-btn mw-btn-outline mw-btn-icon rounded-none border-x-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="17" x2="7" y1="12" y2="12"/><line x1="21" x2="3" y1="18" y2="18"/></svg>
+                </button>
+                <button class="mw-btn mw-btn-outline mw-btn-icon rounded-l-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="21" x2="9" y1="12" y2="12"/><line x1="21" x2="3" y1="18" y2="18"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;!-- Outline Button Group --&gt;
+&lt;div class="inline-flex -space-x-px"&gt;
+  &lt;button class="mw-btn mw-btn-outline rounded-r-none"&gt;Left&lt;/button&gt;
+  &lt;button class="mw-btn mw-btn-outline rounded-none border-x-0"&gt;Center&lt;/button&gt;
+  &lt;button class="mw-btn mw-btn-outline rounded-l-none"&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Icon-only Button Group --&gt;
+&lt;div class="inline-flex -space-x-px"&gt;
+  &lt;button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none"&gt;
+    &lt;!-- Icon SVG --&gt;
+  &lt;/button&gt;
+  &lt;button class="mw-btn mw-btn-outline mw-btn-icon rounded-none border-x-0"&gt;
+    &lt;!-- Icon SVG --&gt;
+  &lt;/button&gt;
+  &lt;button class="mw-btn mw-btn-outline mw-btn-icon rounded-l-none"&gt;
+    &lt;!-- Icon SVG --&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Primary Button Group --&gt;
+&lt;div class="inline-flex -space-x-px"&gt;
+  &lt;button class="mw-btn mw-btn-primary rounded-r-none"&gt;Bold&lt;/button&gt;
+  &lt;button class="mw-btn mw-btn-primary rounded-none"
+          style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);"&gt;
+    Italic
+  &lt;/button&gt;
+  &lt;button class="mw-btn mw-btn-primary rounded-l-none"
+          style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);"&gt;
+    Underline
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>

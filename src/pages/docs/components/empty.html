@@ -1,0 +1,65 @@
+---
+layout: docs
+title: Empty
+description: An empty state placeholder to display when there is no content to show
+component: sidebar-link-active
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Empty</h1>
+          <p class="mt-2 text-lg text-muted-foreground">An empty state placeholder to display when there is no content to show.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card flex items-center justify-center min-h-[200px]">
+            <div class="mw-empty">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4 opacity-50"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1"/><path d="M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1"/></svg>
+              <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+              <p class="text-sm text-muted-foreground max-w-sm mb-4">There are no items to display right now. Try adjusting your filters or create a new item to get started.</p>
+              <button class="mw-btn mw-btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                Create new item
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div class="mw-empty"&gt;
+  &lt;svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+       class="mb-4 opacity-50"&gt;
+    &lt;path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/&gt;
+    &lt;path d="M14 2v4a2 2 0 0 0 2 2h4"/&gt;
+    &lt;path d="M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1"/&gt;
+    &lt;path d="M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1"/&gt;
+  &lt;/svg&gt;
+
+  &lt;h3 class="font-heading text-lg font-semibold mb-1"&gt;No results found&lt;/h3&gt;
+
+  &lt;p class="text-sm text-muted-foreground max-w-sm mb-4"&gt;
+    There are no items to display right now. Try adjusting your
+    filters or create a new item to get started.
+  &lt;/p&gt;
+
+  &lt;button class="mw-btn mw-btn-primary"&gt;
+    &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+      &lt;path d="M5 12h14"/&gt;
+      &lt;path d="M12 5v14"/&gt;
+    &lt;/svg&gt;
+    Create new item
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>

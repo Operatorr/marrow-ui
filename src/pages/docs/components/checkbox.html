@@ -1,0 +1,85 @@
+---
+layout: docs
+title: Checkbox
+description: A toggleable checkbox control with label and checked state indicator
+component: sidebar-link-active
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Checkbox</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A toggleable checkbox control with label and checked state indicator.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card flex items-center justify-center min-h-[200px]">
+            <div class="space-y-4">
+              <div x-data="mwCheckbox()" class="flex items-center gap-2">
+                <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
+                  <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </button>
+                <label @click="toggle()" class="mw-label cursor-pointer select-none">Accept terms and conditions</label>
+              </div>
+              <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+                <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
+                  <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </button>
+                <label @click="toggle()" class="mw-label cursor-pointer select-none">Send me email notifications</label>
+              </div>
+              <div x-data="mwCheckbox()" class="flex items-center gap-2">
+                <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
+                  <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </button>
+                <label @click="toggle()" class="mw-label cursor-pointer select-none">Enable dark mode</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;!-- Unchecked by default --&gt;
+&lt;div x-data="mwCheckbox()" class="flex items-center gap-2"&gt;
+  &lt;button @click="toggle()"
+    :data-state="checked ? 'checked' : 'unchecked'"
+    class="mw-checkbox"
+    role="checkbox"
+    :aria-checked="checked"&gt;
+    &lt;svg x-show="checked"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round"&gt;
+      &lt;path d="M20 6 9 17l-5-5"/&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;label @click="toggle()" class="mw-label cursor-pointer select-none"&gt;
+    Accept terms and conditions
+  &lt;/label&gt;
+&lt;/div&gt;
+
+&lt;!-- Checked by default --&gt;
+&lt;div x-data="mwCheckbox(true)" class="flex items-center gap-2"&gt;
+  &lt;button @click="toggle()"
+    :data-state="checked ? 'checked' : 'unchecked'"
+    class="mw-checkbox"
+    role="checkbox"
+    :aria-checked="checked"&gt;
+    &lt;svg x-show="checked"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round"&gt;
+      &lt;path d="M20 6 9 17l-5-5"/&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;label @click="toggle()" class="mw-label cursor-pointer select-none"&gt;
+    Send me email notifications
+  &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>

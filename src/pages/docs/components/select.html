@@ -1,0 +1,89 @@
+---
+layout: docs
+title: Select
+description: A custom styled select dropdown with keyboard-friendly options
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Select</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A custom select component built with Alpine.js, providing a styled dropdown for choosing from a list of options.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+          <div class="mw-card">
+            <div x-data="mwDropdown()" class="relative w-64">
+              <!-- Trigger -->
+              <button @click="toggle()" class="mw-input flex items-center justify-between cursor-pointer" type="button">
+                <span x-text="$data._selected || 'Select a fruit...'" :class="!$data._selected && 'text-muted-foreground'"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <!-- Options -->
+              <div x-show="open" @click.outside="close()" x-cloak
+                   x-transition:enter="transition ease-out duration-100"
+                   x-transition:enter-start="opacity-0 -translate-y-1"
+                   x-transition:enter-end="opacity-100 translate-y-0"
+                   x-transition:leave="transition ease-in duration-75"
+                   x-transition:leave-start="opacity-100 translate-y-0"
+                   x-transition:leave-end="opacity-0 -translate-y-1"
+                   class="mw-popover absolute z-10 mt-1 w-full">
+                <button class="mw-menu-item" @click="$data._selected = 'Apple'; close()">Apple</button>
+                <button class="mw-menu-item" @click="$data._selected = 'Banana'; close()">Banana</button>
+                <button class="mw-menu-item" @click="$data._selected = 'Blueberry'; close()">Blueberry</button>
+                <button class="mw-menu-item" @click="$data._selected = 'Cherry'; close()">Cherry</button>
+                <button class="mw-menu-item" @click="$data._selected = 'Grape'; close()">Grape</button>
+                <button class="mw-menu-item" @click="$data._selected = 'Mango'; close()">Mango</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwDropdown()" class="relative w-64"&gt;
+  &lt;!-- Trigger --&gt;
+  &lt;button @click="toggle()" class="mw-input flex items-center justify-between cursor-pointer" type="button"&gt;
+    &lt;span x-text="$data._selected || 'Select a fruit...'"
+          :class="!$data._selected &amp;&amp; 'text-muted-foreground'"&gt;&lt;/span&gt;
+    &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" class="text-muted-foreground"&gt;
+      &lt;path d="m6 9 6 6 6-6"/&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+
+  &lt;!-- Options --&gt;
+  &lt;div x-show="open" @click.outside="close()" x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 -translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 -translate-y-1"
+       class="mw-popover absolute z-10 mt-1 w-full"&gt;
+    &lt;button class="mw-menu-item" @click="$data._selected = 'Apple'; close()"&gt;Apple&lt;/button&gt;
+    &lt;button class="mw-menu-item" @click="$data._selected = 'Banana'; close()"&gt;Banana&lt;/button&gt;
+    &lt;button class="mw-menu-item" @click="$data._selected = 'Blueberry'; close()"&gt;Blueberry&lt;/button&gt;
+    &lt;button class="mw-menu-item" @click="$data._selected = 'Cherry'; close()"&gt;Cherry&lt;/button&gt;
+    &lt;button class="mw-menu-item" @click="$data._selected = 'Grape'; close()"&gt;Grape&lt;/button&gt;
+    &lt;button class="mw-menu-item" @click="$data._selected = 'Mango'; close()"&gt;Mango&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Usage Notes -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+          <p class="text-muted-foreground leading-relaxed">The custom select uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwDropdown()"</code> to manage the open/close state. The trigger button is styled with the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-input</code> class, and options use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-popover</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-menu-item</code> classes.</p>
+          <p class="text-muted-foreground leading-relaxed">Clicking outside the dropdown or selecting an option will close it. Store the selected value in a custom property like <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">$data._selected</code> to display it in the trigger.</p>
+        </div>
+      </div>

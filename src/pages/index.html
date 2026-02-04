@@ -1,0 +1,319 @@
+---
+layout: base
+title: Build beautiful UIs without React
+description: A sleek, opinionated UI kit built with Tailwind CSS and Alpine.js. Copy, paste, customize.
+---
+
+<div x-data="{ darkMode: false }" :class="darkMode && 'dark'">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div class="max-w-7xl mx-auto flex h-14 items-center px-4 md:px-6">
+      <a href="/" class="flex items-center gap-2 font-heading font-bold text-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+        Marrow UI
+      </a>
+      <nav class="hidden md:flex items-center gap-1 ml-6 text-sm">
+        <a href="/docs/index.html" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Documentation</a>
+        <a href="/docs/components/button.html" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Components</a>
+        <a href="/docs/customization.html" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Themes</a>
+      </nav>
+      <div class="flex-1"></div>
+      <div class="flex items-center gap-2">
+        <a href="https://github.com" target="_blank" class="mw-btn mw-btn-ghost mw-btn-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 pt-20 pb-16 md:pt-32 md:pb-24">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-2 mb-6">
+          <span class="mw-badge mw-badge-secondary text-xs">v0.1.0</span>
+          <span class="text-sm text-muted-foreground">Alpine.js + Tailwind CSS</span>
+        </div>
+        <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+          Build your UI<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">without React.</span>
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-muted-foreground max-w-[600px] leading-relaxed">
+          A beautifully designed, accessible UI kit for the modern web. Built on Tailwind CSS and Alpine.js. Copy and paste components into your project. No build step, no framework lock-in.
+        </p>
+        <div class="flex flex-wrap items-center gap-3 mt-8">
+          <a href="/docs/index.html" class="mw-btn mw-btn-primary mw-btn-lg">
+            Get Started
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="/docs/components/button.html" class="mw-btn mw-btn-outline mw-btn-lg">Browse Components</a>
+        </div>
+
+        <!-- Code snippet -->
+        <div class="mw-code-block mt-10 max-w-lg">
+          <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          </button>
+          <pre><code>&lt;button class="mw-btn mw-btn-primary"&gt;
+  Click me
+&lt;/button&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+    <!-- Decorative gradient -->
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-tr from-violet-500/10 to-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="border-t bg-muted/30">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
+      <div class="text-center mb-12">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">Why Marrow UI?</h2>
+        <p class="mt-3 text-muted-foreground text-lg max-w-2xl mx-auto">A different approach to UI kits. No React, no virtual DOM, no complex state management. Just HTML, CSS, and a sprinkle of Alpine.js.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="mw-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold">No Framework Lock-in</h3>
+          </div>
+          <p class="text-sm text-muted-foreground leading-relaxed">Pure HTML and Tailwind CSS. Interactivity through Alpine.js. Works with any backend or static site generator.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="mw-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold">Themeable</h3>
+          </div>
+          <p class="text-sm text-muted-foreground leading-relaxed">One config file controls everything: colors, radius, spacing, fonts, compactness. Light and dark mode out of the box.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="mw-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold">60+ Components</h3>
+          </div>
+          <p class="text-sm text-muted-foreground leading-relaxed">From buttons and cards to data tables and command palettes. Everything you need to build complete applications.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="mw-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold">Copy & Paste</h3>
+          </div>
+          <p class="text-sm text-muted-foreground leading-relaxed">Each component is self-contained. Copy the HTML, drop it in your project. No npm install, no imports, no bundler.</p>
+        </div>
+        <!-- Feature 5 -->
+        <div class="mw-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-2.65A4 4 0 0 1 12 3a4 4 0 0 1 3.37 1.97 4 4 0 0 1 4.78 2.65 4 4 0 0 1-1.32 4.36l-.01.01A4 4 0 0 1 18 16.8V17a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-.19a4 4 0 0 1-.82-3.99 4 4 0 0 1-1.32-4.36Z"/><line x1="12" x2="12" y1="12" y2="21"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold">Compactness Control</h3>
+          </div>
+          <p class="text-sm text-muted-foreground leading-relaxed">Switch between minimal, compact, normal, relaxed, and spacious modes. Perfect for data-dense dashboards or spacious marketing sites.</p>
+        </div>
+        <!-- Feature 6 -->
+        <div class="mw-card">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+            </div>
+            <h3 class="font-heading font-semibold">Alpine.js Powered</h3>
+          </div>
+          <p class="text-sm text-muted-foreground leading-relaxed">All interactivity uses Alpine.js. Lightweight, declarative, and right in your HTML. No virtual DOM overhead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Component Preview Section -->
+  <section class="border-t">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
+      <div class="text-center mb-12">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">Component Preview</h2>
+        <p class="mt-3 text-muted-foreground text-lg">A taste of what's included. Every component is customizable through the config file.</p>
+      </div>
+
+      <!-- Demo Grid -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Buttons Demo -->
+        <div class="mw-card">
+          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Buttons</h3>
+          <div class="flex flex-wrap gap-3">
+            <button class="mw-btn mw-btn-primary">Primary</button>
+            <button class="mw-btn mw-btn-secondary">Secondary</button>
+            <button class="mw-btn mw-btn-outline">Outline</button>
+            <button class="mw-btn mw-btn-ghost">Ghost</button>
+            <button class="mw-btn mw-btn-destructive">Destructive</button>
+            <button class="mw-btn mw-btn-link">Link</button>
+          </div>
+        </div>
+
+        <!-- Cards Demo -->
+        <div class="mw-card">
+          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Card</h3>
+          <div class="mw-card" style="padding: 1rem;">
+            <div class="font-heading font-semibold mb-1">Card Title</div>
+            <p class="text-sm text-muted-foreground mb-3">This is a description of the card content.</p>
+            <button class="mw-btn mw-btn-primary mw-btn-sm">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Inputs Demo -->
+        <div class="mw-card">
+          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Inputs</h3>
+          <div class="space-y-3">
+            <input type="text" class="mw-input" placeholder="Enter your email">
+            <textarea class="mw-textarea" placeholder="Write a message..." rows="2"></textarea>
+          </div>
+        </div>
+
+        <!-- Badges & Labels Demo -->
+        <div class="mw-card">
+          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Badges</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="mw-badge mw-badge-default">Default</span>
+            <span class="mw-badge mw-badge-secondary">Secondary</span>
+            <span class="mw-badge mw-badge-outline">Outline</span>
+            <span class="mw-badge mw-badge-destructive">Destructive</span>
+          </div>
+        </div>
+
+        <!-- Switch & Checkbox Demo -->
+        <div class="mw-card" x-data="{ sw: false, cb: true }">
+          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Toggle Controls</h3>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <button class="mw-switch" :data-state="sw ? 'checked' : 'unchecked'" @click="sw = !sw">
+                <span class="mw-switch-thumb"></span>
+              </button>
+              <span class="text-sm">Dark Mode</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <button class="mw-checkbox" :data-state="cb ? 'checked' : 'unchecked'" @click="cb = !cb">
+                <svg x-show="cb" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </button>
+              <span class="text-sm">Accept terms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs Demo -->
+        <div class="mw-card" x-data="mwTabs('account')">
+          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Tabs</h3>
+          <div class="mw-tabs-list mb-3">
+            <button class="mw-tab-trigger" :data-state="isActive('account') ? 'active' : ''" @click="setActive('account')">Account</button>
+            <button class="mw-tab-trigger" :data-state="isActive('password') ? 'active' : ''" @click="setActive('password')">Password</button>
+            <button class="mw-tab-trigger" :data-state="isActive('settings') ? 'active' : ''" @click="setActive('settings')">Settings</button>
+          </div>
+          <div x-show="isActive('account')" class="text-sm text-muted-foreground">Manage your account settings and preferences.</div>
+          <div x-show="isActive('password')" class="text-sm text-muted-foreground">Change your password and security settings.</div>
+          <div x-show="isActive('settings')" class="text-sm text-muted-foreground">Configure your application settings.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Config Preview Section -->
+  <section class="border-t bg-muted/30">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">One config file.<br>Complete control.</h2>
+          <p class="mt-4 text-muted-foreground text-lg leading-relaxed">Every aspect of your UI is controlled from <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">marrow.config.js</code>. Colors, radius, compactness, fonts, shadows, transitions. All documented with available options.</p>
+          <div class="mt-6 space-y-3 text-sm">
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>HSL colors for easy opacity control</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>5 compactness levels: minimal to spacious</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Dual font system (heading + body)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Choose any Iconify icon library</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <span>Light & dark mode with full color control</span>
+            </div>
+          </div>
+        </div>
+        <div class="mw-code-block">
+          <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          </button>
+          <pre><code>// marrow.config.js
+module.exports = {
+  theme: "light",
+  colors: {
+    light: {
+      primary: "220 90% 56%",
+      background: "0 0% 100%",
+      // ... full color palette
+    }
+  },
+  radius: "lg",        // none|sm|md|lg|xl|2xl|full
+  compactness: "normal",// minimal|compact|normal|relaxed|spacious
+  fonts: {
+    heading: "Inter",
+    body: "Inter",
+  },
+  menuAccent: "subtle", // subtle|bold|border
+  iconLibrary: "lucide",
+  shadow: "sm",         // none|sm|md|lg|xl
+};</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="border-t">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24 text-center">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">Start building today.</h2>
+      <p class="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">Browse the documentation, copy a component, and build something. No npm install required.</p>
+      <div class="flex justify-center gap-3 mt-8">
+        <a href="/docs/index.html" class="mw-btn mw-btn-primary mw-btn-lg">
+          Read the Docs
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="/docs/components/button.html" class="mw-btn mw-btn-outline mw-btn-lg">See Components</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2 text-sm text-muted-foreground">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          Marrow UI. Built with Tailwind CSS and Alpine.js.
+        </div>
+        <div class="flex items-center gap-4 text-sm text-muted-foreground">
+          <a href="/docs/index.html" class="hover:text-foreground transition-colors">Docs</a>
+          <a href="/docs/components/button.html" class="hover:text-foreground transition-colors">Components</a>
+          <a href="https://github.com" target="_blank" class="hover:text-foreground transition-colors">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

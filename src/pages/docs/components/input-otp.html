@@ -1,0 +1,82 @@
+---
+layout: docs
+title: Input OTP
+description: A one-time password input with separate boxes for each digit
+component: sidebar-link-active
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Input OTP</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A one-time password input with separate boxes for each digit.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card flex items-center justify-center min-h-[200px]">
+            <div class="text-center" x-data="mwInputOTP(6)">
+              <p class="text-sm text-muted-foreground mb-4">Enter the 6-digit code sent to your email.</p>
+              <div class="flex items-center gap-2 justify-center">
+                <template x-for="(val, index) in values" :key="index">
+                  <div class="flex items-center">
+                    <input
+                      :x-ref="'otp' + index"
+                      type="text"
+                      inputmode="numeric"
+                      maxlength="1"
+                      class="mw-input w-10 h-12 text-center text-lg font-semibold"
+                      :value="values[index]"
+                      @input="handleInput(index, $event)"
+                      @keydown="handleKeydown(index, $event)"
+                    />
+                    <template x-if="index === 2">
+                      <div class="mx-1 text-muted-foreground">-</div>
+                    </template>
+                  </div>
+                </template>
+              </div>
+              <p class="text-xs text-muted-foreground mt-3">
+                Code: <span x-text="code" class="font-mono font-semibold text-foreground"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwInputOTP(6)"&gt;
+  &lt;p class="text-sm text-muted-foreground mb-4"&gt;
+    Enter the 6-digit code sent to your email.
+  &lt;/p&gt;
+
+  &lt;div class="flex items-center gap-2 justify-center"&gt;
+    &lt;template x-for="(val, index) in values" :key="index"&gt;
+      &lt;div class="flex items-center"&gt;
+        &lt;input
+          :x-ref="'otp' + index"
+          type="text"
+          inputmode="numeric"
+          maxlength="1"
+          class="mw-input w-10 h-12 text-center text-lg font-semibold"
+          :value="values[index]"
+          @input="handleInput(index, $event)"
+          @keydown="handleKeydown(index, $event)"
+        /&gt;
+        &lt;!-- Optional separator after 3rd digit --&gt;
+        &lt;template x-if="index === 2"&gt;
+          &lt;div class="mx-1 text-muted-foreground"&gt;-&lt;/div&gt;
+        &lt;/template&gt;
+      &lt;/div&gt;
+    &lt;/template&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Access the full code with: --&gt;
+  &lt;p x-text="code"&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>

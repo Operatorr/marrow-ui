@@ -1,0 +1,77 @@
+---
+layout: docs
+title: Scroll Area
+description: A scrollable content area with styled scrollbars
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Scroll Area</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A container that provides a consistent, styled scrollbar for overflowing content.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+          <div class="mw-card">
+            <div class="mw-scroll-area rounded-md border p-4" style="max-height: 200px;">
+              <h4 class="font-heading font-semibold mb-3">Scrollable Content</h4>
+              <p class="text-sm text-muted-foreground mb-3">This content area has a fixed max-height and will scroll when the content overflows. The scrollbar is styled to match the Marrow UI theme.</p>
+              <p class="text-sm text-muted-foreground mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+              <p class="text-sm text-muted-foreground mb-3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+              <p class="text-sm text-muted-foreground mb-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+              <p class="text-sm text-muted-foreground mb-3">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+              <p class="text-sm text-muted-foreground">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- List Example -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">List Example</h2>
+          <div class="mw-card">
+            <div class="mw-scroll-area rounded-md border" style="max-height: 220px;">
+              <div class="p-1">
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Introduction to Marrow UI</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Installation Guide</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Configuration Options</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Theme Customization</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Button Component</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Card Component</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Dialog Component</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Dropdown Menu</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Input Component</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Select Component</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Table Component</div>
+                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Tabs Component</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div class="mw-scroll-area rounded-md border p-4" style="max-height: 200px;"&gt;
+  &lt;h4 class="font-semibold mb-3"&gt;Scrollable Content&lt;/h4&gt;
+  &lt;p class="text-sm text-muted-foreground mb-3"&gt;
+    Your scrollable content goes here. The container will
+    show a styled scrollbar when content overflows.
+  &lt;/p&gt;
+  &lt;!-- Add more content to trigger scrolling --&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Usage Notes -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+          <p class="text-muted-foreground leading-relaxed">Apply the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-scroll-area</code> class to any container and set a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">max-height</code> via inline style or utility class. The component uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">scrollbar-width: thin</code> for Firefox and custom <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">::-webkit-scrollbar</code> styles for Chromium-based browsers.</p>
+          <p class="text-muted-foreground leading-relaxed">No JavaScript is required. The scrollbar inherits theme colors via CSS custom properties.</p>
+        </div>
+      </div>

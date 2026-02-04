@@ -1,0 +1,123 @@
+---
+layout: docs
+title: Accordion
+description: A vertically stacked set of interactive headings that reveal content
+component: sidebar-link-active
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Accordion</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A vertically stacked set of interactive headings that each reveal a section of content.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card flex items-center justify-center min-h-[200px]">
+            <div class="w-full max-w-lg" x-data="mwAccordion()">
+              <!-- Item 1 -->
+              <div class="border-b border-border">
+                <button @click="toggle('item-1')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
+                  Is it accessible?
+                  <svg :class="isOpen('item-1') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="isOpen('item-1')" x-collapse>
+                  <div class="pb-4 text-sm text-muted-foreground">Yes. It adheres to the WAI-ARIA design pattern for accordions.</div>
+                </div>
+              </div>
+              <!-- Item 2 -->
+              <div class="border-b border-border">
+                <button @click="toggle('item-2')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
+                  Is it styled?
+                  <svg :class="isOpen('item-2') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="isOpen('item-2')" x-collapse>
+                  <div class="pb-4 text-sm text-muted-foreground">Yes. It comes with default styles that match the other components' aesthetic.</div>
+                </div>
+              </div>
+              <!-- Item 3 -->
+              <div class="border-b border-border">
+                <button @click="toggle('item-3')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
+                  Is it animated?
+                  <svg :class="isOpen('item-3') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="isOpen('item-3')" x-collapse>
+                  <div class="pb-4 text-sm text-muted-foreground">Yes. It uses Alpine.js x-collapse for smooth open/close animations.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwAccordion()"&gt;
+  &lt;!-- Item 1 --&gt;
+  &lt;div class="border-b border-border"&gt;
+    &lt;button @click="toggle('item-1')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline"&gt;
+      Is it accessible?
+      &lt;svg :class="isOpen('item-1') &amp;&amp; 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+        &lt;path d="m6 9 6 6 6-6"/&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div x-show="isOpen('item-1')" x-collapse&gt;
+      &lt;div class="pb-4 text-sm text-muted-foreground"&gt;
+        Yes. It adheres to the WAI-ARIA design pattern.
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Item 2 --&gt;
+  &lt;div class="border-b border-border"&gt;
+    &lt;button @click="toggle('item-2')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline"&gt;
+      Is it styled?
+      &lt;svg :class="isOpen('item-2') &amp;&amp; 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+        &lt;path d="m6 9 6 6 6-6"/&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div x-show="isOpen('item-2')" x-collapse&gt;
+      &lt;div class="pb-4 text-sm text-muted-foreground"&gt;
+        Yes. It comes with default styles that match the other components.
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Item 3 --&gt;
+  &lt;div class="border-b border-border"&gt;
+    &lt;button @click="toggle('item-3')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline"&gt;
+      Is it animated?
+      &lt;svg :class="isOpen('item-3') &amp;&amp; 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+        &lt;path d="m6 9 6 6 6-6"/&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div x-show="isOpen('item-3')" x-collapse&gt;
+      &lt;div class="pb-4 text-sm text-muted-foreground"&gt;
+        Yes. It uses Alpine.js x-collapse for smooth animations.
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>

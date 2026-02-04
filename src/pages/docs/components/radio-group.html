@@ -1,0 +1,186 @@
+---
+layout: docs
+title: Radio Group
+description: A group of radio buttons for selecting a single option from a set
+component: sidebar-link-active
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Radio Group</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A group of radio buttons that allows selecting a single option from a set. Uses Alpine.js for state management.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+          <div class="mw-card">
+            <div x-data="mwRadioGroup('option1')" class="space-y-4">
+              <label class="mw-label">Notification preference</label>
+              <div class="space-y-3">
+                <!-- Option 1 -->
+                <div class="flex items-center gap-3 cursor-pointer" @click="select('option1')">
+                  <div class="mw-radio" :data-state="isSelected('option1') ? 'checked' : 'unchecked'"></div>
+                  <label class="text-sm cursor-pointer">All notifications</label>
+                </div>
+
+                <!-- Option 2 -->
+                <div class="flex items-center gap-3 cursor-pointer" @click="select('option2')">
+                  <div class="mw-radio" :data-state="isSelected('option2') ? 'checked' : 'unchecked'"></div>
+                  <label class="text-sm cursor-pointer">Important only</label>
+                </div>
+
+                <!-- Option 3 -->
+                <div class="flex items-center gap-3 cursor-pointer" @click="select('option3')">
+                  <div class="mw-radio" :data-state="isSelected('option3') ? 'checked' : 'unchecked'"></div>
+                  <label class="text-sm cursor-pointer">None</label>
+                </div>
+              </div>
+              <p class="text-xs text-muted-foreground">Selected: <span x-text="selected" class="font-medium text-foreground"></span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwRadioGroup('option1')" class="space-y-3"&gt;
+  &lt;label class="mw-label"&gt;Notification preference&lt;/label&gt;
+
+  &lt;div class="flex items-center gap-3 cursor-pointer" @click="select('option1')"&gt;
+    &lt;div class="mw-radio"
+         :data-state="isSelected('option1') ? 'checked' : 'unchecked'"&gt;
+    &lt;/div&gt;
+    &lt;label class="text-sm cursor-pointer"&gt;All notifications&lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex items-center gap-3 cursor-pointer" @click="select('option2')"&gt;
+    &lt;div class="mw-radio"
+         :data-state="isSelected('option2') ? 'checked' : 'unchecked'"&gt;
+    &lt;/div&gt;
+    &lt;label class="text-sm cursor-pointer"&gt;Important only&lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex items-center gap-3 cursor-pointer" @click="select('option3')"&gt;
+    &lt;div class="mw-radio"
+         :data-state="isSelected('option3') ? 'checked' : 'unchecked'"&gt;
+    &lt;/div&gt;
+    &lt;label class="text-sm cursor-pointer"&gt;None&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- With Descriptions -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">With Descriptions</h2>
+          <p class="text-muted-foreground leading-relaxed">Add description text below each label for more context.</p>
+          <div class="mw-card">
+            <div x-data="mwRadioGroup('free')" class="space-y-4">
+              <label class="mw-label">Plan</label>
+              <div class="space-y-4">
+                <div class="flex items-start gap-3 cursor-pointer" @click="select('free')">
+                  <div class="mw-radio mt-0.5" :data-state="isSelected('free') ? 'checked' : 'unchecked'"></div>
+                  <div>
+                    <div class="text-sm font-medium">Free</div>
+                    <div class="text-xs text-muted-foreground">Up to 3 projects with basic features.</div>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 cursor-pointer" @click="select('pro')">
+                  <div class="mw-radio mt-0.5" :data-state="isSelected('pro') ? 'checked' : 'unchecked'"></div>
+                  <div>
+                    <div class="text-sm font-medium">Pro</div>
+                    <div class="text-xs text-muted-foreground">Unlimited projects with advanced analytics.</div>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 cursor-pointer" @click="select('enterprise')">
+                  <div class="mw-radio mt-0.5" :data-state="isSelected('enterprise') ? 'checked' : 'unchecked'"></div>
+                  <div>
+                    <div class="text-sm font-medium">Enterprise</div>
+                    <div class="text-xs text-muted-foreground">Custom solutions with dedicated support.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwRadioGroup('free')" class="space-y-4"&gt;
+  &lt;label class="mw-label"&gt;Plan&lt;/label&gt;
+
+  &lt;div class="flex items-start gap-3 cursor-pointer" @click="select('free')"&gt;
+    &lt;div class="mw-radio mt-0.5"
+         :data-state="isSelected('free') ? 'checked' : 'unchecked'"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="text-sm font-medium"&gt;Free&lt;/div&gt;
+      &lt;div class="text-xs text-muted-foreground"&gt;Up to 3 projects with basic features.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex items-start gap-3 cursor-pointer" @click="select('pro')"&gt;
+    &lt;div class="mw-radio mt-0.5"
+         :data-state="isSelected('pro') ? 'checked' : 'unchecked'"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="text-sm font-medium"&gt;Pro&lt;/div&gt;
+      &lt;div class="text-xs text-muted-foreground"&gt;Unlimited projects with advanced analytics.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="flex items-start gap-3 cursor-pointer" @click="select('enterprise')"&gt;
+    &lt;div class="mw-radio mt-0.5"
+         :data-state="isSelected('enterprise') ? 'checked' : 'unchecked'"&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;div class="text-sm font-medium"&gt;Enterprise&lt;/div&gt;
+      &lt;div class="text-xs text-muted-foreground"&gt;Custom solutions with dedicated support.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- API -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">API</h2>
+          <div class="overflow-x-auto">
+            <table class="mw-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code class="text-sm font-mono">selected</code></td>
+                  <td class="text-muted-foreground">String</td>
+                  <td class="text-muted-foreground">The value of the currently selected radio option</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">select(val)</code></td>
+                  <td class="text-muted-foreground">Method</td>
+                  <td class="text-muted-foreground">Select a radio option by its value</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">isSelected(val)</code></td>
+                  <td class="text-muted-foreground">Method</td>
+                  <td class="text-muted-foreground">Returns true if the given value is currently selected</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>

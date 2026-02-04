@@ -1,0 +1,104 @@
+---
+layout: docs
+title: Spinner
+description: A loading spinner indicator for asynchronous operations
+---
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Spinner</h1>
+          <p class="mt-2 text-lg text-muted-foreground">An animated loading indicator to signal that content or an action is in progress.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+          <div class="mw-card">
+            <div class="flex items-center gap-8">
+              <!-- Small -->
+              <div class="flex flex-col items-center gap-2">
+                <div class="mw-spinner" style="width: 1rem; height: 1rem;"></div>
+                <span class="text-xs text-muted-foreground">Small</span>
+              </div>
+              <!-- Default -->
+              <div class="flex flex-col items-center gap-2">
+                <div class="mw-spinner"></div>
+                <span class="text-xs text-muted-foreground">Default</span>
+              </div>
+              <!-- Large -->
+              <div class="flex flex-col items-center gap-2">
+                <div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"></div>
+                <span class="text-xs text-muted-foreground">Large</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inline with Text -->
+        <div class="space-y-4">
+          <h3 class="font-heading text-lg font-semibold">Inline with Text</h3>
+          <div class="mw-card">
+            <div class="flex items-center gap-3">
+              <div class="mw-spinner"></div>
+              <span class="text-sm text-muted-foreground">Loading data...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inside a Button -->
+        <div class="space-y-4">
+          <h3 class="font-heading text-lg font-semibold">Inside a Button</h3>
+          <div class="mw-card">
+            <button class="mw-btn mw-btn-primary" disabled>
+              <div class="mw-spinner" style="width: 1rem; height: 1rem; border-color: hsl(var(--marrow-primary-foreground) / 0.3); border-top-color: hsl(var(--marrow-primary-foreground));"></div>
+              Submitting...
+            </button>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;!-- Small --&gt;
+&lt;div class="mw-spinner" style="width: 1rem; height: 1rem;"&gt;&lt;/div&gt;
+
+&lt;!-- Default --&gt;
+&lt;div class="mw-spinner"&gt;&lt;/div&gt;
+
+&lt;!-- Large --&gt;
+&lt;div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"&gt;&lt;/div&gt;
+
+&lt;!-- Inline with text --&gt;
+&lt;div class="flex items-center gap-3"&gt;
+  &lt;div class="mw-spinner"&gt;&lt;/div&gt;
+  &lt;span class="text-sm text-muted-foreground"&gt;Loading data...&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Inside a button --&gt;
+&lt;button class="mw-btn mw-btn-primary" disabled&gt;
+  &lt;div class="mw-spinner"
+       style="width: 1rem; height: 1rem;
+              border-color: hsl(var(--marrow-primary-foreground) / 0.3);
+              border-top-color: hsl(var(--marrow-primary-foreground));"&gt;&lt;/div&gt;
+  Submitting...
+&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Usage Notes -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+          <p class="text-muted-foreground leading-relaxed">Apply the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-spinner</code> class to an empty <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;div&gt;</code>. The default size is 1.25rem (20px). Override size with inline styles:</p>
+          <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+            <li><strong>Small</strong> &mdash; <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">width: 1rem; height: 1rem;</code></li>
+            <li><strong>Default</strong> &mdash; no override needed (1.25rem)</li>
+            <li><strong>Large</strong> &mdash; <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">width: 2rem; height: 2rem; border-width: 3px;</code></li>
+          </ul>
+          <p class="text-muted-foreground leading-relaxed">When using inside a button, override the border colors to match the button foreground color so the spinner remains visible against the button background. No JavaScript is required.</p>
+        </div>
+      </div>
