@@ -12,7 +12,7 @@ module.exports = {
   // ─── THEME MODE ─────────────────────────────────────────────────────
   // Controls the default color scheme.
   // Options: "light" | "dark"
-  theme: "light",
+  theme: "dark",
 
   // ─── COLORS ─────────────────────────────────────────────────────────
   // All colors use HSL format: "H S% L%"
