@@ -35,10 +35,10 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>&lt;div class="space-y-2"&gt;
+            <pre><code is:raw>&lt;div class="space-y-2"&gt;
   &lt;label class="mw-label" for="framework-select"&gt;Framework&lt;/label&gt;
   &lt;select id="framework-select" class="mw-select"&gt;
     &lt;option value="" disabled selected&gt;Select a framework&lt;/option&gt;
@@ -76,10 +76,10 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
           </div>
 
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>&lt;div class="space-y-2"&gt;
+            <pre><code is:raw>&lt;div class="space-y-2"&gt;
   &lt;label class="mw-label" for="language-select"&gt;Language&lt;/label&gt;
   &lt;select id="language-select" class="mw-select"&gt;
     &lt;option value="" disabled selected&gt;Choose a language&lt;/option&gt;
@@ -111,10 +111,10 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
           </div>
 
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>&lt;select class="mw-select" disabled&gt;
+            <pre><code is:raw>&lt;select class="mw-select" disabled&gt;
   &lt;option value="us"&gt;United States&lt;/option&gt;
 &lt;/select&gt;</code></pre>
           </div>

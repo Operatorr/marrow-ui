@@ -25,10 +25,10 @@ import DocsLayout from "../../layouts/DocsLayout.astro";
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Quick Start (CDN)</h2>
           <p class="text-muted-foreground leading-relaxed">The fastest way to get started. Add these to your HTML <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;head&gt;</code>:</p>
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>&lt;!-- Tailwind CSS (CDN) --&gt;
+            <pre><code is:raw>&lt;!-- Tailwind CSS (CDN) --&gt;
 &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
 
 &lt;!-- Alpine.js --&gt;
@@ -49,10 +49,10 @@ import DocsLayout from "../../layouts/DocsLayout.astro";
 
           <h3 class="font-heading text-lg font-semibold mt-6">1. Clone the repository</h3>
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>git clone https://github.com/marrow-ui/marrow-ui.git
+            <pre><code is:raw>git clone https://github.com/marrow-ui/marrow-ui.git
 cd marrow-ui</code></pre>
           </div>
 
@@ -61,26 +61,26 @@ cd marrow-ui</code></pre>
 
           <h3 class="font-heading text-lg font-semibold mt-6">3. Build the theme</h3>
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>node build.js</code></pre>
+            <pre><code is:raw>node build.js</code></pre>
           </div>
           <p class="text-muted-foreground leading-relaxed">This generates <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">dist/css/marrow-theme.css</code> from your config. Include this file along with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">marrow.css</code> in your project.</p>
 
           <h3 class="font-heading text-lg font-semibold mt-6">4. Preview</h3>
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>npx serve dist</code></pre>
+            <pre><code is:raw>npx serve dist</code></pre>
           </div>
         </div>
 
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">File Structure</h2>
           <div class="mw-code-block">
-            <pre><code>your-project/
+            <pre><code is:raw>your-project/
 ├── marrow.config.js    # Theme configuration
 ├── css/
 │   ├── marrow-theme.css  # Generated theme (CSS custom properties)
@@ -96,10 +96,10 @@ cd marrow-ui</code></pre>
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Using with Tailwind Config</h2>
           <p class="text-muted-foreground leading-relaxed">If you're using Tailwind CSS with a build step (not CDN), extend your <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">tailwind.config.js</code> to use Marrow's CSS custom properties:</p>
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>// tailwind.config.js
+            <pre><code is:raw>// tailwind.config.js
 module.exports = {
   theme: {
     extend: {

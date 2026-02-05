@@ -36,6 +36,6 @@
     "url": "https://github.com/Operatorr/marrow-ui"
   },
   "scripts": {
-    "build": "node src/build-theme.js"
+    "build": "echo 'marrow-ui: No build step needed - source files are published directly'"
   }
 }

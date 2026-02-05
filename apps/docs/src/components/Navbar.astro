@@ -7,7 +7,7 @@ const { showMenuButton = false } = Astro.props;
 ---
 
 <header class="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-  <div class="flex h-14 items-center px-4 md:px-6" style="max-width:80rem;margin:0 auto;">
+  <div class="flex h-14 items-center px-4 md:px-6 max-w-5xl mx-auto">
     {showMenuButton && (
       <button @click="mobileSidebar = !mobileSidebar" class="mr-2 md:hidden inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>

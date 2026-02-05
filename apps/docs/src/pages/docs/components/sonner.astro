@@ -17,19 +17,19 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
           <div class="mw-card">
             <div class="flex flex-wrap gap-2">
               <button class="mw-btn mw-btn-outline"
-                      @click="$store.toasts.add({ title: 'Event created', description: 'Your event has been scheduled successfully.', type: 'default' })">
+                      @click={"$store.toasts.add({ title: 'Event created', description: 'Your event has been scheduled successfully.', type: 'default' })"}>
                 Default Toast
               </button>
               <button class="mw-btn mw-btn-primary"
-                      @click="$store.toasts.add({ title: 'Success!', description: 'Your changes have been saved.', type: 'success' })">
+                      @click={"$store.toasts.add({ title: 'Success!', description: 'Your changes have been saved.', type: 'success' })"}>
                 Success Toast
               </button>
               <button class="mw-btn mw-btn-destructive"
-                      @click="$store.toasts.add({ title: 'Error', description: 'Something went wrong. Please try again.', type: 'error' })">
+                      @click={"$store.toasts.add({ title: 'Error', description: 'Something went wrong. Please try again.', type: 'error' })"}>
                 Error Toast
               </button>
               <button class="mw-btn mw-btn-secondary"
-                      @click="$store.toasts.add({ title: 'Heads up!', description: 'This action cannot be undone.', type: 'warning' })">
+                      @click={"$store.toasts.add({ title: 'Heads up!', description: 'This action cannot be undone.', type: 'warning' })"}>
                 Warning Toast
               </button>
             </div>
@@ -74,10 +74,10 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 
           <h3 class="font-heading text-lg font-semibold">Trigger a Toast</h3>
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>&lt;button class="mw-btn mw-btn-primary"
+            <pre><code is:raw>&lt;button class="mw-btn mw-btn-primary"
   @click="$store.toasts.add({
     title: 'Success!',
     description: 'Your changes have been saved.',
@@ -89,10 +89,10 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 
           <h3 class="font-heading text-lg font-semibold mt-6">Toast Container</h3>
           <div class="mw-code-block">
-            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+            <button class="copy-btn" title="Copy to clipboard">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             </button>
-            <pre><code>&lt;!-- Place once in your layout --&gt;
+            <pre><code is:raw>&lt;!-- Place once in your layout --&gt;
 &lt;div x-data class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 w-80"
      style="pointer-events: none;"&gt;
   &lt;template x-for="toast in $store.toasts.items" :key="toast.id"&gt;
@@ -122,8 +122,8 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Usage Notes -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-          <p class="text-muted-foreground leading-relaxed">Toasts use the Alpine.js global store <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Alpine.store('toasts')</code>. Call <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">$store.toasts.add({ title, description, type })</code> from any component to show a notification.</p>
-          <p class="text-muted-foreground leading-relaxed">Toasts auto-dismiss after 4 seconds by default. Pass <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">duration: 6000</code> to change the timeout, or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">duration: 0</code> to keep the toast until manually dismissed. Supported types are <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">default</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">success</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">error</code>, and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">warning</code>.</p>
+          <p class="text-muted-foreground leading-relaxed">Toasts use the Alpine.js global store <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Alpine.store('toasts')</code>. Call <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">$store.toasts.add(&#123; title, description, type &#125;)</code> from any component to show a notification.</p>
+          <p class="text-muted-foreground leading-relaxed">Toasts auto-dismiss after 4 seconds by default. Pass <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">duration&#58; 6000</code> to change the timeout, or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">duration&#58; 0</code> to keep the toast until manually dismissed. Supported types are <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">default</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">success</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">error</code>, and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">warning</code>.</p>
           <p class="text-muted-foreground leading-relaxed">Place the toast container once in your page layout. It will render all active toasts as a stacked list in the bottom-right corner.</p>
         </div>
       </div>
