@@ -1,5 +1,31 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const breadcrumbCode = `<nav class="mw-breadcrumb">
+  <a href="#">Home</a>
+
+  <!-- Separator -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <a href="#">Components</a>
+
+  <!-- Separator -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <!-- Current page (no link) -->
+  <span class="mw-breadcrumb-current">Breadcrumb</span>
+</nav>`;
 ---
 
 <DocsLayout title="Breadcrumb" description="Displays a hierarchical navigation trail for the current page" activeComponent="breadcrumb">
@@ -27,35 +53,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-3">
           <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;nav class="mw-breadcrumb"&gt;
-  &lt;a href="#"&gt;Home&lt;/a&gt;
-
-  &lt;!-- Separator --&gt;
-  &lt;svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0"&gt;
-    &lt;path d="m9 18 6-6-6-6"/&gt;
-  &lt;/svg&gt;
-
-  &lt;a href="#"&gt;Components&lt;/a&gt;
-
-  &lt;!-- Separator --&gt;
-  &lt;svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0"&gt;
-    &lt;path d="m9 18 6-6-6-6"/&gt;
-  &lt;/svg&gt;
-
-  &lt;!-- Current page (no link) --&gt;
-  &lt;span class="mw-breadcrumb-current"&gt;Breadcrumb&lt;/span&gt;
-&lt;/nav&gt;</code></pre>
-          </div>
+          <CodeBlock code={breadcrumbCode} lang="html" />
         </div>
       </div>
 

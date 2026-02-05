@@ -1,5 +1,42 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const tabsCode = `<div x-data="mwTabs('tab1')">
+  <!-- Tab triggers -->
+  <div class="mw-tabs-list">
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab1') ? 'active' : ''"
+            @click="setActive('tab1')">Account</button>
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab2') ? 'active' : ''"
+            @click="setActive('tab2')">Password</button>
+    <button class="mw-tab-trigger"
+            :data-state="isActive('tab3') ? 'active' : ''"
+            @click="setActive('tab3')">Notifications</button>
+  </div>
+
+  <!-- Tab panels -->
+  <div class="mt-4">
+    <div x-show="isActive('tab1')">
+      <h3 class="font-heading font-semibold">Account Settings</h3>
+      <p class="text-sm text-muted-foreground">Update your account information.</p>
+      <!-- Panel content -->
+    </div>
+
+    <div x-show="isActive('tab2')" x-cloak>
+      <h3 class="font-heading font-semibold">Change Password</h3>
+      <p class="text-sm text-muted-foreground">Update your password.</p>
+      <!-- Panel content -->
+    </div>
+
+    <div x-show="isActive('tab3')" x-cloak>
+      <h3 class="font-heading font-semibold">Notification Preferences</h3>
+      <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
+      <!-- Panel content -->
+    </div>
+  </div>
+</div>`;
 ---
 
 <DocsLayout title="Tabs" description="Tabbed navigation for switching between content panels" activeComponent="tabs">
@@ -87,46 +124,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div x-data="mwTabs('tab1')"&gt;
-  &lt;!-- Tab triggers --&gt;
-  &lt;div class="mw-tabs-list"&gt;
-    &lt;button class="mw-tab-trigger"
-            :data-state="isActive('tab1') ? 'active' : ''"
-            @click="setActive('tab1')"&gt;Account&lt;/button&gt;
-    &lt;button class="mw-tab-trigger"
-            :data-state="isActive('tab2') ? 'active' : ''"
-            @click="setActive('tab2')"&gt;Password&lt;/button&gt;
-    &lt;button class="mw-tab-trigger"
-            :data-state="isActive('tab3') ? 'active' : ''"
-            @click="setActive('tab3')"&gt;Notifications&lt;/button&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Tab panels --&gt;
-  &lt;div class="mt-4"&gt;
-    &lt;div x-show="isActive('tab1')"&gt;
-      &lt;h3 class="font-heading font-semibold"&gt;Account Settings&lt;/h3&gt;
-      &lt;p class="text-sm text-muted-foreground"&gt;Update your account information.&lt;/p&gt;
-      &lt;!-- Panel content --&gt;
-    &lt;/div&gt;
-
-    &lt;div x-show="isActive('tab2')" x-cloak&gt;
-      &lt;h3 class="font-heading font-semibold"&gt;Change Password&lt;/h3&gt;
-      &lt;p class="text-sm text-muted-foreground"&gt;Update your password.&lt;/p&gt;
-      &lt;!-- Panel content --&gt;
-    &lt;/div&gt;
-
-    &lt;div x-show="isActive('tab3')" x-cloak&gt;
-      &lt;h3 class="font-heading font-semibold"&gt;Notification Preferences&lt;/h3&gt;
-      &lt;p class="text-sm text-muted-foreground"&gt;Choose how you want to be notified.&lt;/p&gt;
-      &lt;!-- Panel content --&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={tabsCode} lang="html" />
         </div>
       </div>
 

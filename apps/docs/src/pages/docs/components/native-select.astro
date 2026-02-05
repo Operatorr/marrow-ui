@@ -1,5 +1,39 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const selectCode = `<div class="space-y-2">
+  <label class="mw-label" for="framework-select">Framework</label>
+  <select id="framework-select" class="mw-select">
+    <option value="" disabled selected>Select a framework</option>
+    <option value="django">Django</option>
+    <option value="laravel">Laravel</option>
+    <option value="rails">Ruby on Rails</option>
+    <option value="express">Express</option>
+    <option value="flask">Flask</option>
+  </select>
+</div>`;
+
+const selectOptgroupCode = `<div class="space-y-2">
+  <label class="mw-label" for="language-select">Language</label>
+  <select id="language-select" class="mw-select">
+    <option value="" disabled selected>Choose a language</option>
+    <optgroup label="Frontend">
+      <option value="js">JavaScript</option>
+      <option value="ts">TypeScript</option>
+    </optgroup>
+    <optgroup label="Backend">
+      <option value="python">Python</option>
+      <option value="ruby">Ruby</option>
+      <option value="go">Go</option>
+      <option value="rust">Rust</option>
+    </optgroup>
+  </select>
+</div>`;
+
+const selectDisabledCode = `<select class="mw-select" disabled>
+  <option value="us">United States</option>
+</select>`;
 ---
 
 <DocsLayout title="Native Select" description="A styled native HTML select element for simple dropdowns" activeComponent="native-select">
@@ -34,22 +68,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label" for="framework-select"&gt;Framework&lt;/label&gt;
-  &lt;select id="framework-select" class="mw-select"&gt;
-    &lt;option value="" disabled selected&gt;Select a framework&lt;/option&gt;
-    &lt;option value="django"&gt;Django&lt;/option&gt;
-    &lt;option value="laravel"&gt;Laravel&lt;/option&gt;
-    &lt;option value="rails"&gt;Ruby on Rails&lt;/option&gt;
-    &lt;option value="express"&gt;Express&lt;/option&gt;
-    &lt;option value="flask"&gt;Flask&lt;/option&gt;
-  &lt;/select&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={selectCode} lang="html" />
         </div>
 
         <!-- With Option Groups -->
@@ -75,27 +94,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
             </div>
           </div>
 
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label" for="language-select"&gt;Language&lt;/label&gt;
-  &lt;select id="language-select" class="mw-select"&gt;
-    &lt;option value="" disabled selected&gt;Choose a language&lt;/option&gt;
-    &lt;optgroup label="Frontend"&gt;
-      &lt;option value="js"&gt;JavaScript&lt;/option&gt;
-      &lt;option value="ts"&gt;TypeScript&lt;/option&gt;
-    &lt;/optgroup&gt;
-    &lt;optgroup label="Backend"&gt;
-      &lt;option value="python"&gt;Python&lt;/option&gt;
-      &lt;option value="ruby"&gt;Ruby&lt;/option&gt;
-      &lt;option value="go"&gt;Go&lt;/option&gt;
-      &lt;option value="rust"&gt;Rust&lt;/option&gt;
-    &lt;/optgroup&gt;
-  &lt;/select&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={selectOptgroupCode} lang="html" />
         </div>
 
         <!-- Disabled -->
@@ -110,14 +109,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
             </div>
           </div>
 
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;select class="mw-select" disabled&gt;
-  &lt;option value="us"&gt;United States&lt;/option&gt;
-&lt;/select&gt;</code></pre>
-          </div>
+          <CodeBlock code={selectDisabledCode} lang="html" />
         </div>
       </div>
 

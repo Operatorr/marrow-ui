@@ -1,5 +1,38 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const dropdownMenuCode = `<div x-data="mwDropdown()" @click.outside="close()" class="relative">
+  <button @click="toggle()" class="mw-btn mw-btn-outline">
+    Options
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+
+  <div x-show="open" x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 scale-95"
+       x-transition:enter-end="opacity-100 scale-100"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 scale-100"
+       x-transition:leave-end="opacity-0 scale-95"
+       class="mw-popover absolute left-0 mt-1 z-50 w-56">
+
+    <div class="mw-menu-label">My Account</div>
+    <div class="mw-menu-separator"></div>
+
+    <button class="mw-menu-item" @click="close()">Profile</button>
+    <button class="mw-menu-item" @click="close()">Settings</button>
+    <button class="mw-menu-item" @click="close()">Billing</button>
+
+    <div class="mw-menu-separator"></div>
+    <div class="mw-menu-label">Team</div>
+
+    <button class="mw-menu-item" @click="close()">Invite members</button>
+
+    <div class="mw-menu-separator"></div>
+    <button class="mw-menu-item text-destructive" @click="close()">Log out</button>
+  </div>
+</div>`;
 ---
 
 <DocsLayout title="Dropdown Menu" description="A menu that appears below a trigger button with actions and options" activeComponent="dropdown-menu">
@@ -58,42 +91,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 
         <div class="space-y-3">
           <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div x-data="mwDropdown()" @click.outside="close()" class="relative"&gt;
-  &lt;button @click="toggle()" class="mw-btn mw-btn-outline"&gt;
-    Options
-    &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;path d="m6 9 6 6 6-6"/&gt;&lt;/svg&gt;
-  &lt;/button&gt;
-
-  &lt;div x-show="open" x-cloak
-       x-transition:enter="transition ease-out duration-100"
-       x-transition:enter-start="opacity-0 scale-95"
-       x-transition:enter-end="opacity-100 scale-100"
-       x-transition:leave="transition ease-in duration-75"
-       x-transition:leave-start="opacity-100 scale-100"
-       x-transition:leave-end="opacity-0 scale-95"
-       class="mw-popover absolute left-0 mt-1 z-50 w-56"&gt;
-
-    &lt;div class="mw-menu-label"&gt;My Account&lt;/div&gt;
-    &lt;div class="mw-menu-separator"&gt;&lt;/div&gt;
-
-    &lt;button class="mw-menu-item" @click="close()"&gt;Profile&lt;/button&gt;
-    &lt;button class="mw-menu-item" @click="close()"&gt;Settings&lt;/button&gt;
-    &lt;button class="mw-menu-item" @click="close()"&gt;Billing&lt;/button&gt;
-
-    &lt;div class="mw-menu-separator"&gt;&lt;/div&gt;
-    &lt;div class="mw-menu-label"&gt;Team&lt;/div&gt;
-
-    &lt;button class="mw-menu-item" @click="close()"&gt;Invite members&lt;/button&gt;
-
-    &lt;div class="mw-menu-separator"&gt;&lt;/div&gt;
-    &lt;button class="mw-menu-item text-destructive" @click="close()"&gt;Log out&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={dropdownMenuCode} lang="html" />
         </div>
       </div>
 

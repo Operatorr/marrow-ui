@@ -1,5 +1,24 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const textareaCode = `<!-- Default textarea -->
+<div class="space-y-2">
+  <label class="mw-label">Message</label>
+  <textarea class="mw-textarea"></textarea>
+</div>
+
+<!-- With placeholder -->
+<div class="space-y-2">
+  <label class="mw-label">Message</label>
+  <textarea class="mw-textarea" placeholder="Type your message here..."></textarea>
+</div>
+
+<!-- Disabled -->
+<div class="space-y-2">
+  <label class="mw-label">Message</label>
+  <textarea class="mw-textarea" disabled placeholder="This textarea is disabled..."></textarea>
+</div>`;
 ---
 
 <DocsLayout title="Textarea" description="A multi-line text input field" activeComponent="textarea">
@@ -44,28 +63,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- Default textarea --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label"&gt;Message&lt;/label&gt;
-  &lt;textarea class="mw-textarea"&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-
-&lt;!-- With placeholder --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label"&gt;Message&lt;/label&gt;
-  &lt;textarea class="mw-textarea" placeholder="Type your message here..."&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label"&gt;Message&lt;/label&gt;
-  &lt;textarea class="mw-textarea" disabled placeholder="This textarea is disabled..."&gt;&lt;/textarea&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={textareaCode} lang="html" />
         </div>
       </div>
 

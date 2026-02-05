@@ -1,5 +1,44 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const buttonCode = `<!-- Variants -->
+<button class="mw-btn mw-btn-primary">Primary</button>
+<button class="mw-btn mw-btn-secondary">Secondary</button>
+<button class="mw-btn mw-btn-outline">Outline</button>
+<button class="mw-btn mw-btn-ghost">Ghost</button>
+<button class="mw-btn mw-btn-destructive">Destructive</button>
+<button class="mw-btn mw-btn-link">Link</button>
+
+<!-- Sizes -->
+<button class="mw-btn mw-btn-primary mw-btn-sm">Small</button>
+<button class="mw-btn mw-btn-primary">Default</button>
+<button class="mw-btn mw-btn-primary mw-btn-lg">Large</button>
+
+<!-- Icon Button -->
+<button class="mw-btn mw-btn-outline mw-btn-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12h14"/>
+    <path d="M12 5v14"/>
+  </svg>
+</button>
+
+<!-- With Icon -->
+<button class="mw-btn mw-btn-primary">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" x2="12" y1="15" y2="3"/>
+  </svg>
+  Download
+</button>
+
+<!-- Disabled -->
+<button class="mw-btn mw-btn-primary" disabled>Disabled</button>`;
 ---
 
 <DocsLayout title="Button" description="Displays a button or a component that looks like a button" activeComponent="button">
@@ -68,48 +107,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code: Variants -->
         <div class="space-y-3">
           <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- Variants --&gt;
-&lt;button class="mw-btn mw-btn-primary"&gt;Primary&lt;/button&gt;
-&lt;button class="mw-btn mw-btn-secondary"&gt;Secondary&lt;/button&gt;
-&lt;button class="mw-btn mw-btn-outline"&gt;Outline&lt;/button&gt;
-&lt;button class="mw-btn mw-btn-ghost"&gt;Ghost&lt;/button&gt;
-&lt;button class="mw-btn mw-btn-destructive"&gt;Destructive&lt;/button&gt;
-&lt;button class="mw-btn mw-btn-link"&gt;Link&lt;/button&gt;
-
-&lt;!-- Sizes --&gt;
-&lt;button class="mw-btn mw-btn-primary mw-btn-sm"&gt;Small&lt;/button&gt;
-&lt;button class="mw-btn mw-btn-primary"&gt;Default&lt;/button&gt;
-&lt;button class="mw-btn mw-btn-primary mw-btn-lg"&gt;Large&lt;/button&gt;
-
-&lt;!-- Icon Button --&gt;
-&lt;button class="mw-btn mw-btn-outline mw-btn-icon"&gt;
-  &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
-    &lt;path d="M5 12h14"/&gt;
-    &lt;path d="M12 5v14"/&gt;
-  &lt;/svg&gt;
-&lt;/button&gt;
-
-&lt;!-- With Icon --&gt;
-&lt;button class="mw-btn mw-btn-primary"&gt;
-  &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
-    &lt;path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/&gt;
-    &lt;polyline points="7 10 12 15 17 10"/&gt;
-    &lt;line x1="12" x2="12" y1="15" y2="3"/&gt;
-  &lt;/svg&gt;
-  Download
-&lt;/button&gt;
-
-&lt;!-- Disabled --&gt;
-&lt;button class="mw-btn mw-btn-primary" disabled&gt;Disabled&lt;/button&gt;</code></pre>
-          </div>
+          <CodeBlock code={buttonCode} lang="html" />
         </div>
       </div>
 

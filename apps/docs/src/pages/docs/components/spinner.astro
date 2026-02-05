@@ -1,5 +1,30 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const spinnerCode = `<!-- Small -->
+<div class="mw-spinner" style="width: 1rem; height: 1rem;"></div>
+
+<!-- Default -->
+<div class="mw-spinner"></div>
+
+<!-- Large -->
+<div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"></div>
+
+<!-- Inline with text -->
+<div class="flex items-center gap-3">
+  <div class="mw-spinner"></div>
+  <span class="text-sm text-muted-foreground">Loading data...</span>
+</div>
+
+<!-- Inside a button -->
+<button class="mw-btn mw-btn-primary" disabled>
+  <div class="mw-spinner"
+       style="width: 1rem; height: 1rem;
+              border-color: hsl(var(--marrow-primary-foreground) / 0.3);
+              border-top-color: hsl(var(--marrow-primary-foreground));"></div>
+  Submitting...
+</button>`;
 ---
 
 <DocsLayout title="Spinner" description="A loading spinner indicator for asynchronous operations" activeComponent="spinner">
@@ -60,34 +85,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- Small --&gt;
-&lt;div class="mw-spinner" style="width: 1rem; height: 1rem;"&gt;&lt;/div&gt;
-
-&lt;!-- Default --&gt;
-&lt;div class="mw-spinner"&gt;&lt;/div&gt;
-
-&lt;!-- Large --&gt;
-&lt;div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"&gt;&lt;/div&gt;
-
-&lt;!-- Inline with text --&gt;
-&lt;div class="flex items-center gap-3"&gt;
-  &lt;div class="mw-spinner"&gt;&lt;/div&gt;
-  &lt;span class="text-sm text-muted-foreground"&gt;Loading data...&lt;/span&gt;
-&lt;/div&gt;
-
-&lt;!-- Inside a button --&gt;
-&lt;button class="mw-btn mw-btn-primary" disabled&gt;
-  &lt;div class="mw-spinner"
-       style="width: 1rem; height: 1rem;
-              border-color: hsl(var(--marrow-primary-foreground) / 0.3);
-              border-top-color: hsl(var(--marrow-primary-foreground));"&gt;&lt;/div&gt;
-  Submitting...
-&lt;/button&gt;</code></pre>
-          </div>
+          <CodeBlock code={spinnerCode} lang="html" />
         </div>
 
         <!-- Usage Notes -->

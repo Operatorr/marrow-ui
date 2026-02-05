@@ -1,5 +1,52 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const itemCode = `<div class="divide-y divide-border">
+  <!-- Item with badge -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Project Roadmap</div>
+      <div class="text-xs text-muted-foreground">Updated 2 hours ago</div>
+    </div>
+    <span class="mw-badge mw-badge-default">New</span>
+  </div>
+
+  <!-- Item with chevron -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Team Members</div>
+      <div class="text-xs text-muted-foreground">Manage your team and permissions</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  </div>
+
+  <!-- Item with count badge -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Activity Log</div>
+      <div class="text-xs text-muted-foreground">View recent actions and events</div>
+    </div>
+    <span class="mw-badge mw-badge-secondary">12</span>
+  </div>
+</div>`;
+
+const itemWithoutIconCode = `<div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+  <div class="flex-1 min-w-0">
+    <div class="text-sm font-medium">General Settings</div>
+    <div class="text-xs text-muted-foreground">Configure your workspace preferences</div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+</div>`;
 ---
 
 <DocsLayout title="Item" description="A list item component with icon, title, description, and optional trailing content" activeComponent="item">
@@ -58,48 +105,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div class="divide-y divide-border"&gt;
-  &lt;!-- Item with badge --&gt;
-  &lt;div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer"&gt;
-    &lt;div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0"&gt;
-      &lt;!-- Icon SVG --&gt;
-    &lt;/div&gt;
-    &lt;div class="flex-1 min-w-0"&gt;
-      &lt;div class="text-sm font-medium"&gt;Project Roadmap&lt;/div&gt;
-      &lt;div class="text-xs text-muted-foreground"&gt;Updated 2 hours ago&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;span class="mw-badge mw-badge-default"&gt;New&lt;/span&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Item with chevron --&gt;
-  &lt;div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer"&gt;
-    &lt;div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0"&gt;
-      &lt;!-- Icon SVG --&gt;
-    &lt;/div&gt;
-    &lt;div class="flex-1 min-w-0"&gt;
-      &lt;div class="text-sm font-medium"&gt;Team Members&lt;/div&gt;
-      &lt;div class="text-xs text-muted-foreground"&gt;Manage your team and permissions&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"&gt;&lt;path d="m9 18 6-6-6-6"/&gt;&lt;/svg&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Item with count badge --&gt;
-  &lt;div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer"&gt;
-    &lt;div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0"&gt;
-      &lt;!-- Icon SVG --&gt;
-    &lt;/div&gt;
-    &lt;div class="flex-1 min-w-0"&gt;
-      &lt;div class="text-sm font-medium"&gt;Activity Log&lt;/div&gt;
-      &lt;div class="text-xs text-muted-foreground"&gt;View recent actions and events&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;span class="mw-badge mw-badge-secondary"&gt;12&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={itemCode} lang="html" />
         </div>
 
         <!-- Without Icon -->
@@ -125,18 +131,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
             </div>
           </div>
 
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer"&gt;
-  &lt;div class="flex-1 min-w-0"&gt;
-    &lt;div class="text-sm font-medium"&gt;General Settings&lt;/div&gt;
-    &lt;div class="text-xs text-muted-foreground"&gt;Configure your workspace preferences&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"&gt;&lt;path d="m9 18 6-6-6-6"/&gt;&lt;/svg&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={itemWithoutIconCode} lang="html" />
         </div>
       </div>
 

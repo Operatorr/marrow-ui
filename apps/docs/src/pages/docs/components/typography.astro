@@ -1,5 +1,46 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const typographyCode = `<!-- Headings -->
+<h1 class="font-heading text-4xl font-extrabold tracking-tight lg:text-5xl">Heading 1</h1>
+<h2 class="font-heading text-3xl font-semibold tracking-tight border-b pb-2">Heading 2</h2>
+<h3 class="font-heading text-2xl font-semibold tracking-tight">Heading 3</h3>
+<h4 class="font-heading text-xl font-semibold tracking-tight">Heading 4</h4>
+<h5 class="font-heading text-lg font-semibold tracking-tight">Heading 5</h5>
+<h6 class="font-heading text-base font-semibold tracking-tight">Heading 6</h6>
+
+<!-- Paragraph -->
+<p class="leading-7">Standard body text with comfortable line height.</p>
+
+<!-- Lead paragraph -->
+<p class="text-lg text-muted-foreground leading-relaxed">A lead paragraph for introductions.</p>
+
+<!-- Small text -->
+<p class="text-sm text-muted-foreground">Small muted text for secondary info.</p>
+
+<!-- Inline code -->
+<p>Use the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn</code> class.</p>
+
+<!-- Blockquote -->
+<blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground">
+  "A meaningful quote goes here."
+  <footer class="mt-2 text-sm not-italic">&mdash; Author Name</footer>
+</blockquote>
+
+<!-- Unordered list -->
+<ul class="list-disc pl-6 space-y-1 leading-7">
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ul>
+
+<!-- Ordered list -->
+<ol class="list-decimal pl-6 space-y-1 leading-7">
+  <li>Step one</li>
+  <li>Step two</li>
+  <li>Step three</li>
+</ol>`;
 ---
 
 <DocsLayout title="Typography" description="Heading levels, body text, inline code, blockquotes, and lists" activeComponent="typography">
@@ -83,50 +124,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- Headings --&gt;
-&lt;h1 class="font-heading text-4xl font-extrabold tracking-tight lg:text-5xl"&gt;Heading 1&lt;/h1&gt;
-&lt;h2 class="font-heading text-3xl font-semibold tracking-tight border-b pb-2"&gt;Heading 2&lt;/h2&gt;
-&lt;h3 class="font-heading text-2xl font-semibold tracking-tight"&gt;Heading 3&lt;/h3&gt;
-&lt;h4 class="font-heading text-xl font-semibold tracking-tight"&gt;Heading 4&lt;/h4&gt;
-&lt;h5 class="font-heading text-lg font-semibold tracking-tight"&gt;Heading 5&lt;/h5&gt;
-&lt;h6 class="font-heading text-base font-semibold tracking-tight"&gt;Heading 6&lt;/h6&gt;
-
-&lt;!-- Paragraph --&gt;
-&lt;p class="leading-7"&gt;Standard body text with comfortable line height.&lt;/p&gt;
-
-&lt;!-- Lead paragraph --&gt;
-&lt;p class="text-lg text-muted-foreground leading-relaxed"&gt;A lead paragraph for introductions.&lt;/p&gt;
-
-&lt;!-- Small text --&gt;
-&lt;p class="text-sm text-muted-foreground"&gt;Small muted text for secondary info.&lt;/p&gt;
-
-&lt;!-- Inline code --&gt;
-&lt;p&gt;Use the &lt;code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono"&gt;mw-btn&lt;/code&gt; class.&lt;/p&gt;
-
-&lt;!-- Blockquote --&gt;
-&lt;blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground"&gt;
-  "A meaningful quote goes here."
-  &lt;footer class="mt-2 text-sm not-italic"&gt;&amp;mdash; Author Name&lt;/footer&gt;
-&lt;/blockquote&gt;
-
-&lt;!-- Unordered list --&gt;
-&lt;ul class="list-disc pl-6 space-y-1 leading-7"&gt;
-  &lt;li&gt;First item&lt;/li&gt;
-  &lt;li&gt;Second item&lt;/li&gt;
-  &lt;li&gt;Third item&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;!-- Ordered list --&gt;
-&lt;ol class="list-decimal pl-6 space-y-1 leading-7"&gt;
-  &lt;li&gt;Step one&lt;/li&gt;
-  &lt;li&gt;Step two&lt;/li&gt;
-  &lt;li&gt;Step three&lt;/li&gt;
-&lt;/ol&gt;</code></pre>
-          </div>
+          <CodeBlock code={typographyCode} lang="html" />
         </div>
       </div>
 

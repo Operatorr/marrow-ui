@@ -1,5 +1,25 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const sliderCode = `<div x-data="mwSlider(0, 100, 50)" class="space-y-4">
+  <div class="flex items-center justify-between">
+    <label class="mw-label">Volume</label>
+    <span class="text-sm text-muted-foreground" x-text="value + '%'"></span>
+  </div>
+
+  <div class="relative pt-1">
+    <!-- Visual track -->
+    <div class="mw-slider-track">
+      <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+    </div>
+    <!-- Invisible native range input -->
+    <input type="range" :min="min" :max="max"
+           x-model="value" @input="handleInput($event)"
+           class="absolute inset-0 w-full opacity-0 cursor-pointer"
+           style="margin: 0; height: 0.375rem;">
+  </div>
+</div>`;
 ---
 
 <DocsLayout title="Slider" description="A range slider input for selecting numeric values" activeComponent="slider">
@@ -59,29 +79,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div x-data="mwSlider(0, 100, 50)" class="space-y-4"&gt;
-  &lt;div class="flex items-center justify-between"&gt;
-    &lt;label class="mw-label"&gt;Volume&lt;/label&gt;
-    &lt;span class="text-sm text-muted-foreground" x-text="value + '%'"&gt;&lt;/span&gt;
-  &lt;/div&gt;
-
-  &lt;div class="relative pt-1"&gt;
-    &lt;!-- Visual track --&gt;
-    &lt;div class="mw-slider-track"&gt;
-      &lt;div class="mw-slider-range" :style="'width: ' + percentage + '%'"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;!-- Invisible native range input --&gt;
-    &lt;input type="range" :min="min" :max="max"
-           x-model="value" @input="handleInput($event)"
-           class="absolute inset-0 w-full opacity-0 cursor-pointer"
-           style="margin: 0; height: 0.375rem;"&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={sliderCode} lang="html" />
         </div>
 
         <!-- Usage Notes -->

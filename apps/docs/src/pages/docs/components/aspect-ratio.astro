@@ -1,5 +1,30 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const aspectRatioCode = `<!-- 16:9 Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 16 / 9;">
+  <img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 1:1 Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 1 / 1;">
+  <img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 4:3 Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+     style="aspect-ratio: 4 / 3;">
+  <img src="your-image.jpg"
+       alt="Description"
+       class="h-full w-full object-cover" />
+</div>`;
 ---
 
 <DocsLayout title="Aspect Ratio" description="Displays content within a desired ratio using pure CSS" activeComponent="aspect-ratio">
@@ -35,34 +60,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-3">
           <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- 16:9 Aspect Ratio --&gt;
-&lt;div class="overflow-hidden rounded-[var(--marrow-radius)]"
-     style="aspect-ratio: 16 / 9;"&gt;
-  &lt;img src="your-image.jpg"
-       alt="Description"
-       class="h-full w-full object-cover" /&gt;
-&lt;/div&gt;
-
-&lt;!-- 1:1 Aspect Ratio --&gt;
-&lt;div class="overflow-hidden rounded-[var(--marrow-radius)]"
-     style="aspect-ratio: 1 / 1;"&gt;
-  &lt;img src="your-image.jpg"
-       alt="Description"
-       class="h-full w-full object-cover" /&gt;
-&lt;/div&gt;
-
-&lt;!-- 4:3 Aspect Ratio --&gt;
-&lt;div class="overflow-hidden rounded-[var(--marrow-radius)]"
-     style="aspect-ratio: 4 / 3;"&gt;
-  &lt;img src="your-image.jpg"
-       alt="Description"
-       class="h-full w-full object-cover" /&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={aspectRatioCode} lang="html" />
         </div>
       </div>
 

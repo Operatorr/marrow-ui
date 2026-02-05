@@ -1,5 +1,38 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const fieldCode = `<!-- Default field -->
+<div class="space-y-2">
+  <label for="field-name" class="mw-label">Name</label>
+  <input id="field-name" type="text" class="mw-input"
+         placeholder="Enter your name" />
+  <p class="text-sm text-muted-foreground">
+    This is your public display name.
+  </p>
+</div>
+
+<!-- Required field -->
+<div class="space-y-2">
+  <label for="field-email" class="mw-label">
+    Email <span class="text-destructive">*</span>
+  </label>
+  <input id="field-email" type="email" class="mw-input"
+         placeholder="you@example.com" />
+  <p class="text-sm text-muted-foreground">
+    We will never share your email.
+  </p>
+</div>
+
+<!-- Error state -->
+<div class="space-y-2">
+  <label for="field-error" class="mw-label">Username</label>
+  <input id="field-error" type="text" class="mw-input" value="ab"
+         style="border-color: hsl(var(--marrow-destructive));" />
+  <p class="text-sm" style="color: hsl(var(--marrow-destructive));">
+    Username must be at least 3 characters.
+  </p>
+</div>`;
 ---
 
 <DocsLayout title="Field" description="A complete form field pattern combining label, input, and helper text" activeComponent="field">
@@ -37,42 +70,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 
         <div class="space-y-3">
           <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- Default field --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label for="field-name" class="mw-label"&gt;Name&lt;/label&gt;
-  &lt;input id="field-name" type="text" class="mw-input"
-         placeholder="Enter your name" /&gt;
-  &lt;p class="text-sm text-muted-foreground"&gt;
-    This is your public display name.
-  &lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- Required field --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label for="field-email" class="mw-label"&gt;
-    Email &lt;span class="text-destructive"&gt;*&lt;/span&gt;
-  &lt;/label&gt;
-  &lt;input id="field-email" type="email" class="mw-input"
-         placeholder="you@example.com" /&gt;
-  &lt;p class="text-sm text-muted-foreground"&gt;
-    We will never share your email.
-  &lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- Error state --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label for="field-error" class="mw-label"&gt;Username&lt;/label&gt;
-  &lt;input id="field-error" type="text" class="mw-input" value="ab"
-         style="border-color: hsl(var(--marrow-destructive));" /&gt;
-  &lt;p class="text-sm" style="color: hsl(var(--marrow-destructive));"&gt;
-    Username must be at least 3 characters.
-  &lt;/p&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={fieldCode} lang="html" />
         </div>
       </div>
 

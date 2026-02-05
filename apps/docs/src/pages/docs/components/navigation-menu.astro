@@ -1,5 +1,37 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const navCode = `<nav class="flex items-center gap-1">
+  <!-- Active link -->
+  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Dashboard</a>
+
+  <!-- Inactive links -->
+  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Projects</a>
+  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Team</a>
+  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Settings</a>
+</nav>`;
+
+const navBorderCode = `<nav class="flex items-center gap-6 border-b border-border">
+  <!-- Active link with bottom border -->
+  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-primary text-foreground -mb-px transition-colors">Dashboard</a>
+
+  <!-- Inactive links -->
+  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Projects</a>
+  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Team</a>
+  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Settings</a>
+</nav>`;
+
+const navIconsCode = `<nav class="flex items-center gap-1">
+  <a href="#" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">
+    <!-- Icon SVG -->
+    Dashboard
+  </a>
+  <a href="#" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+    <!-- Icon SVG -->
+    Team
+  </a>
+</nav>`;
 ---
 
 <DocsLayout title="Navigation Menu" description="A horizontal navigation menu with links and active state indicator" activeComponent="navigation-menu">
@@ -27,20 +59,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;nav class="flex items-center gap-1"&gt;
-  &lt;!-- Active link --&gt;
-  &lt;a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors"&gt;Dashboard&lt;/a&gt;
-
-  &lt;!-- Inactive links --&gt;
-  &lt;a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"&gt;Projects&lt;/a&gt;
-  &lt;a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"&gt;Team&lt;/a&gt;
-  &lt;a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"&gt;Settings&lt;/a&gt;
-&lt;/nav&gt;</code></pre>
-          </div>
+          <CodeBlock code={navCode} lang="html" />
         </div>
 
         <!-- With Border Bottom -->
@@ -56,20 +75,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
             </nav>
           </div>
 
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;nav class="flex items-center gap-6 border-b border-border"&gt;
-  &lt;!-- Active link with bottom border --&gt;
-  &lt;a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-primary text-foreground -mb-px transition-colors"&gt;Dashboard&lt;/a&gt;
-
-  &lt;!-- Inactive links --&gt;
-  &lt;a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors"&gt;Projects&lt;/a&gt;
-  &lt;a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors"&gt;Team&lt;/a&gt;
-  &lt;a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors"&gt;Settings&lt;/a&gt;
-&lt;/nav&gt;</code></pre>
-          </div>
+          <CodeBlock code={navBorderCode} lang="html" />
         </div>
 
         <!-- With Icons -->
@@ -93,21 +99,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
             </nav>
           </div>
 
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;nav class="flex items-center gap-1"&gt;
-  &lt;a href="#" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors"&gt;
-    &lt;!-- Icon SVG --&gt;
-    Dashboard
-  &lt;/a&gt;
-  &lt;a href="#" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"&gt;
-    &lt;!-- Icon SVG --&gt;
-    Team
-  &lt;/a&gt;
-&lt;/nav&gt;</code></pre>
-          </div>
+          <CodeBlock code={navIconsCode} lang="html" />
         </div>
       </div>
 

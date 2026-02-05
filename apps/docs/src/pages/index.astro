@@ -52,13 +52,18 @@ import Navbar from "../components/Navbar.astro";
         </div>
 
         <!-- Code snippet -->
-        <div class="mw-code-block mt-10 max-w-lg">
-          <button class="copy-btn" title="Copy to clipboard">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-          </button>
-          <pre><code is:raw>&lt;button class="mw-btn mw-btn-primary"&gt;
-  Click me
-&lt;/button&gt;</code></pre>
+        <div class="mt-10 max-w-lg relative bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
+          <div class="flex items-center justify-between px-4 py-2 bg-zinc-800/50 border-b border-zinc-800">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+            </div>
+            <span class="text-xs text-zinc-500">HTML</span>
+          </div>
+          <pre class="p-4 text-sm font-mono overflow-x-auto"><code><span class="text-zinc-500">&lt;</span><span class="text-red-400">button</span> <span class="text-yellow-300">class</span><span class="text-zinc-500">=</span><span class="text-emerald-400">"mw-btn mw-btn-primary"</span><span class="text-zinc-500">&gt;</span>
+  <span class="text-zinc-200">Click me</span>
+<span class="text-zinc-500">&lt;/</span><span class="text-red-400">button</span><span class="text-zinc-500">&gt;</span></code></pre>
         </div>
       </div>
     </div>
@@ -228,210 +233,529 @@ import Navbar from "../components/Navbar.astro";
   </section>
 
   <!-- Real World Examples Section -->
-  <section class="border-t">
+  <section class="border-t bg-gradient-to-b from-muted/50 to-background">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
       <div class="text-center mb-12">
+        <span class="mw-badge mw-badge-secondary text-xs mb-4">Interactive Demos</span>
         <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">Real World Examples</h2>
-        <p class="mt-3 text-muted-foreground text-lg">Composable components for common UI patterns. Copy, customize, ship.</p>
+        <p class="mt-3 text-muted-foreground text-lg max-w-2xl mx-auto">Production-ready patterns built with Marrow components. Fully interactive — try them out.</p>
       </div>
 
       <!-- Examples Grid -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- Payment Method Selector -->
-        <div class="mw-card rounded-lg p-5" x-data="{ selected: 'card' }">
-          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Payment Method</h3>
-          <div class="space-y-3">
-            <label class="flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all"
-                   :class="selected === 'card' ? 'border-blue-500 bg-blue-500/10' : 'hover:border-muted-foreground/50'"
-                   @click="selected = 'card'">
-              <button class="mw-radio" :data-state="selected === 'card' ? 'checked' : ''"></button>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-              <span class="text-sm text-foreground">Credit Card</span>
+        <div class="mw-card rounded-xl p-5 shadow-lg" x-data="{ selected: 'card', cardNumber: '', showCardForm: false }">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Payment Method</h3>
+            <span class="mw-badge text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 border-0">Secure</span>
+          </div>
+          <div class="space-y-2">
+            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all duration-200"
+                   :class="selected === 'card' ? 'border-blue-500/50 bg-blue-500/10 shadow-lg shadow-blue-500/5' : 'hover:border-muted-foreground/30 hover:bg-muted/50'"
+                   @click="selected = 'card'; showCardForm = true">
+              <button class="mw-radio shrink-0" :data-state="selected === 'card' ? 'checked' : ''"></button>
+              <div class="flex items-center gap-2 flex-1">
+                <div class="w-8 h-5 bg-gradient-to-r from-blue-600 to-blue-400 rounded flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                </div>
+                <span class="text-sm text-foreground font-medium">Credit Card</span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="m9 18 6-6-6-6"/></svg>
             </label>
-            <label class="flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all"
-                   :class="selected === 'paypal' ? 'border-blue-500 bg-blue-500/10' : 'hover:border-muted-foreground/50'"
+
+            <!-- Card Input (shown when card selected) -->
+            <div x-show="selected === 'card'" x-collapse class="pl-4 border-l-2 border-blue-500/30 ml-2">
+              <div class="pt-2 pb-1 space-y-2">
+                <input type="text" class="mw-input text-sm" placeholder="4242 4242 4242 4242" x-model="cardNumber" @input="cardNumber = cardNumber.replace(/\D/g, '').replace(/(\d{4})/g, '$1 ').trim().slice(0, 19)">
+                <div class="flex gap-2">
+                  <input type="text" class="mw-input text-sm flex-1" placeholder="MM/YY">
+                  <input type="text" class="mw-input text-sm w-20" placeholder="CVC">
+                </div>
+              </div>
+            </div>
+
+            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all duration-200"
+                   :class="selected === 'paypal' ? 'border-blue-500/50 bg-blue-500/10 shadow-lg shadow-blue-500/5' : 'hover:border-muted-foreground/30 hover:bg-muted/50'"
                    @click="selected = 'paypal'">
-              <button class="mw-radio" :data-state="selected === 'paypal' ? 'checked' : ''"></button>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-muted-foreground"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .757-.65h7.09c2.39 0 4.155.56 5.24 1.663.482.491.82 1.054 1.004 1.675.2.665.253 1.442.157 2.308-.018.163-.04.334-.066.508-.261 1.745-.988 3.12-2.158 4.083-1.089.896-2.505 1.35-4.21 1.35h-2.4a.77.77 0 0 0-.758.65l-.63 3.992a.642.642 0 0 1-.633.54z"/></svg>
-              <span class="text-sm text-foreground">PayPal</span>
+              <button class="mw-radio shrink-0" :data-state="selected === 'paypal' ? 'checked' : ''"></button>
+              <div class="flex items-center gap-2 flex-1">
+                <div class="w-8 h-5 bg-[#003087] rounded flex items-center justify-center">
+                  <span class="text-[10px] font-bold text-white italic">Pay</span>
+                </div>
+                <span class="text-sm text-foreground font-medium">PayPal</span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
             </label>
-            <label class="flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all"
-                   :class="selected === 'apple' ? 'border-blue-500 bg-blue-500/10' : 'hover:border-muted-foreground/50'"
+            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all duration-200"
+                   :class="selected === 'apple' ? 'border-blue-500/50 bg-blue-500/10 shadow-lg shadow-blue-500/5' : 'hover:border-muted-foreground/30 hover:bg-muted/50'"
                    @click="selected = 'apple'">
-              <button class="mw-radio" :data-state="selected === 'apple' ? 'checked' : ''"></button>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-muted-foreground"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-              <span class="text-sm text-foreground">Apple Pay</span>
+              <button class="mw-radio shrink-0" :data-state="selected === 'apple' ? 'checked' : ''"></button>
+              <div class="flex items-center gap-2 flex-1">
+                <div class="w-8 h-5 bg-foreground rounded flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="text-background"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+                </div>
+                <span class="text-sm text-foreground font-medium">Apple Pay</span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="m9 18 6-6-6-6"/></svg>
             </label>
           </div>
+          <button class="mw-btn mw-btn-primary w-full mt-4" :disabled="selected === 'card' && !cardNumber">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+            Pay $99.00
+          </button>
         </div>
 
         <!-- Invite Team Members -->
-        <div class="mw-card rounded-lg p-5" x-data="{ emails: ['alex@acme.com'], newEmail: '' }">
-          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Invite Team Members</h3>
-          <div class="space-y-3">
-            <template x-for="(email, index) in emails" :key="index">
-              <div class="flex items-center gap-2 p-2 bg-muted rounded-lg">
-                <div class="mw-avatar mw-avatar-sm bg-gradient-to-br from-violet-500 to-pink-500 text-white text-xs" x-text="email.charAt(0).toUpperCase()"></div>
-                <span class="flex-1 text-sm text-foreground truncate" x-text="email"></span>
-                <button @click="emails = emails.filter((_, i) => i !== index)" class="text-muted-foreground hover:text-foreground transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <div class="mw-card rounded-xl p-5 shadow-lg" x-data="{
+          members: [
+            { email: 'alex@acme.com', role: 'Admin', color: 'from-violet-500 to-pink-500' },
+            { email: 'sam@acme.com', role: 'Editor', color: 'from-cyan-500 to-blue-500' }
+          ],
+          newEmail: '',
+          newRole: 'Viewer',
+          roles: ['Admin', 'Editor', 'Viewer'],
+          colors: ['from-violet-500 to-pink-500', 'from-cyan-500 to-blue-500', 'from-amber-500 to-orange-500', 'from-emerald-500 to-teal-500', 'from-rose-500 to-red-500']
+        }">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Team Members</h3>
+            <span class="text-xs text-muted-foreground" x-text="members.length + ' invited'"></span>
+          </div>
+          <div class="space-y-2 max-h-[140px] overflow-y-auto pr-1 -mr-1">
+            <template x-for="(member, index) in members" :key="index">
+              <div class="group flex items-center gap-2 p-2 bg-muted/50 rounded-lg hover:bg-muted transition-colors">
+                <div class="mw-avatar mw-avatar-sm text-white text-xs shrink-0" :class="'bg-gradient-to-br ' + member.color" x-text="member.email.charAt(0).toUpperCase()"></div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-foreground truncate" x-text="member.email"></p>
+                  <p class="text-[10px] text-muted-foreground" x-text="member.role"></p>
+                </div>
+                <button @click="members = members.filter((_, i) => i !== index)" class="opacity-0 group-hover:opacity-100 p-1 text-muted-foreground hover:text-destructive transition-all">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
               </div>
             </template>
+          </div>
+          <div class="mt-3 pt-3 border-t border-border">
             <div class="flex gap-2">
-              <input type="email" class="mw-input flex-1" placeholder="colleague@company.com" x-model="newEmail" @keydown.enter="if(newEmail.includes('@')) { emails.push(newEmail); newEmail = '' }">
-              <button class="mw-btn mw-btn-primary" @click="if(newEmail.includes('@')) { emails.push(newEmail); newEmail = '' }">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-              </button>
+              <input type="email" class="mw-input flex-1 text-sm" placeholder="colleague@company.com" x-model="newEmail" @keydown.enter="if(newEmail.includes('@')) { members.push({ email: newEmail, role: newRole, color: colors[members.length % colors.length] }); newEmail = '' }">
+              <select class="mw-select text-sm w-24 py-1.5" x-model="newRole">
+                <template x-for="role in roles" :key="role">
+                  <option :value="role" x-text="role"></option>
+                </template>
+              </select>
             </div>
-          </div>
-        </div>
-
-        <!-- Status Labels -->
-        <div class="mw-card rounded-lg p-5" x-data="{ status: 'syncing', statuses: ['syncing', 'loading', 'updating', 'success'] }" x-init="setInterval(() => { const idx = statuses.indexOf(status); status = statuses[(idx + 1) % statuses.length] }, 2000)">
-          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Status Indicators</h3>
-          <div class="space-y-3">
-            <div class="flex items-center gap-2">
-              <template x-if="status === 'syncing'">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-500/20 text-blue-400 rounded-full text-sm">
-                  <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-                  Syncing...
-                </span>
-              </template>
-              <template x-if="status === 'loading'">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500/20 text-amber-400 rounded-full text-sm">
-                  <span class="mw-spinner" style="width: 14px; height: 14px; border-width: 2px; border-top-color: currentColor;"></span>
-                  Loading...
-                </span>
-              </template>
-              <template x-if="status === 'updating'">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-violet-500/20 text-violet-400 rounded-full text-sm">
-                  <svg class="animate-pulse" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                  Updating...
-                </span>
-              </template>
-              <template x-if="status === 'success'">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                  Up to date
-                </span>
-              </template>
-            </div>
-            <p class="text-xs text-muted-foreground">Status cycles automatically every 2 seconds</p>
-          </div>
-        </div>
-
-        <!-- Send Message Input -->
-        <div class="mw-card rounded-lg p-5" x-data="{ message: '', sending: false }">
-          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Send Message</h3>
-          <div class="flex gap-2">
-            <div class="relative flex-1">
-              <input type="text" class="mw-input pr-10" placeholder="Type a message..." x-model="message" @keydown.enter="if(message && !sending) { sending = true; setTimeout(() => { message = ''; sending = false }, 1000) }">
-              <button class="absolute right-1 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
-              </button>
-            </div>
-            <button class="mw-btn mw-btn-primary" :disabled="!message || sending" @click="if(message) { sending = true; setTimeout(() => { message = ''; sending = false }, 1000) }">
-              <template x-if="!sending">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-              </template>
-              <template x-if="sending">
-                <span class="mw-spinner" style="width: 16px; height: 16px; border-width: 2px;"></span>
-              </template>
+            <button class="mw-btn mw-btn-primary w-full mt-2" :disabled="!newEmail.includes('@')" @click="if(newEmail.includes('@')) { members.push({ email: newEmail, role: newRole, color: colors[members.length % colors.length] }); newEmail = '' }">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+              Send Invite
             </button>
           </div>
         </div>
 
-        <!-- Price Range Slider -->
-        <div class="mw-card rounded-lg p-5" x-data="{ min: 25, max: 75 }">
-          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Price Range</h3>
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="text-2xl font-semibold text-foreground">$<span x-text="min"></span> - $<span x-text="max"></span></span>
+        <!-- Status Labels -->
+        <div class="mw-card rounded-xl p-5 shadow-lg" x-data="{
+          status: 'syncing',
+          statuses: ['syncing', 'loading', 'updating', 'success', 'error'],
+          auto: true
+        }" x-init="setInterval(() => { if(auto) { const idx = statuses.indexOf(status); status = statuses[(idx + 1) % statuses.length] } }, 2000)">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Status Indicators</h3>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <span class="text-[10px] text-muted-foreground">Auto</span>
+              <button class="mw-switch" style="width: 2rem; height: 1rem;" :data-state="auto ? 'checked' : 'unchecked'" @click="auto = !auto">
+                <span class="mw-switch-thumb" style="width: 0.75rem; height: 0.75rem; top: 1px; left: 1px;" :style="auto && 'transform: translateX(0.9rem)'"></span>
+              </button>
+            </label>
+          </div>
+          <div class="space-y-3">
+            <!-- Current Status Display -->
+            <div class="flex items-center justify-center py-3">
+              <template x-if="status === 'syncing'">
+                <span class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 text-blue-500 rounded-full text-sm font-medium border border-blue-500/20">
+                  <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                  Syncing...
+                </span>
+              </template>
+              <template x-if="status === 'loading'">
+                <span class="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/20 text-amber-500 rounded-full text-sm font-medium border border-amber-500/20">
+                  <span class="mw-spinner" style="width: 16px; height: 16px; border-width: 2px; border-top-color: currentColor;"></span>
+                  Loading...
+                </span>
+              </template>
+              <template x-if="status === 'updating'">
+                <span class="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/20 text-violet-500 rounded-full text-sm font-medium border border-violet-500/20">
+                  <svg class="animate-bounce" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                  Updating...
+                </span>
+              </template>
+              <template x-if="status === 'success'">
+                <span class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 text-emerald-500 rounded-full text-sm font-medium border border-emerald-500/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  Up to date
+                </span>
+              </template>
+              <template x-if="status === 'error'">
+                <span class="inline-flex items-center gap-2 px-4 py-2 bg-red-500/20 text-red-500 rounded-full text-sm font-medium border border-red-500/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                  Connection lost
+                </span>
+              </template>
             </div>
-            <div class="space-y-3">
+            <!-- Manual Controls -->
+            <div class="flex flex-wrap gap-1.5 justify-center" x-show="!auto" x-collapse>
+              <template x-for="s in statuses" :key="s">
+                <button class="px-2 py-1 text-[10px] rounded-md transition-colors capitalize"
+                        :class="status === s ? 'bg-secondary text-foreground' : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground'"
+                        @click="status = s" x-text="s"></button>
+              </template>
+            </div>
+          </div>
+        </div>
+
+        <!-- Send Message Input -->
+        <div class="mw-card rounded-xl p-5 shadow-lg" x-data="{
+          message: '',
+          sending: false,
+          sent: false,
+          charLimit: 280,
+          showEmoji: false,
+          emojis: ['😊', '👍', '❤️', '🎉', '🔥', '✨', '😂', '🙏']
+        }">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Send Message</h3>
+            <span class="text-[10px] transition-colors" :class="message.length > charLimit ? 'text-destructive' : message.length > charLimit * 0.8 ? 'text-amber-500' : 'text-muted-foreground'" x-text="message.length + '/' + charLimit"></span>
+          </div>
+          <div class="space-y-3">
+            <div class="relative">
+              <textarea
+                class="mw-textarea text-sm resize-none pr-10"
+                rows="3"
+                placeholder="What's on your mind?"
+                x-model="message"
+                :class="message.length > charLimit && 'border-destructive focus:border-destructive'"
+                @keydown.meta.enter="if(message && message.length <= charLimit && !sending) { sending = true; setTimeout(() => { sent = true; setTimeout(() => { message = ''; sending = false; sent = false }, 1500) }, 800) }"
+              ></textarea>
+              <div class="absolute right-2 bottom-2 flex items-center gap-1">
+                <div class="relative">
+                  <button @click="showEmoji = !showEmoji" class="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded hover:bg-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+                  </button>
+                  <div x-show="showEmoji" @click.outside="showEmoji = false" x-transition class="absolute bottom-full right-0 mb-1 p-1.5 bg-popover border border-border rounded-lg shadow-xl grid grid-cols-4 gap-1 z-10">
+                    <template x-for="emoji in emojis" :key="emoji">
+                      <button @click="message += emoji; showEmoji = false" class="w-7 h-7 flex items-center justify-center hover:bg-muted rounded text-sm" x-text="emoji"></button>
+                    </template>
+                  </div>
+                </div>
+                <button class="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded hover:bg-muted">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <p class="text-[10px] text-muted-foreground"><span class="mw-kbd text-[9px] px-1">⌘</span> + <span class="mw-kbd text-[9px] px-1">↵</span> to send</p>
+              <button
+                class="mw-btn mw-btn-primary mw-btn-sm"
+                :disabled="!message || message.length > charLimit || sending"
+                @click="if(message && message.length <= charLimit) { sending = true; setTimeout(() => { sent = true; setTimeout(() => { message = ''; sending = false; sent = false }, 1500) }, 800) }"
+              >
+                <template x-if="!sending && !sent">
+                  <span class="flex items-center gap-1.5">
+                    Send
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                  </span>
+                </template>
+                <template x-if="sending && !sent">
+                  <span class="mw-spinner" style="width: 14px; height: 14px; border-width: 2px;"></span>
+                </template>
+                <template x-if="sent">
+                  <span class="flex items-center gap-1.5 text-emerald-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    Sent!
+                  </span>
+                </template>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price Range Slider -->
+        <div class="mw-card rounded-xl p-5 shadow-lg" x-data="{
+          min: 25,
+          max: 75,
+          presets: [
+            { label: 'Budget', min: 0, max: 25 },
+            { label: 'Mid-range', min: 25, max: 75 },
+            { label: 'Premium', min: 75, max: 100 }
+          ]
+        }">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Price Range</h3>
+            <span class="mw-badge text-[10px] px-2 py-0.5 bg-muted text-muted-foreground border-border" x-text="(max - min) + ' range'"></span>
+          </div>
+          <div class="space-y-4">
+            <!-- Price Display -->
+            <div class="flex items-baseline justify-center gap-2">
+              <div class="text-center">
+                <span class="text-3xl font-bold text-foreground">$<span x-text="min"></span></span>
+                <span class="text-muted-foreground mx-2">—</span>
+                <span class="text-3xl font-bold text-foreground">$<span x-text="max"></span></span>
+              </div>
+            </div>
+
+            <!-- Visual Bar -->
+            <div class="relative h-2 bg-muted rounded-full overflow-hidden">
+              <div class="absolute h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-150"
+                   :style="'left: ' + min + '%; width: ' + (max - min) + '%'"></div>
+            </div>
+
+            <!-- Sliders -->
+            <div class="space-y-2">
               <div class="flex items-center gap-3">
                 <span class="text-xs text-muted-foreground w-8">Min</span>
-                <input type="range" min="0" max="100" x-model="min" @input="if(parseInt(min) > parseInt(max)) max = min" class="flex-1 h-1.5 bg-secondary rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:cursor-pointer">
+                <input type="range" min="0" max="100" x-model="min" @input="if(parseInt(min) > parseInt(max)) max = min" class="flex-1 h-1.5 bg-secondary rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:shadow-blue-500/30 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-background">
+                <span class="text-xs text-muted-foreground w-8 text-right">$<span x-text="min"></span></span>
               </div>
               <div class="flex items-center gap-3">
                 <span class="text-xs text-muted-foreground w-8">Max</span>
-                <input type="range" min="0" max="100" x-model="max" @input="if(parseInt(max) < parseInt(min)) min = max" class="flex-1 h-1.5 bg-secondary rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:cursor-pointer">
+                <input type="range" min="0" max="100" x-model="max" @input="if(parseInt(max) < parseInt(min)) min = max" class="flex-1 h-1.5 bg-secondary rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-cyan-400 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:shadow-cyan-500/30 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-background">
+                <span class="text-xs text-muted-foreground w-8 text-right">$<span x-text="max"></span></span>
               </div>
+            </div>
+
+            <!-- Presets -->
+            <div class="flex gap-2 pt-1">
+              <template x-for="preset in presets" :key="preset.label">
+                <button
+                  class="flex-1 py-1.5 text-[10px] font-medium rounded-md transition-all"
+                  :class="min == preset.min && max == preset.max ? 'bg-blue-500/20 text-blue-500 border border-blue-500/30' : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-transparent'"
+                  @click="min = preset.min; max = preset.max"
+                  x-text="preset.label"
+                ></button>
+              </template>
             </div>
           </div>
         </div>
 
         <!-- Ask / Search / Chat Switcher -->
-        <div class="mw-card rounded-lg p-5" x-data="{ mode: 'ask' }">
-          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Smart Input</h3>
+        <div class="mw-card rounded-xl p-5 shadow-lg" x-data="{
+          mode: 'ask',
+          query: '',
+          suggestions: {
+            ask: ['How do I get started?', 'What are the system requirements?', 'How to customize themes?'],
+            search: ['Button component', 'Installation guide', 'API reference'],
+            chat: ['Tell me about Marrow UI', 'Help me build a form', 'Explain the config file']
+          }
+        }">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Smart Input</h3>
+            <div class="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <span class="mw-kbd text-[9px] px-1">/</span>
+              <span>to switch</span>
+            </div>
+          </div>
           <div class="space-y-3">
-            <div class="mw-tabs-list w-full grid grid-cols-3">
-              <button class="mw-tab-trigger text-xs" :data-state="mode === 'ask' ? 'active' : ''" @click="mode = 'ask'">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+            <!-- Mode Tabs -->
+            <div class="mw-tabs-list w-full grid grid-cols-3 p-1">
+              <button class="mw-tab-trigger text-xs gap-1.5 py-2" :data-state="mode === 'ask' ? 'active' : ''" @click="mode = 'ask'; query = ''">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
                 Ask
               </button>
-              <button class="mw-tab-trigger text-xs" :data-state="mode === 'search' ? 'active' : ''" @click="mode = 'search'">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <button class="mw-tab-trigger text-xs gap-1.5 py-2" :data-state="mode === 'search' ? 'active' : ''" @click="mode = 'search'; query = ''">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                 Search
               </button>
-              <button class="mw-tab-trigger text-xs" :data-state="mode === 'chat' ? 'active' : ''" @click="mode = 'chat'">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <button class="mw-tab-trigger text-xs gap-1.5 py-2" :data-state="mode === 'chat' ? 'active' : ''" @click="mode = 'chat'; query = ''">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 Chat
               </button>
             </div>
-            <input type="text" class="mw-input" :placeholder="mode === 'ask' ? 'Ask a question...' : mode === 'search' ? 'Search documentation...' : 'Start a conversation...'">
+
+            <!-- Input -->
+            <div class="relative">
+              <input
+                type="text"
+                class="mw-input pl-9"
+                :placeholder="mode === 'ask' ? 'Ask a question...' : mode === 'search' ? 'Search documentation...' : 'Start a conversation...'"
+                x-model="query"
+              >
+              <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                <template x-if="mode === 'ask'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                </template>
+                <template x-if="mode === 'search'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </template>
+                <template x-if="mode === 'chat'">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </template>
+              </div>
+            </div>
+
+            <!-- Suggestions -->
+            <div class="space-y-1.5">
+              <p class="text-[10px] text-muted-foreground uppercase tracking-wider">Suggestions</p>
+              <div class="flex flex-wrap gap-1.5">
+                <template x-for="suggestion in suggestions[mode]" :key="suggestion">
+                  <button
+                    @click="query = suggestion"
+                    class="px-2 py-1 text-[11px] bg-muted/50 text-muted-foreground rounded-md hover:bg-muted hover:text-foreground transition-colors truncate max-w-full"
+                    x-text="suggestion"
+                  ></button>
+                </template>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- How did you hear about us -->
-        <div class="mw-card rounded-lg p-5" x-data="{ selected: '' }">
-          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Feedback Form</h3>
-          <div class="space-y-3">
-            <label class="text-sm text-foreground">How did you hear about us?</label>
-            <select class="mw-select" x-model="selected">
-              <option value="" disabled>Select an option...</option>
-              <option value="twitter">Twitter / X</option>
-              <option value="google">Google Search</option>
-              <option value="friend">Friend or Colleague</option>
-              <option value="github">GitHub</option>
-              <option value="blog">Blog Post</option>
-              <option value="other">Other</option>
-            </select>
-            <p class="text-xs text-muted-foreground" x-show="selected" x-text="'Selected: ' + selected"></p>
+        <div class="mw-card rounded-xl p-5 shadow-lg" x-data="{
+          selected: '',
+          otherText: '',
+          submitted: false,
+          options: [
+            { value: 'twitter', label: 'Twitter / X' },
+            { value: 'google', label: 'Google Search' },
+            { value: 'friend', label: 'Friend or Colleague' },
+            { value: 'github', label: 'GitHub' },
+            { value: 'blog', label: 'Blog Post' },
+            { value: 'other', label: 'Other' }
+          ]
+        }">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Feedback</h3>
+            <template x-if="submitted">
+              <span class="mw-badge text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 border-0">Submitted</span>
+            </template>
           </div>
+
+          <template x-if="!submitted">
+            <div class="space-y-3">
+              <label class="text-sm text-foreground">How did you hear about us?</label>
+              <select class="mw-select" x-model="selected">
+                <option value="" disabled>Select an option...</option>
+                <template x-for="option in options" :key="option.value">
+                  <option :value="option.value" x-text="option.label"></option>
+                </template>
+              </select>
+
+              <!-- Other text input -->
+              <div x-show="selected === 'other'" x-collapse>
+                <input type="text" class="mw-input text-sm" placeholder="Please specify..." x-model="otherText">
+              </div>
+
+              <button
+                class="mw-btn mw-btn-primary w-full"
+                :disabled="!selected || (selected === 'other' && !otherText)"
+                @click="submitted = true"
+              >
+                Submit Feedback
+              </button>
+            </div>
+          </template>
+
+          <template x-if="submitted">
+            <div class="flex flex-col items-center justify-center py-6 gap-3">
+              <div class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              </div>
+              <p class="text-sm text-foreground">Thanks for your feedback!</p>
+              <p class="text-xs text-muted-foreground" x-text="'You selected: ' + (selected === 'other' ? otherText : options.find(o => o.value === selected)?.label)"></p>
+              <button class="text-xs text-muted-foreground hover:text-foreground transition-colors underline" @click="submitted = false; selected = ''; otherText = ''">Submit another</button>
+            </div>
+          </template>
         </div>
 
         <!-- Processing Request -->
-        <div class="mw-card rounded-lg p-5" x-data="{ processing: false, done: false }">
-          <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Processing State</h3>
+        <div class="mw-card rounded-xl p-5 shadow-lg" x-data="{
+          processing: false,
+          done: false,
+          progress: 0,
+          currentStep: 0,
+          steps: ['Validating input', 'Processing data', 'Generating output', 'Finalizing']
+        }">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Processing</h3>
+            <template x-if="processing">
+              <span class="text-xs text-blue-500" x-text="progress + '%'"></span>
+            </template>
+          </div>
           <div class="space-y-4">
             <template x-if="!processing && !done">
-              <div class="text-center py-4">
-                <button class="mw-btn mw-btn-primary" @click="processing = true; setTimeout(() => { processing = false; done = true }, 2500)">
+              <div class="flex flex-col items-center py-6 gap-4">
+                <div class="w-16 h-16 bg-muted/50 rounded-2xl flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </div>
+                <button class="mw-btn mw-btn-primary" @click="
+                  processing = true;
+                  progress = 0;
+                  currentStep = 0;
+                  let interval = setInterval(() => {
+                    progress += 2;
+                    currentStep = Math.floor(progress / 25);
+                    if(progress >= 100) {
+                      clearInterval(interval);
+                      setTimeout(() => { processing = false; done = true }, 300);
+                    }
+                  }, 50)
+                ">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                   Start Processing
                 </button>
               </div>
             </template>
+
             <template x-if="processing">
-              <div class="flex flex-col items-center justify-center py-4 gap-3">
-                <div class="relative">
-                  <div class="w-12 h-12 border-4 border-border border-t-blue-500 rounded-full animate-spin"></div>
+              <div class="space-y-4 py-2">
+                <!-- Spinner -->
+                <div class="flex justify-center">
+                  <div class="relative w-16 h-16">
+                    <svg class="w-16 h-16 -rotate-90" viewBox="0 0 64 64">
+                      <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="4" class="text-muted"/>
+                      <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="4" class="text-blue-500"
+                              :stroke-dasharray="'175.93'"
+                              :stroke-dashoffset="175.93 - (175.93 * progress / 100)"
+                              stroke-linecap="round"/>
+                    </svg>
+                    <span class="absolute inset-0 flex items-center justify-center text-sm font-medium text-foreground" x-text="progress + '%'"></span>
+                  </div>
                 </div>
-                <div class="text-sm text-muted-foreground">Processing your request...</div>
-                <div class="w-full bg-muted rounded-full h-1.5 overflow-hidden">
-                  <div class="bg-blue-500 h-full rounded-full animate-pulse" style="width: 60%"></div>
+
+                <!-- Current Step -->
+                <p class="text-center text-sm text-muted-foreground" x-text="steps[Math.min(currentStep, steps.length - 1)] + '...'"></p>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-muted rounded-full h-1 overflow-hidden">
+                  <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full transition-all duration-100" :style="'width: ' + progress + '%'"></div>
+                </div>
+
+                <!-- Steps -->
+                <div class="flex justify-between px-1">
+                  <template x-for="(step, i) in steps" :key="i">
+                    <div class="flex flex-col items-center gap-1">
+                      <div class="w-2 h-2 rounded-full transition-colors" :class="i <= currentStep ? 'bg-blue-500' : 'bg-muted-foreground/30'"></div>
+                    </div>
+                  </template>
                 </div>
               </div>
             </template>
+
             <template x-if="done">
-              <div class="flex flex-col items-center justify-center py-4 gap-3">
-                <div class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400"><path d="M20 6 9 17l-5-5"/></svg>
+              <div class="flex flex-col items-center justify-center py-6 gap-3">
+                <div class="relative">
+                  <div class="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+                  </div>
+                  <div class="absolute -top-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                  </div>
                 </div>
-                <div class="text-sm text-emerald-400">Request completed!</div>
-                <button class="text-xs text-muted-foreground hover:text-foreground transition-colors" @click="done = false">Reset demo</button>
+                <div class="text-center">
+                  <p class="text-sm font-medium text-emerald-500">Processing Complete!</p>
+                  <p class="text-xs text-muted-foreground mt-1">All 4 steps finished successfully</p>
+                </div>
+                <button class="mw-btn mw-btn-ghost mw-btn-sm text-muted-foreground" @click="done = false; progress = 0; currentStep = 0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+                  Run Again
+                </button>
               </div>
             </template>
           </div>
@@ -471,30 +795,35 @@ import Navbar from "../components/Navbar.astro";
             </div>
           </div>
         </div>
-        <div class="mw-code-block">
-          <button class="copy-btn" title="Copy to clipboard">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-          </button>
-          <pre><code is:raw>// marrow.config.js
-module.exports = {
-  theme: "light",
-  colors: {
-    light: {
-      primary: "220 90% 56%",
-      background: "0 0% 100%",
-      // ... full color palette
-    }
-  },
-  radius: "lg",        // none|sm|md|lg|xl|2xl|full
-  compactness: "normal",// minimal|compact|normal|relaxed|spacious
-  fonts: {
-    heading: "Inter",
-    body: "Inter",
-  },
-  menuAccent: "subtle", // subtle|bold|border
-  iconLibrary: "lucide",
-  shadow: "sm",         // none|sm|md|lg|xl
-};</code></pre>
+        <div class="relative bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
+          <div class="flex items-center justify-between px-4 py-2 bg-zinc-800/50 border-b border-zinc-800">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+            </div>
+            <span class="text-xs text-zinc-500">marrow.config.js</span>
+          </div>
+          <pre class="p-4 text-[13px] font-mono overflow-x-auto leading-relaxed"><code><span class="text-zinc-500">// marrow.config.js</span>
+<span class="text-violet-400">module</span><span class="text-zinc-400">.</span><span class="text-violet-400">exports</span> <span class="text-cyan-400">=</span> <span class="text-zinc-400">{</span>
+  <span class="text-red-400">theme</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"light"</span><span class="text-zinc-400">,</span>
+  <span class="text-red-400">colors</span><span class="text-zinc-400">:</span> <span class="text-zinc-400">{</span>
+    <span class="text-red-400">light</span><span class="text-zinc-400">:</span> <span class="text-zinc-400">{</span>
+      <span class="text-red-400">primary</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"220 90% 56%"</span><span class="text-zinc-400">,</span>
+      <span class="text-red-400">background</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"0 0% 100%"</span><span class="text-zinc-400">,</span>
+      <span class="text-zinc-500">// ... full color palette</span>
+    <span class="text-zinc-400">}</span>
+  <span class="text-zinc-400">}</span><span class="text-zinc-400">,</span>
+  <span class="text-red-400">radius</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"lg"</span><span class="text-zinc-400">,</span>        <span class="text-zinc-500">// none|sm|md|lg|xl|2xl|full</span>
+  <span class="text-red-400">compactness</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"normal"</span><span class="text-zinc-400">,</span><span class="text-zinc-500">// minimal|compact|normal|relaxed|spacious</span>
+  <span class="text-red-400">fonts</span><span class="text-zinc-400">:</span> <span class="text-zinc-400">{</span>
+    <span class="text-red-400">heading</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"Inter"</span><span class="text-zinc-400">,</span>
+    <span class="text-red-400">body</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"Inter"</span><span class="text-zinc-400">,</span>
+  <span class="text-zinc-400">}</span><span class="text-zinc-400">,</span>
+  <span class="text-red-400">menuAccent</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"subtle"</span><span class="text-zinc-400">,</span> <span class="text-zinc-500">// subtle|bold|border</span>
+  <span class="text-red-400">iconLibrary</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"lucide"</span><span class="text-zinc-400">,</span>
+  <span class="text-red-400">shadow</span><span class="text-zinc-400">:</span> <span class="text-emerald-400">"sm"</span><span class="text-zinc-400">,</span>         <span class="text-zinc-500">// none|sm|md|lg|xl</span>
+<span class="text-zinc-400">}</span><span class="text-zinc-400">;</span></code></pre>
         </div>
       </div>
     </div>

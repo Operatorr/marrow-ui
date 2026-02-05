@@ -1,5 +1,44 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const sheetCode = `<div x-data="mwSheet()">
+  <button @click="show()" class="mw-btn mw-btn-outline">Open Sheet</button>
+
+  <template x-if="open">
+    <div>
+      <!-- Overlay -->
+      <div class="mw-overlay" @click="close()"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"></div>
+
+      <!-- Sheet Panel (right side) -->
+      <div class="mw-sheet mw-sheet-right"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="translate-x-full"
+           x-transition:enter-end="translate-x-0"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="translate-x-0"
+           x-transition:leave-end="translate-x-full">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-heading text-lg font-semibold">Sheet Title</h3>
+            <p class="text-sm text-muted-foreground">Sheet description.</p>
+          </div>
+          <button @click="close()" class="mw-btn mw-btn-ghost mw-btn-icon">
+            &times;
+          </button>
+        </div>
+        <div class="mw-separator"></div>
+        <!-- Sheet content here -->
+      </div>
+    </div>
+  </template>
+</div>`;
 ---
 
 <DocsLayout title="Sheet" description="A side panel that slides in from the edge of the screen" activeComponent="sheet">
@@ -75,48 +114,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div x-data="mwSheet()"&gt;
-  &lt;button @click="show()" class="mw-btn mw-btn-outline"&gt;Open Sheet&lt;/button&gt;
-
-  &lt;template x-if="open"&gt;
-    &lt;div&gt;
-      &lt;!-- Overlay --&gt;
-      &lt;div class="mw-overlay" @click="close()"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="opacity-0"
-           x-transition:enter-end="opacity-100"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="opacity-100"
-           x-transition:leave-end="opacity-0"&gt;&lt;/div&gt;
-
-      &lt;!-- Sheet Panel (right side) --&gt;
-      &lt;div class="mw-sheet mw-sheet-right"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="translate-x-full"
-           x-transition:enter-end="translate-x-0"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="translate-x-0"
-           x-transition:leave-end="translate-x-full"&gt;
-        &lt;div class="flex items-center justify-between mb-4"&gt;
-          &lt;div&gt;
-            &lt;h3 class="font-heading text-lg font-semibold"&gt;Sheet Title&lt;/h3&gt;
-            &lt;p class="text-sm text-muted-foreground"&gt;Sheet description.&lt;/p&gt;
-          &lt;/div&gt;
-          &lt;button @click="close()" class="mw-btn mw-btn-ghost mw-btn-icon"&gt;
-            &amp;times;
-          &lt;/button&gt;
-        &lt;/div&gt;
-        &lt;div class="mw-separator"&gt;&lt;/div&gt;
-        &lt;!-- Sheet content here --&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/template&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={sheetCode} lang="html" />
         </div>
 
         <!-- Usage Notes -->

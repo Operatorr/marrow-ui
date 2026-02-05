@@ -1,5 +1,37 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const toggleCode = `<!-- Toggle (unpressed by default) -->
+<div x-data="mwToggle()">
+  <button class="mw-toggle"
+          :data-state="pressed ? 'on' : 'off'"
+          @click="toggle()"
+          :aria-pressed="pressed">
+    <svg ...>Bold icon</svg>
+  </button>
+</div>
+
+<!-- Toggle (pressed by default) -->
+<div x-data="mwToggle(true)">
+  <button class="mw-toggle"
+          :data-state="pressed ? 'on' : 'off'"
+          @click="toggle()"
+          :aria-pressed="pressed">
+    <svg ...>Italic icon</svg>
+  </button>
+</div>
+
+<!-- Toggle with text label -->
+<div x-data="mwToggle()">
+  <button class="mw-toggle !aspect-auto px-3 gap-2"
+          :data-state="pressed ? 'on' : 'off'"
+          @click="toggle()"
+          :aria-pressed="pressed">
+    <svg ...>Icon</svg>
+    <span class="text-sm">Wrap</span>
+  </button>
+</div>`;
 ---
 
 <DocsLayout title="Toggle" description="A two-state button that can be pressed or unpressed" activeComponent="toggle">
@@ -64,41 +96,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- Toggle (unpressed by default) --&gt;
-&lt;div x-data="mwToggle()"&gt;
-  &lt;button class="mw-toggle"
-          :data-state="pressed ? 'on' : 'off'"
-          @click="toggle()"
-          :aria-pressed="pressed"&gt;
-    &lt;svg ...&gt;Bold icon&lt;/svg&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Toggle (pressed by default) --&gt;
-&lt;div x-data="mwToggle(true)"&gt;
-  &lt;button class="mw-toggle"
-          :data-state="pressed ? 'on' : 'off'"
-          @click="toggle()"
-          :aria-pressed="pressed"&gt;
-    &lt;svg ...&gt;Italic icon&lt;/svg&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-
-&lt;!-- Toggle with text label --&gt;
-&lt;div x-data="mwToggle()"&gt;
-  &lt;button class="mw-toggle !aspect-auto px-3 gap-2"
-          :data-state="pressed ? 'on' : 'off'"
-          @click="toggle()"
-          :aria-pressed="pressed"&gt;
-    &lt;svg ...&gt;Icon&lt;/svg&gt;
-    &lt;span class="text-sm"&gt;Wrap&lt;/span&gt;
-  &lt;/button&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={toggleCode} lang="html" />
         </div>
       </div>
 

@@ -1,5 +1,41 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const contextMenuCode = `<div x-data="mwContextMenu()">
+  <!-- Right-click trigger area -->
+  <div @contextmenu="show($event)"
+    class="flex items-center justify-center h-[150px] border-2 border-dashed border-border rounded-marrow text-sm text-muted-foreground">
+    Right-click here to open context menu
+  </div>
+
+  <!-- Context Menu -->
+  <div x-show="open" x-cloak
+    @click.away="close()"
+    @keydown.escape.window="close()"
+    :style="'position: fixed; left: ' + x + 'px; top: ' + y + 'px; z-index: 50;'"
+    class="mw-popover w-48">
+    <button @click="close()" class="mw-menu-item">
+      Share
+    </button>
+    <button @click="close()" class="mw-menu-item">
+      Copy
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+C</span>
+    </button>
+    <button @click="close()" class="mw-menu-item">
+      Edit
+    </button>
+    <div class="mw-menu-separator"></div>
+    <button @click="close()" class="mw-menu-item">
+      Rename
+    </button>
+    <div class="mw-menu-separator"></div>
+    <button @click="close()" class="mw-menu-item text-destructive">
+      Delete
+      <span class="ml-auto text-xs text-muted-foreground">Del</span>
+    </button>
+  </div>
+</div>`;
 ---
 
 <DocsLayout title="Context Menu" description="A menu that appears on right-click, providing contextual actions for an element" activeComponent="context-menu">
@@ -60,45 +96,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 
         <div class="space-y-3">
           <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div x-data="mwContextMenu()"&gt;
-  &lt;!-- Right-click trigger area --&gt;
-  &lt;div @contextmenu="show($event)"
-    class="flex items-center justify-center h-[150px] border-2 border-dashed border-border rounded-marrow text-sm text-muted-foreground"&gt;
-    Right-click here to open context menu
-  &lt;/div&gt;
-
-  &lt;!-- Context Menu --&gt;
-  &lt;div x-show="open" x-cloak
-    @click.away="close()"
-    @keydown.escape.window="close()"
-    :style="'position: fixed; left: ' + x + 'px; top: ' + y + 'px; z-index: 50;'"
-    class="mw-popover w-48"&gt;
-    &lt;button @click="close()" class="mw-menu-item"&gt;
-      Share
-    &lt;/button&gt;
-    &lt;button @click="close()" class="mw-menu-item"&gt;
-      Copy
-      &lt;span class="ml-auto text-xs text-muted-foreground"&gt;Ctrl+C&lt;/span&gt;
-    &lt;/button&gt;
-    &lt;button @click="close()" class="mw-menu-item"&gt;
-      Edit
-    &lt;/button&gt;
-    &lt;div class="mw-menu-separator"&gt;&lt;/div&gt;
-    &lt;button @click="close()" class="mw-menu-item"&gt;
-      Rename
-    &lt;/button&gt;
-    &lt;div class="mw-menu-separator"&gt;&lt;/div&gt;
-    &lt;button @click="close()" class="mw-menu-item text-destructive"&gt;
-      Delete
-      &lt;span class="ml-auto text-xs text-muted-foreground"&gt;Del&lt;/span&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={contextMenuCode} lang="html" />
         </div>
       </div>
 

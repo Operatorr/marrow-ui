@@ -1,5 +1,32 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const labelCode = `<!-- Basic label with input -->
+<div class="space-y-2">
+  <label class="mw-label" for="email-input">Email address</label>
+  <input type="email" id="email-input" class="mw-input" placeholder="you@example.com">
+</div>
+
+<!-- Label with required indicator -->
+<div class="space-y-2">
+  <label class="mw-label" for="name-input">
+    Full name <span class="text-destructive">*</span>
+  </label>
+  <input type="text" id="name-input" class="mw-input" placeholder="Enter your full name">
+</div>
+
+<!-- Label with description text -->
+<div class="space-y-2">
+  <label class="mw-label" for="username-input">Username</label>
+  <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
+  <p class="text-xs text-muted-foreground">This will be your public display name.</p>
+</div>`;
+
+const labelDisabledCode = `<div class="space-y-2">
+  <label class="mw-label opacity-50" for="disabled-input">Disabled field</label>
+  <input type="text" id="disabled-input" class="mw-input" placeholder="Cannot edit" disabled>
+</div>`;
 ---
 
 <DocsLayout title="Label" description="Label component for form inputs with optional required indicator" activeComponent="label">
@@ -43,31 +70,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
         <!-- Code -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- Basic label with input --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label" for="email-input"&gt;Email address&lt;/label&gt;
-  &lt;input type="email" id="email-input" class="mw-input" placeholder="you@example.com"&gt;
-&lt;/div&gt;
-
-&lt;!-- Label with required indicator --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label" for="name-input"&gt;
-    Full name &lt;span class="text-destructive"&gt;*&lt;/span&gt;
-  &lt;/label&gt;
-  &lt;input type="text" id="name-input" class="mw-input" placeholder="Enter your full name"&gt;
-&lt;/div&gt;
-
-&lt;!-- Label with description text --&gt;
-&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label" for="username-input"&gt;Username&lt;/label&gt;
-  &lt;input type="text" id="username-input" class="mw-input" placeholder="marrow-user"&gt;
-  &lt;p class="text-xs text-muted-foreground"&gt;This will be your public display name.&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={labelCode} lang="html" />
         </div>
 
         <!-- Disabled State -->
@@ -81,15 +84,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
             </div>
           </div>
 
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div class="space-y-2"&gt;
-  &lt;label class="mw-label opacity-50" for="disabled-input"&gt;Disabled field&lt;/label&gt;
-  &lt;input type="text" id="disabled-input" class="mw-input" placeholder="Cannot edit" disabled&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={labelDisabledCode} lang="html" />
         </div>
       </div>
 

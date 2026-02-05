@@ -1,5 +1,28 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const cardSkeletonCode = `<div class="mw-card">
+  <div class="flex items-center gap-4">
+    <!-- Avatar placeholder -->
+    <div class="mw-skeleton rounded-full" style="width: 3rem; height: 3rem;"></div>
+    <div class="flex-1 space-y-2">
+      <div class="mw-skeleton" style="height: 0.875rem; width: 60%;"></div>
+      <div class="mw-skeleton" style="height: 0.75rem; width: 40%;"></div>
+    </div>
+  </div>
+  <div class="mt-4 space-y-2">
+    <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 90%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 75%;"></div>
+  </div>
+</div>`;
+
+const avatarSkeletonCode = `<div class="flex gap-3">
+  <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+  <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+  <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+</div>`;
 ---
 
 <DocsLayout title="Skeleton" description="Placeholder loading animations for content that is not yet available" activeComponent="skeleton">
@@ -63,38 +86,10 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
 
           <h3 class="font-heading text-lg font-semibold">Card Skeleton</h3>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div class="mw-card"&gt;
-  &lt;div class="flex items-center gap-4"&gt;
-    &lt;!-- Avatar placeholder --&gt;
-    &lt;div class="mw-skeleton rounded-full" style="width: 3rem; height: 3rem;"&gt;&lt;/div&gt;
-    &lt;div class="flex-1 space-y-2"&gt;
-      &lt;div class="mw-skeleton" style="height: 0.875rem; width: 60%;"&gt;&lt;/div&gt;
-      &lt;div class="mw-skeleton" style="height: 0.75rem; width: 40%;"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="mt-4 space-y-2"&gt;
-    &lt;div class="mw-skeleton" style="height: 0.75rem; width: 100%;"&gt;&lt;/div&gt;
-    &lt;div class="mw-skeleton" style="height: 0.75rem; width: 90%;"&gt;&lt;/div&gt;
-    &lt;div class="mw-skeleton" style="height: 0.75rem; width: 75%;"&gt;&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={cardSkeletonCode} lang="html" />
 
           <h3 class="font-heading text-lg font-semibold mt-6">Avatar Placeholders</h3>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div class="flex gap-3"&gt;
-  &lt;div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"&gt;&lt;/div&gt;
-  &lt;div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"&gt;&lt;/div&gt;
-  &lt;div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={avatarSkeletonCode} lang="html" />
         </div>
 
         <!-- Usage Notes -->

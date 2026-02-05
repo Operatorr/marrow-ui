@@ -1,5 +1,55 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const chartCode = `<div class="mw-card">
+  <h3 class="font-heading font-semibold mb-1">Monthly Revenue</h3>
+  <p class="text-sm text-muted-foreground mb-4">Jan &ndash; Jun 2025</p>
+  <div class="space-y-3">
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Jan</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 65%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$6,500</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Feb</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 78%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$7,800</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Mar</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 52%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$5,200</span>
+    </div>
+    <!-- Add more bars as needed -->
+  </div>
+</div>`;
+
+const chartJsCode = `<!-- Example: Chart.js inside a Marrow card -->
+<div class="mw-card">
+  <h3 class="font-heading font-semibold mb-4">Analytics</h3>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  new Chart(document.getElementById('myChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Revenue',
+        data: [6500, 7800, 5200, 9000, 7200, 10000],
+      }]
+    }
+  });
+</script>`;
 ---
 
 <DocsLayout title="Chart" description="Simple CSS-based bar chart for visualizing data, with guidance for production charting libraries" activeComponent="chart">
@@ -64,39 +114,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 
         <div class="space-y-3">
           <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div class="mw-card"&gt;
-  &lt;h3 class="font-heading font-semibold mb-1"&gt;Monthly Revenue&lt;/h3&gt;
-  &lt;p class="text-sm text-muted-foreground mb-4"&gt;Jan &amp;ndash; Jun 2025&lt;/p&gt;
-  &lt;div class="space-y-3"&gt;
-    &lt;div class="flex items-center gap-3"&gt;
-      &lt;span class="text-xs text-muted-foreground w-8 text-right shrink-0"&gt;Jan&lt;/span&gt;
-      &lt;div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden"&gt;
-        &lt;div class="h-full bg-primary rounded-sm" style="width: 65%;"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;span class="text-xs text-muted-foreground w-12 text-right shrink-0"&gt;$6,500&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="flex items-center gap-3"&gt;
-      &lt;span class="text-xs text-muted-foreground w-8 text-right shrink-0"&gt;Feb&lt;/span&gt;
-      &lt;div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden"&gt;
-        &lt;div class="h-full bg-primary rounded-sm" style="width: 78%;"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;span class="text-xs text-muted-foreground w-12 text-right shrink-0"&gt;$7,800&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class="flex items-center gap-3"&gt;
-      &lt;span class="text-xs text-muted-foreground w-8 text-right shrink-0"&gt;Mar&lt;/span&gt;
-      &lt;div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden"&gt;
-        &lt;div class="h-full bg-primary rounded-sm" style="width: 52%;"&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;span class="text-xs text-muted-foreground w-12 text-right shrink-0"&gt;$5,200&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;!-- Add more bars as needed --&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={chartCode} lang="html" />
         </div>
 
         <div class="mw-separator"></div>
@@ -107,30 +125,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
             <h4 class="font-heading font-semibold mb-1">Use a charting library for production</h4>
             <p class="text-sm text-muted-foreground">The CSS-based chart above is great for simple visualizations. For production dashboards with interactivity, tooltips, and complex data, integrate with a dedicated charting library such as <a href="https://www.chartjs.org/" target="_blank" class="text-primary hover:underline">Chart.js</a>, <a href="https://apexcharts.com/" target="_blank" class="text-primary hover:underline">ApexCharts</a>, or <a href="https://d3js.org/" target="_blank" class="text-primary hover:underline">D3.js</a>. These libraries work seamlessly alongside Marrow UI.</p>
           </div>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;!-- Example: Chart.js inside a Marrow card --&gt;
-&lt;div class="mw-card"&gt;
-  &lt;h3 class="font-heading font-semibold mb-4"&gt;Analytics&lt;/h3&gt;
-  &lt;canvas id="myChart"&gt;&lt;/canvas&gt;
-&lt;/div&gt;
-
-&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  new Chart(document.getElementById('myChart'), {
-    type: 'bar',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      datasets: [{
-        label: 'Revenue',
-        data: [6500, 7800, 5200, 9000, 7200, 10000],
-      }]
-    }
-  });
-&lt;/script&gt;</code></pre>
-          </div>
+          <CodeBlock code={chartJsCode} lang="html" />
         </div>
       </div>
 

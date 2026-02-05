@@ -1,5 +1,57 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import CodeBlock from "../../../components/CodeBlock.astro";
+
+const commandCode = `<div x-data="mwCommand()" @keydown.window.ctrl.k.prevent="show()">
+  <!-- Trigger Button -->
+  <button @click="show()" class="mw-btn mw-btn-outline gap-2">
+    Search...
+    <span class="flex items-center gap-0.5 ml-2">
+      <span class="mw-kbd">Ctrl</span>
+      <span class="mw-kbd">K</span>
+    </span>
+  </button>
+
+  <!-- Command Palette Overlay -->
+  <template x-teleport="body">
+    <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+      <div class="mw-overlay" @click="close()"></div>
+      <div class="fixed top-[20%] left-1/2 -translate-x-1/2 z-51 w-full max-w-lg"
+        @keydown.escape.window="close()">
+        <div class="bg-popover border border-border rounded-marrow shadow-lg overflow-hidden">
+          <!-- Search Input -->
+          <div class="flex items-center border-b border-border px-3">
+            <svg ...search icon.../>
+            <input type="text" x-model="search"
+              class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none"
+              placeholder="Type a command or search...">
+          </div>
+
+          <!-- Results -->
+          <div class="max-h-[300px] overflow-y-auto p-1">
+            <div class="mw-menu-label">Suggestions</div>
+            <button x-show="matchesSearch('Calendar')" class="mw-menu-item">
+              Calendar
+            </button>
+            <button x-show="matchesSearch('Settings')" class="mw-menu-item">
+              Settings
+            </button>
+
+            <div class="mw-menu-separator"></div>
+
+            <div class="mw-menu-label">Account</div>
+            <button x-show="matchesSearch('Profile')" class="mw-menu-item">
+              Profile
+            </button>
+            <button x-show="matchesSearch('Billing')" class="mw-menu-item">
+              Billing
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>`;
 ---
 
 <DocsLayout title="Command" description="A command palette overlay for quick navigation and actions, triggered with Ctrl+K" activeComponent="command">
@@ -92,61 +144,7 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 
         <div class="space-y-3">
           <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>&lt;div x-data="mwCommand()" @keydown.window.ctrl.k.prevent="show()"&gt;
-  &lt;!-- Trigger Button --&gt;
-  &lt;button @click="show()" class="mw-btn mw-btn-outline gap-2"&gt;
-    Search...
-    &lt;span class="flex items-center gap-0.5 ml-2"&gt;
-      &lt;span class="mw-kbd"&gt;Ctrl&lt;/span&gt;
-      &lt;span class="mw-kbd"&gt;K&lt;/span&gt;
-    &lt;/span&gt;
-  &lt;/button&gt;
-
-  &lt;!-- Command Palette Overlay --&gt;
-  &lt;template x-teleport="body"&gt;
-    &lt;div x-show="open" class="fixed inset-0 z-50" x-cloak&gt;
-      &lt;div class="mw-overlay" @click="close()"&gt;&lt;/div&gt;
-      &lt;div class="fixed top-[20%] left-1/2 -translate-x-1/2 z-51 w-full max-w-lg"
-        @keydown.escape.window="close()"&gt;
-        &lt;div class="bg-popover border border-border rounded-marrow shadow-lg overflow-hidden"&gt;
-          &lt;!-- Search Input --&gt;
-          &lt;div class="flex items-center border-b border-border px-3"&gt;
-            &lt;svg ...search icon.../&gt;
-            &lt;input type="text" x-model="search"
-              class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none"
-              placeholder="Type a command or search..."&gt;
-          &lt;/div&gt;
-
-          &lt;!-- Results --&gt;
-          &lt;div class="max-h-[300px] overflow-y-auto p-1"&gt;
-            &lt;div class="mw-menu-label"&gt;Suggestions&lt;/div&gt;
-            &lt;button x-show="matchesSearch('Calendar')" class="mw-menu-item"&gt;
-              Calendar
-            &lt;/button&gt;
-            &lt;button x-show="matchesSearch('Settings')" class="mw-menu-item"&gt;
-              Settings
-            &lt;/button&gt;
-
-            &lt;div class="mw-menu-separator"&gt;&lt;/div&gt;
-
-            &lt;div class="mw-menu-label"&gt;Account&lt;/div&gt;
-            &lt;button x-show="matchesSearch('Profile')" class="mw-menu-item"&gt;
-              Profile
-            &lt;/button&gt;
-            &lt;button x-show="matchesSearch('Billing')" class="mw-menu-item"&gt;
-              Billing
-            &lt;/button&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/template&gt;
-&lt;/div&gt;</code></pre>
-          </div>
+          <CodeBlock code={commandCode} lang="html" />
         </div>
       </div>
 
