@@ -1,0 +1,244 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Customization" description="How to customize Marrow UI themes, colors, and spacing" activeSection="customization">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Customization</h1>
+          <p class="mt-2 text-lg text-muted-foreground">Complete control over your UI through a single config file.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">The Config File</h2>
+          <p class="text-muted-foreground leading-relaxed">All customization is done in <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">marrow.config.js</code>. Every option includes a comment explaining what it does and what values are available. After making changes, run <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">node build.js</code> to regenerate the theme CSS.</p>
+        </div>
+
+        <!-- Colors -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Colors</h2>
+          <p class="text-muted-foreground leading-relaxed">Colors use HSL format (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">"H S% L%"</code>) so Tailwind can apply opacity modifiers. Both light and dark mode palettes are defined separately.</p>
+
+          <h3 class="font-heading text-lg font-semibold mt-4">Color Roles</h3>
+          <div class="overflow-x-auto">
+            <table class="mw-table">
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Usage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code class="text-sm font-mono">primary</code></td>
+                  <td class="text-muted-foreground">Main brand color. Buttons, links, active states.</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">secondary</code></td>
+                  <td class="text-muted-foreground">Secondary actions, subtle accents.</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">accent</code></td>
+                  <td class="text-muted-foreground">Hover backgrounds, decorative highlights.</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">background</code></td>
+                  <td class="text-muted-foreground">Page background color.</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">muted</code></td>
+                  <td class="text-muted-foreground">Disabled states, placeholder areas, subtle backgrounds.</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">destructive</code></td>
+                  <td class="text-muted-foreground">Error states, delete buttons, warning indicators.</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">border</code></td>
+                  <td class="text-muted-foreground">Default border color for all elements.</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">ring</code></td>
+                  <td class="text-muted-foreground">Focus ring color for keyboard navigation.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="text-muted-foreground leading-relaxed">Each color also has a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">*Foreground</code> variant for text that appears on top of that color.</p>
+
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>colors: {
+  light: {
+    primary:           "220 90% 56%",   // Blue
+    primaryForeground: "0 0% 100%",     // White text on primary
+    // ... see marrow.config.js for all tokens
+  },
+  dark: {
+    primary:           "220 90% 56%",
+    primaryForeground: "0 0% 100%",
+    background:        "222 47% 6%",    // Dark background
+    // ...
+  },
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- Compactness -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Compactness</h2>
+          <p class="text-muted-foreground leading-relaxed">The compactness setting globally adjusts font sizes, button padding, input padding, and card padding. This is the single most impactful setting for the overall feel of your UI.</p>
+
+          <div class="overflow-x-auto">
+            <table class="mw-table">
+              <thead>
+                <tr>
+                  <th>Level</th>
+                  <th>Font Size</th>
+                  <th>Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code class="text-sm font-mono">minimal</code></td>
+                  <td class="text-muted-foreground">0.75rem (12px)</td>
+                  <td class="text-muted-foreground">Data-dense dashboards, admin panels</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">compact</code></td>
+                  <td class="text-muted-foreground">0.875rem (14px)</td>
+                  <td class="text-muted-foreground">Productivity tools, settings pages</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">normal</code></td>
+                  <td class="text-muted-foreground">1rem (16px)</td>
+                  <td class="text-muted-foreground">General purpose (default)</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">relaxed</code></td>
+                  <td class="text-muted-foreground">1.125rem (18px)</td>
+                  <td class="text-muted-foreground">Marketing sites, blogs</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">spacious</code></td>
+                  <td class="text-muted-foreground">1.25rem (20px)</td>
+                  <td class="text-muted-foreground">Hero sections, editorial layouts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>compactness: "normal", // minimal | compact | normal | relaxed | spacious</code></pre>
+          </div>
+        </div>
+
+        <!-- Radius -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Border Radius</h2>
+          <p class="text-muted-foreground leading-relaxed">Controls the roundness of all component corners globally.</p>
+
+          <div class="flex flex-wrap gap-4 my-4">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-primary/10 border-2 border-primary/30" style="border-radius: 0;"></div>
+              <span class="text-xs text-muted-foreground mt-1 block">none</span>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-primary/10 border-2 border-primary/30" style="border-radius: 0.25rem;"></div>
+              <span class="text-xs text-muted-foreground mt-1 block">sm</span>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-primary/10 border-2 border-primary/30" style="border-radius: 0.375rem;"></div>
+              <span class="text-xs text-muted-foreground mt-1 block">md</span>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-primary/10 border-2 border-primary/30" style="border-radius: 0.5rem;"></div>
+              <span class="text-xs text-muted-foreground mt-1 block">lg</span>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-primary/10 border-2 border-primary/30" style="border-radius: 0.75rem;"></div>
+              <span class="text-xs text-muted-foreground mt-1 block">xl</span>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-primary/10 border-2 border-primary/30" style="border-radius: 1rem;"></div>
+              <span class="text-xs text-muted-foreground mt-1 block">2xl</span>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-primary/10 border-2 border-primary/30" style="border-radius: 9999px;"></div>
+              <span class="text-xs text-muted-foreground mt-1 block">full</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Typography</h2>
+          <p class="text-muted-foreground leading-relaxed">Marrow supports dual font families: one for headings and one for body text. Use any Google Font name or system font stack.</p>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>fonts: {
+  heading: "Inter",       // Used for h1-h6 and .font-heading
+  body: "Inter",          // Used for body text and .font-body
+},
+
+// Popular combinations:
+// "Inter" + "Inter"               → Clean, modern
+// "Cal Sans" + "Inter"            → Bold headings + clean body
+// "Playfair Display" + "Source Sans 3" → Editorial
+// "Space Grotesk" + "DM Sans"    → Techy</code></pre>
+          </div>
+        </div>
+
+        <!-- Other Settings -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Other Settings</h2>
+          <div class="grid gap-4">
+            <div class="mw-card">
+              <h3 class="font-heading font-semibold mb-1">Menu Accent</h3>
+              <p class="text-sm text-muted-foreground"><code class="px-1 py-0.5 bg-muted rounded font-mono">menuAccent</code>: Controls active menu item style. <code class="font-mono">"subtle"</code> (light bg), <code class="font-mono">"bold"</code> (primary color bg), or <code class="font-mono">"border"</code> (left border indicator).</p>
+            </div>
+            <div class="mw-card">
+              <h3 class="font-heading font-semibold mb-1">Icon Library</h3>
+              <p class="text-sm text-muted-foreground"><code class="px-1 py-0.5 bg-muted rounded font-mono">iconLibrary</code>: Default Iconify set. Options include <code class="font-mono">"lucide"</code>, <code class="font-mono">"heroicons"</code>, <code class="font-mono">"phosphor"</code>, <code class="font-mono">"tabler"</code>, <code class="font-mono">"solar"</code>, and more.</p>
+            </div>
+            <div class="mw-card">
+              <h3 class="font-heading font-semibold mb-1">Transitions</h3>
+              <p class="text-sm text-muted-foreground"><code class="px-1 py-0.5 bg-muted rounded font-mono">transitionDuration</code>: Animation speed. <code class="font-mono">"none"</code> (0ms), <code class="font-mono">"fast"</code> (100ms), <code class="font-mono">"base"</code> (150ms), <code class="font-mono">"slow"</code> (300ms), <code class="font-mono">"lazy"</code> (500ms).</p>
+            </div>
+            <div class="mw-card">
+              <h3 class="font-heading font-semibold mb-1">Shadows</h3>
+              <p class="text-sm text-muted-foreground"><code class="px-1 py-0.5 bg-muted rounded font-mono">shadow</code>: Card and popover shadow depth. <code class="font-mono">"none"</code>, <code class="font-mono">"sm"</code>, <code class="font-mono">"md"</code>, <code class="font-mono">"lg"</code>, <code class="font-mono">"xl"</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Advanced: Tailwind Extend</h2>
+          <p class="text-muted-foreground leading-relaxed">For edge cases not covered by the config, extend Tailwind directly. The CSS custom properties from Marrow are available everywhere:</p>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>/* In your own CSS */
+.my-custom-component {
+  background-color: hsl(var(--marrow-primary) / 0.1);
+  border-radius: var(--marrow-radius);
+  padding: var(--marrow-card-p);
+  transition: all var(--marrow-duration) ease-in-out;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

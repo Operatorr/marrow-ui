@@ -1,0 +1,13 @@
+<!-- Marrow UI: Progress -->
+<!-- A progress bar component for displaying completion status -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwProgress(60)" class="space-y-2">
+  <div class="flex justify-between text-sm">
+    <span class="text-muted-foreground">Progress</span>
+    <span class="font-medium" x-text="value + '%'"></span>
+  </div>
+  <div class="mw-progress">
+    <div class="mw-progress-bar" :style="'width: ' + value + '%'"></div>
+  </div>
+</div>

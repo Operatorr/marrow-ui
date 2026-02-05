@@ -1,0 +1,35 @@
+<!-- Marrow UI: Collapsible -->
+<!-- A component that can be expanded or collapsed to show or hide content -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCollapsible()">
+  <div class="flex items-center justify-between">
+    <h4 class="text-sm font-semibold">@marrow-ui/components</h4>
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        :class="open ? 'rotate-180' : ''" class="transition-transform">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Always visible item -->
+  <div class="mt-2 rounded-marrow border border-border px-3 py-2 text-sm">
+    <span class="text-muted-foreground">marrow-ui/card.html</span>
+  </div>
+
+  <!-- Collapsible content -->
+  <div x-show="open" x-collapse class="mt-1 space-y-1">
+    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
+      <span class="text-muted-foreground">marrow-ui/button.html</span>
+    </div>
+    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
+      <span class="text-muted-foreground">marrow-ui/dialog.html</span>
+    </div>
+    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
+      <span class="text-muted-foreground">marrow-ui/tabs.html</span>
+    </div>
+  </div>
+</div>

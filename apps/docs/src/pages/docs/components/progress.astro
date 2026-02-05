@@ -1,0 +1,136 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Progress" description="A progress bar component for displaying completion status" activeComponent="progress">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Progress</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A progress bar that visually indicates completion status. Uses Alpine.js to manage the progress value reactively.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+          <div class="mw-card">
+            <div x-data="mwProgress(60)" class="space-y-6">
+              <div class="space-y-2">
+                <div class="flex justify-between text-sm">
+                  <span class="text-muted-foreground">Progress</span>
+                  <span class="font-medium" x-text="value + '%'"></span>
+                </div>
+                <div class="mw-progress">
+                  <div class="mw-progress-bar" :style="'width: ' + value + '%'"></div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button @click="set(0)" class="mw-btn mw-btn-outline mw-btn-sm">0%</button>
+                <button @click="set(25)" class="mw-btn mw-btn-outline mw-btn-sm">25%</button>
+                <button @click="set(50)" class="mw-btn mw-btn-outline mw-btn-sm">50%</button>
+                <button @click="set(75)" class="mw-btn mw-btn-outline mw-btn-sm">75%</button>
+                <button @click="set(100)" class="mw-btn mw-btn-outline mw-btn-sm">100%</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="mwProgress(60)" class="space-y-2"&gt;
+  &lt;div class="flex justify-between text-sm"&gt;
+    &lt;span class="text-muted-foreground"&gt;Progress&lt;/span&gt;
+    &lt;span class="font-medium" x-text="value + '%'"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="mw-progress"&gt;
+    &lt;div class="mw-progress-bar" :style="'width: ' + value + '%'"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Sizes -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Sizes</h2>
+          <p class="text-muted-foreground leading-relaxed">Adjust the height of the progress bar using utility classes.</p>
+          <div class="mw-card">
+            <div class="space-y-5">
+              <div class="space-y-1.5">
+                <span class="text-xs text-muted-foreground">Small (h-1)</span>
+                <div class="mw-progress" style="height: 0.25rem;">
+                  <div class="mw-progress-bar" style="width: 40%;"></div>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <span class="text-xs text-muted-foreground">Default (h-2)</span>
+                <div class="mw-progress">
+                  <div class="mw-progress-bar" style="width: 60%;"></div>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <span class="text-xs text-muted-foreground">Large (h-4)</span>
+                <div class="mw-progress" style="height: 1rem;">
+                  <div class="mw-progress-bar" style="width: 80%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;!-- Small --&gt;
+&lt;div class="mw-progress" style="height: 0.25rem;"&gt;
+  &lt;div class="mw-progress-bar" style="width: 40%;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Default --&gt;
+&lt;div class="mw-progress"&gt;
+  &lt;div class="mw-progress-bar" style="width: 60%;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Large --&gt;
+&lt;div class="mw-progress" style="height: 1rem;"&gt;
+  &lt;div class="mw-progress-bar" style="width: 80%;"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- API -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">API</h2>
+          <div class="overflow-x-auto">
+            <table class="mw-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code class="text-sm font-mono">value</code></td>
+                  <td class="text-muted-foreground">Number</td>
+                  <td class="text-muted-foreground">Current progress value (0 to 100)</td>
+                </tr>
+                <tr>
+                  <td><code class="text-sm font-mono">set(v)</code></td>
+                  <td class="text-muted-foreground">Method</td>
+                  <td class="text-muted-foreground">Set the progress value, clamped between 0 and 100</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

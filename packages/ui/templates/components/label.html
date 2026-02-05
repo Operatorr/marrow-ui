@@ -1,0 +1,24 @@
+<!-- Marrow UI: Label -->
+<!-- Label component for form inputs with optional required indicator -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Basic label with input -->
+<div class="space-y-2">
+  <label class="mw-label" for="email-input">Email address</label>
+  <input type="email" id="email-input" class="mw-input" placeholder="you@example.com">
+</div>
+
+<!-- Label with required indicator -->
+<div class="space-y-2">
+  <label class="mw-label" for="name-input">
+    Full name <span class="text-destructive">*</span>
+  </label>
+  <input type="text" id="name-input" class="mw-input" placeholder="Enter your full name">
+</div>
+
+<!-- Label with description text -->
+<div class="space-y-2">
+  <label class="mw-label" for="username-input">Username</label>
+  <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
+  <p class="text-xs text-muted-foreground">This will be your public display name.</p>
+</div>

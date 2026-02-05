@@ -1,0 +1,36 @@
+<!-- Marrow UI: Direction -->
+<!-- Support for right-to-left (RTL) layouts using the dir attribute -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- LTR (default) -->
+<div class="mw-card" dir="ltr">
+  <div class="flex items-center gap-3 mb-2">
+    <div class="mw-avatar">LR</div>
+    <div>
+      <h4 class="font-heading font-semibold text-sm">Left-to-Right</h4>
+      <p class="text-xs text-muted-foreground">This card uses the default LTR direction.</p>
+    </div>
+  </div>
+  <p class="text-sm text-muted-foreground">
+    Content flows from left to right.
+  </p>
+</div>
+
+<!-- RTL -->
+<div class="mw-card" dir="rtl">
+  <div class="flex items-center gap-3 mb-2">
+    <div class="mw-avatar">RL</div>
+    <div>
+      <h4 class="font-heading font-semibold text-sm">من اليمين إلى اليسار</h4>
+      <p class="text-xs text-muted-foreground">هذه البطاقة تستخدم اتجاه RTL.</p>
+    </div>
+  </div>
+  <p class="text-sm text-muted-foreground">
+    المحتوى يتدفق من اليمين إلى اليسار.
+  </p>
+</div>
+
+<!-- Apply RTL to the entire page -->
+<html dir="rtl">
+  ...
+</html>

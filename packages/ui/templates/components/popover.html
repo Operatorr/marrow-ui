@@ -1,0 +1,37 @@
+<!-- Marrow UI: Popover -->
+<!-- A floating popover panel anchored to a trigger button -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="relative" x-data="mwPopover()">
+  <!-- Trigger -->
+  <button @click="toggle()" class="mw-btn mw-btn-outline">
+    Open Popover
+  </button>
+
+  <!-- Popover Content -->
+  <div x-show="open" @click.outside="close()" x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 scale-95"
+       x-transition:enter-end="opacity-100 scale-100"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 scale-100"
+       x-transition:leave-end="opacity-0 scale-95"
+       class="absolute left-0 top-full mt-2 z-50 w-72 rounded-md border border-border bg-popover p-4 shadow-md">
+    <div class="space-y-3">
+      <div>
+        <h4 class="font-medium text-sm">Dimensions</h4>
+        <p class="text-xs text-muted-foreground">Set the dimensions for the layer.</p>
+      </div>
+      <div class="grid gap-2">
+        <div class="grid grid-cols-3 items-center gap-3">
+          <label class="mw-label text-xs">Width</label>
+          <input type="text" class="mw-input col-span-2" value="100%">
+        </div>
+        <div class="grid grid-cols-3 items-center gap-3">
+          <label class="mw-label text-xs">Height</label>
+          <input type="text" class="mw-input col-span-2" value="25px">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

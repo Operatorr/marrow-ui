@@ -1,0 +1,151 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Data Table" description="A structured table component with sortable headers for displaying tabular data" activeComponent="data-table">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Data Table</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A structured table component with sortable headers for displaying tabular data.</p>
+        </div>
+        <div class="mw-separator"></div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Preview</h2>
+          <div class="mw-card min-h-[200px] p-0" x-data="{
+            sortCol: 'name',
+            sortAsc: true,
+            rows: [
+              { name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin', status: 'Active' },
+              { name: 'Bob Smith', email: 'bob@example.com', role: 'Editor', status: 'Active' },
+              { name: 'Carol White', email: 'carol@example.com', role: 'Viewer', status: 'Inactive' },
+              { name: 'David Brown', email: 'david@example.com', role: 'Editor', status: 'Active' },
+              { name: 'Eva Martinez', email: 'eva@example.com', role: 'Admin', status: 'Active' }
+            ],
+            sort(col) {
+              if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
+              else { this.sortCol = col; this.sortAsc = true; }
+            },
+            get sorted() {
+              return [...this.rows].sort((a, b) => {
+                const valA = a[this.sortCol].toLowerCase();
+                const valB = b[this.sortCol].toLowerCase();
+                return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+              });
+            }
+          }">
+            <div class="overflow-x-auto">
+              <table class="mw-table">
+                <thead>
+                  <tr>
+                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('name')">
+                      <span class="inline-flex items-center gap-1">
+                        Name
+                        <svg x-show="sortCol === 'name'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+                      </span>
+                    </th>
+                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('email')">
+                      <span class="inline-flex items-center gap-1">
+                        Email
+                        <svg x-show="sortCol === 'email'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+                      </span>
+                    </th>
+                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('role')">
+                      <span class="inline-flex items-center gap-1">
+                        Role
+                        <svg x-show="sortCol === 'role'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+                      </span>
+                    </th>
+                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('status')">
+                      <span class="inline-flex items-center gap-1">
+                        Status
+                        <svg x-show="sortCol === 'status'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template x-for="row in sorted" :key="row.email">
+                    <tr>
+                      <td class="font-medium" x-text="row.name"></td>
+                      <td class="text-muted-foreground" x-text="row.email"></td>
+                      <td><span class="mw-badge mw-badge-secondary" x-text="row.role"></span></td>
+                      <td>
+                        <span class="mw-badge"
+                          :class="row.status === 'Active' ? 'mw-badge-default' : 'mw-badge-outline'"
+                          x-text="row.status"></span>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h2 class="font-heading text-xl font-semibold">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div x-data="{
+  sortCol: 'name',
+  sortAsc: true,
+  rows: [
+    { name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin', status: 'Active' },
+    { name: 'Bob Smith', email: 'bob@example.com', role: 'Editor', status: 'Active' },
+    { name: 'Carol White', email: 'carol@example.com', role: 'Viewer', status: 'Inactive' },
+    { name: 'David Brown', email: 'david@example.com', role: 'Editor', status: 'Active' },
+    { name: 'Eva Martinez', email: 'eva@example.com', role: 'Admin', status: 'Active' }
+  ],
+  sort(col) {
+    if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
+    else { this.sortCol = col; this.sortAsc = true; }
+  },
+  get sorted() {
+    return [...this.rows].sort((a, b) =&gt; {
+      const valA = a[this.sortCol].toLowerCase();
+      const valB = b[this.sortCol].toLowerCase();
+      return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    });
+  }
+}"&gt;
+  &lt;div class="overflow-x-auto"&gt;
+    &lt;table class="mw-table"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th class="cursor-pointer select-none" @click="sort('name')"&gt;
+            &lt;span class="inline-flex items-center gap-1"&gt;
+              Name
+              &lt;svg x-show="sortCol === 'name'" ...chevron icon...
+                :class="sortAsc ? '' : 'rotate-180'"&gt;&lt;/svg&gt;
+            &lt;/span&gt;
+          &lt;/th&gt;
+          &lt;th class="cursor-pointer select-none" @click="sort('email')"&gt;Email&lt;/th&gt;
+          &lt;th class="cursor-pointer select-none" @click="sort('role')"&gt;Role&lt;/th&gt;
+          &lt;th class="cursor-pointer select-none" @click="sort('status')"&gt;Status&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;template x-for="row in sorted" :key="row.email"&gt;
+          &lt;tr&gt;
+            &lt;td class="font-medium" x-text="row.name"&gt;&lt;/td&gt;
+            &lt;td class="text-muted-foreground" x-text="row.email"&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;span class="mw-badge mw-badge-secondary" x-text="row.role"&gt;&lt;/span&gt;&lt;/td&gt;
+            &lt;td&gt;
+              &lt;span class="mw-badge"
+                :class="row.status === 'Active' ? 'mw-badge-default' : 'mw-badge-outline'"
+                x-text="row.status"&gt;&lt;/span&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/template&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

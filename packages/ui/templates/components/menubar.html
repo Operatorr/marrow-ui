@@ -1,0 +1,90 @@
+<!-- Marrow UI: Menubar -->
+<!-- A horizontal menu bar with dropdown menus for application-level navigation -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="flex items-center gap-1 border rounded-md border-border p-1 bg-background">
+  <!-- File Menu -->
+  <div class="relative" x-data="mwDropdown()">
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">File</button>
+    <div x-show="open" @click.outside="close()" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+      <div class="mw-menu-item justify-between">
+        <span>New File</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">N</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Open</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">O</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Save</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">S</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-separator"></div>
+      <div class="mw-menu-item">Exit</div>
+    </div>
+  </div>
+
+  <!-- Edit Menu -->
+  <div class="relative" x-data="mwDropdown()">
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">Edit</button>
+    <div x-show="open" @click.outside="close()" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+      <div class="mw-menu-item justify-between">
+        <span>Undo</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">Z</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-separator"></div>
+      <div class="mw-menu-item">Cut</div>
+      <div class="mw-menu-item">Copy</div>
+      <div class="mw-menu-item">Paste</div>
+    </div>
+  </div>
+
+  <!-- View Menu -->
+  <div class="relative" x-data="mwDropdown()">
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">View</button>
+    <div x-show="open" @click.outside="close()" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+      <div class="mw-menu-item">Zoom In</div>
+      <div class="mw-menu-item">Zoom Out</div>
+      <div class="mw-menu-separator"></div>
+      <div class="mw-menu-item">Full Screen</div>
+      <div class="mw-menu-item">Toggle Sidebar</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<!-- Marrow UI: Spinner -->
+<!-- A loading spinner indicator for asynchronous operations -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Small -->
+<div class="mw-spinner" style="width: 1rem; height: 1rem;"></div>
+
+<!-- Default -->
+<div class="mw-spinner"></div>
+
+<!-- Large -->
+<div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"></div>
+
+<!-- Inline with text -->
+<div class="flex items-center gap-3">
+  <div class="mw-spinner"></div>
+  <span class="text-sm text-muted-foreground">Loading data...</span>
+</div>
+
+<!-- Inside a button -->
+<button class="mw-btn mw-btn-primary" disabled>
+  <div class="mw-spinner"
+       style="width: 1rem; height: 1rem;
+              border-color: hsl(var(--marrow-primary-foreground) / 0.3);
+              border-top-color: hsl(var(--marrow-primary-foreground));"></div>
+  Submitting...
+</button>

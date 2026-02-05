@@ -1,0 +1,78 @@
+# Marrow UI
+
+> A sleek, opinionated UI kit built with Tailwind CSS and Alpine.js. No React, no build step required. 59 copy-paste components with a single config file for complete theme control.
+
+Marrow UI uses CSS classes prefixed with `mw-` (e.g., `mw-btn`, `mw-card`, `mw-input`). Interactive components use Alpine.js `x-data` directives. All styling is powered by Tailwind CSS with CSS custom properties for theming.
+
+## Getting Started
+- [Introduction](https://marrow-ui.dev/docs/introduction): Overview, philosophy, and comparison with shadcn/ui
+- [Installation](https://marrow-ui.dev/docs/installation): CDN quick start, CLI setup, project configuration
+- [Customization](https://marrow-ui.dev/docs/customization): Theme config file reference — colors, radius, compactness, fonts, shadows
+
+## CLI
+- `npx marrow-ui init` — Scaffold config, CSS, and JS files in your project
+- `npx marrow-ui add button card dialog` — Add specific component templates
+- `npx marrow-ui add --all` — Add all 59 component templates
+- `npx marrow-ui build` — Generate theme CSS from marrow.config.js
+- `npx marrow-ui list` — List all available components
+
+## Components
+- [Accordion](https://marrow-ui.dev/docs/components/accordion): Collapsible content sections
+- [Alert](https://marrow-ui.dev/docs/components/alert): Status messages with variants
+- [Alert Dialog](https://marrow-ui.dev/docs/components/alert-dialog): Confirmation modal with actions
+- [Aspect Ratio](https://marrow-ui.dev/docs/components/aspect-ratio): Fixed aspect ratio container
+- [Avatar](https://marrow-ui.dev/docs/components/avatar): User avatar with image or initials
+- [Badge](https://marrow-ui.dev/docs/components/badge): Small status labels
+- [Breadcrumb](https://marrow-ui.dev/docs/components/breadcrumb): Navigation path indicator
+- [Button](https://marrow-ui.dev/docs/components/button): Primary, secondary, outline, ghost, destructive, link variants
+- [Button Group](https://marrow-ui.dev/docs/components/button-group): Grouped button set
+- [Calendar](https://marrow-ui.dev/docs/components/calendar): Inline date calendar
+- [Card](https://marrow-ui.dev/docs/components/card): Container with header, content, footer
+- [Carousel](https://marrow-ui.dev/docs/components/carousel): Slide-based content viewer
+- [Chart](https://marrow-ui.dev/docs/components/chart): Data visualization container
+- [Checkbox](https://marrow-ui.dev/docs/components/checkbox): Boolean toggle with check mark
+- [Collapsible](https://marrow-ui.dev/docs/components/collapsible): Expandable content section
+- [Combobox](https://marrow-ui.dev/docs/components/combobox): Searchable select dropdown
+- [Command](https://marrow-ui.dev/docs/components/command): Command palette / search interface
+- [Context Menu](https://marrow-ui.dev/docs/components/context-menu): Right-click menu
+- [Data Table](https://marrow-ui.dev/docs/components/data-table): Full-featured data table
+- [Date Picker](https://marrow-ui.dev/docs/components/date-picker): Date selection with calendar popup
+- [Dialog](https://marrow-ui.dev/docs/components/dialog): Modal dialog with overlay
+- [Direction](https://marrow-ui.dev/docs/components/direction): RTL/LTR direction control
+- [Drawer](https://marrow-ui.dev/docs/components/drawer): Slide-out panel from edge
+- [Dropdown Menu](https://marrow-ui.dev/docs/components/dropdown-menu): Click-triggered menu
+- [Empty](https://marrow-ui.dev/docs/components/empty): Empty state placeholder
+- [Field](https://marrow-ui.dev/docs/components/field): Form field wrapper with label and error
+- [Hover Card](https://marrow-ui.dev/docs/components/hover-card): Hover-triggered info card
+- [Input](https://marrow-ui.dev/docs/components/input): Text input field
+- [Input Group](https://marrow-ui.dev/docs/components/input-group): Input with addons
+- [Input OTP](https://marrow-ui.dev/docs/components/input-otp): One-time password input
+- [Item](https://marrow-ui.dev/docs/components/item): List item with icon and text
+- [Kbd](https://marrow-ui.dev/docs/components/kbd): Keyboard shortcut indicator
+- [Label](https://marrow-ui.dev/docs/components/label): Form label element
+- [Menubar](https://marrow-ui.dev/docs/components/menubar): Horizontal menu bar
+- [Native Select](https://marrow-ui.dev/docs/components/native-select): Browser-native select
+- [Navigation Menu](https://marrow-ui.dev/docs/components/navigation-menu): Top navigation with dropdowns
+- [Pagination](https://marrow-ui.dev/docs/components/pagination): Page navigation controls
+- [Popover](https://marrow-ui.dev/docs/components/popover): Floating content panel
+- [Progress](https://marrow-ui.dev/docs/components/progress): Progress bar indicator
+- [Radio Group](https://marrow-ui.dev/docs/components/radio-group): Single-select option group
+- [Resizable](https://marrow-ui.dev/docs/components/resizable): Resizable panel layout
+- [Scroll Area](https://marrow-ui.dev/docs/components/scroll-area): Custom scrollbar container
+- [Select](https://marrow-ui.dev/docs/components/select): Custom select dropdown
+- [Separator](https://marrow-ui.dev/docs/components/separator): Horizontal or vertical divider
+- [Sheet](https://marrow-ui.dev/docs/components/sheet): Side panel overlay
+- [Sidebar](https://marrow-ui.dev/docs/components/sidebar): Collapsible sidebar navigation
+- [Skeleton](https://marrow-ui.dev/docs/components/skeleton): Loading placeholder
+- [Slider](https://marrow-ui.dev/docs/components/slider): Range input slider
+- [Sonner](https://marrow-ui.dev/docs/components/sonner): Stacked toast notifications
+- [Spinner](https://marrow-ui.dev/docs/components/spinner): Loading spinner
+- [Switch](https://marrow-ui.dev/docs/components/switch): Toggle switch
+- [Table](https://marrow-ui.dev/docs/components/table): Data table
+- [Tabs](https://marrow-ui.dev/docs/components/tabs): Tabbed content navigation
+- [Textarea](https://marrow-ui.dev/docs/components/textarea): Multi-line text input
+- [Toast](https://marrow-ui.dev/docs/components/toast): Notification popup
+- [Toggle](https://marrow-ui.dev/docs/components/toggle): Pressable toggle button
+- [Toggle Group](https://marrow-ui.dev/docs/components/toggle-group): Multi-toggle selection
+- [Tooltip](https://marrow-ui.dev/docs/components/tooltip): Hover tooltip
+- [Typography](https://marrow-ui.dev/docs/components/typography): Heading and text styles

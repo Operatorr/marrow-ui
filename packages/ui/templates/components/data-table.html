@@ -1,0 +1,59 @@
+<!-- Marrow UI: Data Table -->
+<!-- A structured table component with sortable headers for displaying tabular data -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="{
+  sortCol: 'name',
+  sortAsc: true,
+  rows: [
+    { name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin', status: 'Active' },
+    { name: 'Bob Smith', email: 'bob@example.com', role: 'Editor', status: 'Active' },
+    { name: 'Carol White', email: 'carol@example.com', role: 'Viewer', status: 'Inactive' },
+    { name: 'David Brown', email: 'david@example.com', role: 'Editor', status: 'Active' },
+    { name: 'Eva Martinez', email: 'eva@example.com', role: 'Admin', status: 'Active' }
+  ],
+  sort(col) {
+    if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
+    else { this.sortCol = col; this.sortAsc = true; }
+  },
+  get sorted() {
+    return [...this.rows].sort((a, b) => {
+      const valA = a[this.sortCol].toLowerCase();
+      const valB = b[this.sortCol].toLowerCase();
+      return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    });
+  }
+}">
+  <div class="overflow-x-auto">
+    <table class="mw-table">
+      <thead>
+        <tr>
+          <th class="cursor-pointer select-none" @click="sort('name')">
+            <span class="inline-flex items-center gap-1">
+              Name
+              <svg x-show="sortCol === 'name'" ...chevron icon...
+                :class="sortAsc ? '' : 'rotate-180'"></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none" @click="sort('email')">Email</th>
+          <th class="cursor-pointer select-none" @click="sort('role')">Role</th>
+          <th class="cursor-pointer select-none" @click="sort('status')">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="row in sorted" :key="row.email">
+          <tr>
+            <td class="font-medium" x-text="row.name"></td>
+            <td class="text-muted-foreground" x-text="row.email"></td>
+            <td><span class="mw-badge mw-badge-secondary" x-text="row.role"></span></td>
+            <td>
+              <span class="mw-badge"
+                :class="row.status === 'Active' ? 'mw-badge-default' : 'mw-badge-outline'"
+                x-text="row.status"></span>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
+</div>

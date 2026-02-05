@@ -1,0 +1,54 @@
+<!-- Marrow UI: Command -->
+<!-- A command palette overlay for quick navigation and actions, triggered with Ctrl+K -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwCommand()" @keydown.window.ctrl.k.prevent="show()">
+  <!-- Trigger Button -->
+  <button @click="show()" class="mw-btn mw-btn-outline gap-2">
+    Search...
+    <span class="flex items-center gap-0.5 ml-2">
+      <span class="mw-kbd">Ctrl</span>
+      <span class="mw-kbd">K</span>
+    </span>
+  </button>
+
+  <!-- Command Palette Overlay -->
+  <template x-teleport="body">
+    <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+      <div class="mw-overlay" @click="close()"></div>
+      <div class="fixed top-[20%] left-1/2 -translate-x-1/2 z-51 w-full max-w-lg"
+        @keydown.escape.window="close()">
+        <div class="bg-popover border border-border rounded-marrow shadow-lg overflow-hidden">
+          <!-- Search Input -->
+          <div class="flex items-center border-b border-border px-3">
+            <svg ...search icon.../>
+            <input type="text" x-model="search"
+              class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none"
+              placeholder="Type a command or search...">
+          </div>
+
+          <!-- Results -->
+          <div class="max-h-[300px] overflow-y-auto p-1">
+            <div class="mw-menu-label">Suggestions</div>
+            <button x-show="matchesSearch('Calendar')" class="mw-menu-item">
+              Calendar
+            </button>
+            <button x-show="matchesSearch('Settings')" class="mw-menu-item">
+              Settings
+            </button>
+
+            <div class="mw-menu-separator"></div>
+
+            <div class="mw-menu-label">Account</div>
+            <button x-show="matchesSearch('Profile')" class="mw-menu-item">
+              Profile
+            </button>
+            <button x-show="matchesSearch('Billing')" class="mw-menu-item">
+              Billing
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>

@@ -1,0 +1,35 @@
+<!-- Marrow UI: Alert Dialog -->
+<!-- A modal dialog that interrupts the user with important content and expects a response -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div x-data="mwAlertDialog()">
+  <button @click="show()" class="mw-btn mw-btn-outline">
+    Delete Account
+  </button>
+
+  <template x-if="open">
+    <div class="fixed inset-0 z-50" @keydown.escape.window="cancel()">
+      <!-- Overlay -->
+      <div class="mw-overlay" @click="cancel()"></div>
+
+      <!-- Dialog -->
+      <div class="mw-dialog max-w-md">
+        <h2 class="font-heading text-lg font-semibold">
+          Are you absolutely sure?
+        </h2>
+        <p class="mt-2 text-sm text-muted-foreground">
+          This action cannot be undone. This will permanently
+          delete your account and remove your data from our servers.
+        </p>
+        <div class="mt-6 flex justify-end gap-2">
+          <button @click="cancel()" class="mw-btn mw-btn-outline">
+            Cancel
+          </button>
+          <button @click="confirm()" class="mw-btn mw-btn-destructive">
+            Yes, delete account
+          </button>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>

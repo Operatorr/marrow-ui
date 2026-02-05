@@ -1,0 +1,12 @@
+<!-- Marrow UI: Sonner -->
+<!-- Toast notifications with auto-dismiss and multiple variants -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<button class="mw-btn mw-btn-primary"
+  @click="$store.toasts.add({
+    title: 'Success!',
+    description: 'Your changes have been saved.',
+    type: 'success'
+  })">
+  Show Toast
+</button>

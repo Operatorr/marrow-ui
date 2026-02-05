@@ -1,0 +1,32 @@
+<!-- Marrow UI: Chart -->
+<!-- Simple CSS-based bar chart for visualizing data, with guidance for production charting libraries -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="mw-card">
+  <h3 class="font-heading font-semibold mb-1">Monthly Revenue</h3>
+  <p class="text-sm text-muted-foreground mb-4">Jan &ndash; Jun 2025</p>
+  <div class="space-y-3">
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Jan</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 65%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$6,500</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Feb</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 78%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$7,800</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Mar</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 52%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$5,200</span>
+    </div>
+    <!-- Add more bars as needed -->
+  </div>
+</div>

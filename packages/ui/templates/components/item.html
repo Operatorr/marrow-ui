@@ -1,0 +1,41 @@
+<!-- Marrow UI: Item -->
+<!-- A list item component with icon, title, description, and optional trailing content -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<div class="divide-y divide-border">
+  <!-- Item with badge -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Project Roadmap</div>
+      <div class="text-xs text-muted-foreground">Updated 2 hours ago</div>
+    </div>
+    <span class="mw-badge mw-badge-default">New</span>
+  </div>
+
+  <!-- Item with chevron -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Team Members</div>
+      <div class="text-xs text-muted-foreground">Manage your team and permissions</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  </div>
+
+  <!-- Item with count badge -->
+  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <!-- Icon SVG -->
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Activity Log</div>
+      <div class="text-xs text-muted-foreground">View recent actions and events</div>
+    </div>
+    <span class="mw-badge mw-badge-secondary">12</span>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Kbd" description="Keyboard shortcut indicator for displaying key combinations" activeComponent="kbd">
+      <div class="space-y-8">
+        <div>
+          <h1 class="font-heading text-3xl font-bold tracking-tight">Kbd</h1>
+          <p class="mt-2 text-lg text-muted-foreground">A keyboard shortcut indicator used to display individual keys or key combinations inline with text.</p>
+        </div>
+
+        <div class="mw-separator"></div>
+
+        <!-- Preview -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+          <div class="mw-card">
+            <div class="space-y-6">
+              <!-- Single keys -->
+              <div>
+                <p class="text-sm text-muted-foreground mb-3">Single keys</p>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <kbd class="mw-kbd">K</kbd>
+                  <kbd class="mw-kbd">Enter</kbd>
+                  <kbd class="mw-kbd">Tab</kbd>
+                  <kbd class="mw-kbd">Esc</kbd>
+                  <kbd class="mw-kbd">Space</kbd>
+                </div>
+              </div>
+
+              <!-- Key combinations -->
+              <div>
+                <p class="text-sm text-muted-foreground mb-3">Key combinations</p>
+                <div class="flex items-center gap-4 flex-wrap">
+                  <span class="flex items-center gap-1">
+                    <kbd class="mw-kbd">Ctrl</kbd>
+                    <span class="text-xs text-muted-foreground">+</span>
+                    <kbd class="mw-kbd">K</kbd>
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <kbd class="mw-kbd">Ctrl</kbd>
+                    <span class="text-xs text-muted-foreground">+</span>
+                    <kbd class="mw-kbd">Shift</kbd>
+                    <span class="text-xs text-muted-foreground">+</span>
+                    <kbd class="mw-kbd">P</kbd>
+                  </span>
+                  <span class="flex items-center gap-1">
+                    <kbd class="mw-kbd">Cmd</kbd>
+                    <span class="text-xs text-muted-foreground">+</span>
+                    <kbd class="mw-kbd">S</kbd>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Inline with text -->
+              <div>
+                <p class="text-sm text-muted-foreground mb-3">Inline with text</p>
+                <p class="text-sm">Press <kbd class="mw-kbd">Ctrl</kbd> <span class="text-xs text-muted-foreground">+</span> <kbd class="mw-kbd">K</kbd> to open the command palette.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;!-- Single key --&gt;
+&lt;kbd class="mw-kbd"&gt;K&lt;/kbd&gt;
+
+&lt;!-- Key combination --&gt;
+&lt;span class="flex items-center gap-1"&gt;
+  &lt;kbd class="mw-kbd"&gt;Ctrl&lt;/kbd&gt;
+  &lt;span class="text-xs text-muted-foreground"&gt;+&lt;/span&gt;
+  &lt;kbd class="mw-kbd"&gt;K&lt;/kbd&gt;
+&lt;/span&gt;
+
+&lt;!-- Three-key combination --&gt;
+&lt;span class="flex items-center gap-1"&gt;
+  &lt;kbd class="mw-kbd"&gt;Ctrl&lt;/kbd&gt;
+  &lt;span class="text-xs text-muted-foreground"&gt;+&lt;/span&gt;
+  &lt;kbd class="mw-kbd"&gt;Shift&lt;/kbd&gt;
+  &lt;span class="text-xs text-muted-foreground"&gt;+&lt;/span&gt;
+  &lt;kbd class="mw-kbd"&gt;P&lt;/kbd&gt;
+&lt;/span&gt;
+
+&lt;!-- Inline with text --&gt;
+&lt;p&gt;Press &lt;kbd class="mw-kbd"&gt;Ctrl&lt;/kbd&gt;
+  &lt;span class="text-xs text-muted-foreground"&gt;+&lt;/span&gt;
+  &lt;kbd class="mw-kbd"&gt;K&lt;/kbd&gt; to open the command palette.
+&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- In Menu Items -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">In Menu Items</h2>
+          <p class="text-muted-foreground leading-relaxed">Keyboard shortcuts are commonly shown alongside menu items using a trailing kbd element.</p>
+          <div class="mw-card">
+            <div class="mw-popover" style="position: relative; min-width: 14rem;">
+              <div class="mw-menu-item justify-between">
+                <span>Cut</span>
+                <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">X</kbd></span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Copy</span>
+                <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">C</kbd></span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Paste</span>
+                <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">V</kbd></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mw-code-block">
+            <button onclick="copyCode(this)" class="copy-btn" title="Copy to clipboard">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            </button>
+            <pre><code>&lt;div class="mw-menu-item justify-between"&gt;
+  &lt;span&gt;Copy&lt;/span&gt;
+  &lt;span class="flex items-center gap-1"&gt;
+    &lt;kbd class="mw-kbd"&gt;Ctrl&lt;/kbd&gt;
+    &lt;span class="text-xs text-muted-foreground"&gt;+&lt;/span&gt;
+    &lt;kbd class="mw-kbd"&gt;C&lt;/kbd&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+</DocsLayout>

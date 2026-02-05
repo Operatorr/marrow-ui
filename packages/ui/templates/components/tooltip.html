@@ -1,0 +1,51 @@
+<!-- Marrow UI: Tooltip -->
+<!-- A popup that displays information on hover -->
+<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+
+<!-- Tooltip on a button -->
+<div x-data="mwTooltip()" class="relative inline-block">
+  <button class="mw-btn mw-btn-outline"
+          @mouseenter="enter()"
+          @mouseleave="leave()">
+    Hover me
+  </button>
+  <div x-show="show"
+       x-cloak
+       x-transition:enter="transition ease-out duration-150"
+       x-transition:enter-start="opacity-0 translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-100"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-1"
+       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+    This is a tooltip
+  </div>
+</div>
+
+<!-- Tooltip on an icon button -->
+<div x-data="mwTooltip()" class="relative inline-block">
+  <button class="mw-btn mw-btn-ghost mw-btn-icon"
+          @mouseenter="enter()"
+          @mouseleave="leave()">
+    <svg ...>Icon</svg>
+  </button>
+  <div x-show="show"
+       x-cloak
+       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+    More information
+  </div>
+</div>
+
+<!-- Tooltip on text -->
+<div x-data="mwTooltip()" class="relative inline-block">
+  <span class="underline decoration-dashed underline-offset-4 cursor-help"
+        @mouseenter="enter()"
+        @mouseleave="leave()">
+    What is this?
+  </span>
+  <div x-show="show"
+       x-cloak
+       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+    A helpful explanation
+  </div>
+</div>
