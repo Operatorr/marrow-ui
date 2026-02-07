@@ -7,124 +7,223 @@ const kbdCode = `<!-- Single key -->
 
 <!-- Key combination -->
 <span class="flex items-center gap-1">
-  <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">⌘</kbd>
   <kbd class="mw-kbd">K</kbd>
 </span>
 
 <!-- Three-key combination -->
 <span class="flex items-center gap-1">
   <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
   <kbd class="mw-kbd">Shift</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
   <kbd class="mw-kbd">P</kbd>
 </span>
 
 <!-- Inline with text -->
-<p>Press <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
-  <kbd class="mw-kbd">K</kbd> to open the command palette.
-</p>`;
+<p>Press <kbd class="mw-kbd">⌘</kbd> <kbd class="mw-kbd">K</kbd> to open command palette.</p>`;
 
-const kbdMenuCode = `<div class="mw-menu-item justify-between">
-  <span>Copy</span>
+const kbdShortcutsCode = `<!-- Common shortcuts -->
+<div class="space-y-3">
+  <div class="flex items-center justify-between">
+    <span>Copy</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">C</kbd>
+    </span>
+  </div>
+  <div class="flex items-center justify-between">
+    <span>Paste</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">V</kbd>
+    </span>
+  </div>
+  <div class="flex items-center justify-between">
+    <span>Undo</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">Z</kbd>
+    </span>
+  </div>
+</div>`;
+
+const kbdUsageCode = `<div class="mw-menu-item justify-between">
+  <span>Command Palette</span>
   <span class="flex items-center gap-1">
     <kbd class="mw-kbd">Ctrl</kbd>
-    <span class="text-xs text-muted-foreground">+</span>
-    <kbd class="mw-kbd">C</kbd>
+    <kbd class="mw-kbd">Shift</kbd>
+    <kbd class="mw-kbd">P</kbd>
   </span>
 </div>`;
 ---
 
 <DocsLayout title="Kbd" description="Keyboard shortcut indicator for displaying key combinations" activeComponent="kbd">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Kbd</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A keyboard shortcut indicator used to display individual keys or key combinations inline with text.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Kbd</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A keyboard shortcut indicator used to display individual keys or key combinations inline with text.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div class="space-y-6">
-              <!-- Single keys -->
-              <div>
-                <p class="text-sm text-muted-foreground mb-3">Single keys</p>
-                <div class="flex items-center gap-2 flex-wrap">
-                  <kbd class="mw-kbd">K</kbd>
-                  <kbd class="mw-kbd">Enter</kbd>
-                  <kbd class="mw-kbd">Tab</kbd>
-                  <kbd class="mw-kbd">Esc</kbd>
-                  <kbd class="mw-kbd">Space</kbd>
-                </div>
-              </div>
-
-              <!-- Key combinations -->
-              <div>
-                <p class="text-sm text-muted-foreground mb-3">Key combinations</p>
-                <div class="flex items-center gap-4 flex-wrap">
-                  <span class="flex items-center gap-1">
-                    <kbd class="mw-kbd">Ctrl</kbd>
-                    <span class="text-xs text-muted-foreground">+</span>
-                    <kbd class="mw-kbd">K</kbd>
-                  </span>
-                  <span class="flex items-center gap-1">
-                    <kbd class="mw-kbd">Ctrl</kbd>
-                    <span class="text-xs text-muted-foreground">+</span>
-                    <kbd class="mw-kbd">Shift</kbd>
-                    <span class="text-xs text-muted-foreground">+</span>
-                    <kbd class="mw-kbd">P</kbd>
-                  </span>
-                  <span class="flex items-center gap-1">
-                    <kbd class="mw-kbd">Cmd</kbd>
-                    <span class="text-xs text-muted-foreground">+</span>
-                    <kbd class="mw-kbd">S</kbd>
-                  </span>
-                </div>
-              </div>
-
-              <!-- Inline with text -->
-              <div>
-                <p class="text-sm text-muted-foreground mb-3">Inline with text</p>
-                <p class="text-sm">Press <kbd class="mw-kbd">Ctrl</kbd> <span class="text-xs text-muted-foreground">+</span> <kbd class="mw-kbd">K</kbd> to open the command palette.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={kbdCode} lang="html" />
-        </div>
-
-        <!-- In Menu Items -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">In Menu Items</h2>
-          <p class="text-muted-foreground leading-relaxed">Keyboard shortcuts are commonly shown alongside menu items using a trailing kbd element.</p>
-          <div class="mw-card">
-            <div class="mw-popover" style="position: relative; min-width: 14rem;">
-              <div class="mw-menu-item justify-between">
-                <span>Cut</span>
-                <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">X</kbd></span>
-              </div>
-              <div class="mw-menu-item justify-between">
-                <span>Copy</span>
-                <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">C</kbd></span>
-              </div>
-              <div class="mw-menu-item justify-between">
-                <span>Paste</span>
-                <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">V</kbd></span>
-              </div>
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="space-y-6">
+          <!-- Individual Keys -->
+          <div>
+            <h3 class="font-heading text-lg font-semibold mb-3">Individual Keys</h3>
+            <div class="flex items-center gap-2 flex-wrap">
+              <kbd class="mw-kbd">Ctrl</kbd>
+              <kbd class="mw-kbd">Alt</kbd>
+              <kbd class="mw-kbd">Shift</kbd>
+              <kbd class="mw-kbd">⌘</kbd>
+              <kbd class="mw-kbd">Enter</kbd>
+              <kbd class="mw-kbd">Esc</kbd>
+              <kbd class="mw-kbd">Tab</kbd>
             </div>
           </div>
 
-          <CodeBlock code={kbdMenuCode} lang="html" />
+          <!-- Common Shortcuts -->
+          <div>
+            <h3 class="font-heading text-lg font-semibold mb-3">Common Shortcuts</h3>
+            <div class="flex items-center gap-4 flex-wrap">
+              <span class="flex items-center gap-1">
+                <kbd class="mw-kbd">⌘</kbd>
+                <kbd class="mw-kbd">C</kbd>
+              </span>
+              <span class="text-sm text-muted-foreground">Copy</span>
+
+              <span class="flex items-center gap-1">
+                <kbd class="mw-kbd">⌘</kbd>
+                <kbd class="mw-kbd">V</kbd>
+              </span>
+              <span class="text-sm text-muted-foreground">Paste</span>
+
+              <span class="flex items-center gap-1">
+                <kbd class="mw-kbd">⌘</kbd>
+                <kbd class="mw-kbd">Z</kbd>
+              </span>
+              <span class="text-sm text-muted-foreground">Undo</span>
+
+              <span class="flex items-center gap-1">
+                <kbd class="mw-kbd">Ctrl</kbd>
+                <kbd class="mw-kbd">Shift</kbd>
+                <kbd class="mw-kbd">P</kbd>
+              </span>
+              <span class="text-sm text-muted-foreground">Command Palette</span>
+            </div>
+          </div>
+
+          <!-- In Context -->
+          <div>
+            <h3 class="font-heading text-lg font-semibold mb-3">In Context</h3>
+            <p class="text-sm">Press <kbd class="mw-kbd">⌘</kbd> <kbd class="mw-kbd">K</kbd> to open the command palette.</p>
+          </div>
         </div>
       </div>
+    </div>
 
+    <!-- Keyboard Shortcuts -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Keyboard Shortcuts</h2>
+      <p class="text-muted-foreground leading-relaxed">Shortcuts are commonly displayed in labeled groups showing the action and its key combination.</p>
+      <div class="mw-card max-w-md">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-sm">Copy</span>
+            <span class="flex items-center gap-1">
+              <kbd class="mw-kbd">⌘</kbd>
+              <kbd class="mw-kbd">C</kbd>
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm">Paste</span>
+            <span class="flex items-center gap-1">
+              <kbd class="mw-kbd">⌘</kbd>
+              <kbd class="mw-kbd">V</kbd>
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm">Undo</span>
+            <span class="flex items-center gap-1">
+              <kbd class="mw-kbd">⌘</kbd>
+              <kbd class="mw-kbd">Z</kbd>
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm">Command Palette</span>
+            <span class="flex items-center gap-1">
+              <kbd class="mw-kbd">Ctrl</kbd>
+              <kbd class="mw-kbd">Shift</kbd>
+              <kbd class="mw-kbd">P</kbd>
+            </span>
+          </div>
+        </div>
+      </div>
+      <CodeBlock code={kbdShortcutsCode} lang="html" />
+    </div>
+
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={kbdCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+      <p class="text-muted-foreground leading-relaxed">The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-kbd</code> class provides styling for keyboard keys and shortcuts.</p>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">CSS Class</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed">
+            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-kbd</code> — Base keyboard key style with monospace font, muted background, border, and shadow</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">In Menu Items</h3>
+          <p class="text-muted-foreground leading-relaxed mb-3">Keyboard shortcuts are commonly displayed alongside menu items as trailing elements.</p>
+          <div class="mw-card max-w-xs">
+            <div class="mw-menu-item justify-between">
+              <span>Cut</span>
+              <span class="flex items-center gap-1">
+                <kbd class="mw-kbd">Ctrl</kbd>
+                <kbd class="mw-kbd">X</kbd>
+              </span>
+            </div>
+            <div class="mw-menu-item justify-between">
+              <span>Copy</span>
+              <span class="flex items-center gap-1">
+                <kbd class="mw-kbd">Ctrl</kbd>
+                <kbd class="mw-kbd">C</kbd>
+              </span>
+            </div>
+            <div class="mw-menu-item justify-between">
+              <span>Paste</span>
+              <span class="flex items-center gap-1">
+                <kbd class="mw-kbd">Ctrl</kbd>
+                <kbd class="mw-kbd">V</kbd>
+              </span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <CodeBlock code={kbdUsageCode} lang="html" />
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed">
+            <li>Use semantic <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;kbd&gt;</code> elements for keyboard keys</li>
+            <li>Consider platform-specific shortcuts (⌘ for macOS, Ctrl for Windows/Linux)</li>
+            <li>Ensure sufficient color contrast between kbd elements and background</li>
+            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> for screen readers when showing only symbols</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

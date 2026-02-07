@@ -46,6 +46,21 @@ const tableCode = `<div class="overflow-x-auto">
     </tbody>
   </table>
 </div>`;
+
+const usageCode = `<table class="mw-table">
+  <thead>
+    <tr>
+      <th>Header 1</th>
+      <th>Header 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+    </tr>
+  </tbody>
+</table>`;
 ---
 
 <DocsLayout title="Table" description="A data table for displaying structured information" activeComponent="table">
@@ -60,7 +75,7 @@ const tableCode = `<div class="overflow-x-auto">
         <!-- Preview -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card p-6">
+          <div class="mw-card p-0 overflow-hidden">
             <div class="overflow-x-auto">
               <table class="mw-table">
                 <thead>
@@ -106,6 +121,12 @@ const tableCode = `<div class="overflow-x-auto">
               </table>
             </div>
           </div>
+        </div>
+
+        <!-- Usage -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+          <CodeBlock code={usageCode} lang="html" />
         </div>
 
         <!-- Code -->

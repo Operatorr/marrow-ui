@@ -2,115 +2,240 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const selectCode = `<div class="space-y-2">
-  <label class="mw-label" for="framework-select">Framework</label>
-  <select id="framework-select" class="mw-select">
-    <option value="" disabled selected>Select a framework</option>
-    <option value="django">Django</option>
-    <option value="laravel">Laravel</option>
-    <option value="rails">Ruby on Rails</option>
-    <option value="express">Express</option>
-    <option value="flask">Flask</option>
+const basicSelectCode = `<div class="space-y-2">
+  <label class="mw-label" for="country-select">Country</label>
+  <select id="country-select" class="mw-select">
+    <option value="" disabled selected>Select your country</option>
+    <option value="us">United States</option>
+    <option value="ca">Canada</option>
+    <option value="uk">United Kingdom</option>
+    <option value="au">Australia</option>
+    <option value="de">Germany</option>
+    <option value="fr">France</option>
   </select>
 </div>`;
 
-const selectOptgroupCode = `<div class="space-y-2">
-  <label class="mw-label" for="language-select">Language</label>
-  <select id="language-select" class="mw-select">
-    <option value="" disabled selected>Choose a language</option>
-    <optgroup label="Frontend">
-      <option value="js">JavaScript</option>
-      <option value="ts">TypeScript</option>
+const optgroupCode = `<div class="space-y-2">
+  <label class="mw-label" for="timezone-select">Timezone</label>
+  <select id="timezone-select" class="mw-select">
+    <option value="" disabled selected>Choose a timezone</option>
+    <optgroup label="North America">
+      <option value="est">Eastern (EST)</option>
+      <option value="cst">Central (CST)</option>
+      <option value="mst">Mountain (MST)</option>
+      <option value="pst">Pacific (PST)</option>
     </optgroup>
-    <optgroup label="Backend">
-      <option value="python">Python</option>
-      <option value="ruby">Ruby</option>
-      <option value="go">Go</option>
-      <option value="rust">Rust</option>
+    <optgroup label="Europe">
+      <option value="gmt">GMT (London)</option>
+      <option value="cet">CET (Paris)</option>
+      <option value="eet">EET (Athens)</option>
+    </optgroup>
+    <optgroup label="Asia">
+      <option value="ist">IST (Mumbai)</option>
+      <option value="jst">JST (Tokyo)</option>
+      <option value="hkt">HKT (Hong Kong)</option>
     </optgroup>
   </select>
 </div>`;
 
-const selectDisabledCode = `<select class="mw-select" disabled>
-  <option value="us">United States</option>
-</select>`;
+const formContextCode = `<form class="space-y-4 max-w-md">
+  <div class="space-y-2">
+    <label class="mw-label" for="role-select">Role</label>
+    <select id="role-select" class="mw-select" required>
+      <option value="" disabled selected>Select your role</option>
+      <option value="developer">Developer</option>
+      <option value="designer">Designer</option>
+      <option value="manager">Product Manager</option>
+      <option value="marketing">Marketing</option>
+    </select>
+  </div>
+
+  <div class="space-y-2">
+    <label class="mw-label" for="experience-select">Experience Level</label>
+    <select id="experience-select" class="mw-select" required>
+      <option value="junior">Junior (0-2 years)</option>
+      <option value="mid">Mid-level (2-5 years)</option>
+      <option value="senior">Senior (5-10 years)</option>
+      <option value="lead">Lead (10+ years)</option>
+    </select>
+  </div>
+
+  <button type="submit" class="mw-btn mw-btn-primary">
+    Submit
+  </button>
+</form>`;
+
+const disabledCode = `<div class="space-y-2">
+  <label class="mw-label opacity-50" for="disabled-select">Region</label>
+  <select id="disabled-select" class="mw-select" disabled>
+    <option value="us">United States</option>
+  </select>
+</div>`;
 ---
 
 <DocsLayout title="Native Select" description="A styled native HTML select element for simple dropdowns" activeComponent="native-select">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Native Select</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A styled native HTML select element. Uses the browser's built-in dropdown behavior for maximum compatibility and accessibility.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Native Select</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A styled native HTML select element. Uses the browser's built-in dropdown behavior for maximum compatibility and accessibility.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div class="space-y-4 max-w-sm">
-              <div class="space-y-2">
-                <label class="mw-label" for="framework-select">Framework</label>
-                <select id="framework-select" class="mw-select">
-                  <option value="" disabled selected>Select a framework</option>
-                  <option value="django">Django</option>
-                  <option value="laravel">Laravel</option>
-                  <option value="rails">Ruby on Rails</option>
-                  <option value="express">Express</option>
-                  <option value="flask">Flask</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={selectCode} lang="html" />
-        </div>
-
-        <!-- With Option Groups -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">With Option Groups</h2>
-          <p class="text-muted-foreground leading-relaxed">Use native <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;optgroup&gt;</code> elements to organize options into categories.</p>
-          <div class="mw-card">
-            <div class="space-y-2 max-w-sm">
-              <label class="mw-label" for="language-select">Language</label>
-              <select id="language-select" class="mw-select">
-                <option value="" disabled selected>Choose a language</option>
-                <optgroup label="Frontend">
-                  <option value="js">JavaScript</option>
-                  <option value="ts">TypeScript</option>
-                </optgroup>
-                <optgroup label="Backend">
-                  <option value="python">Python</option>
-                  <option value="ruby">Ruby</option>
-                  <option value="go">Go</option>
-                  <option value="rust">Rust</option>
-                </optgroup>
-              </select>
-            </div>
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="space-y-6 max-w-sm">
+          <!-- Basic Select with Label -->
+          <div class="space-y-2">
+            <label class="mw-label" for="country-select">Country</label>
+            <select id="country-select" class="mw-select">
+              <option value="" disabled selected>Select your country</option>
+              <option value="us">United States</option>
+              <option value="ca">Canada</option>
+              <option value="uk">United Kingdom</option>
+              <option value="au">Australia</option>
+              <option value="de">Germany</option>
+              <option value="fr">France</option>
+            </select>
           </div>
 
-          <CodeBlock code={selectOptgroupCode} lang="html" />
-        </div>
-
-        <!-- Disabled -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Disabled</h2>
-          <div class="mw-card">
-            <div class="space-y-2 max-w-sm">
-              <label class="mw-label opacity-50" for="disabled-select">Region</label>
-              <select id="disabled-select" class="mw-select" disabled>
-                <option value="us">United States</option>
-              </select>
-            </div>
+          <!-- With Placeholder -->
+          <div class="space-y-2">
+            <label class="mw-label" for="framework-select">Framework</label>
+            <select id="framework-select" class="mw-select">
+              <option value="" disabled selected>Choose a framework</option>
+              <option value="django">Django</option>
+              <option value="laravel">Laravel</option>
+              <option value="rails">Ruby on Rails</option>
+              <option value="express">Express.js</option>
+              <option value="flask">Flask</option>
+            </select>
           </div>
-
-          <CodeBlock code={selectDisabledCode} lang="html" />
         </div>
       </div>
+    </div>
 
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={basicSelectCode} lang="html" />
+    </div>
+
+    <!-- With Option Groups -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">With Option Groups</h2>
+      <p class="text-muted-foreground leading-relaxed">Use native <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;optgroup&gt;</code> elements to organize options into logical categories.</p>
+      <div class="mw-card">
+        <div class="space-y-2 max-w-sm">
+          <label class="mw-label" for="timezone-select">Timezone</label>
+          <select id="timezone-select" class="mw-select">
+            <option value="" disabled selected>Choose a timezone</option>
+            <optgroup label="North America">
+              <option value="est">Eastern (EST)</option>
+              <option value="cst">Central (CST)</option>
+              <option value="mst">Mountain (MST)</option>
+              <option value="pst">Pacific (PST)</option>
+            </optgroup>
+            <optgroup label="Europe">
+              <option value="gmt">GMT (London)</option>
+              <option value="cet">CET (Paris)</option>
+              <option value="eet">EET (Athens)</option>
+            </optgroup>
+            <optgroup label="Asia">
+              <option value="ist">IST (Mumbai)</option>
+              <option value="jst">JST (Tokyo)</option>
+              <option value="hkt">HKT (Hong Kong)</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <CodeBlock code={optgroupCode} lang="html" />
+    </div>
+
+    <!-- Form Context -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">In Form Context</h3>
+      <p class="text-muted-foreground leading-relaxed">Native selects work seamlessly with HTML forms and validation.</p>
+      <div class="mw-card">
+        <form class="space-y-4 max-w-md">
+          <div class="space-y-2">
+            <label class="mw-label" for="role-select">Role</label>
+            <select id="role-select" class="mw-select" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="developer">Developer</option>
+              <option value="designer">Designer</option>
+              <option value="manager">Product Manager</option>
+              <option value="marketing">Marketing</option>
+            </select>
+          </div>
+
+          <div class="space-y-2">
+            <label class="mw-label" for="experience-select">Experience Level</label>
+            <select id="experience-select" class="mw-select" required>
+              <option value="junior">Junior (0-2 years)</option>
+              <option value="mid">Mid-level (2-5 years)</option>
+              <option value="senior">Senior (5-10 years)</option>
+              <option value="lead">Lead (10+ years)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="mw-btn mw-btn-primary">
+            Submit
+          </button>
+        </form>
+      </div>
+      <CodeBlock code={formContextCode} lang="html" />
+    </div>
+
+    <!-- Disabled -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Disabled State</h3>
+      <div class="mw-card">
+        <div class="space-y-2 max-w-sm">
+          <label class="mw-label opacity-50" for="disabled-select">Region</label>
+          <select id="disabled-select" class="mw-select" disabled>
+            <option value="us">United States</option>
+          </select>
+        </div>
+      </div>
+      <CodeBlock code={disabledCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+          <p class="text-muted-foreground leading-relaxed mt-2">
+            Apply <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-select</code> to any native <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;select&gt;</code> element. The component uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">appearance: none</code> and includes a custom chevron icon via CSS.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed mt-2">
+            <li>• Always pair selects with a visible <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-label</code> using the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> attribute</li>
+            <li>• Use a disabled placeholder option (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">disabled selected</code>) to provide context</li>
+            <li>• Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">required</code> attribute for form validation when needed</li>
+            <li>• The native select element is fully keyboard navigable and screen reader accessible</li>
+            <li>• Reduce label opacity when the select is disabled for visual consistency</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Best Practices</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed mt-2">
+            <li>• Use native selects for simple dropdown lists with 5-20 options</li>
+            <li>• For complex selection needs (search, multi-select), consider using a custom select component</li>
+            <li>• Group related options with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;optgroup&gt;</code> for better organization</li>
+            <li>• Keep option text concise and scannable</li>
+            <li>• Provide a clear placeholder that describes the expected selection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

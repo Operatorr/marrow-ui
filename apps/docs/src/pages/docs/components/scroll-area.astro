@@ -2,76 +2,157 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const scrollAreaCode = `<div class="mw-scroll-area rounded-md border p-4" style="max-height: 200px;">
-  <h4 class="font-semibold mb-3">Scrollable Content</h4>
-  <p class="text-sm text-muted-foreground mb-3">
-    Your scrollable content goes here. The container will
-    show a styled scrollbar when content overflows.
-  </p>
-  <!-- Add more content to trigger scrolling -->
+const scrollAreaCode = `<!-- Vertical Scroll Area -->
+<div class="mw-scroll-area rounded-md border p-4" style="height: 16rem;">
+  <h4 class="font-heading font-semibold mb-3">Typography Families</h4>
+  <div class="space-y-2">
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Inter</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Geist Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">SF Pro Display</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Helvetica Neue</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Segoe UI</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Roboto</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Open Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Lato</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Montserrat</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Poppins</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Source Sans Pro</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Nunito Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Plus Jakarta Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">DM Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Work Sans</div>
+  </div>
+</div>
+
+<!-- Horizontal Scroll Area -->
+<div class="mw-scroll-area overflow-x-auto">
+  <div class="flex gap-4 p-4 min-w-max">
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card One</h4>
+      <p class="text-sm text-muted-foreground">First card content</p>
+    </div>
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card Two</h4>
+      <p class="text-sm text-muted-foreground">Second card content</p>
+    </div>
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card Three</h4>
+      <p class="text-sm text-muted-foreground">Third card content</p>
+    </div>
+  </div>
 </div>`;
 ---
 
 <DocsLayout title="Scroll Area" description="A scrollable content area with styled scrollbars" activeComponent="scroll-area">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Scroll Area</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A container that provides a consistent, styled scrollbar for overflowing content.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Scroll Area</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A container that provides a consistent, styled scrollbar for overflowing content.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div class="mw-scroll-area rounded-md border p-4" style="max-height: 200px;">
-              <h4 class="font-heading font-semibold mb-3">Scrollable Content</h4>
-              <p class="text-sm text-muted-foreground mb-3">This content area has a fixed max-height and will scroll when the content overflows. The scrollbar is styled to match the Marrow UI theme.</p>
-              <p class="text-sm text-muted-foreground mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-              <p class="text-sm text-muted-foreground mb-3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-              <p class="text-sm text-muted-foreground mb-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
-              <p class="text-sm text-muted-foreground mb-3">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-              <p class="text-sm text-muted-foreground">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-            </div>
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="mw-scroll-area rounded-md border p-4" style="height: 16rem;">
+          <h4 class="font-heading font-semibold mb-3">Typography Families</h4>
+          <div class="space-y-2">
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Inter</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Geist Sans</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">SF Pro Display</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Helvetica Neue</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Segoe UI</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Roboto</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Open Sans</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Lato</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Montserrat</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Poppins</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Source Sans Pro</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Nunito Sans</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Plus Jakarta Sans</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">DM Sans</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Work Sans</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Manrope</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Space Grotesk</div>
+            <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Satoshi</div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- List Example -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">List Example</h2>
-          <div class="mw-card">
-            <div class="mw-scroll-area rounded-md border" style="max-height: 220px;">
-              <div class="p-1">
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Introduction to Marrow UI</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Installation Guide</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Configuration Options</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Theme Customization</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Button Component</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Card Component</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Dialog Component</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Dropdown Menu</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Input Component</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Select Component</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Table Component</div>
-                <div class="px-3 py-2 text-sm hover:bg-accent rounded-md cursor-pointer transition-colors">Tabs Component</div>
+    <!-- Horizontal Scroll -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Horizontal Scroll</h3>
+      <div class="mw-card">
+        <div class="mw-scroll-area overflow-x-auto">
+          <div class="flex gap-4 p-4 min-w-max">
+            <div class="mw-card w-64 shrink-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-blue-500/20">
+              <h4 class="font-heading font-semibold mb-2">Ocean Depths</h4>
+              <p class="text-sm text-muted-foreground mb-3">Deep blue gradients for immersive interfaces.</p>
+              <div class="flex gap-2">
+                <div class="h-8 w-8 rounded bg-blue-500"></div>
+                <div class="h-8 w-8 rounded bg-cyan-500"></div>
+                <div class="h-8 w-8 rounded bg-sky-500"></div>
+              </div>
+            </div>
+            <div class="mw-card w-64 shrink-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/20">
+              <h4 class="font-heading font-semibold mb-2">Sunset Vibes</h4>
+              <p class="text-sm text-muted-foreground mb-3">Warm purples and pinks for creative layouts.</p>
+              <div class="flex gap-2">
+                <div class="h-8 w-8 rounded bg-purple-500"></div>
+                <div class="h-8 w-8 rounded bg-pink-500"></div>
+                <div class="h-8 w-8 rounded bg-rose-500"></div>
+              </div>
+            </div>
+            <div class="mw-card w-64 shrink-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border-emerald-500/20">
+              <h4 class="font-heading font-semibold mb-2">Forest Green</h4>
+              <p class="text-sm text-muted-foreground mb-3">Natural greens for eco-friendly brands.</p>
+              <div class="flex gap-2">
+                <div class="h-8 w-8 rounded bg-emerald-500"></div>
+                <div class="h-8 w-8 rounded bg-teal-500"></div>
+                <div class="h-8 w-8 rounded bg-green-500"></div>
+              </div>
+            </div>
+            <div class="mw-card w-64 shrink-0 bg-gradient-to-br from-amber-500/10 to-orange-500/10 border-amber-500/20">
+              <h4 class="font-heading font-semibold mb-2">Golden Hour</h4>
+              <p class="text-sm text-muted-foreground mb-3">Warm yellows and oranges for energetic designs.</p>
+              <div class="flex gap-2">
+                <div class="h-8 w-8 rounded bg-amber-500"></div>
+                <div class="h-8 w-8 rounded bg-orange-500"></div>
+                <div class="h-8 w-8 rounded bg-yellow-500"></div>
+              </div>
+            </div>
+            <div class="mw-card w-64 shrink-0 bg-gradient-to-br from-red-500/10 to-rose-500/10 border-red-500/20">
+              <h4 class="font-heading font-semibold mb-2">Fire & Passion</h4>
+              <p class="text-sm text-muted-foreground mb-3">Bold reds for high-impact messaging.</p>
+              <div class="flex gap-2">
+                <div class="h-8 w-8 rounded bg-red-500"></div>
+                <div class="h-8 w-8 rounded bg-rose-500"></div>
+                <div class="h-8 w-8 rounded bg-pink-600"></div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={scrollAreaCode} lang="html" />
-        </div>
-
-        <!-- Usage Notes -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-          <p class="text-muted-foreground leading-relaxed">Apply the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-scroll-area</code> class to any container and set a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">max-height</code> via inline style or utility class. The component uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">scrollbar-width: thin</code> for Firefox and custom <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">::-webkit-scrollbar</code> styles for Chromium-based browsers.</p>
-          <p class="text-muted-foreground leading-relaxed">No JavaScript is required. The scrollbar inherits theme colors via CSS custom properties.</p>
-        </div>
       </div>
+    </div>
 
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={scrollAreaCode} lang="html" />
+    </div>
+
+    <!-- Usage Notes -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+      <p class="text-muted-foreground leading-relaxed">Apply the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-scroll-area</code> class to any container and set a fixed height via inline style or utility class. The component uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">scrollbar-width: thin</code> for Firefox and custom <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">::-webkit-scrollbar</code> styles for Chromium-based browsers.</p>
+      <p class="text-muted-foreground leading-relaxed">For horizontal scrolling, add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">overflow-x-auto</code> and ensure the inner content has <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">min-w-max</code> or a combined width larger than the container.</p>
+      <p class="text-muted-foreground leading-relaxed">No JavaScript is required. The scrollbar inherits theme colors via CSS custom properties and automatically adapts to light and dark modes.</p>
+
+      <h3 class="font-heading text-lg font-semibold mt-6">Accessibility</h3>
+      <p class="text-muted-foreground leading-relaxed">Scroll containers are keyboard accessible by default. Users can focus the container and use arrow keys to scroll. Ensure scrollable content remains accessible to screen readers and provides sufficient visual contrast for scroll indicators.</p>
+    </div>
+  </div>
 </DocsLayout>

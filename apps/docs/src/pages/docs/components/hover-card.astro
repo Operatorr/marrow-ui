@@ -8,7 +8,7 @@ const hoverCardCode = `<div x-data="mwHoverCard()" class="relative inline-block"
      @mouseenter="enter()"
      @mouseleave="leave()"
      class="text-primary font-medium underline underline-offset-4">
-    @marrow-ui
+    @alice_johnson
   </a>
 
   <!-- Hover Card -->
@@ -20,17 +20,17 @@ const hoverCardCode = `<div x-data="mwHoverCard()" class="relative inline-block"
        x-transition:leave="transition ease-in duration-100"
        x-transition:leave-start="opacity-100 translate-y-0"
        x-transition:leave-end="opacity-0 translate-y-1"
-       class="absolute left-0 top-full mt-2 z-50 w-80 mw-card">
+       class="absolute left-0 top-full mt-2 z-50 w-80 mw-popover">
     <div class="flex gap-4">
-      <div class="mw-avatar mw-avatar-lg flex-shrink-0">MU</div>
+      <img src="https://i.pravatar.cc/150?img=5" alt="" class="mw-avatar mw-avatar-lg flex-shrink-0" />
       <div class="space-y-1">
-        <h4 class="font-heading text-sm font-semibold">Marrow UI</h4>
+        <h4 class="font-heading text-sm font-semibold">Alice Johnson</h4>
         <p class="text-sm text-muted-foreground">
-          A copy-paste UI kit built with Tailwind CSS and Alpine.js.
+          Product designer & creative technologist. Building beautiful interfaces for the modern web.
         </p>
         <div class="flex items-center gap-4 pt-1">
-          <span class="text-xs text-muted-foreground">Joined Dec 2024</span>
-          <span class="text-xs text-muted-foreground">1.2k followers</span>
+          <span class="text-xs text-muted-foreground">Joined Mar 2023</span>
+          <span class="text-xs text-muted-foreground">2.4k followers</span>
         </div>
       </div>
     </div>
@@ -39,55 +39,130 @@ const hoverCardCode = `<div x-data="mwHoverCard()" class="relative inline-block"
 ---
 
 <DocsLayout title="Hover Card" description="A card that appears when hovering over a trigger element for previewing content" activeComponent="hover-card">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Hover Card</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A card that appears when hovering over a trigger element for previewing content.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Hover Card</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A card that appears when hovering over a trigger element for previewing content.</p>
+    </div>
+    <div class="mw-separator"></div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div x-data="mwHoverCard()" class="relative inline-block">
-              <a href="#" @mouseenter="enter()" @mouseleave="leave()" class="text-primary font-medium underline underline-offset-4 decoration-primary/40 hover:decoration-primary">
-                @marrow-ui
-              </a>
-              <div x-show="show" x-cloak
-                   @mouseenter="enter()" @mouseleave="leave()"
-                   x-transition:enter="transition ease-out duration-150"
-                   x-transition:enter-start="opacity-0 translate-y-1"
-                   x-transition:enter-end="opacity-100 translate-y-0"
-                   x-transition:leave="transition ease-in duration-100"
-                   x-transition:leave-start="opacity-100 translate-y-0"
-                   x-transition:leave-end="opacity-0 translate-y-1"
-                   class="absolute left-0 top-full mt-2 z-50 w-80 mw-card">
-                <div class="flex gap-4">
-                  <div class="mw-avatar mw-avatar-lg flex-shrink-0">MU</div>
-                  <div class="space-y-1">
-                    <h4 class="font-heading text-sm font-semibold">Marrow UI</h4>
-                    <p class="text-sm text-muted-foreground">A copy-paste UI kit built with Tailwind CSS and Alpine.js. No framework lock-in.</p>
-                    <div class="flex items-center gap-4 pt-1">
-                      <div class="flex items-center gap-1 text-xs text-muted-foreground">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-                        Joined Dec 2024
-                      </div>
-                      <div class="flex items-center gap-1 text-xs text-muted-foreground">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
-                        1.2k followers
-                      </div>
-                    </div>
-                  </div>
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card flex items-center justify-center min-h-[280px]">
+        <div x-data="mwHoverCard()" class="relative inline-block">
+          <a href="#" @mouseenter="enter()" @mouseleave="leave()" class="text-primary font-medium underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors duration-200">
+            @alice_johnson
+          </a>
+          <div x-show="show" x-cloak
+               @mouseenter="enter()" @mouseleave="leave()"
+               x-transition:enter="transition ease-out duration-150"
+               x-transition:enter-start="opacity-0 translate-y-1"
+               x-transition:enter-end="opacity-100 translate-y-0"
+               x-transition:leave="transition ease-in duration-100"
+               x-transition:leave-start="opacity-100 translate-y-0"
+               x-transition:leave-end="opacity-0 translate-y-1"
+               class="absolute left-0 top-full mt-2 z-50 w-80 mw-popover">
+            <div class="flex gap-4">
+              <img src="https://i.pravatar.cc/150?img=5" alt="" class="mw-avatar mw-avatar-lg flex-shrink-0" />
+              <div class="space-y-1">
+                <h4 class="font-heading text-sm font-semibold">Alice Johnson</h4>
+                <p class="text-sm text-muted-foreground">
+                  Product designer & creative technologist. Building beautiful interfaces for the modern web.
+                </p>
+                <div class="flex items-center gap-4 pt-1">
+                  <span class="text-xs text-muted-foreground">Joined Mar 2023</span>
+                  <span class="text-xs text-muted-foreground">2.4k followers</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={hoverCardCode} lang="html" />
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={hoverCardCode} lang="html" />
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
+          <div class="mw-card overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-border">
+                    <th class="text-left p-3 font-semibold">Property/Method</th>
+                    <th class="text-left p-3 font-semibold">Type</th>
+                    <th class="text-left p-3 font-semibold">Description</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                  <tr>
+                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">show</code></td>
+                    <td class="p-3 text-muted-foreground">Boolean</td>
+                    <td class="p-3 text-muted-foreground">Controls the visibility of the hover card</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">timeout</code></td>
+                    <td class="p-3 text-muted-foreground">Number</td>
+                    <td class="p-3 text-muted-foreground">Internal debounce timer for hover delay</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">enter()</code></td>
+                    <td class="p-3 text-muted-foreground">Function</td>
+                    <td class="p-3 text-muted-foreground">Shows the card after a 200ms delay</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">leave()</code></td>
+                    <td class="p-3 text-muted-foreground">Function</td>
+                    <td class="p-3 text-muted-foreground">Hides the card after a 100ms delay</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
+          <div class="mw-card overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-border">
+                    <th class="text-left p-3 font-semibold">Class</th>
+                    <th class="text-left p-3 font-semibold">Description</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                  <tr>
+                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-popover</code></td>
+                    <td class="p-3 text-muted-foreground">Styled container for the hover card panel</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
+          <div class="mw-card prose prose-sm max-w-none">
+            <ul class="space-y-2 text-muted-foreground">
+              <li>The hover card uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-cloak</code> to prevent flash of unstyled content</li>
+              <li>Entrance and exit delays prevent accidental triggers while moving the cursor</li>
+              <li>The card remains visible when hovering over it, allowing interaction with its contents</li>
+              <li>Decorative images should use empty <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">alt=""</code> attributes</li>
+              <li>Consider providing keyboard alternatives for touch/keyboard users who cannot hover</li>
+            </ul>
+          </div>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

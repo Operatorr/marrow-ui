@@ -36,43 +36,176 @@ const alertDialogCode = `<div x-data="mwAlertDialog()">
 ---
 
 <DocsLayout title="Alert Dialog" description="A modal dialog that interrupts the user with important content and expects a response" activeComponent="alert-dialog">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Alert Dialog</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A modal dialog that interrupts the user with important content and expects a response.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Alert Dialog</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">
+        A modal dialog that interrupts the user with important content and expects a response. Use this for critical actions that require confirmation.
+      </p>
+    </div>
 
-        <!-- Preview -->
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div x-data="mwAlertDialog()">
-              <button @click="show()" class="mw-btn mw-btn-outline">Delete Account</button>
+    <div class="mw-separator"></div>
 
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div x-data="mwAlertDialog()" class="flex items-center justify-center py-12">
+          <button @click="show()" class="mw-btn mw-btn-outline">
+            Delete Account
+          </button>
+
+          <template x-if="open">
+            <div class="fixed inset-0 z-50" @keydown.escape.window="cancel()">
               <!-- Overlay -->
-              <template x-if="open">
-                <div class="fixed inset-0 z-50" @keydown.escape.window="cancel()">
-                  <div class="mw-overlay" @click="cancel()"></div>
-                  <div class="mw-dialog max-w-md">
-                    <h2 class="font-heading text-lg font-semibold">Are you absolutely sure?</h2>
-                    <p class="mt-2 text-sm text-muted-foreground">This action cannot be undone. This will permanently delete your account and remove your data from our servers.</p>
-                    <div class="mt-6 flex justify-end gap-2">
-                      <button @click="cancel()" class="mw-btn mw-btn-outline">Cancel</button>
-                      <button @click="confirm()" class="mw-btn mw-btn-destructive">Yes, delete account</button>
-                    </div>
-                  </div>
+              <div class="mw-overlay" @click="cancel()"></div>
+
+              <!-- Dialog -->
+              <div class="mw-dialog max-w-md">
+                <h2 class="font-heading text-lg font-semibold">
+                  Are you absolutely sure?
+                </h2>
+                <p class="mt-2 text-sm text-muted-foreground leading-relaxed">
+                  This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+                </p>
+                <div class="mt-6 flex justify-end gap-2">
+                  <button @click="cancel()" class="mw-btn mw-btn-outline">
+                    Cancel
+                  </button>
+                  <button @click="confirm()" class="mw-btn mw-btn-destructive">
+                    Yes, delete account
+                  </button>
                 </div>
-              </template>
+              </div>
             </div>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={alertDialogCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-6">
+        <!-- CSS Classes -->
+        <div class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+          <div class="mw-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="border-b border-border">
+                <tr class="bg-muted/50">
+                  <th class="px-4 py-3 text-left font-semibold">Class</th>
+                  <th class="px-4 py-3 text-left font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="px-4 py-3">
+                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-overlay</code>
+                  </td>
+                  <td class="px-4 py-3 text-muted-foreground">Semi-transparent backdrop overlay</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3">
+                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-dialog</code>
+                  </td>
+                  <td class="px-4 py-3 text-muted-foreground">Dialog panel container (reused from Dialog component)</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <!-- Code -->
+        <!-- Alpine.js API -->
         <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={alertDialogCode} lang="html" />
+          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwAlertDialog()"</code>
+          </p>
+          <div class="mw-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="border-b border-border">
+                <tr class="bg-muted/50">
+                  <th class="px-4 py-3 text-left font-semibold">Property/Method</th>
+                  <th class="px-4 py-3 text-left font-semibold">Type</th>
+                  <th class="px-4 py-3 text-left font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="px-4 py-3">
+                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code>
+                  </td>
+                  <td class="px-4 py-3 text-muted-foreground">Boolean</td>
+                  <td class="px-4 py-3 text-muted-foreground">Whether the alert dialog is visible</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3">
+                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">show()</code>
+                  </td>
+                  <td class="px-4 py-3 text-muted-foreground">Method</td>
+                  <td class="px-4 py-3 text-muted-foreground">Open the alert dialog</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3">
+                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code>
+                  </td>
+                  <td class="px-4 py-3 text-muted-foreground">Method</td>
+                  <td class="px-4 py-3 text-muted-foreground">Close the alert dialog</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3">
+                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">confirm()</code>
+                  </td>
+                  <td class="px-4 py-3 text-muted-foreground">Method</td>
+                  <td class="px-4 py-3 text-muted-foreground">Dispatch 'confirm' event and close the dialog</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3">
+                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">cancel()</code>
+                  </td>
+                  <td class="px-4 py-3 text-muted-foreground">Method</td>
+                  <td class="px-4 py-3 text-muted-foreground">Dispatch 'cancel' event and close the dialog</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Accessibility -->
+        <div class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <ul class="space-y-2 text-sm text-muted-foreground leading-relaxed">
+            <li class="flex gap-2">
+              <span class="text-primary">•</span>
+              <span>Pressing <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Escape</code> triggers the cancel action</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary">•</span>
+              <span>Clicking the overlay backdrop triggers the cancel action</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary">•</span>
+              <span>Use destructive button styling (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-destructive</code>) for dangerous actions</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary">•</span>
+              <span>Clearly communicate the consequences of the action in the dialog content</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary">•</span>
+              <span>Listen to <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@confirm</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@cancel</code> events to handle user responses</span>
+            </li>
+          </ul>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

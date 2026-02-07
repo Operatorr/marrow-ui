@@ -11,11 +11,12 @@ const paginationCode = `<div x-data="mwPagination(10)" class="flex flex-col item
   <div class="mw-pagination">
     <!-- Previous button -->
     <button @click="prev()" :disabled="current === 1"
-            class="mw-pagination-item">
+            class="mw-pagination-item"
+            aria-label="Previous page">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round"
-           stroke-linejoin="round">
+           stroke-linejoin="round" aria-hidden="true">
         <path d="m15 18-6-6 6-6"/>
       </svg>
     </button>
@@ -24,6 +25,7 @@ const paginationCode = `<div x-data="mwPagination(10)" class="flex flex-col item
     <template x-for="page in pages" :key="page">
       <button @click="goTo(page)"
               :data-active="current === page ? '' : undefined"
+              :aria-current="current === page ? 'page' : undefined"
               class="mw-pagination-item"
               x-text="page">
       </button>
@@ -31,11 +33,12 @@ const paginationCode = `<div x-data="mwPagination(10)" class="flex flex-col item
 
     <!-- Next button -->
     <button @click="next()" :disabled="current === totalPages"
-            class="mw-pagination-item">
+            class="mw-pagination-item"
+            aria-label="Next page">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round"
-           stroke-linejoin="round">
+           stroke-linejoin="round" aria-hidden="true">
         <path d="m9 18 6-6-6-6"/>
       </svg>
     </button>
@@ -44,98 +47,166 @@ const paginationCode = `<div x-data="mwPagination(10)" class="flex flex-col item
 ---
 
 <DocsLayout title="Pagination" description="Pagination component with page numbers, previous and next buttons" activeComponent="pagination">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Pagination</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A pagination component with page numbers, previous and next buttons. Uses Alpine.js to manage the current page state.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight">Pagination</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A pagination component with page numbers, previous and next buttons. Uses Alpine.js to manage the current page state.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div x-data="mwPagination(10)" class="flex flex-col items-center gap-4">
-              <p class="text-sm text-muted-foreground">Page <span x-text="current" class="font-medium text-foreground"></span> of <span x-text="totalPages"></span></p>
-              <div class="mw-pagination">
-                <!-- Previous -->
-                <button @click="prev()" :disabled="current === 1" class="mw-pagination-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                </button>
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+      <div class="mw-card">
+        <div x-data="mwPagination(10)" class="flex flex-col items-center gap-4">
+          <p class="text-sm text-muted-foreground">
+            Page <span x-text="current" class="font-medium text-foreground"></span>
+            of <span x-text="totalPages"></span>
+          </p>
 
-                <!-- Page numbers -->
-                <template x-for="page in pages" :key="page">
-                  <button @click="goTo(page)"
-                          :data-active="current === page ? '' : undefined"
-                          class="mw-pagination-item"
-                          x-text="page">
-                  </button>
-                </template>
+          <div class="mw-pagination">
+            <!-- Previous button -->
+            <button @click="prev()" :disabled="current === 1"
+                    class="mw-pagination-item"
+                    aria-label="Previous page">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" aria-hidden="true">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+            </button>
 
-                <!-- Next -->
-                <button @click="next()" :disabled="current === totalPages" class="mw-pagination-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+            <!-- Page numbers -->
+            <template x-for="page in pages" x-bind:key="page">
+              <button @click="goTo(page)"
+                      :data-active="current === page ? '' : undefined"
+                      :aria-current="current === page ? 'page' : undefined"
+                      class="mw-pagination-item"
+                      x-text="page">
+              </button>
+            </template>
 
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={paginationCode} lang="html" />
-        </div>
-
-        <!-- API -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">API</h2>
-          <p class="text-muted-foreground leading-relaxed">The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwPagination(totalPages, initialPage)</code> component accepts two arguments.</p>
-          <div class="overflow-x-auto">
-            <table class="mw-table">
-              <thead>
-                <tr>
-                  <th>Property</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code class="text-sm font-mono">current</code></td>
-                  <td class="text-muted-foreground">Number</td>
-                  <td class="text-muted-foreground">The currently active page number</td>
-                </tr>
-                <tr>
-                  <td><code class="text-sm font-mono">totalPages</code></td>
-                  <td class="text-muted-foreground">Number</td>
-                  <td class="text-muted-foreground">Total number of pages</td>
-                </tr>
-                <tr>
-                  <td><code class="text-sm font-mono">pages</code></td>
-                  <td class="text-muted-foreground">Array</td>
-                  <td class="text-muted-foreground">Computed window of visible page numbers</td>
-                </tr>
-                <tr>
-                  <td><code class="text-sm font-mono">goTo(page)</code></td>
-                  <td class="text-muted-foreground">Method</td>
-                  <td class="text-muted-foreground">Navigate to a specific page</td>
-                </tr>
-                <tr>
-                  <td><code class="text-sm font-mono">prev()</code></td>
-                  <td class="text-muted-foreground">Method</td>
-                  <td class="text-muted-foreground">Go to the previous page</td>
-                </tr>
-                <tr>
-                  <td><code class="text-sm font-mono">next()</code></td>
-                  <td class="text-muted-foreground">Method</td>
-                  <td class="text-muted-foreground">Go to the next page</td>
-                </tr>
-              </tbody>
-            </table>
+            <!-- Next button -->
+            <button @click="next()" :disabled="current === totalPages"
+                    class="mw-pagination-item"
+                    aria-label="Next page">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" aria-hidden="true">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
+    </div>
 
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+      <CodeBlock code={paginationCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+
+      <div class="space-y-4">
+        <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
+        <p class="text-muted-foreground leading-relaxed">
+          The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwPagination(totalPages, initial)</code> component manages pagination state.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="mw-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="text-sm font-mono">current</code></td>
+                <td class="text-muted-foreground">Number</td>
+                <td class="text-muted-foreground">The currently active page number</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">totalPages</code></td>
+                <td class="text-muted-foreground">Number</td>
+                <td class="text-muted-foreground">Total number of pages</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">pages</code></td>
+                <td class="text-muted-foreground">Array</td>
+                <td class="text-muted-foreground">Computed window of visible page numbers (max 5)</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">goTo(page)</code></td>
+                <td class="text-muted-foreground">Method</td>
+                <td class="text-muted-foreground">Navigate to a specific page (clamped to valid range)</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">prev()</code></td>
+                <td class="text-muted-foreground">Method</td>
+                <td class="text-muted-foreground">Go to the previous page</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">next()</code></td>
+                <td class="text-muted-foreground">Method</td>
+                <td class="text-muted-foreground">Go to the next page</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+        <div class="overflow-x-auto">
+          <table class="mw-table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="text-sm font-mono">mw-pagination</code></td>
+                <td class="text-muted-foreground">Flex container with gap spacing for pagination items</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">mw-pagination-item</code></td>
+                <td class="text-muted-foreground">Page button (2.25rem square, border, rounded corners)</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">mw-pagination-item:hover</code></td>
+                <td class="text-muted-foreground">Hover state with accent background</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">mw-pagination-item[data-active]</code></td>
+                <td class="text-muted-foreground">Active page state with primary background and foreground</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+        <ul class="list-disc list-inside space-y-2 text-muted-foreground leading-relaxed">
+          <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> on previous/next buttons for screen readers</li>
+          <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-current="page"</code> to the active page button</li>
+          <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative SVG icons</li>
+          <li>Disable previous/next buttons at boundaries using the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:disabled</code> attribute</li>
+          <li>Ensure sufficient color contrast between active and inactive page buttons</li>
+          <li>Consider providing a "Skip to page" input for very long pagination lists</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

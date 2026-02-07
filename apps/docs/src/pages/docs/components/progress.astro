@@ -99,31 +99,53 @@ const progressSizesCode = `<!-- Small -->
           <CodeBlock code={progressSizesCode} lang="html" />
         </div>
 
-        <!-- API -->
+        <!-- Usage -->
         <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">API</h2>
-          <div class="overflow-x-auto">
-            <table class="mw-table">
-              <thead>
-                <tr>
-                  <th>Property</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code class="text-sm font-mono">value</code></td>
-                  <td class="text-muted-foreground">Number</td>
-                  <td class="text-muted-foreground">Current progress value (0 to 100)</td>
-                </tr>
-                <tr>
-                  <td><code class="text-sm font-mono">set(v)</code></td>
-                  <td class="text-muted-foreground">Method</td>
-                  <td class="text-muted-foreground">Set the progress value, clamped between 0 and 100</td>
-                </tr>
-              </tbody>
-            </table>
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+
+          <div>
+            <h3 class="font-heading text-lg font-medium mb-2">CSS Classes</h3>
+            <ul class="list-disc list-inside space-y-1 text-muted-foreground">
+              <li><code class="text-sm font-mono">.mw-progress</code> — Progress track (0.5rem height, full width, rounded, secondary background)</li>
+              <li><code class="text-sm font-mono">.mw-progress-bar</code> — Fill bar (primary background, transitions width)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-heading text-lg font-medium mb-2">Alpine.js API</h3>
+            <div class="overflow-x-auto">
+              <table class="mw-table">
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code class="text-sm font-mono">value</code></td>
+                    <td class="text-muted-foreground">Number</td>
+                    <td class="text-muted-foreground">Current progress value (0 to 100)</td>
+                  </tr>
+                  <tr>
+                    <td><code class="text-sm font-mono">set(v)</code></td>
+                    <td class="text-muted-foreground">Method</td>
+                    <td class="text-muted-foreground">Set the progress value, clamped between 0 and 100</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-heading text-lg font-medium mb-2">Accessibility</h3>
+            <ul class="list-disc list-inside space-y-1 text-muted-foreground">
+              <li>Add <code class="text-sm font-mono">role="progressbar"</code> to the <code class="text-sm font-mono">.mw-progress</code> element</li>
+              <li>Include <code class="text-sm font-mono">aria-valuenow</code>, <code class="text-sm font-mono">aria-valuemin="0"</code>, and <code class="text-sm font-mono">aria-valuemax="100"</code> attributes</li>
+              <li>Add <code class="text-sm font-mono">aria-label</code> or <code class="text-sm font-mono">aria-labelledby</code> to describe the progress purpose</li>
+              <li>Consider adding <code class="text-sm font-mono">aria-live="polite"</code> for dynamic updates to announce changes to screen readers</li>
+            </ul>
           </div>
         </div>
       </div>

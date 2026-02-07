@@ -16,124 +16,151 @@ const popoverCode = `<div class="relative" x-data="mwPopover()">
        x-transition:leave="transition ease-in duration-75"
        x-transition:leave-start="opacity-100 scale-100"
        x-transition:leave-end="opacity-0 scale-95"
-       class="absolute left-0 top-full mt-2 z-50 w-72 rounded-md border border-border bg-popover p-4 shadow-md">
-    <div class="space-y-3">
+       class="mw-popover absolute left-0 top-full mt-2 z-50 w-80">
+    <div class="space-y-4">
       <div>
-        <h4 class="font-medium text-sm">Dimensions</h4>
-        <p class="text-xs text-muted-foreground">Set the dimensions for the layer.</p>
+        <h4 class="font-medium text-sm">Settings</h4>
+        <p class="text-xs text-muted-foreground">Configure the dimensions for this element.</p>
       </div>
-      <div class="grid gap-2">
+      <div class="space-y-3">
         <div class="grid grid-cols-3 items-center gap-3">
-          <label class="mw-label text-xs">Width</label>
-          <input type="text" class="mw-input col-span-2" value="100%">
+          <label for="popover-width" class="mw-label text-xs">Width</label>
+          <input type="text" id="popover-width" class="mw-input col-span-2" value="100%">
         </div>
         <div class="grid grid-cols-3 items-center gap-3">
-          <label class="mw-label text-xs">Height</label>
-          <input type="text" class="mw-input col-span-2" value="25px">
+          <label for="popover-height" class="mw-label text-xs">Height</label>
+          <input type="text" id="popover-height" class="mw-input col-span-2" value="25px">
+        </div>
+        <div class="grid grid-cols-3 items-center gap-3">
+          <label for="popover-max-width" class="mw-label text-xs">Max Width</label>
+          <input type="text" id="popover-max-width" class="mw-input col-span-2" value="none">
         </div>
       </div>
     </div>
   </div>
 </div>`;
-
-const popoverSimpleCode = `<div class="relative" x-data="mwPopover()">
-  <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon">
-    <!-- Info icon SVG -->
-  </button>
-  <div x-show="open" @click.outside="close()" x-cloak
-       x-transition:enter="transition ease-out duration-100"
-       x-transition:enter-start="opacity-0 scale-95"
-       x-transition:enter-end="opacity-100 scale-100"
-       x-transition:leave="transition ease-in duration-75"
-       x-transition:leave-start="opacity-100 scale-100"
-       x-transition:leave-end="opacity-0 scale-95"
-       class="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 w-64 rounded-md border border-border bg-popover p-3 shadow-md">
-    <p class="text-sm text-muted-foreground">Popover text content here.</p>
-  </div>
-</div>`;
 ---
 
 <DocsLayout title="Popover" description="A floating popover panel anchored to a trigger button" activeComponent="popover">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Popover</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A floating panel that appears when a trigger button is clicked. Useful for displaying additional content, forms, or settings without leaving the current context.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Popover</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A floating panel that appears when a trigger button is clicked. Useful for displaying additional content, forms, or settings without leaving the current context.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div class="flex items-center justify-center py-8">
-              <div class="relative" x-data="mwPopover()">
-                <button @click="toggle()" class="mw-btn mw-btn-outline">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-                  Open Popover
-                </button>
-                <div x-show="open" @click.outside="close()" x-cloak
-                     x-transition:enter="transition ease-out duration-100"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-75"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="absolute left-0 top-full mt-2 z-50 w-72 rounded-md border border-border bg-popover p-4 shadow-md" style="border-radius: var(--marrow-radius);">
-                  <div class="space-y-3">
-                    <div>
-                      <h4 class="font-medium text-sm">Dimensions</h4>
-                      <p class="text-xs text-muted-foreground">Set the dimensions for the layer.</p>
-                    </div>
-                    <div class="grid gap-2">
-                      <div class="grid grid-cols-3 items-center gap-3">
-                        <label class="mw-label text-xs">Width</label>
-                        <input type="text" class="mw-input col-span-2" value="100%" placeholder="Width">
-                      </div>
-                      <div class="grid grid-cols-3 items-center gap-3">
-                        <label class="mw-label text-xs">Height</label>
-                        <input type="text" class="mw-input col-span-2" value="25px" placeholder="Height">
-                      </div>
-                    </div>
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="flex items-center justify-center py-12">
+          <div class="relative" x-data="mwPopover()">
+            <button @click="toggle()" class="mw-btn mw-btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              Open Popover
+            </button>
+            <div x-show="open" @click.outside="close()" x-cloak
+                 x-transition:enter="transition ease-out duration-100"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-75"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="mw-popover absolute left-0 top-full mt-2 z-50 w-80">
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-medium text-sm">Settings</h4>
+                  <p class="text-xs text-muted-foreground">Configure the dimensions for this element.</p>
+                </div>
+                <div class="space-y-3">
+                  <div class="grid grid-cols-3 items-center gap-3">
+                    <label for="popover-width" class="mw-label text-xs">Width</label>
+                    <input type="text" id="popover-width" class="mw-input col-span-2" value="100%">
+                  </div>
+                  <div class="grid grid-cols-3 items-center gap-3">
+                    <label for="popover-height" class="mw-label text-xs">Height</label>
+                    <input type="text" id="popover-height" class="mw-input col-span-2" value="25px">
+                  </div>
+                  <div class="grid grid-cols-3 items-center gap-3">
+                    <label for="popover-max-width" class="mw-label text-xs">Max Width</label>
+                    <input type="text" id="popover-max-width" class="mw-input col-span-2" value="none">
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={popoverCode} lang="html" />
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={popoverCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
+          <p class="mt-2 text-muted-foreground leading-relaxed">
+            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwPopover()"</code> on the wrapper element.
+          </p>
         </div>
 
-        <!-- Simple Text Popover -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Simple Text Popover</h2>
-          <p class="text-muted-foreground leading-relaxed">A simpler popover variant with just text content.</p>
-          <div class="mw-card">
-            <div class="flex items-center justify-center py-8">
-              <div class="relative" x-data="mwPopover()">
-                <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-                </button>
-                <div x-show="open" @click.outside="close()" x-cloak
-                     x-transition:enter="transition ease-out duration-100"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-75"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50 w-64 rounded-md border border-border bg-popover p-3 shadow-md" style="border-radius: var(--marrow-radius);">
-                  <p class="text-sm text-muted-foreground">This is a popover with simple text content. Click outside to dismiss.</p>
-                </div>
-              </div>
-            </div>
+        <div class="mw-card">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-border">
+                  <th class="text-left py-3 px-4 font-semibold">Property/Method</th>
+                  <th class="text-left py-3 px-4 font-semibold">Type</th>
+                  <th class="text-left py-3 px-4 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code></td>
+                  <td class="py-3 px-4 text-muted-foreground">Boolean</td>
+                  <td class="py-3 px-4 text-muted-foreground">Controls popover visibility state</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">toggle()</code></td>
+                  <td class="py-3 px-4 text-muted-foreground">Function</td>
+                  <td class="py-3 px-4 text-muted-foreground">Toggles the open state</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code></td>
+                  <td class="py-3 px-4 text-muted-foreground">Function</td>
+                  <td class="py-3 px-4 text-muted-foreground">Closes the popover</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+        </div>
 
-          <CodeBlock code={popoverSimpleCode} lang="html" />
+        <div>
+          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+          <p class="mt-2 text-muted-foreground leading-relaxed">
+            The popover content uses the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-popover</code> class, which provides the border, background, padding, shadow, and rounded corners styling.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
+            <li>• Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@click.outside</code> to close the popover when clicking outside</li>
+            <li>• Include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-cloak</code> to prevent flash of unstyled content</li>
+            <li>• Ensure form elements inside popovers have proper labels with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code> associations</li>
+            <li>• Position popovers with appropriate <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">z-index</code> to layer above other content</li>
+            <li>• Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-haspopup="dialog"</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-expanded</code> attributes to the trigger button for screen reader support</li>
+          </ul>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

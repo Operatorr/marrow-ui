@@ -2,7 +2,7 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const checkboxCode = `<!-- Unchecked by default -->
+const checkboxCode = `<!-- Single Checkbox -->
 <div x-data="mwCheckbox()" class="flex items-center gap-2">
   <button @click="toggle()"
     :data-state="checked ? 'checked' : 'unchecked'"
@@ -21,7 +21,7 @@ const checkboxCode = `<!-- Unchecked by default -->
   </label>
 </div>
 
-<!-- Checked by default -->
+<!-- Checked by Default -->
 <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
   <button @click="toggle()"
     :data-state="checked ? 'checked' : 'unchecked'"
@@ -38,47 +38,241 @@ const checkboxCode = `<!-- Unchecked by default -->
   <label @click="toggle()" class="mw-label cursor-pointer select-none">
     Send me email notifications
   </label>
+</div>
+
+<!-- Disabled State -->
+<div x-data="mwCheckbox()" class="flex items-center gap-2 opacity-50 pointer-events-none">
+  <button
+    data-state="unchecked"
+    class="mw-checkbox"
+    role="checkbox"
+    aria-checked="false"
+    disabled>
+    <svg x-show="false"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+  </button>
+  <label class="mw-label cursor-not-allowed select-none">
+    Disabled checkbox
+  </label>
+</div>`;
+
+const checkboxGroupCode = `<!-- Checkbox Group (Notification Preferences) -->
+<div class="space-y-4">
+  <div>
+    <h3 class="font-heading text-lg font-semibold">Notification Preferences</h3>
+    <p class="text-sm text-muted-foreground mt-1">
+      Choose how you'd like to receive notifications
+    </p>
+  </div>
+
+  <div class="space-y-3">
+    <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        Email notifications
+      </label>
+    </div>
+
+    <div x-data="mwCheckbox(false)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        SMS notifications
+      </label>
+    </div>
+
+    <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        Push notifications
+      </label>
+    </div>
+  </div>
 </div>`;
 ---
 
 <DocsLayout title="Checkbox" description="A toggleable checkbox control with label and checked state indicator" activeComponent="checkbox">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Checkbox</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A toggleable checkbox control with label and checked state indicator.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Checkbox</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A toggleable checkbox control with label and checked state indicator.</p>
+    </div>
+    <div class="mw-separator"></div>
 
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card flex items-center justify-center min-h-[240px]">
+        <div class="space-y-4">
+          <div x-data="mwCheckbox()" class="flex items-center gap-2">
+            <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
+              <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+            <label @click="toggle()" class="mw-label cursor-pointer select-none">Accept terms and conditions</label>
+          </div>
+          <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+            <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
+              <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+            <label @click="toggle()" class="mw-label cursor-pointer select-none">Send me email notifications</label>
+          </div>
+          <div x-data="mwCheckbox()" class="flex items-center gap-2 opacity-50 pointer-events-none">
+            <button data-state="unchecked" class="mw-checkbox" role="checkbox" aria-checked="false" disabled>
+              <svg x-show="false" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </button>
+            <label class="mw-label cursor-not-allowed select-none">Disabled checkbox</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Checkbox Group</h3>
+      <div class="mw-card min-h-[240px] p-6">
+        <div class="space-y-4">
+          <div>
+            <h3 class="font-heading text-lg font-semibold">Notification Preferences</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed mt-1">
+              Choose how you'd like to receive notifications
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+              <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
+                <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </button>
+              <label @click="toggle()" class="mw-label cursor-pointer select-none">Email notifications</label>
+            </div>
+
+            <div x-data="mwCheckbox(false)" class="flex items-center gap-2">
+              <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
+                <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </button>
+              <label @click="toggle()" class="mw-label cursor-pointer select-none">SMS notifications</label>
+            </div>
+
+            <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+              <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
+                <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </button>
+              <label @click="toggle()" class="mw-label cursor-pointer select-none">Push notifications</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={checkboxCode} lang="html" />
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Checkbox Group Code</h3>
+      <CodeBlock code={checkboxGroupCode} lang="html" />
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+      <div class="space-y-6">
         <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div class="space-y-4">
-              <div x-data="mwCheckbox()" class="flex items-center gap-2">
-                <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
-                  <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                </button>
-                <label @click="toggle()" class="mw-label cursor-pointer select-none">Accept terms and conditions</label>
-              </div>
-              <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
-                <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
-                  <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                </button>
-                <label @click="toggle()" class="mw-label cursor-pointer select-none">Send me email notifications</label>
-              </div>
-              <div x-data="mwCheckbox()" class="flex items-center gap-2">
-                <button @click="toggle()" :data-state="checked ? 'checked' : 'unchecked'" class="mw-checkbox" role="checkbox" :aria-checked="checked">
-                  <svg x-show="checked" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                </button>
-                <label @click="toggle()" class="mw-label cursor-pointer select-none">Enable dark mode</label>
-              </div>
+          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+          <div class="space-y-2">
+            <div>
+              <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-checkbox</code>
+              <p class="text-sm text-muted-foreground leading-relaxed mt-1">
+                Base checkbox control (1rem square, border, centered flex container for checkmark)
+              </p>
+            </div>
+            <div>
+              <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-checkbox[data-state="checked"]</code>
+              <p class="text-sm text-muted-foreground leading-relaxed mt-1">
+                Checked state styling (primary background and foreground color)
+              </p>
             </div>
           </div>
         </div>
 
         <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={checkboxCode} lang="html" />
+          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
+          <div class="mw-card overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead class="border-b">
+                  <tr class="bg-muted/50">
+                    <th class="text-left p-3 font-semibold">Property</th>
+                    <th class="text-left p-3 font-semibold">Type</th>
+                    <th class="text-left p-3 font-semibold">Description</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y">
+                  <tr>
+                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">checked</code></td>
+                    <td class="p-3 text-muted-foreground">Boolean</td>
+                    <td class="p-3 text-muted-foreground leading-relaxed">Current checked state of the checkbox</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">toggle()</code></td>
+                    <td class="p-3 text-muted-foreground">Function</td>
+                    <td class="p-3 text-muted-foreground leading-relaxed">Toggles the checked state between true and false</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwCheckbox()"</code> for unchecked by default, or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwCheckbox(true)"</code> for checked by default.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <ul class="space-y-2 text-sm text-muted-foreground leading-relaxed list-disc list-inside">
+            <li>Uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="checkbox"</code> for proper semantics</li>
+            <li>Dynamically sets <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-checked</code> attribute based on state</li>
+            <li>Uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">data-state</code> attribute for styling states</li>
+            <li>Label is clickable and associated with the checkbox for better usability</li>
+            <li>Keyboard accessible (Space key toggles when focused)</li>
+            <li>Visual checkmark indicator appears when checked</li>
+          </ul>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

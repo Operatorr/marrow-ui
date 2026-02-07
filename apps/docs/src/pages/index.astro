@@ -11,18 +11,18 @@ import Navbar from "../components/Navbar.astro";
   <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
     <div class="max-w-7xl mx-auto flex h-14 items-center px-4 md:px-6">
       <a href="/" class="flex items-center gap-2 font-heading font-bold text-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
         Marrow UI
       </a>
       <nav class="hidden md:flex items-center gap-1 ml-6 text-sm">
-        <a href="/docs/" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Documentation</a>
+        <a href="/docs/" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Docs</a>
         <a href="/docs/components/button/" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Components</a>
         <a href="/docs/customization/" class="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground transition-colors">Themes</a>
       </nav>
       <div class="flex-1"></div>
       <div class="flex items-center gap-2">
-        <a href="https://github.com" target="_blank" class="mw-btn mw-btn-ghost mw-btn-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="mw-btn mw-btn-ghost mw-btn-icon">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         </a>
       </div>
     </div>
@@ -30,29 +30,30 @@ import Navbar from "../components/Navbar.astro";
 
   <!-- Hero Section -->
   <section class="relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 pt-20 pb-16 md:pt-32 md:pb-24">
+    <div class="hero-mesh"></div>
+    <div class="max-w-7xl mx-auto px-4 md:px-6 pt-20 pb-16 md:pt-32 md:pb-24 relative">
       <div class="max-w-3xl">
-        <div class="flex items-center gap-2 mb-6">
+        <div class="flex items-center gap-2 mb-6 hero-animate hero-animate-1">
           <span class="mw-badge mw-badge-secondary text-xs">v0.1.0</span>
           <span class="text-sm text-muted-foreground">Alpine.js + Tailwind CSS</span>
         </div>
-        <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+        <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-pretty hero-animate hero-animate-2">
           Built for humans.<br>
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Readable by AI.</span>
         </h1>
-        <p class="mt-6 text-lg md:text-xl text-muted-foreground max-w-[600px] leading-relaxed">
+        <p class="mt-6 text-lg md:text-xl text-muted-foreground max-w-[600px] leading-relaxed hero-animate hero-animate-3">
           A beautifully designed UI kit with LLM-optimized documentation. Built on Tailwind CSS and Alpine.js. Copy, paste, or let your AI assistant handle it.
         </p>
-        <div class="flex flex-wrap items-center gap-3 mt-8">
+        <div class="flex flex-wrap items-center gap-3 mt-8 hero-animate hero-animate-4">
           <a href="/docs/" class="mw-btn mw-btn-primary mw-btn-lg">
             Get Started
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
           <a href="/docs/components/button/" class="mw-btn mw-btn-outline mw-btn-lg">Browse Components</a>
         </div>
 
         <!-- Code snippet -->
-        <div class="mt-10 max-w-lg relative bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
+        <div class="mt-10 max-w-lg relative bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden hero-animate hero-animate-5">
           <div class="flex items-center justify-between px-4 py-2 bg-zinc-800/50 border-b border-zinc-800">
             <div class="flex items-center gap-1.5">
               <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
@@ -67,74 +68,71 @@ import Navbar from "../components/Navbar.astro";
         </div>
       </div>
     </div>
-    <!-- Decorative gradient -->
-    <div class="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-tr from-violet-500/10 to-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
   </section>
 
   <!-- Features Grid -->
   <section class="border-t bg-muted/30">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
       <div class="text-center mb-12">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">Why Marrow UI?</h2>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight text-pretty">Why Marrow UI?</h2>
         <p class="mt-3 text-muted-foreground text-lg max-w-2xl mx-auto">A different approach to UI kits. No React, no virtual DOM, no complex state management. Just HTML, CSS, and a sprinkle of Alpine.js.</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Feature 1 -->
-        <div class="mw-card">
+        <div class="mw-card feature-card">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m9 12 2 2 4-4"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
             <h3 class="font-heading font-semibold">No Framework Lock-in</h3>
           </div>
           <p class="text-sm text-muted-foreground leading-relaxed">Pure HTML and Tailwind CSS. Interactivity through Alpine.js. Works with any backend or static site generator.</p>
         </div>
         <!-- Feature 2 -->
-        <div class="mw-card">
+        <div class="mw-card feature-card">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-9 h-9 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
             </div>
             <h3 class="font-heading font-semibold">Fully Themeable</h3>
           </div>
           <p class="text-sm text-muted-foreground leading-relaxed">One config controls colors, radius, fonts, shadows, and 5 compactness levels. Light and dark mode included.</p>
         </div>
         <!-- Feature 3 -->
-        <div class="mw-card">
+        <div class="mw-card feature-card">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
             </div>
             <h3 class="font-heading font-semibold">60+ Components</h3>
           </div>
           <p class="text-sm text-muted-foreground leading-relaxed">From buttons and cards to data tables and command palettes. Everything you need to build complete applications.</p>
         </div>
         <!-- Feature 4 -->
-        <div class="mw-card">
+        <div class="mw-card feature-card">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-9 h-9 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
             </div>
             <h3 class="font-heading font-semibold">Copy & Paste</h3>
           </div>
           <p class="text-sm text-muted-foreground leading-relaxed">Each component is self-contained. Copy the HTML, drop it in your project. No npm install, no imports, no bundler.</p>
         </div>
         <!-- Feature 6 -->
-        <div class="mw-card">
+        <div class="mw-card feature-card">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
             </div>
             <h3 class="font-heading font-semibold">Alpine.js Powered</h3>
           </div>
           <p class="text-sm text-muted-foreground leading-relaxed">All interactivity uses Alpine.js. Lightweight, declarative, and right in your HTML. No virtual DOM overhead.</p>
         </div>
         <!-- Feature 7 -->
-        <div class="mw-card">
+        <div class="mw-card feature-card">
           <div class="flex items-center gap-3 mb-3">
             <div class="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
             </div>
             <h3 class="font-heading font-semibold">AI-Ready Documentation</h3>
           </div>
@@ -149,12 +147,133 @@ import Navbar from "../components/Navbar.astro";
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
       <div class="text-center mb-12">
         <span class="mw-badge mw-badge-secondary text-xs mb-4">Interactive Demos</span>
-        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">Real World Examples</h2>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight text-pretty">Real World Examples</h2>
         <p class="mt-3 text-muted-foreground text-lg max-w-2xl mx-auto">Production-ready patterns built with Marrow components. Fully interactive — try them out.</p>
       </div>
 
+      <!-- Theme Configuration Container -->
+      <div x-data="{
+        theme: 'blue',
+        themes: {
+          blue:   { primary: '220 90% 56%' },
+          amber:  { primary: '38 92% 50%' },
+          cyan:   { primary: '192 91% 36%' },
+          purple: { primary: '270 60% 55%' },
+          violet: { primary: '263 70% 50%' },
+          teal:   { primary: '173 80% 40%' },
+          rose:   { primary: '347 77% 50%' },
+          green:  { primary: '142 71% 45%' },
+          orange: { primary: '24 95% 53%' }
+        },
+        compactness: 'normal',
+        compactnessPresets: {
+          minimal:  { text: '0.75rem',  btnPy: '0.25rem',  btnPx: '0.5rem',   inputPy: '0.25rem',  inputPx: '0.5rem',   cardP: '0.75rem' },
+          compact:  { text: '0.875rem', btnPy: '0.375rem', btnPx: '0.75rem',  inputPy: '0.375rem', inputPx: '0.75rem',  cardP: '1rem' },
+          normal:   { text: '1rem',     btnPy: '0.5rem',   btnPx: '1rem',     inputPy: '0.5rem',   inputPx: '0.75rem',  cardP: '1.5rem' },
+          relaxed:  { text: '1.125rem', btnPy: '0.625rem', btnPx: '1.25rem',  inputPy: '0.625rem', inputPx: '1rem',     cardP: '2rem' },
+          spacious: { text: '1.25rem',  btnPy: '0.75rem',  btnPx: '1.5rem',   inputPy: '0.75rem',  inputPx: '1.25rem',  cardP: '2.5rem' }
+        },
+        radius: 'lg',
+        radiusPresets: { none: '0px', sm: '0.25rem', md: '0.375rem', lg: '0.5rem', xl: '0.75rem', '2xl': '1rem', full: '9999px' },
+        typography: 'inter',
+        typographyPresets: {
+          inter:  { heading: 'Inter', body: 'Inter' },
+          system: { heading: 'system-ui', body: 'system-ui' },
+          geist:  { heading: 'Geist', body: 'Geist' }
+        },
+        shadow: 'sm',
+        shadowPresets: {
+          none: 'none',
+          sm:   '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+          md:   '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+          lg:   '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+          xl:   '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)'
+        }
+      }">
+
+        <!-- Theme Configuration Bar -->
+        <div class="mb-8 p-4 bg-muted/30 border border-border rounded-xl">
+          <div class="flex flex-wrap items-center gap-4 justify-center">
+
+            <!-- Theme/Color Selector -->
+            <div class="flex flex-col gap-1.5">
+              <label for="theme-select" class="text-xs text-muted-foreground font-medium">Theme</label>
+              <select id="theme-select" class="mw-select text-sm py-1.5 w-28" x-model="theme">
+                <option value="blue">Blue</option>
+                <option value="amber">Amber</option>
+                <option value="cyan">Cyan</option>
+                <option value="purple">Purple</option>
+                <option value="violet">Violet</option>
+                <option value="teal">Teal</option>
+                <option value="rose">Rose</option>
+                <option value="green">Green</option>
+                <option value="orange">Orange</option>
+              </select>
+            </div>
+
+            <!-- Compactness -->
+            <div class="flex flex-col gap-1.5">
+              <label for="compactness-select" class="text-xs text-muted-foreground font-medium">Compactness</label>
+              <select id="compactness-select" class="mw-select text-sm py-1.5 w-28" x-model="compactness">
+                <option value="minimal">Minimal</option>
+                <option value="compact">Compact</option>
+                <option value="normal">Normal</option>
+                <option value="relaxed">Relaxed</option>
+                <option value="spacious">Spacious</option>
+              </select>
+            </div>
+
+            <!-- Radius -->
+            <div class="flex flex-col gap-1.5">
+              <label for="radius-select" class="text-xs text-muted-foreground font-medium">Radius</label>
+              <select id="radius-select" class="mw-select text-sm py-1.5 w-24" x-model="radius">
+                <option value="none">None</option>
+                <option value="sm">SM</option>
+                <option value="md">MD</option>
+                <option value="lg">LG</option>
+                <option value="xl">XL</option>
+                <option value="2xl">2XL</option>
+                <option value="full">Full</option>
+              </select>
+            </div>
+
+            <!-- Typography -->
+            <div class="flex flex-col gap-1.5">
+              <label for="typography-select" class="text-xs text-muted-foreground font-medium">Typography</label>
+              <select id="typography-select" class="mw-select text-sm py-1.5 w-28" x-model="typography">
+                <option value="inter">Inter</option>
+                <option value="system">System</option>
+                <option value="geist">Geist</option>
+              </select>
+            </div>
+
+            <!-- Shadows -->
+            <div class="flex flex-col gap-1.5">
+              <label for="shadow-select" class="text-xs text-muted-foreground font-medium">Shadows</label>
+              <select id="shadow-select" class="mw-select text-sm py-1.5 w-24" x-model="shadow">
+                <option value="none">None</option>
+                <option value="sm">SM</option>
+                <option value="md">MD</option>
+                <option value="lg">LG</option>
+                <option value="xl">XL</option>
+              </select>
+            </div>
+
+            <!-- Reset Button -->
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs text-muted-foreground font-medium invisible">Reset</label>
+              <button class="mw-btn mw-btn-ghost mw-btn-sm" @click="theme='blue'; compactness='normal'; radius='lg'; typography='inter'; shadow='sm'">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                Reset
+              </button>
+            </div>
+
+          </div>
+        </div>
+
       <!-- Examples Grid - Masonry Layout -->
-      <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+           :style="'--marrow-primary: ' + themes[theme].primary + '; --marrow-ring: ' + themes[theme].primary + '; --marrow-radius: ' + radiusPresets[radius] + '; --marrow-text: ' + compactnessPresets[compactness].text + '; --marrow-btn-py: ' + compactnessPresets[compactness].btnPy + '; --marrow-btn-px: ' + compactnessPresets[compactness].btnPx + '; --marrow-input-py: ' + compactnessPresets[compactness].inputPy + '; --marrow-input-px: ' + compactnessPresets[compactness].inputPx + '; --marrow-card-p: ' + compactnessPresets[compactness].cardP + '; --marrow-shadow: ' + shadowPresets[shadow] + '; --marrow-font-heading: ' + typographyPresets[typography].heading + ', ui-sans-serif, system-ui, sans-serif; --marrow-font-body: ' + typographyPresets[typography].body + ', ui-sans-serif, system-ui, sans-serif;'">
 
         <!-- Column 1 -->
         <div class="flex flex-col gap-6">
@@ -182,57 +301,57 @@ import Navbar from "../components/Navbar.astro";
             <span class="mw-badge text-[10px] px-2 py-0.5 bg-emerald-500/20 text-emerald-500 border-0">Secure</span>
           </div>
           <div class="space-y-2">
-            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all duration-200"
+            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-[border-color,background-color,box-shadow] duration-200"
                    :class="selected === 'card' ? 'border-blue-500/50 bg-blue-500/10 shadow-lg shadow-blue-500/5' : 'hover:border-muted-foreground/30 hover:bg-muted/50'"
                    @click="selected = 'card'; showCardForm = true">
-              <button class="mw-radio shrink-0" :data-state="selected === 'card' ? 'checked' : ''"></button>
+              <button class="mw-radio shrink-0" role="radio" :aria-checked="(selected === 'card').toString()" :data-state="selected === 'card' ? 'checked' : ''"></button>
               <div class="flex items-center gap-2 flex-1">
                 <div class="w-8 h-5 bg-gradient-to-r from-blue-600 to-blue-400 rounded flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
                 </div>
                 <span class="text-sm text-foreground font-medium">Credit Card</span>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="m9 18 6-6-6-6"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="m9 18 6-6-6-6"/></svg>
             </label>
 
             <!-- Card Input (shown when card selected) -->
             <div x-show="selected === 'card'" x-collapse class="pl-4 border-l-2 border-blue-500/30 ml-2">
               <div class="pt-2 pb-1 space-y-2">
-                <input type="text" class="mw-input text-sm" placeholder="4242 4242 4242 4242" x-model="cardNumber" @input="cardNumber = cardNumber.replace(/\D/g, '').replace(/(\d{4})/g, '$1 ').trim().slice(0, 19)">
+                <input type="text" class="mw-input text-sm" placeholder="4242 4242 4242 4242" autocomplete="cc-number" inputmode="numeric" x-model="cardNumber" @input="cardNumber = cardNumber.replace(/\D/g, '').replace(/(\d{4})/g, '$1 ').trim().slice(0, 19)">
                 <div class="flex gap-2">
-                  <input type="text" class="mw-input text-sm flex-1" placeholder="MM/YY">
-                  <input type="text" class="mw-input text-sm w-20" placeholder="CVC">
+                  <input type="text" class="mw-input text-sm flex-1" placeholder="MM/YY" autocomplete="cc-exp">
+                  <input type="text" class="mw-input text-sm w-20" placeholder="CVC" autocomplete="cc-csc" inputmode="numeric">
                 </div>
               </div>
             </div>
 
-            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all duration-200"
+            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-[border-color,background-color,box-shadow] duration-200"
                    :class="selected === 'paypal' ? 'border-blue-500/50 bg-blue-500/10 shadow-lg shadow-blue-500/5' : 'hover:border-muted-foreground/30 hover:bg-muted/50'"
                    @click="selected = 'paypal'">
-              <button class="mw-radio shrink-0" :data-state="selected === 'paypal' ? 'checked' : ''"></button>
+              <button class="mw-radio shrink-0" role="radio" :aria-checked="(selected === 'paypal').toString()" :data-state="selected === 'paypal' ? 'checked' : ''"></button>
               <div class="flex items-center gap-2 flex-1">
                 <div class="w-8 h-5 bg-[#003087] rounded flex items-center justify-center">
                   <span class="text-[10px] font-bold text-white italic">Pay</span>
                 </div>
                 <span class="text-sm text-foreground font-medium">PayPal</span>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
             </label>
-            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-all duration-200"
+            <label class="group flex items-center gap-3 p-3 border border-border rounded-lg cursor-pointer transition-[border-color,background-color,box-shadow] duration-200"
                    :class="selected === 'apple' ? 'border-blue-500/50 bg-blue-500/10 shadow-lg shadow-blue-500/5' : 'hover:border-muted-foreground/30 hover:bg-muted/50'"
                    @click="selected = 'apple'">
-              <button class="mw-radio shrink-0" :data-state="selected === 'apple' ? 'checked' : ''"></button>
+              <button class="mw-radio shrink-0" role="radio" :aria-checked="(selected === 'apple').toString()" :data-state="selected === 'apple' ? 'checked' : ''"></button>
               <div class="flex items-center gap-2 flex-1">
                 <div class="w-8 h-5 bg-foreground rounded flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="text-background"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
                 </div>
                 <span class="text-sm text-foreground font-medium">Apple Pay</span>
               </div>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="m9 18 6-6-6-6"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground/50 group-hover:text-muted-foreground transition-colors"><path d="m9 18 6-6-6-6"/></svg>
             </label>
           </div>
           <button class="mw-btn mw-btn-primary w-full mt-4" :disabled="selected === 'card' && !cardNumber">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
             Pay $99.00
           </button>
         </div>
@@ -258,13 +377,13 @@ import Navbar from "../components/Navbar.astro";
                 <span class="text-2xl font-bold text-foreground">$<span x-text="max"></span></span>
               </div>
               <div class="relative h-2 bg-muted rounded-full overflow-hidden">
-                <div class="absolute h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-150"
+                <div class="absolute h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-[left,width] duration-150"
                      :style="'left: ' + min + '%; width: ' + (max - min) + '%'"></div>
               </div>
               <div class="flex gap-2">
                 <template x-for="preset in presets" :key="preset.label">
                   <button
-                    class="flex-1 py-1.5 text-[10px] font-medium rounded-md transition-all"
+                    class="flex-1 py-1.5 text-[10px] font-medium rounded-md transition-[background-color,color,border-color]"
                     :class="min == preset.min && max == preset.max ? 'bg-blue-500/20 text-blue-500 border border-blue-500/30' : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border border-transparent'"
                     @click="min = preset.min; max = preset.max"
                     x-text="preset.label"
@@ -316,15 +435,15 @@ import Navbar from "../components/Navbar.astro";
                   <p class="text-sm text-foreground truncate" x-text="member.email"></p>
                   <p class="text-[10px] text-muted-foreground" x-text="member.role"></p>
                 </div>
-                <button @click="members = members.filter((_, i) => i !== index)" class="opacity-0 group-hover:opacity-100 p-1 text-muted-foreground hover:text-destructive transition-all">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                <button @click="members = members.filter((_, i) => i !== index)" aria-label="Remove member" class="opacity-0 group-hover:opacity-100 p-1 text-muted-foreground hover:text-destructive transition-opacity">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
               </div>
             </template>
           </div>
           <div class="mt-3 pt-3 border-t border-border">
             <div class="flex gap-2">
-              <input type="email" class="mw-input flex-1 text-sm" placeholder="colleague@company.com" x-model="newEmail" @keydown.enter="if(newEmail.includes('@')) { members.push({ email: newEmail, role: newRole, color: colors[members.length % colors.length] }); newEmail = '' }">
+              <input type="email" class="mw-input flex-1 text-sm" placeholder="colleague@company.com" autocomplete="email" spellcheck="false" x-model="newEmail" @keydown.enter="if(newEmail.includes('@')) { members.push({ email: newEmail, role: newRole, color: colors[members.length % colors.length] }); newEmail = '' }">
               <select class="mw-select text-sm w-24 py-1.5" x-model="newRole">
                 <template x-for="role in roles" :key="role">
                   <option :value="role" x-text="role"></option>
@@ -332,7 +451,7 @@ import Navbar from "../components/Navbar.astro";
               </select>
             </div>
             <button class="mw-btn mw-btn-primary w-full mt-2" :disabled="!newEmail.includes('@')" @click="if(newEmail.includes('@')) { members.push({ email: newEmail, role: newRole, color: colors[members.length % colors.length] }); newEmail = '' }">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
               Send Invite
             </button>
           </div>
@@ -343,12 +462,12 @@ import Navbar from "../components/Navbar.astro";
           status: 'syncing',
           statuses: ['syncing', 'loading', 'updating', 'success', 'error'],
           auto: true
-        }" x-init="setInterval(() => { if(auto) { const idx = statuses.indexOf(status); status = statuses[(idx + 1) % statuses.length] } }, 2000)">
+        }" x-init="if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setInterval(() => { if(auto) { const idx = statuses.indexOf(status); status = statuses[(idx + 1) % statuses.length] } }, 2000) }">
           <div class="flex items-center justify-between mb-4">
             <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider">Status Indicators</h3>
             <label class="flex items-center gap-2 cursor-pointer">
               <span class="text-[10px] text-muted-foreground">Auto</span>
-              <button class="mw-switch" style="width: 2rem; height: 1rem;" :data-state="auto ? 'checked' : 'unchecked'" @click="auto = !auto">
+              <button class="mw-switch" role="switch" :aria-checked="auto.toString()" style="width: 2rem; height: 1rem;" :data-state="auto ? 'checked' : 'unchecked'" @click="auto = !auto">
                 <span class="mw-switch-thumb" style="width: 0.75rem; height: 0.75rem; top: 1px; left: 1px;" :style="auto && 'transform: translateX(0.9rem)'"></span>
               </button>
             </label>
@@ -358,7 +477,7 @@ import Navbar from "../components/Navbar.astro";
             <div class="flex items-center justify-center py-3">
               <template x-if="status === 'syncing'">
                 <span class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 text-blue-500 rounded-full text-sm font-medium border border-blue-500/20">
-                  <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                  <svg class="motion-safe:animate-spin" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
                   Syncing...
                 </span>
               </template>
@@ -370,7 +489,7 @@ import Navbar from "../components/Navbar.astro";
               </template>
               <template x-if="status === 'updating'">
                 <span class="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/20 text-violet-500 rounded-full text-sm font-medium border border-violet-500/20">
-                  <svg class="animate-bounce" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                  <svg class="motion-safe:animate-bounce" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                   Updating...
                 </span>
               </template>
@@ -442,19 +561,19 @@ import Navbar from "../components/Navbar.astro";
             <div class="space-y-3">
               <div class="flex items-center justify-between">
                 <span class="text-sm">Dark Mode</span>
-                <button class="mw-switch" :data-state="dark ? 'checked' : 'unchecked'" @click="dark = !dark">
+                <button class="mw-switch" role="switch" :aria-checked="dark.toString()" :data-state="dark ? 'checked' : 'unchecked'" @click="dark = !dark">
                   <span class="mw-switch-thumb"></span>
                 </button>
               </div>
               <div class="flex items-center justify-between">
                 <span class="text-sm">Notifications</span>
-                <button class="mw-switch" :data-state="notifications ? 'checked' : 'unchecked'" @click="notifications = !notifications">
+                <button class="mw-switch" role="switch" :aria-checked="notifications.toString()" :data-state="notifications ? 'checked' : 'unchecked'" @click="notifications = !notifications">
                   <span class="mw-switch-thumb"></span>
                 </button>
               </div>
               <div class="flex items-center justify-between">
                 <span class="text-sm">Sound</span>
-                <button class="mw-switch" :data-state="sound ? 'checked' : 'unchecked'" @click="sound = !sound">
+                <button class="mw-switch" role="switch" :aria-checked="sound.toString()" :data-state="sound ? 'checked' : 'unchecked'" @click="sound = !sound">
                   <span class="mw-switch-thumb"></span>
                 </button>
               </div>
@@ -479,6 +598,7 @@ import Navbar from "../components/Navbar.astro";
               <textarea
                 class="mw-textarea text-sm resize-none pr-10"
                 rows="3"
+                aria-label="Message"
                 placeholder="What's on your mind?"
                 x-model="message"
                 :class="message.length > charLimit && 'border-destructive focus:border-destructive'"
@@ -486,8 +606,8 @@ import Navbar from "../components/Navbar.astro";
               ></textarea>
               <div class="absolute right-2 bottom-2 flex items-center gap-1">
                 <div class="relative">
-                  <button @click="showEmoji = !showEmoji" class="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded hover:bg-muted">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+                  <button @click="showEmoji = !showEmoji" aria-label="Insert emoji" class="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded hover:bg-muted">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
                   </button>
                   <div x-show="showEmoji" @click.outside="showEmoji = false" x-transition class="absolute bottom-full right-0 mb-1 p-1.5 bg-popover border border-border rounded-lg shadow-xl grid grid-cols-4 gap-1 z-10">
                     <template x-for="emoji in emojis" :key="emoji">
@@ -495,8 +615,8 @@ import Navbar from "../components/Navbar.astro";
                     </template>
                   </div>
                 </div>
-                <button class="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded hover:bg-muted">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                <button aria-label="Attach file" class="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded hover:bg-muted">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
                 </button>
               </div>
             </div>
@@ -566,6 +686,7 @@ import Navbar from "../components/Navbar.astro";
               <input
                 type="text"
                 class="mw-input pl-9"
+                :aria-label="mode === 'ask' ? 'Ask a question' : mode === 'search' ? 'Search documentation' : 'Start a conversation'"
                 :placeholder="mode === 'ask' ? 'Ask a question...' : mode === 'search' ? 'Search documentation...' : 'Start a conversation...'"
                 x-model="query"
               >
@@ -619,7 +740,7 @@ import Navbar from "../components/Navbar.astro";
             <template x-if="processing">
               <div class="py-4">
                 <div class="w-full bg-muted rounded-full h-2 overflow-hidden">
-                  <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full transition-all duration-100" :style="'width: ' + progress + '%'"></div>
+                  <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full transition-[width] duration-100" :style="'width: ' + progress + '%'"></div>
                 </div>
                 <p class="text-center text-xs text-muted-foreground mt-2">Processing...</p>
               </div>
@@ -639,7 +760,8 @@ import Navbar from "../components/Navbar.astro";
       </div>
 
       <!-- Mobile Grid (single column) -->
-      <div class="md:hidden grid grid-cols-1 gap-6">
+      <div class="md:hidden grid grid-cols-1 gap-6"
+           :style="'--marrow-primary: ' + themes[theme].primary + '; --marrow-ring: ' + themes[theme].primary + '; --marrow-radius: ' + radiusPresets[radius] + '; --marrow-text: ' + compactnessPresets[compactness].text + '; --marrow-btn-py: ' + compactnessPresets[compactness].btnPy + '; --marrow-btn-px: ' + compactnessPresets[compactness].btnPx + '; --marrow-input-py: ' + compactnessPresets[compactness].inputPy + '; --marrow-input-px: ' + compactnessPresets[compactness].inputPx + '; --marrow-card-p: ' + compactnessPresets[compactness].cardP + '; --marrow-shadow: ' + shadowPresets[shadow] + '; --marrow-font-heading: ' + typographyPresets[typography].heading + ', ui-sans-serif, system-ui, sans-serif; --marrow-font-body: ' + typographyPresets[typography].body + ', ui-sans-serif, system-ui, sans-serif;'">
         <!-- Buttons & Badges -->
         <div class="mw-card rounded-xl p-5 shadow-lg">
           <h3 class="font-heading font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-4">Buttons</h3>
@@ -661,13 +783,13 @@ import Navbar from "../components/Navbar.astro";
           <div class="space-y-3">
             <div class="flex items-center justify-between">
               <span class="text-sm">Dark Mode</span>
-              <button class="mw-switch" :data-state="dark ? 'checked' : 'unchecked'" @click="dark = !dark">
+              <button class="mw-switch" role="switch" :aria-checked="dark.toString()" :data-state="dark ? 'checked' : 'unchecked'" @click="dark = !dark">
                 <span class="mw-switch-thumb"></span>
               </button>
             </div>
             <div class="flex items-center justify-between">
               <span class="text-sm">Notifications</span>
-              <button class="mw-switch" :data-state="notifications ? 'checked' : 'unchecked'" @click="notifications = !notifications">
+              <button class="mw-switch" role="switch" :aria-checked="notifications.toString()" :data-state="notifications ? 'checked' : 'unchecked'" @click="notifications = !notifications">
                 <span class="mw-switch-thumb"></span>
               </button>
             </div>
@@ -688,6 +810,8 @@ import Navbar from "../components/Navbar.astro";
           </div>
         </div>
       </div>
+
+      </div><!-- End Theme Configuration Container -->
     </div>
   </section>
 
@@ -696,32 +820,32 @@ import Navbar from "../components/Navbar.astro";
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">One config file.<br>Complete control.</h2>
+          <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight text-pretty">One config file.<br>Complete control.</h2>
           <p class="mt-4 text-muted-foreground text-lg leading-relaxed">Every aspect of your UI is controlled from <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">marrow.config.js</code>. Colors, radius, compactness, fonts, shadows, transitions. All documented with available options.</p>
           <div class="mt-6 space-y-3 text-sm">
             <div class="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
               <span>HSL colors for easy opacity control</span>
             </div>
             <div class="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
               <span>5 compactness levels: minimal to spacious</span>
             </div>
             <div class="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
               <span>Dual font system (heading + body)</span>
             </div>
             <div class="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
               <span>Choose any Iconify icon library</span>
             </div>
             <div class="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>
               <span>Light & dark mode with full color control</span>
             </div>
           </div>
         </div>
-        <div class="relative bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden">
+        <div class="relative bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden code-glow">
           <div class="flex items-center justify-between px-4 py-2 bg-zinc-800/50 border-b border-zinc-800">
             <div class="flex items-center gap-1.5">
               <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
@@ -758,12 +882,13 @@ import Navbar from "../components/Navbar.astro";
   <!-- CTA Section -->
   <section class="border-t">
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24 text-center">
-      <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight">Start building today.</h2>
+      <div class="cta-gradient-line"></div>
+      <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight text-pretty">Start building today.</h2>
       <p class="mt-4 text-muted-foreground text-lg max-w-xl mx-auto">Browse the documentation, copy a component, and build something. No npm install required.</p>
       <div class="flex justify-center gap-3 mt-8">
         <a href="/docs/" class="mw-btn mw-btn-primary mw-btn-lg">
           Read the Docs
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
         <a href="/docs/components/button/" class="mw-btn mw-btn-outline mw-btn-lg">See Components</a>
       </div>
@@ -775,13 +900,13 @@ import Navbar from "../components/Navbar.astro";
     <div class="max-w-7xl mx-auto px-4 md:px-6 py-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-2 text-sm text-muted-foreground">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
           Marrow UI. Built with Tailwind CSS and Alpine.js.
         </div>
         <div class="flex items-center gap-4 text-sm text-muted-foreground">
           <a href="/docs/" class="hover:text-foreground transition-colors">Docs</a>
           <a href="/docs/components/button/" class="hover:text-foreground transition-colors">Components</a>
-          <a href="https://github.com" target="_blank" class="hover:text-foreground transition-colors">GitHub</a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">GitHub</a>
         </div>
       </div>
     </div>
@@ -789,3 +914,128 @@ import Navbar from "../components/Navbar.astro";
 </div>
 
 </BaseLayout>
+
+<style>
+  /* ── Hero Entrance Animation ───────────────────────────────────── */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-animate {
+    opacity: 0;
+    animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-animate-1 { animation-delay: 0.05s; }
+  .hero-animate-2 { animation-delay: 0.15s; }
+  .hero-animate-3 { animation-delay: 0.25s; }
+  .hero-animate-4 { animation-delay: 0.35s; }
+  .hero-animate-5 { animation-delay: 0.45s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-animate {
+      opacity: 1;
+      animation: none;
+    }
+  }
+
+  /* ── Hero Background Mesh ──────────────────────────────────────── */
+  .hero-mesh {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-mesh::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(ellipse at 70% 30%, hsl(220 90% 56% / 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 30% 70%, hsl(263 70% 50% / 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, hsl(192 91% 36% / 0.06) 0%, transparent 40%);
+    filter: blur(60px);
+  }
+
+  .hero-mesh::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+  }
+
+  /* ── Feature Card Hover ────────────────────────────────────────── */
+  .feature-card {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.3),
+                0 0 0 1px hsl(220 90% 56% / 0.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-card {
+      transition: none;
+    }
+    .feature-card:hover {
+      transform: none;
+    }
+  }
+
+  /* ── Config Code Glow ──────────────────────────────────────────── */
+  .code-glow {
+    position: relative;
+  }
+
+  .code-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 0.5rem;
+    padding: 1px;
+    background: linear-gradient(135deg,
+      hsl(220 90% 56% / 0.3),
+      hsl(263 70% 50% / 0.15),
+      hsl(192 91% 36% / 0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .code-glow::after {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(ellipse at center, hsl(220 90% 56% / 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 50%;
+  }
+
+  /* ── CTA Gradient Accent ───────────────────────────────────────── */
+  .cta-gradient-line {
+    width: 80px;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+      hsl(220 90% 56%),
+      hsl(192 91% 50%));
+    margin: 0 auto 1.5rem;
+  }
+</style>

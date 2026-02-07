@@ -2,25 +2,46 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const aspectRatioCode = `<!-- 16:9 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+const aspectRatioCode = `<!-- 16:9 Video Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
      style="aspect-ratio: 16 / 9;">
-  <img src="your-image.jpg"
-       alt="Description"
+  <img src="your-video-thumbnail.jpg"
+       alt="Video thumbnail"
        class="h-full w-full object-cover" />
 </div>
 
-<!-- 1:1 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+<!-- 1:1 Square Profile Photo -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
      style="aspect-ratio: 1 / 1;">
+  <img src="your-profile-photo.jpg"
+       alt="Profile photo"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 4:3 Classic Photo -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
+     style="aspect-ratio: 4 / 3;">
+  <img src="your-photo.jpg"
+       alt="Photo description"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 21:9 Ultra-wide Banner -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
+     style="aspect-ratio: 21 / 9;">
+  <img src="your-banner.jpg"
+       alt="Banner image"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- Using Tailwind Utilities -->
+<div class="aspect-video overflow-hidden rounded-[var(--marrow-radius)] bg-muted">
   <img src="your-image.jpg"
        alt="Description"
        class="h-full w-full object-cover" />
 </div>
 
-<!-- 4:3 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
-     style="aspect-ratio: 4 / 3;">
+<div class="aspect-square overflow-hidden rounded-[var(--marrow-radius)] bg-muted">
   <img src="your-image.jpg"
        alt="Description"
        class="h-full w-full object-cover" />
@@ -28,40 +49,140 @@ const aspectRatioCode = `<!-- 16:9 Aspect Ratio -->
 ---
 
 <DocsLayout title="Aspect Ratio" description="Displays content within a desired ratio using pure CSS" activeComponent="aspect-ratio">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Aspect Ratio</h1>
-          <p class="mt-2 text-lg text-muted-foreground">Displays content within a desired ratio using pure CSS.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Aspect Ratio</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">Displays content within a desired ratio using the CSS aspect-ratio property. No dedicated component class required.</p>
+    </div>
 
-        <!-- Preview: 16:9 -->
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card min-h-[200px] space-y-6">
-            <!-- 16:9 -->
-            <div>
-              <p class="text-sm font-medium mb-2">16:9</p>
-              <div class="overflow-hidden rounded-[var(--marrow-radius)]" style="aspect-ratio: 16 / 9;">
-                <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&h=450&fit=crop" alt="Photo placeholder" class="h-full w-full object-cover" />
+    <div class="mw-separator"></div>
+
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="grid gap-6">
+          <!-- 16:9 Video -->
+          <div class="space-y-2">
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">16:9 — Video Embed</p>
+            <div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted flex items-center justify-center"
+                 style="aspect-ratio: 16 / 9;">
+              <div class="text-center space-y-2">
+                <svg class="mx-auto h-12 w-12 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-sm text-muted-foreground">16:9 Video Area</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid of smaller ratios -->
+          <div class="grid gap-6 md:grid-cols-3">
+            <!-- 1:1 Square -->
+            <div class="space-y-2">
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">1:1 — Profile Photo</p>
+              <div class="overflow-hidden rounded-[var(--marrow-radius)] bg-secondary flex items-center justify-center"
+                   style="aspect-ratio: 1 / 1;">
+                <div class="text-center space-y-2">
+                  <svg class="mx-auto h-10 w-10 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <p class="text-xs text-muted-foreground">Square</p>
+                </div>
               </div>
             </div>
 
-            <!-- 1:1 -->
-            <div>
-              <p class="text-sm font-medium mb-2">1:1</p>
-              <div class="max-w-[200px] overflow-hidden rounded-[var(--marrow-radius)]" style="aspect-ratio: 1 / 1;">
-                <img src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=400&h=400&fit=crop" alt="Photo placeholder" class="h-full w-full object-cover" />
+            <!-- 4:3 Classic -->
+            <div class="space-y-2">
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">4:3 — Classic Photo</p>
+              <div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted flex items-center justify-center"
+                   style="aspect-ratio: 4 / 3;">
+                <div class="text-center space-y-2">
+                  <svg class="mx-auto h-10 w-10 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <p class="text-xs text-muted-foreground">4:3 Photo</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3:2 Photography -->
+            <div class="space-y-2">
+              <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">3:2 — Photography</p>
+              <div class="overflow-hidden rounded-[var(--marrow-radius)] bg-secondary flex items-center justify-center"
+                   style="aspect-ratio: 3 / 2;">
+                <div class="text-center space-y-2">
+                  <svg class="mx-auto h-10 w-10 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <p class="text-xs text-muted-foreground">DSLR Photo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 21:9 Ultra-wide Banner -->
+          <div class="space-y-2">
+            <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">21:9 — Ultra-wide Banner</p>
+            <div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted flex items-center justify-center"
+                 style="aspect-ratio: 21 / 9;">
+              <div class="text-center space-y-2">
+                <svg class="mx-auto h-10 w-10 text-muted-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                </svg>
+                <p class="text-sm text-muted-foreground">21:9 Cinematic Banner</p>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Code -->
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={aspectRatioCode} lang="html" />
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={aspectRatioCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold">CSS Properties</h3>
+          <p class="mt-2 text-muted-foreground leading-relaxed">
+            Aspect Ratio uses the native CSS <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aspect-ratio</code> property, which is supported in all modern browsers. Apply it using inline styles or Tailwind's aspect ratio utilities.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Common Ratios</h3>
+          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
+            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">16:9</code> — Standard video (YouTube, Vimeo)</li>
+            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">4:3</code> — Classic photography and displays</li>
+            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">1:1</code> — Square (profile photos, Instagram)</li>
+            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">3:2</code> — DSLR photography standard</li>
+            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">21:9</code> — Ultra-wide cinematic</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Tailwind Utilities</h3>
+          <p class="mt-2 text-muted-foreground leading-relaxed">
+            Tailwind provides built-in aspect ratio utilities: <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aspect-video</code> (16:9), <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aspect-square</code> (1:1), and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aspect-auto</code>. For custom ratios, use inline styles.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <p class="mt-2 text-muted-foreground leading-relaxed">
+            Always include descriptive alt text for images within aspect ratio containers. Ensure content remains readable and usable when aspect ratios are applied, especially for text overlays on images.
+          </p>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

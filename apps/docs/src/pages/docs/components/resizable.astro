@@ -2,11 +2,17 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const resizableCode = `<div x-data="mwResizable(50)" class="flex h-64 select-none border rounded-md overflow-hidden">
-  <!-- Left Panel -->
-  <div class="overflow-auto p-4" :style="'width:' + split + '%'">
-    <h3 class="font-semibold mb-2">Left Panel</h3>
-    <p class="text-sm text-muted-foreground">Resizable content here.</p>
+const resizableCode = `<div x-data="mwResizable(30)" class="flex h-96 select-none border rounded-md overflow-hidden">
+  <!-- Left Panel (Sidebar) -->
+  <div class="overflow-auto p-4 bg-muted/30"
+       :style="'width:' + Math.max(10, Math.min(90, split)) + '%'">
+    <h3 class="font-semibold mb-3">Sidebar</h3>
+    <nav class="space-y-2">
+      <a href="#" class="block px-3 py-2 rounded-md bg-primary text-primary-foreground text-sm">Dashboard</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Projects</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Settings</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Team</a>
+    </nav>
   </div>
 
   <!-- Drag Handle -->
@@ -14,56 +20,180 @@ const resizableCode = `<div x-data="mwResizable(50)" class="flex h-64 select-non
        @mousedown="startDrag($event)"
        @touchstart.prevent="startDrag($event)"></div>
 
-  <!-- Right Panel -->
-  <div class="overflow-auto p-4 flex-1">
-    <h3 class="font-semibold mb-2">Right Panel</h3>
-    <p class="text-sm text-muted-foreground">This fills the remaining space.</p>
+  <!-- Right Panel (Content) -->
+  <div class="overflow-auto p-6 flex-1">
+    <h3 class="font-semibold text-lg mb-2">Main Content</h3>
+    <p class="text-sm text-muted-foreground mb-4">
+      Current split: <span x-text="Math.round(split)"></span>%
+    </p>
+    <p class="text-sm text-muted-foreground leading-relaxed">
+      Drag the divider to adjust the layout. The sidebar is constrained
+      between 10% and 90% width to prevent panels from collapsing entirely.
+      Try resizing to see how the layout adapts.
+    </p>
   </div>
 </div>`;
 ---
 
 <DocsLayout title="Resizable" description="Resizable panels with a draggable divider" activeComponent="resizable">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Resizable</h1>
-          <p class="mt-2 text-lg text-muted-foreground">Resizable panels let users adjust the layout by dragging a divider between two panes.</p>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Resizable</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">
+        Resizable panels let users adjust the layout by dragging a divider between two panes.
+      </p>
+    </div>
+
+    <div class="mw-separator"></div>
+
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div x-data="mwResizable(30)" class="flex h-96 select-none border rounded-md overflow-hidden">
+          <!-- Left Panel (Sidebar) -->
+          <div class="overflow-auto p-4 bg-muted/30"
+               :style="'width:' + Math.max(10, Math.min(90, split)) + '%'">
+            <h3 class="font-heading text-lg font-semibold mb-3">Sidebar</h3>
+            <nav class="space-y-2">
+              <a href="#" class="block px-3 py-2 rounded-md bg-primary text-primary-foreground text-sm">Dashboard</a>
+              <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Projects</a>
+              <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Settings</a>
+              <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Team</a>
+            </nav>
+          </div>
+
+          <!-- Drag Handle -->
+          <div class="mw-resizable-handle"
+               @mousedown="startDrag($event)"
+               @touchstart.prevent="startDrag($event)"></div>
+
+          <!-- Right Panel (Content) -->
+          <div class="overflow-auto p-6 flex-1">
+            <h3 class="font-heading text-lg font-semibold mb-2">Main Content</h3>
+            <p class="text-sm text-muted-foreground mb-4">
+              Current split: <span x-text="Math.round(split)"></span>%
+            </p>
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              Drag the divider to adjust the layout. The sidebar is constrained
+              between 10% and 90% width to prevent panels from collapsing entirely.
+              Try resizing to see how the layout adapts.
+            </p>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="mw-separator"></div>
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={resizableCode} lang="html" />
+    </div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card p-0 overflow-hidden">
-            <div x-data="mwResizable(50)" class="flex h-64 select-none" style="min-height: 16rem;">
-              <!-- Left Panel -->
-              <div class="overflow-auto p-4" :style="'width:' + split + '%'">
-                <h3 class="font-heading font-semibold mb-2">Left Panel</h3>
-                <p class="text-sm text-muted-foreground">This panel is resizable. Drag the handle to adjust the width. The split is currently at <span x-text="Math.round(split)"></span>%.</p>
-              </div>
-              <!-- Drag Handle -->
-              <div class="mw-resizable-handle" @mousedown="startDrag($event)" @touchstart.prevent="startDrag($event)"></div>
-              <!-- Right Panel -->
-              <div class="overflow-auto p-4 flex-1">
-                <h3 class="font-heading font-semibold mb-2">Right Panel</h3>
-                <p class="text-sm text-muted-foreground">This panel fills the remaining space. Try dragging the divider left and right.</p>
-              </div>
-            </div>
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js API</h3>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwResizable(initialSplit)"</code> where <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">initialSplit</code> is a number between 0 and 100 representing the starting split percentage.
+          </p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-left py-2 px-3 font-semibold">Property</th>
+                  <th class="text-left py-2 px-3 font-semibold">Type</th>
+                  <th class="text-left py-2 px-3 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="text-muted-foreground">
+                <tr class="border-b">
+                  <td class="py-2 px-3 font-mono text-xs">split</td>
+                  <td class="py-2 px-3">Number</td>
+                  <td class="py-2 px-3">Current split percentage (0-100)</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="py-2 px-3 font-mono text-xs">dragging</td>
+                  <td class="py-2 px-3">Boolean</td>
+                  <td class="py-2 px-3">Whether currently dragging the handle</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="py-2 px-3 font-mono text-xs">startDrag(e)</td>
+                  <td class="py-2 px-3">Function</td>
+                  <td class="py-2 px-3">Begin drag operation (called on mousedown/touchstart)</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={resizableCode} lang="html" />
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-left py-2 px-3 font-semibold">Class</th>
+                  <th class="text-left py-2 px-3 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="text-muted-foreground">
+                <tr class="border-b">
+                  <td class="py-2 px-3 font-mono text-xs">mw-resizable-handle</td>
+                  <td class="py-2 px-3">4px wide drag handle with border background, col-resize cursor, and hover primary color</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <!-- Usage Notes -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-          <p class="text-muted-foreground leading-relaxed">The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwResizable(50)</code> function accepts an initial split percentage (0&ndash;100). The left panel width is bound to the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">split</code> value, and the right panel uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">flex-1</code> to fill the rest.</p>
-          <p class="text-muted-foreground leading-relaxed">The drag handle constrains values between 10% and 90% to prevent panels from collapsing entirely. Both mouse and touch events are supported.</p>
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">Implementation Notes</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed">
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>The left panel width is bound to the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">split</code> value using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:style</code> binding</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>The right panel uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">flex-1</code> to fill the remaining space</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Math.max(10, Math.min(90, split))</code> constraints to prevent panels from collapsing entirely</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>Both mouse and touch events are supported via <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@mousedown</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@touchstart</code></span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">select-none</code> to the container to prevent text selection during drag</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed">
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>The drag handle has a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">col-resize</code> cursor to indicate draggability</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> to the handle for screen reader users</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>For keyboard navigation, consider adding keyboard event handlers to adjust split percentage with arrow keys</span>
+            </li>
+          </ul>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

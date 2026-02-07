@@ -3,14 +3,15 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
 const dataTableCode = `<div x-data="{
-  sortCol: 'name',
+  sortCol: 'invoice',
   sortAsc: true,
   rows: [
-    { name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin', status: 'Active' },
-    { name: 'Bob Smith', email: 'bob@example.com', role: 'Editor', status: 'Active' },
-    { name: 'Carol White', email: 'carol@example.com', role: 'Viewer', status: 'Inactive' },
-    { name: 'David Brown', email: 'david@example.com', role: 'Editor', status: 'Active' },
-    { name: 'Eva Martinez', email: 'eva@example.com', role: 'Admin', status: 'Active' }
+    { invoice: 'INV-2024-001', name: 'Alice Johnson', email: 'alice@acme.com', status: 'Paid', amount: 1250.00, date: '2024-01-15' },
+    { invoice: 'INV-2024-002', name: 'Bob Smith', email: 'bob@techcorp.com', status: 'Pending', amount: 890.50, date: '2024-01-18' },
+    { invoice: 'INV-2024-003', name: 'Carol White', email: 'carol@design.io', status: 'Overdue', amount: 2150.00, date: '2024-01-10' },
+    { invoice: 'INV-2024-004', name: 'David Brown', email: 'david@startup.com', status: 'Paid', amount: 3400.00, date: '2024-01-20' },
+    { invoice: 'INV-2024-005', name: 'Eva Martinez', email: 'eva@agency.co', status: 'Pending', amount: 1680.75, date: '2024-01-22' },
+    { invoice: 'INV-2024-006', name: 'Frank Garcia', email: 'frank@solutions.net', status: 'Paid', amount: 975.00, date: '2024-01-25' }
   ],
   sort(col) {
     if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
@@ -18,9 +19,14 @@ const dataTableCode = `<div x-data="{
   },
   get sorted() {
     return [...this.rows].sort((a, b) => {
-      const valA = a[this.sortCol].toLowerCase();
-      const valB = b[this.sortCol].toLowerCase();
-      return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      let valA = a[this.sortCol];
+      let valB = b[this.sortCol];
+      if (this.sortCol === 'amount') {
+        return this.sortAsc ? valA - valB : valB - valA;
+      }
+      valA = String(valA).toLowerCase();
+      valB = String(valB).toLowerCase();
+      return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valB);
     });
   }
 }">
@@ -28,29 +34,61 @@ const dataTableCode = `<div x-data="{
     <table class="mw-table">
       <thead>
         <tr>
-          <th class="cursor-pointer select-none" @click="sort('name')">
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('invoice')">
             <span class="inline-flex items-center gap-1">
-              Name
-              <svg x-show="sortCol === 'name'" ...chevron icon...
-                :class="sortAsc ? '' : 'rotate-180'"></svg>
+              Invoice
+              <svg x-show="sortCol === 'invoice'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
             </span>
           </th>
-          <th class="cursor-pointer select-none" @click="sort('email')">Email</th>
-          <th class="cursor-pointer select-none" @click="sort('role')">Role</th>
-          <th class="cursor-pointer select-none" @click="sort('status')">Status</th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('name')">
+            <span class="inline-flex items-center gap-1">
+              Name
+              <svg x-show="sortCol === 'name'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('email')">
+            <span class="inline-flex items-center gap-1">
+              Email
+              <svg x-show="sortCol === 'email'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('status')">
+            <span class="inline-flex items-center gap-1">
+              Status
+              <svg x-show="sortCol === 'status'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors text-right" @click="sort('amount')">
+            <span class="inline-flex items-center gap-1 justify-end">
+              Amount
+              <svg x-show="sortCol === 'amount'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('date')">
+            <span class="inline-flex items-center gap-1">
+              Date
+              <svg x-show="sortCol === 'date'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <template x-for="row in sorted" :key="row.email">
+        <template x-for="row in sorted" :key="row.invoice">
           <tr>
+            <td class="font-mono text-sm" x-text="row.invoice"></td>
             <td class="font-medium" x-text="row.name"></td>
             <td class="text-muted-foreground" x-text="row.email"></td>
-            <td><span class="mw-badge mw-badge-secondary" x-text="row.role"></span></td>
             <td>
               <span class="mw-badge"
-                :class="row.status === 'Active' ? 'mw-badge-default' : 'mw-badge-outline'"
+                :class="{
+                  'mw-badge-default': row.status === 'Paid',
+                  'mw-badge-secondary': row.status === 'Pending',
+                  'mw-badge-destructive': row.status === 'Overdue'
+                }"
                 x-text="row.status"></span>
             </td>
+            <td class="text-right font-medium" x-text="'$' + row.amount.toFixed(2)"></td>
+            <td class="text-muted-foreground" x-text="row.date"></td>
           </tr>
         </template>
       </tbody>
@@ -60,90 +98,155 @@ const dataTableCode = `<div x-data="{
 ---
 
 <DocsLayout title="Data Table" description="A structured table component with sortable headers for displaying tabular data" activeComponent="data-table">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Data Table</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A structured table component with sortable headers for displaying tabular data.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Data Table</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A structured table component with sortable headers for displaying tabular data.</p>
+    </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card min-h-[200px] p-0" x-data={`{
-            sortCol: 'name',
-            sortAsc: true,
-            rows: [
-              { name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin', status: 'Active' },
-              { name: 'Bob Smith', email: 'bob@example.com', role: 'Editor', status: 'Active' },
-              { name: 'Carol White', email: 'carol@example.com', role: 'Viewer', status: 'Inactive' },
-              { name: 'David Brown', email: 'david@example.com', role: 'Editor', status: 'Active' },
-              { name: 'Eva Martinez', email: 'eva@example.com', role: 'Admin', status: 'Active' }
-            ],
-            sort(col) {
-              if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
-              else { this.sortCol = col; this.sortAsc = true; }
-            },
-            get sorted() {
-              return [...this.rows].sort((a, b) => {
-                const valA = a[this.sortCol].toLowerCase();
-                const valB = b[this.sortCol].toLowerCase();
-                return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
-              });
+    <div class="mw-separator"></div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+      <div class="mw-card p-0 overflow-hidden" x-data={`{
+        sortCol: 'invoice',
+        sortAsc: true,
+        rows: [
+          { invoice: 'INV-2024-001', name: 'Alice Johnson', email: 'alice@acme.com', status: 'Paid', amount: 1250.00, date: '2024-01-15' },
+          { invoice: 'INV-2024-002', name: 'Bob Smith', email: 'bob@techcorp.com', status: 'Pending', amount: 890.50, date: '2024-01-18' },
+          { invoice: 'INV-2024-003', name: 'Carol White', email: 'carol@design.io', status: 'Overdue', amount: 2150.00, date: '2024-01-10' },
+          { invoice: 'INV-2024-004', name: 'David Brown', email: 'david@startup.com', status: 'Paid', amount: 3400.00, date: '2024-01-20' },
+          { invoice: 'INV-2024-005', name: 'Eva Martinez', email: 'eva@agency.co', status: 'Pending', amount: 1680.75, date: '2024-01-22' },
+          { invoice: 'INV-2024-006', name: 'Frank Garcia', email: 'frank@solutions.net', status: 'Paid', amount: 975.00, date: '2024-01-25' }
+        ],
+        sort(col) {
+          if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
+          else { this.sortCol = col; this.sortAsc = true; }
+        },
+        get sorted() {
+          return [...this.rows].sort((a, b) => {
+            let valA = a[this.sortCol];
+            let valB = b[this.sortCol];
+            if (this.sortCol === 'amount') {
+              return this.sortAsc ? valA - valB : valB - valA;
             }
-          }`}>
-            <div class="overflow-x-auto">
-              <table class="mw-table">
-                <thead>
-                  <tr>
-                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('name')">
-                      <span class="inline-flex items-center gap-1">
-                        Name
-                        <svg x-show="sortCol === 'name'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-                      </span>
-                    </th>
-                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('email')">
-                      <span class="inline-flex items-center gap-1">
-                        Email
-                        <svg x-show="sortCol === 'email'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-                      </span>
-                    </th>
-                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('role')">
-                      <span class="inline-flex items-center gap-1">
-                        Role
-                        <svg x-show="sortCol === 'role'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-                      </span>
-                    </th>
-                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('status')">
-                      <span class="inline-flex items-center gap-1">
-                        Status
-                        <svg x-show="sortCol === 'status'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-                      </span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <template x-for="row in sorted" :key="row.email">
-                    <tr>
-                      <td class="font-medium" x-text="row.name"></td>
-                      <td class="text-muted-foreground" x-text="row.email"></td>
-                      <td><span class="mw-badge mw-badge-secondary" x-text="row.role"></span></td>
-                      <td>
-                        <span class="mw-badge"
-                          :class="row.status === 'Active' ? 'mw-badge-default' : 'mw-badge-outline'"
-                          x-text="row.status"></span>
-                      </td>
-                    </tr>
-                  </template>
-                </tbody>
-              </table>
-            </div>
+            valA = String(valA).toLowerCase();
+            valB = String(valB).toLowerCase();
+            return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+          });
+        }
+      }`}>
+        <div class="overflow-x-auto">
+          <table class="mw-table">
+            <thead>
+              <tr>
+                <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('invoice')">
+                  <span class="inline-flex items-center gap-1">
+                    Invoice
+                    <svg x-show="sortCol === 'invoice'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </th>
+                <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('name')">
+                  <span class="inline-flex items-center gap-1">
+                    Name
+                    <svg x-show="sortCol === 'name'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </th>
+                <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('email')">
+                  <span class="inline-flex items-center gap-1">
+                    Email
+                    <svg x-show="sortCol === 'email'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </th>
+                <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('status')">
+                  <span class="inline-flex items-center gap-1">
+                    Status
+                    <svg x-show="sortCol === 'status'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </th>
+                <th class="cursor-pointer select-none hover:text-foreground transition-colors text-right" @click="sort('amount')">
+                  <span class="inline-flex items-center gap-1 justify-end">
+                    Amount
+                    <svg x-show="sortCol === 'amount'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </th>
+                <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('date')">
+                  <span class="inline-flex items-center gap-1">
+                    Date
+                    <svg x-show="sortCol === 'date'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="row in sorted" x-bind:key="row.invoice">
+                <tr>
+                  <td class="font-mono text-sm" x-text="row.invoice"></td>
+                  <td class="font-medium" x-text="row.name"></td>
+                  <td class="text-muted-foreground" x-text="row.email"></td>
+                  <td>
+                    <span class="mw-badge"
+                      :class="{
+                        'mw-badge-default': row.status === 'Paid',
+                        'mw-badge-secondary': row.status === 'Pending',
+                        'mw-badge-destructive': row.status === 'Overdue'
+                      }"
+                      x-text="row.status"></span>
+                  </td>
+                  <td class="text-right font-medium" x-text="'$' + row.amount.toFixed(2)"></td>
+                  <td class="text-muted-foreground" x-text="row.date"></td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+      <CodeBlock code={dataTableCode} lang="html" />
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
+          <div class="overflow-x-auto">
+            <table class="mw-table">
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-table</code></td>
+                  <td>Base table styles with borders, padding, and hover states</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={dataTableCode} lang="html" />
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js Integration</h3>
+          <p class="text-muted-foreground leading-relaxed">This example uses Alpine.js for client-side sorting. Click any column header to sort by that column. Click again to reverse the sort order. The chevron icon indicates the current sort column and direction.</p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
+          <ul class="list-disc list-inside space-y-2 text-muted-foreground leading-relaxed">
+            <li>Use semantic <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;table&gt;</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;thead&gt;</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;tbody&gt;</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;th&gt;</code>, and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;td&gt;</code> elements</li>
+            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative sort icons</li>
+            <li>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-sort</code> attributes to sortable column headers</li>
+            <li>Ensure sufficient color contrast for text and badges</li>
+            <li>Wrap table in <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">overflow-x-auto</code> for responsive scrolling on small screens</li>
+          </ul>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

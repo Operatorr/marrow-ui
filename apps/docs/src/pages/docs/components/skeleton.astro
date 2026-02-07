@@ -18,6 +18,15 @@ const cardSkeletonCode = `<div class="mw-card">
   </div>
 </div>`;
 
+const textSkeletonCode = `<div class="mw-card">
+  <div class="space-y-3">
+    <div class="mw-skeleton" style="height: 1rem; width: 35%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 80%;"></div>
+  </div>
+</div>`;
+
 const avatarSkeletonCode = `<div class="flex gap-3">
   <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
   <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
@@ -26,78 +35,103 @@ const avatarSkeletonCode = `<div class="flex gap-3">
 ---
 
 <DocsLayout title="Skeleton" description="Placeholder loading animations for content that is not yet available" activeComponent="skeleton">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Skeleton</h1>
-          <p class="mt-2 text-lg text-muted-foreground">Skeleton loaders indicate where content will appear while data is being fetched or rendered.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight">Skeleton</h1>
+      <p class="mt-2 text-lg text-muted-foreground">Skeleton loaders indicate where content will appear while data is being fetched or rendered.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview: Card Skeleton -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+    <!-- Preview: Card Skeleton -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
 
-          <h3 class="font-heading text-lg font-semibold">Card Skeleton</h3>
-          <div class="mw-card">
-            <div class="flex items-center gap-4">
-              <div class="mw-skeleton rounded-full" style="width: 3rem; height: 3rem;"></div>
-              <div class="flex-1 space-y-2">
-                <div class="mw-skeleton" style="height: 0.875rem; width: 60%;"></div>
-                <div class="mw-skeleton" style="height: 0.75rem; width: 40%;"></div>
-              </div>
-            </div>
-            <div class="mt-4 space-y-2">
-              <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
-              <div class="mw-skeleton" style="height: 0.75rem; width: 90%;"></div>
-              <div class="mw-skeleton" style="height: 0.75rem; width: 75%;"></div>
-            </div>
+      <h3 class="font-heading text-lg font-semibold">Card Skeleton</h3>
+      <div class="mw-card">
+        <div class="flex items-center gap-4">
+          <div class="mw-skeleton rounded-full" style="width: 3rem; height: 3rem;"></div>
+          <div class="flex-1 space-y-2">
+            <div class="mw-skeleton" style="height: 0.875rem; width: 60%;"></div>
+            <div class="mw-skeleton" style="height: 0.75rem; width: 40%;"></div>
           </div>
         </div>
-
-        <!-- Preview: Text Lines -->
-        <div class="space-y-4">
-          <h3 class="font-heading text-lg font-semibold">Text Lines</h3>
-          <div class="mw-card">
-            <div class="space-y-3">
-              <div class="mw-skeleton" style="height: 1rem; width: 35%;"></div>
-              <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
-              <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
-              <div class="mw-skeleton" style="height: 0.75rem; width: 80%;"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Preview: Avatar Placeholders -->
-        <div class="space-y-4">
-          <h3 class="font-heading text-lg font-semibold">Avatar Placeholders</h3>
-          <div class="mw-card">
-            <div class="flex gap-3">
-              <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
-              <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
-              <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
-              <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-
-          <h3 class="font-heading text-lg font-semibold">Card Skeleton</h3>
-          <CodeBlock code={cardSkeletonCode} lang="html" />
-
-          <h3 class="font-heading text-lg font-semibold mt-6">Avatar Placeholders</h3>
-          <CodeBlock code={avatarSkeletonCode} lang="html" />
-        </div>
-
-        <!-- Usage Notes -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-          <p class="text-muted-foreground leading-relaxed">Apply the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-skeleton</code> class to any empty <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;div&gt;</code>. Set width and height via inline styles or utility classes to match the size of the content being loaded.</p>
-          <p class="text-muted-foreground leading-relaxed">For circular skeletons (avatars, profile images), add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-full</code>. The skeleton uses a pulsing animation defined in the Marrow CSS. No JavaScript is required.</p>
+        <div class="mt-4 space-y-2">
+          <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+          <div class="mw-skeleton" style="height: 0.75rem; width: 90%;"></div>
+          <div class="mw-skeleton" style="height: 0.75rem; width: 75%;"></div>
         </div>
       </div>
+    </div>
 
+    <!-- Preview: Text Lines -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Text Lines</h3>
+      <div class="mw-card">
+        <div class="space-y-3">
+          <div class="mw-skeleton" style="height: 1rem; width: 35%;"></div>
+          <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+          <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+          <div class="mw-skeleton" style="height: 0.75rem; width: 80%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview: Avatar Placeholders -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Avatar Placeholders</h3>
+      <div class="mw-card">
+        <div class="flex gap-3">
+          <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+          <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+          <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+          <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+
+      <h3 class="font-heading text-lg font-semibold">Card Skeleton</h3>
+      <CodeBlock code={cardSkeletonCode} lang="html" />
+
+      <h3 class="font-heading text-lg font-semibold mt-6">Text Lines</h3>
+      <CodeBlock code={textSkeletonCode} lang="html" />
+
+      <h3 class="font-heading text-lg font-semibold mt-6">Avatar Placeholders</h3>
+      <CodeBlock code={avatarSkeletonCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-base font-semibold mb-2">CSS Classes</h3>
+          <ul class="list-disc list-inside space-y-1 text-muted-foreground">
+            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-skeleton</code> — Base skeleton loader with muted background and pulse animation (2s duration)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-base font-semibold mb-2">Implementation</h3>
+          <p class="text-muted-foreground leading-relaxed">Apply the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-skeleton</code> class to any empty <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;div&gt;</code>. Set width and height via inline styles or utility classes to match the size of the content being loaded.</p>
+          <p class="text-muted-foreground leading-relaxed mt-2">For circular skeletons (avatars, profile images), add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-full</code>. The skeleton uses a pulsing animation defined in the Marrow CSS. No JavaScript is required.</p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-base font-semibold mb-2">Accessibility</h3>
+          <ul class="list-disc list-inside space-y-1 text-muted-foreground">
+            <li>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-busy="true"</code> to the parent container while content is loading</li>
+            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-live="polite"</code> to announce when content has finished loading</li>
+            <li>For screen reader users, provide alternative text indicating that content is loading</li>
+            <li>The pulse animation respects <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">prefers-reduced-motion</code> system preferences</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

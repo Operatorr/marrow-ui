@@ -3,79 +3,169 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
 const inputOtpCode = `<div x-data="mwInputOTP(6)">
-  <p class="text-sm text-muted-foreground mb-4">
-    Enter the 6-digit code sent to your email.
-  </p>
+  <div class="text-center space-y-4">
+    <div>
+      <h3 class="font-heading text-lg font-semibold">Enter verification code</h3>
+      <p class="text-sm text-muted-foreground mt-1">
+        We sent a code to your email
+      </p>
+    </div>
 
-  <div class="flex items-center gap-2 justify-center">
-    <template x-for="(val, index) in values" :key="index">
-      <div class="flex items-center">
-        <input
-          :x-ref="'otp' + index"
-          type="text"
-          inputmode="numeric"
-          maxlength="1"
-          class="mw-input w-10 h-12 text-center text-lg font-semibold"
-          :value="values[index]"
-          @input="handleInput(index, $event)"
-          @keydown="handleKeydown(index, $event)"
-        />
-        <!-- Optional separator after 3rd digit -->
-        <template x-if="index === 2">
-          <div class="mx-1 text-muted-foreground">-</div>
-        </template>
-      </div>
-    </template>
+    <div class="flex items-center gap-2 justify-center">
+      <template x-for="(val, index) in values" :key="index">
+        <div class="flex items-center">
+          <input
+            :x-ref="'otp' + index"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+            class="mw-input w-10 h-12 text-center text-lg font-semibold"
+            :value="values[index]"
+            @input="handleInput(index, $event)"
+            @keydown="handleKeydown(index, $event)"
+          />
+          <!-- Separator after 3rd digit -->
+          <template x-if="index === 2">
+            <div class="mx-1 text-muted-foreground">-</div>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <p class="text-sm text-muted-foreground">
+      Code: <span x-text="code" class="font-mono font-semibold text-foreground"></span>
+    </p>
   </div>
-
-  <!-- Access the full code with: -->
-  <p x-text="code"></p>
 </div>`;
 ---
 
 <DocsLayout title="Input OTP" description="A one-time password input with separate boxes for each digit" activeComponent="input-otp">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Input OTP</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A one-time password input with separate boxes for each digit.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Input OTP</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A one-time password input with separate boxes for each digit.</p>
+    </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div class="text-center" x-data="mwInputOTP(6)">
-              <p class="text-sm text-muted-foreground mb-4">Enter the 6-digit code sent to your email.</p>
-              <div class="flex items-center gap-2 justify-center">
-                <template x-for="(val, index) in values" :key="index">
-                  <div class="flex items-center">
-                    <input
-                      :x-ref="'otp' + index"
-                      type="text"
-                      inputmode="numeric"
-                      maxlength="1"
-                      class="mw-input w-10 h-12 text-center text-lg font-semibold"
-                      :value="values[index]"
-                      @input="handleInput(index, $event)"
-                      @keydown="handleKeydown(index, $event)"
-                    />
-                    <template x-if="index === 2">
-                      <div class="mx-1 text-muted-foreground">-</div>
-                    </template>
-                  </div>
-                </template>
-              </div>
-              <p class="text-xs text-muted-foreground mt-3">
-                Code: <span x-text="code" class="font-mono font-semibold text-foreground"></span>
+    <div class="mw-separator"></div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card flex items-center justify-center min-h-[280px]">
+        <div x-data="mwInputOTP(6)">
+          <div class="text-center space-y-4">
+            <div>
+              <h3 class="font-heading text-lg font-semibold">Enter verification code</h3>
+              <p class="text-sm text-muted-foreground mt-1">
+                We sent a code to your email
               </p>
             </div>
+
+            <div class="flex items-center gap-2 justify-center">
+              <template x-for="(val, index) in values" x-bind:key="index">
+                <div class="flex items-center">
+                  <input
+                    :x-ref="'otp' + index"
+                    type="text"
+                    inputmode="numeric"
+                    maxlength="1"
+                    class="mw-input w-10 h-12 text-center text-lg font-semibold"
+                    :value="values[index]"
+                    @input="handleInput(index, $event)"
+                    @keydown="handleKeydown(index, $event)"
+                  />
+                  <!-- Separator after 3rd digit -->
+                  <template x-if="index === 2">
+                    <div class="mx-1 text-muted-foreground">-</div>
+                  </template>
+                </div>
+              </template>
+            </div>
+
+            <p class="text-sm text-muted-foreground">
+              Code: <span x-text="code" class="font-mono font-semibold text-foreground"></span>
+            </p>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={inputOtpCode} lang="html" />
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={inputOtpCode} lang="html" />
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
+          <p class="text-muted-foreground leading-relaxed mt-1">
+            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwInputOTP(length)"</code>
+          </p>
+        </div>
+
+        <div class="mw-card overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-border">
+                <th class="text-left py-2 px-3 font-semibold">Property/Method</th>
+                <th class="text-left py-2 px-3 font-semibold">Type</th>
+                <th class="text-left py-2 px-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr>
+                <td class="py-2 px-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">length</code></td>
+                <td class="py-2 px-3 text-muted-foreground">Number</td>
+                <td class="py-2 px-3 text-muted-foreground">Number of OTP digits (parameter)</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">values</code></td>
+                <td class="py-2 px-3 text-muted-foreground">Array</td>
+                <td class="py-2 px-3 text-muted-foreground">Array of individual digit values</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">code</code></td>
+                <td class="py-2 px-3 text-muted-foreground">String (getter)</td>
+                <td class="py-2 px-3 text-muted-foreground">Joined string of all values</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">handleInput(index, e)</code></td>
+                <td class="py-2 px-3 text-muted-foreground">Method</td>
+                <td class="py-2 px-3 text-muted-foreground">Process input and auto-advance to next field</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">handleKeydown(index, e)</code></td>
+                <td class="py-2 px-3 text-muted-foreground">Method</td>
+                <td class="py-2 px-3 text-muted-foreground">Handle backspace navigation between fields</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
+            <li class="flex gap-2">
+              <span class="text-foreground">•</span>
+              <span>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">inputmode="numeric"</code> to show numeric keyboard on mobile devices</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-foreground">•</span>
+              <span>Each input has <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">maxlength="1"</code> to limit to single characters</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-foreground">•</span>
+              <span>Auto-advance on input and backspace navigation improve keyboard usability</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-foreground">•</span>
+              <span>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">autocomplete="one-time-code"</code> for SMS autofill support</span>
+            </li>
+          </ul>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

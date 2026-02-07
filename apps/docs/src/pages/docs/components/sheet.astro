@@ -121,13 +121,66 @@ const sheetCode = `<div x-data="mwSheet()">
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
           <p class="text-muted-foreground leading-relaxed">The sheet uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwSheet()"</code> with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">show()</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code> methods. Combine <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet</code> with a direction class:</p>
-          <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet-right</code> &mdash; slides in from the right</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet-left</code> &mdash; slides in from the left</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet-top</code> &mdash; slides down from the top</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet-bottom</code> &mdash; slides up from the bottom</li>
-          </ul>
-          <p class="text-muted-foreground leading-relaxed">The overlay backdrop (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-overlay</code>) closes the sheet when clicked.</p>
+
+          <div class="mw-card">
+            <h3 class="font-heading text-base font-semibold mb-3">Alpine.js API</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-border">
+                    <th class="text-left py-2 pr-4 font-semibold">Property/Method</th>
+                    <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                    <th class="text-left py-2 font-semibold">Description</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                  <tr>
+                    <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code></td>
+                    <td class="py-2 pr-4 text-muted-foreground">Boolean</td>
+                    <td class="py-2 text-muted-foreground">Sheet visibility state</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">show()</code></td>
+                    <td class="py-2 pr-4 text-muted-foreground">Method</td>
+                    <td class="py-2 text-muted-foreground">Open the sheet</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code></td>
+                    <td class="py-2 pr-4 text-muted-foreground">Method</td>
+                    <td class="py-2 text-muted-foreground">Close the sheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mw-card">
+            <h3 class="font-heading text-base font-semibold mb-3">CSS Classes</h3>
+            <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet</code> &mdash; base panel (fixed, z-51, bg, border, shadow, padding)</li>
+              <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet-right</code> &mdash; slides in from the right (24rem width)</li>
+              <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet-left</code> &mdash; slides in from the left</li>
+              <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet-top</code> &mdash; slides down from the top</li>
+              <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-sheet-bottom</code> &mdash; slides up from the bottom</li>
+              <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-overlay</code> &mdash; backdrop (closes sheet on click)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Accessibility -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Accessibility</h2>
+          <div class="mw-card space-y-3">
+            <p class="text-muted-foreground leading-relaxed">The sheet component follows accessibility best practices:</p>
+            <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li><strong>Role:</strong> Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="dialog"</code> to the sheet panel for proper semantic markup</li>
+              <li><strong>Modal state:</strong> Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-modal="true"</code> to indicate the sheet is modal</li>
+              <li><strong>Focus management:</strong> When the sheet opens, focus should move to the first interactive element or the sheet itself. On close, focus should return to the trigger button</li>
+              <li><strong>Keyboard navigation:</strong> Pressing <kbd class="px-2 py-1 bg-muted rounded text-sm font-mono border border-border">Escape</kbd> should close the sheet. Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@keydown.escape="close()"</code> on the sheet panel</li>
+              <li><strong>Screen readers:</strong> Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-labelledby</code> on the sheet panel to reference the sheet title heading</li>
+              <li><strong>Backdrop:</strong> The overlay backdrop provides a clear visual indication of modal state and allows users to dismiss by clicking outside</li>
+            </ul>
+          </div>
         </div>
       </div>
 

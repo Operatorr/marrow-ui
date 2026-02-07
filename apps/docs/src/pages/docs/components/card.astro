@@ -2,138 +2,188 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const basicCardCode = `<div class="mw-card">
-  <div class="pb-3 mb-3 border-b border-border">
-    <h3 class="font-heading text-lg font-semibold">Card Title</h3>
-    <p class="text-sm text-muted-foreground mt-1">Card description goes here.</p>
+const profileCardCode = `<div class="mw-card">
+  <div class="flex items-center gap-3">
+    <div class="mw-avatar">
+      <span>AJ</span>
+    </div>
+    <div>
+      <h3 class="font-heading font-semibold">Alice Johnson</h3>
+      <p class="text-sm text-muted-foreground">Product Designer</p>
+    </div>
   </div>
-  <div class="py-2">
-    <p class="text-sm text-muted-foreground">This is the card content area.</p>
-  </div>
-  <div class="pt-3 mt-3 border-t border-border flex justify-end gap-2">
-    <button class="mw-btn mw-btn-outline mw-btn-sm">Cancel</button>
-    <button class="mw-btn mw-btn-primary mw-btn-sm">Save</button>
+  <p class="text-sm text-muted-foreground mt-3 leading-relaxed">
+    Passionate about creating intuitive user experiences that solve real problems.
+  </p>
+</div>`;
+
+const notificationCardCode = `<div class="mw-card">
+  <div class="flex gap-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary flex-shrink-0 mt-0.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="flex-1 min-w-0">
+      <h3 class="font-heading font-semibold">New comment on your post</h3>
+      <p class="text-xs text-muted-foreground mt-1">2 minutes ago</p>
+      <p class="text-sm text-muted-foreground mt-2">
+        "Great insights! I'd love to hear more about your approach."
+      </p>
+    </div>
   </div>
 </div>`;
 
-const simpleCardCode = `<div class="mw-card">
-  <p class="text-sm text-muted-foreground">A simple card with just content inside.</p>
+const pricingCardCode = `<div class="mw-card">
+  <div class="text-center">
+    <h3 class="font-heading text-lg font-semibold">Pro</h3>
+    <div class="mt-2">
+      <span class="text-3xl font-bold">$29</span>
+      <span class="text-muted-foreground">/mo</span>
+    </div>
+  </div>
+  <ul class="mt-4 space-y-2">
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Unlimited projects
+    </li>
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Advanced analytics
+    </li>
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Priority support
+    </li>
+  </ul>
+  <button class="mw-btn mw-btn-primary w-full mt-4">Get started</button>
 </div>`;
-
-const cardGridCode = `<div class="grid md:grid-cols-3 gap-4">
-  <div class="mw-card">
-    <h3 class="font-heading font-semibold mb-2">Revenue</h3>
-    <p class="text-2xl font-bold">$45,231</p>
-    <p class="text-xs text-muted-foreground mt-1">+20.1% from last month</p>
-  </div>
-  <div class="mw-card">
-    <h3 class="font-heading font-semibold mb-2">Users</h3>
-    <p class="text-2xl font-bold">+2,350</p>
-    <p class="text-xs text-muted-foreground mt-1">+180 this week</p>
-  </div>
-  <div class="mw-card">
-    <h3 class="font-heading font-semibold mb-2">Active Now</h3>
-    <p class="text-2xl font-bold">573</p>
-    <p class="text-xs text-muted-foreground mt-1">+12 since last hour</p>
-  </div>
-</div>`;
-
-const interactiveCardCode = `<a href="#" class="mw-card block no-underline hover:border-primary/50 transition-colors">
-  <h3 class="font-heading font-semibold">Click me</h3>
-  <p class="text-sm text-muted-foreground mt-1">This entire card is a clickable link.</p>
-</a>`;
 ---
 
-<DocsLayout title="Card" description="A container component for grouping related content with header, body, and footer sections" activeComponent="card">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Card</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A container component for grouping related content with header, body, and footer sections.</p>
-        </div>
-        <div class="mw-separator"></div>
+<DocsLayout title="Card" description="A container component for grouping related content with consistent styling" activeComponent="card">
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Card</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A container component for grouping related content with consistent styling.</p>
+    </div>
 
-        <!-- Preview: Basic Card -->
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div class="mw-card w-full max-w-sm">
-              <div class="pb-3 mb-3 border-b border-border">
-                <h3 class="font-heading text-lg font-semibold">Card Title</h3>
-                <p class="text-sm text-muted-foreground mt-1">Card description goes here.</p>
+    <div class="mw-separator"></div>
+
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Profile Card -->
+          <div class="mw-card">
+            <div class="flex items-center gap-3">
+              <div class="mw-avatar">
+                <span>AJ</span>
               </div>
-              <div class="py-2">
-                <p class="text-sm text-muted-foreground">This is the card content area. You can place any content here including text, images, forms, or other components.</p>
+              <div>
+                <h3 class="font-heading font-semibold">Alice Johnson</h3>
+                <p class="text-sm text-muted-foreground">Product Designer</p>
               </div>
-              <div class="pt-3 mt-3 border-t border-border flex justify-end gap-2">
-                <button class="mw-btn mw-btn-outline mw-btn-sm">Cancel</button>
-                <button class="mw-btn mw-btn-primary mw-btn-sm">Save</button>
+            </div>
+            <p class="text-sm text-muted-foreground mt-3 leading-relaxed">
+              Passionate about creating intuitive user experiences that solve real problems.
+            </p>
+          </div>
+
+          <!-- Notification Card -->
+          <div class="mw-card">
+            <div class="flex gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary flex-shrink-0 mt-0.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-heading font-semibold">New comment on your post</h3>
+                <p class="text-xs text-muted-foreground mt-1">2 minutes ago</p>
+                <p class="text-sm text-muted-foreground mt-2">
+                  "Great insights! I'd love to hear more about your approach."
+                </p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={basicCardCode} lang="html" />
-        </div>
-
-        <div class="mw-separator"></div>
-
-        <!-- Variations -->
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Simple Card</h2>
-          <p class="text-sm text-muted-foreground">A card with just content, no header or footer.</p>
-          <div class="mw-card flex items-center justify-center min-h-[120px]">
-            <div class="mw-card w-full max-w-sm">
-              <p class="text-sm text-muted-foreground">A simple card with just content inside. No header or footer needed.</p>
-            </div>
-          </div>
-          <CodeBlock code={simpleCardCode} lang="html" />
-        </div>
-
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Card Grid</h2>
-          <p class="text-sm text-muted-foreground">Cards arranged in a responsive grid layout.</p>
-          <div class="grid md:grid-cols-3 gap-4">
-            <div class="mw-card">
-              <div class="flex items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                <h3 class="font-heading font-semibold">Revenue</h3>
+          <!-- Pricing Card -->
+          <div class="mw-card">
+            <div class="text-center">
+              <h3 class="font-heading text-lg font-semibold">Pro</h3>
+              <div class="mt-2">
+                <span class="text-3xl font-bold">$29</span>
+                <span class="text-muted-foreground">/mo</span>
               </div>
-              <p class="text-2xl font-bold">$45,231</p>
-              <p class="text-xs text-muted-foreground mt-1">+20.1% from last month</p>
             </div>
-            <div class="mw-card">
-              <div class="flex items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <h3 class="font-heading font-semibold">Users</h3>
-              </div>
-              <p class="text-2xl font-bold">+2,350</p>
-              <p class="text-xs text-muted-foreground mt-1">+180 this week</p>
-            </div>
-            <div class="mw-card">
-              <div class="flex items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                <h3 class="font-heading font-semibold">Active Now</h3>
-              </div>
-              <p class="text-2xl font-bold">573</p>
-              <p class="text-xs text-muted-foreground mt-1">+12 since last hour</p>
-            </div>
+            <ul class="mt-4 space-y-2">
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Unlimited projects
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Advanced analytics
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Priority support
+              </li>
+            </ul>
+            <button class="mw-btn mw-btn-primary w-full mt-4">Get started</button>
           </div>
-          <CodeBlock code={cardGridCode} lang="html" />
-        </div>
-
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Interactive Card</h2>
-          <p class="text-sm text-muted-foreground">A card styled as a clickable link with hover effects.</p>
-          <div class="mw-card flex items-center justify-center min-h-[120px]">
-            <a href="#" class="mw-card block w-full max-w-sm no-underline hover:border-primary/50 transition-colors">
-              <h3 class="font-heading font-semibold group-hover:text-primary">Click me</h3>
-              <p class="text-sm text-muted-foreground mt-1">This entire card is a clickable link with a hover border effect.</p>
-            </a>
-          </div>
-          <CodeBlock code={interactiveCardCode} lang="html" />
         </div>
       </div>
+    </div>
 
+    <!-- Code Examples -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+
+      <div class="space-y-4">
+        <div>
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">Profile Card</p>
+          <CodeBlock code={profileCardCode} lang="html" />
+        </div>
+
+        <div>
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">Notification Card</p>
+          <CodeBlock code={notificationCardCode} lang="html" />
+        </div>
+
+        <div>
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-2">Pricing Card</p>
+          <CodeBlock code={pricingCardCode} lang="html" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+          <p class="text-muted-foreground leading-relaxed mt-2">
+            The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-card</code> class provides the base card styling with background, border, border radius, padding, and shadow. All styling is controlled through your <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">marrow.config.js</code> theme configuration.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Layout Patterns</h3>
+          <p class="text-muted-foreground leading-relaxed mt-2">
+            Cards can be composed with any content structure. Common patterns include header sections with titles, content areas with text or images, and footer sections with actions. Use standard Tailwind utilities for internal spacing and layout.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Grid Layouts</h3>
+          <p class="text-muted-foreground leading-relaxed mt-2">
+            Cards work well in responsive grid layouts using Tailwind's grid utilities: <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">grid grid-cols-1 md:grid-cols-3 gap-4</code>. Adjust column counts and gaps based on your design needs.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <p class="text-muted-foreground leading-relaxed mt-2">
+            Cards are primarily visual containers and don't require specific ARIA roles. If a card is interactive (clickable), ensure it uses a semantic element like <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;a&gt;</code> or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;button&gt;</code> with appropriate focus styles. Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative icons.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

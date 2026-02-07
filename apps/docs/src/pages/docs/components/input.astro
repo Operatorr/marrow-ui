@@ -2,14 +2,12 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const inputCode = `<!-- Default -->
-<input type="text" class="mw-input" />
-
-<!-- With Placeholder -->
-<input type="email" class="mw-input" placeholder="you@example.com" />
-
-<!-- Disabled -->
-<input type="text" class="mw-input" disabled value="Disabled input" />
+const inputCode = `<!-- Basic Input -->
+<div>
+  <label for="email" class="mw-label mb-1.5 block">Email</label>
+  <input type="email" id="email" class="mw-input" placeholder="you@example.com" />
+  <p class="mt-1.5 text-sm text-muted-foreground">We'll never share your email.</p>
+</div>
 
 <!-- With Icon -->
 <div class="relative">
@@ -22,48 +20,132 @@ const inputCode = `<!-- Default -->
   </svg>
   <input type="text" class="mw-input" style="padding-left: 2.25rem;"
          placeholder="Search..." />
-</div>`;
+</div>
+
+<!-- Error State -->
+<div>
+  <label for="username" class="mw-label mb-1.5 block">Username</label>
+  <input type="text" id="username" class="mw-input"
+         style="border-color: hsl(0 84% 60%);" />
+  <p class="mt-1.5 text-sm" style="color: hsl(0 84% 60%);">
+    Username is already taken
+  </p>
+</div>
+
+<!-- Disabled -->
+<input type="text" class="mw-input" disabled value="Disabled input" />
+
+<!-- File Input -->
+<input type="file" class="mw-input" />`;
 ---
 
 <DocsLayout title="Input" description="A text input field for collecting user data" activeComponent="input">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Input</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A text input field for collecting user data.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight">Input</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A text input field for collecting user data.</p>
+    </div>
+    <div class="mw-separator"></div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div class="w-full max-w-sm space-y-4">
-              <div>
-                <label class="mw-label mb-1.5 block">Default</label>
-                <input type="text" class="mw-input" />
-              </div>
-              <div>
-                <label class="mw-label mb-1.5 block">With Placeholder</label>
-                <input type="email" class="mw-input" placeholder="you@example.com" />
-              </div>
-              <div>
-                <label class="mw-label mb-1.5 block">Disabled</label>
-                <input type="text" class="mw-input" disabled value="Disabled input" />
-              </div>
-              <div>
-                <label class="mw-label mb-1.5 block">With Icon</label>
-                <div class="relative">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                  <input type="text" class="mw-input" style="padding-left: 2.25rem;" placeholder="Search..." />
-                </div>
-              </div>
-            </div>
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+      <div class="mw-card flex items-center justify-center min-h-[200px]">
+        <div class="w-full max-w-sm">
+          <label for="preview-email" class="mw-label mb-1.5 block">Email</label>
+          <input type="email" id="preview-email" class="mw-input" placeholder="you@example.com" />
+          <p class="mt-1.5 text-sm text-muted-foreground">We'll never share your email.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">With Icon</h3>
+      <div class="mw-card flex items-center justify-center min-h-[150px]">
+        <div class="w-full max-w-sm">
+          <label for="search" class="mw-label mb-1.5 block">Search</label>
+          <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="search" class="mw-input" style="padding-left: 2.25rem;" placeholder="Search..." />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Error State</h3>
+      <div class="mw-card flex items-center justify-center min-h-[150px]">
+        <div class="w-full max-w-sm">
+          <label for="username" class="mw-label mb-1.5 block">Username</label>
+          <input type="text" id="username" class="mw-input" style="border-color: hsl(0 84% 60%);" value="johndoe" />
+          <p class="mt-1.5 text-sm" style="color: hsl(0 84% 60%);">Username is already taken</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Disabled</h3>
+      <div class="mw-card flex items-center justify-center min-h-[150px]">
+        <div class="w-full max-w-sm">
+          <label for="disabled-input" class="mw-label mb-1.5 block">Disabled Input</label>
+          <input type="text" id="disabled-input" class="mw-input" disabled value="Disabled input" />
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">File Input</h3>
+      <div class="mw-card flex items-center justify-center min-h-[150px]">
+        <div class="w-full max-w-sm">
+          <label for="file-upload" class="mw-label mb-1.5 block">Upload File</label>
+          <input type="file" id="file-upload" class="mw-input" />
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+      <CodeBlock code={inputCode} lang="html" />
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+      <div class="mw-card space-y-6">
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-border">
+                  <th class="text-left py-2 font-semibold">Class</th>
+                  <th class="text-left py-2 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="py-2 font-mono text-sm"><span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-input</span></td>
+                  <td class="py-2 text-muted-foreground">Base input styles with border, padding, and focus states</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-mono text-sm"><span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-label</span></td>
+                  <td class="py-2 text-muted-foreground">Form label styling</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={inputCode} lang="html" />
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed">
+            <li>• Always associate labels with inputs using <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</span> and <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</span> attributes</li>
+            <li>• Use appropriate <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">type</span> attributes (email, tel, url, etc.) for better mobile keyboards</li>
+            <li>• Add <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-describedby</span> to link error messages to inputs</li>
+            <li>• Use <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-invalid="true"</span> on inputs with validation errors</li>
+            <li>• Add <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</span> to decorative icons</li>
+            <li>• Provide clear placeholder text and helper messages</li>
+          </ul>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

@@ -2,112 +2,203 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const carouselCode = `<div x-data="mwCarousel(3)">
+const carouselCode = `<div x-data="mwCarousel(4)">
   <div class="relative overflow-hidden rounded-marrow border border-border">
     <!-- Slides -->
-    <div class="relative min-h-[200px]">
-      <div x-show="current === 0" class="flex items-center justify-center h-[200px] bg-muted/30">
-        <div class="text-center">
-          <p class="text-lg font-semibold">Slide 1</p>
-          <p class="text-sm text-muted-foreground">First slide content</p>
+    <div class="relative min-h-[280px]">
+      <div x-show="current === 0" class="flex items-center justify-center h-[280px] bg-gradient-to-br from-primary/20 to-primary/5">
+        <div class="text-center space-y-2">
+          <p class="text-2xl font-bold">Welcome</p>
+          <p class="text-muted-foreground">Slide 1 of 4</p>
         </div>
       </div>
-      <div x-show="current === 1" class="flex items-center justify-center h-[200px] bg-muted/30">
-        <div class="text-center">
-          <p class="text-lg font-semibold">Slide 2</p>
-          <p class="text-sm text-muted-foreground">Second slide content</p>
+      <div x-show="current === 1" class="flex items-center justify-center h-[280px] bg-gradient-to-br from-secondary/20 to-secondary/5">
+        <div class="text-center space-y-2">
+          <p class="text-2xl font-bold">Features</p>
+          <p class="text-muted-foreground">Slide 2 of 4</p>
         </div>
       </div>
-      <div x-show="current === 2" class="flex items-center justify-center h-[200px] bg-muted/30">
-        <div class="text-center">
-          <p class="text-lg font-semibold">Slide 3</p>
-          <p class="text-sm text-muted-foreground">Third slide content</p>
+      <div x-show="current === 2" class="flex items-center justify-center h-[280px] bg-gradient-to-br from-accent/20 to-accent/5">
+        <div class="text-center space-y-2">
+          <p class="text-2xl font-bold">Benefits</p>
+          <p class="text-muted-foreground">Slide 3 of 4</p>
+        </div>
+      </div>
+      <div x-show="current === 3" class="flex items-center justify-center h-[280px] bg-gradient-to-br from-muted/40 to-muted/10">
+        <div class="text-center space-y-2">
+          <p class="text-2xl font-bold">Get Started</p>
+          <p class="text-muted-foreground">Slide 4 of 4</p>
         </div>
       </div>
     </div>
 
     <!-- Prev/Next Buttons -->
     <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Previous slide">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
     </button>
     <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Next slide">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
     </button>
   </div>
 
   <!-- Dot Indicators -->
-  <div class="flex justify-center gap-2 mt-3">
+  <div class="flex justify-center gap-2 mt-4" role="group" aria-label="Slide navigation">
     <template x-for="i in count" :key="i">
       <button @click="goTo(i - 1)"
         :class="current === i - 1 ? 'bg-primary' : 'bg-muted-foreground/30'"
         class="w-2 h-2 rounded-full transition-colors"
-        :aria-label="'Go to slide ' + i"></button>
+        :aria-label="'Go to slide ' + i"
+        :aria-current="current === i - 1 ? 'true' : 'false'"></button>
     </template>
   </div>
 </div>`;
 ---
 
 <DocsLayout title="Carousel" description="A slideshow component for cycling through content with navigation controls" activeComponent="carousel">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Carousel</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A slideshow component for cycling through content with navigation controls.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div class="space-y-4">
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Carousel</h1>
+      <p class="text-muted-foreground leading-relaxed">A slideshow component for cycling through content with navigation controls, prev/next arrows, and dot indicators.</p>
+    </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div class="w-full max-w-lg" x-data="mwCarousel(3)">
-              <div class="relative overflow-hidden rounded-marrow border border-border">
-                <!-- Slides -->
-                <div class="relative min-h-[200px]">
-                  <div x-show="current === 0" class="flex items-center justify-center h-[200px] bg-muted/30">
-                    <div class="text-center">
-                      <p class="text-lg font-semibold">Slide 1</p>
-                      <p class="text-sm text-muted-foreground">First slide content</p>
-                    </div>
-                  </div>
-                  <div x-show="current === 1" class="flex items-center justify-center h-[200px] bg-muted/30">
-                    <div class="text-center">
-                      <p class="text-lg font-semibold">Slide 2</p>
-                      <p class="text-sm text-muted-foreground">Second slide content</p>
-                    </div>
-                  </div>
-                  <div x-show="current === 2" class="flex items-center justify-center h-[200px] bg-muted/30">
-                    <div class="text-center">
-                      <p class="text-lg font-semibold">Slide 3</p>
-                      <p class="text-sm text-muted-foreground">Third slide content</p>
-                    </div>
-                  </div>
+    <div class="mw-separator"></div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card flex items-center justify-center p-8">
+        <div class="w-full max-w-lg" x-data="mwCarousel(4)">
+          <div class="relative overflow-hidden rounded-marrow border border-border">
+            <!-- Slides -->
+            <div class="relative min-h-[280px]">
+              <div x-show="current === 0" class="flex items-center justify-center h-[280px] bg-gradient-to-br from-primary/20 to-primary/5">
+                <div class="text-center space-y-2">
+                  <p class="text-2xl font-bold">Welcome</p>
+                  <p class="text-muted-foreground">Slide 1 of 4</p>
                 </div>
-
-                <!-- Prev/Next Buttons -->
-                <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Previous slide">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                </button>
-                <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Next slide">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                </button>
               </div>
-
-              <!-- Dot Indicators -->
-              <div class="flex justify-center gap-2 mt-3">
-                <template x-for="i in count" :key="i">
-                  <button @click="goTo(i - 1)"
-                    :class="current === i - 1 ? 'bg-primary' : 'bg-muted-foreground/30'"
-                    class="w-2 h-2 rounded-full transition-colors"
-                    :aria-label="'Go to slide ' + i"></button>
-                </template>
+              <div x-show="current === 1" class="flex items-center justify-center h-[280px] bg-gradient-to-br from-secondary/20 to-secondary/5">
+                <div class="text-center space-y-2">
+                  <p class="text-2xl font-bold">Features</p>
+                  <p class="text-muted-foreground">Slide 2 of 4</p>
+                </div>
+              </div>
+              <div x-show="current === 2" class="flex items-center justify-center h-[280px] bg-gradient-to-br from-accent/20 to-accent/5">
+                <div class="text-center space-y-2">
+                  <p class="text-2xl font-bold">Benefits</p>
+                  <p class="text-muted-foreground">Slide 3 of 4</p>
+                </div>
+              </div>
+              <div x-show="current === 3" class="flex items-center justify-center h-[280px] bg-gradient-to-br from-muted/40 to-muted/10">
+                <div class="text-center space-y-2">
+                  <p class="text-2xl font-bold">Get Started</p>
+                  <p class="text-muted-foreground">Slide 4 of 4</p>
+                </div>
               </div>
             </div>
+
+            <!-- Prev/Next Buttons -->
+            <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Previous slide">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Next slide">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+
+          <!-- Dot Indicators -->
+          <div class="flex justify-center gap-2 mt-4" role="group" aria-label="Slide navigation">
+            <template x-for="i in count" x-bind:key="i">
+              <button @click="goTo(i - 1)"
+                :class="current === i - 1 ? 'bg-primary' : 'bg-muted-foreground/30'"
+                class="w-2 h-2 rounded-full transition-colors"
+                :aria-label="'Go to slide ' + i"
+                :aria-current="current === i - 1 ? 'true' : 'false'"></button>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={carouselCode} lang="html" />
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwCarousel(count)"</code> where <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">count</code> is the total number of slides.
+          </p>
+          <div class="mw-card">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-border">
+                  <th class="text-left py-3 px-4 font-semibold">Property/Method</th>
+                  <th class="text-left py-3 px-4 font-semibold">Type</th>
+                  <th class="text-left py-3 px-4 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">current</code></td>
+                  <td class="py-3 px-4 text-muted-foreground">Number</td>
+                  <td class="py-3 px-4 text-muted-foreground">Current slide index (0-based)</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">count</code></td>
+                  <td class="py-3 px-4 text-muted-foreground">Number</td>
+                  <td class="py-3 px-4 text-muted-foreground">Total number of slides</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">next()</code></td>
+                  <td class="py-3 px-4 text-muted-foreground">Function</td>
+                  <td class="py-3 px-4 text-muted-foreground">Go to next slide (wraps to first)</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">prev()</code></td>
+                  <td class="py-3 px-4 text-muted-foreground">Function</td>
+                  <td class="py-3 px-4 text-muted-foreground">Go to previous slide (wraps to last)</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">goTo(i)</code></td>
+                  <td class="py-3 px-4 text-muted-foreground">Function</td>
+                  <td class="py-3 px-4 text-muted-foreground">Go to specific slide index</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={carouselCode} lang="html" />
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed">
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>Navigation buttons include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> attributes for screen readers</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>Dot indicators use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-current</code> to indicate the active slide</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>Indicator container has <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="group"</code> with descriptive label</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>SVG icons are marked with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> as decorative elements</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-primary mt-1">•</span>
+              <span>Consider adding keyboard navigation (left/right arrow keys) for enhanced accessibility</span>
+            </li>
+          </ul>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

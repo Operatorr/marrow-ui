@@ -42,14 +42,14 @@ const tabsCode = `<div x-data="mwTabs('tab1')">
 <DocsLayout title="Tabs" description="Tabbed navigation for switching between content panels" activeComponent="tabs">
       <div class="space-y-8">
         <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Tabs</h1>
+          <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Tabs</h1>
           <p class="mt-2 text-lg text-muted-foreground">A set of layered content sections, displayed one at a time via tabbed navigation.</p>
         </div>
 
         <div class="mw-separator"></div>
 
         <!-- Preview -->
-        <div class="space-y-4">
+        <section class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
           <div class="mw-card p-6">
             <div x-data="mwTabs('tab1')">
@@ -101,7 +101,8 @@ const tabsCode = `<div x-data="mwTabs('tab1')">
                     <button class="mw-switch"
                             :data-state="checked ? 'checked' : 'unchecked'"
                             @click="toggle()"
-                            role="switch">
+                            role="switch"
+                            :aria-checked="checked.toString()">
                       <span class="mw-switch-thumb"></span>
                     </button>
                     <span class="text-sm">Email notifications</span>
@@ -110,7 +111,8 @@ const tabsCode = `<div x-data="mwTabs('tab1')">
                     <button class="mw-switch"
                             :data-state="checked ? 'checked' : 'unchecked'"
                             @click="toggle()"
-                            role="switch">
+                            role="switch"
+                            :aria-checked="checked.toString()">
                       <span class="mw-switch-thumb"></span>
                     </button>
                     <span class="text-sm">Push notifications</span>
@@ -119,13 +121,91 @@ const tabsCode = `<div x-data="mwTabs('tab1')">
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- Code -->
-        <div class="space-y-4">
+        <section class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
           <CodeBlock code={tabsCode} lang="html" />
-        </div>
-      </div>
+        </section>
 
+        <!-- Usage -->
+        <section class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
+              <p class="text-sm text-muted-foreground mb-4">Initialize with <code class="mw-code">x-data="mwTabs(defaultTab)"</code></p>
+              <div class="mw-card overflow-hidden">
+                <table class="w-full text-sm">
+                  <thead class="border-b border-border bg-muted/50">
+                    <tr>
+                      <th class="text-left p-3 font-semibold">Property/Method</th>
+                      <th class="text-left p-3 font-semibold">Type</th>
+                      <th class="text-left p-3 font-semibold">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-border">
+                    <tr>
+                      <td class="p-3"><code class="mw-code">active</code></td>
+                      <td class="p-3">String</td>
+                      <td class="p-3">Currently active tab ID</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3"><code class="mw-code">setActive(tab)</code></td>
+                      <td class="p-3">Function</td>
+                      <td class="p-3">Switch to the specified tab</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3"><code class="mw-code">isActive(tab)</code></td>
+                      <td class="p-3">Function</td>
+                      <td class="p-3">Check if the specified tab is active (returns boolean)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
+              <div class="mw-card overflow-hidden">
+                <table class="w-full text-sm">
+                  <thead class="border-b border-border bg-muted/50">
+                    <tr>
+                      <th class="text-left p-3 font-semibold">Class</th>
+                      <th class="text-left p-3 font-semibold">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-border">
+                    <tr>
+                      <td class="p-3"><code class="mw-code">mw-tabs-list</code></td>
+                      <td class="p-3">Container for tab triggers with inline-flex layout, muted background, and rounded corners</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3"><code class="mw-code">mw-tab-trigger</code></td>
+                      <td class="p-3">Individual tab button with transitions and muted-foreground color</td>
+                    </tr>
+                    <tr>
+                      <td class="p-3"><code class="mw-code">mw-tab-trigger[data-state="active"]</code></td>
+                      <td class="p-3">Active tab state with white background, foreground color, and shadow</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
+              <ul class="space-y-2 text-sm text-muted-foreground list-disc list-inside">
+                <li>Tab triggers are keyboard navigable with arrow keys when using proper ARIA attributes</li>
+                <li>Use <code class="mw-code">x-cloak</code> on hidden tab panels to prevent content flash on load</li>
+                <li>Tab panels automatically hide/show with Alpine.js <code class="mw-code">x-show</code> directive</li>
+                <li>Consider adding <code class="mw-code">role="tablist"</code>, <code class="mw-code">role="tab"</code>, and <code class="mw-code">role="tabpanel"</code> for enhanced screen reader support</li>
+                <li>Add <code class="mw-code">aria-selected</code> to tab triggers to indicate active state</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
 </DocsLayout>

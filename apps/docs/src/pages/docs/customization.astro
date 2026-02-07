@@ -1,5 +1,41 @@
 ---
 import DocsLayout from "../../layouts/DocsLayout.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+
+const colorsCode = `colors: {
+  light: {
+    primary:           "220 90% 56%",   // Blue
+    primaryForeground: "0 0% 100%",     // White text on primary
+    // ... see marrow.config.js for all tokens
+  },
+  dark: {
+    primary:           "220 90% 56%",
+    primaryForeground: "0 0% 100%",
+    background:        "222 47% 6%",    // Dark background
+    // ...
+  },
+}`;
+
+const compactnessCode = `compactness: "normal", // minimal | compact | normal | relaxed | spacious`;
+
+const fontsCode = `fonts: {
+  heading: "Inter",       // Used for h1-h6 and .font-heading
+  body: "Inter",          // Used for body text and .font-body
+},
+
+// Popular combinations:
+// "Inter" + "Inter"               → Clean, modern
+// "Cal Sans" + "Inter"            → Bold headings + clean body
+// "Playfair Display" + "Source Sans 3" → Editorial
+// "Space Grotesk" + "DM Sans"    → Techy`;
+
+const advancedCode = `/* In your own CSS */
+.my-custom-component {
+  background-color: hsl(var(--marrow-primary) / 0.1);
+  border-radius: var(--marrow-radius);
+  padding: var(--marrow-card-p);
+  transition: all var(--marrow-duration) ease-in-out;
+}`;
 ---
 
 <DocsLayout title="Customization" description="How to customize Marrow UI themes, colors, and spacing" activeSection="customization">
@@ -69,24 +105,7 @@ import DocsLayout from "../../layouts/DocsLayout.astro";
 
           <p class="text-muted-foreground leading-relaxed">Each color also has a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">*Foreground</code> variant for text that appears on top of that color.</p>
 
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>colors: {
-  light: {
-    primary:           "220 90% 56%",   // Blue
-    primaryForeground: "0 0% 100%",     // White text on primary
-    // ... see marrow.config.js for all tokens
-  },
-  dark: {
-    primary:           "220 90% 56%",
-    primaryForeground: "0 0% 100%",
-    background:        "222 47% 6%",    // Dark background
-    // ...
-  },
-}</code></pre>
-          </div>
+          <CodeBlock code={colorsCode} lang="javascript" />
         </div>
 
         <!-- Compactness -->
@@ -133,12 +152,7 @@ import DocsLayout from "../../layouts/DocsLayout.astro";
             </table>
           </div>
 
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>compactness: "normal", // minimal | compact | normal | relaxed | spacious</code></pre>
-          </div>
+          <CodeBlock code={compactnessCode} lang="javascript" />
         </div>
 
         <!-- Radius -->
@@ -182,21 +196,7 @@ import DocsLayout from "../../layouts/DocsLayout.astro";
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Typography</h2>
           <p class="text-muted-foreground leading-relaxed">Marrow supports dual font families: one for headings and one for body text. Use any Google Font name or system font stack.</p>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>fonts: {
-  heading: "Inter",       // Used for h1-h6 and .font-heading
-  body: "Inter",          // Used for body text and .font-body
-},
-
-// Popular combinations:
-// "Inter" + "Inter"               → Clean, modern
-// "Cal Sans" + "Inter"            → Bold headings + clean body
-// "Playfair Display" + "Source Sans 3" → Editorial
-// "Space Grotesk" + "DM Sans"    → Techy</code></pre>
-          </div>
+          <CodeBlock code={fontsCode} lang="javascript" />
         </div>
 
         <!-- Other Settings -->
@@ -226,18 +226,7 @@ import DocsLayout from "../../layouts/DocsLayout.astro";
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Advanced: Tailwind Extend</h2>
           <p class="text-muted-foreground leading-relaxed">For edge cases not covered by the config, extend Tailwind directly. The CSS custom properties from Marrow are available everywhere:</p>
-          <div class="mw-code-block">
-            <button class="copy-btn" title="Copy to clipboard">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-            </button>
-            <pre><code is:raw>/* In your own CSS */
-.my-custom-component {
-  background-color: hsl(var(--marrow-primary) / 0.1);
-  border-radius: var(--marrow-radius);
-  padding: var(--marrow-card-p);
-  transition: all var(--marrow-duration) ease-in-out;
-}</code></pre>
-          </div>
+          <CodeBlock code={advancedCode} lang="css" />
         </div>
       </div>
 

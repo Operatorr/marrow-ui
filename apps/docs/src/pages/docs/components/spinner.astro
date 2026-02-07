@@ -88,7 +88,7 @@ const spinnerCode = `<!-- Small -->
           <CodeBlock code={spinnerCode} lang="html" />
         </div>
 
-        <!-- Usage Notes -->
+        <!-- Usage -->
         <div class="space-y-4">
           <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
           <p class="text-muted-foreground leading-relaxed">Apply the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-spinner</code> class to an empty <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;div&gt;</code>. The default size is 1.25rem (20px). Override size with inline styles:</p>
@@ -98,6 +98,39 @@ const spinnerCode = `<!-- Small -->
             <li><strong>Large</strong> &mdash; <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">width: 2rem; height: 2rem; border-width: 3px;</code></li>
           </ul>
           <p class="text-muted-foreground leading-relaxed">When using inside a button, override the border colors to match the button foreground color so the spinner remains visible against the button background. No JavaScript is required.</p>
+        </div>
+
+        <!-- CSS Classes -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">CSS Classes</h2>
+          <div class="mw-card overflow-hidden">
+            <table class="mw-table">
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.mw-spinner</code></td>
+                  <td>Base spinner class. Displays a 1.25rem circular border with spin animation (0.6s linear infinite). Default border is muted with primary-colored top border for the spinning effect.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Accessibility -->
+        <div class="space-y-4">
+          <h2 class="font-heading text-2xl font-semibold tracking-tight">Accessibility</h2>
+          <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="status"</code> to the spinner container to announce loading state changes to screen readers</li>
+            <li>Include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label="Loading"</code> or similar to provide context for assistive technologies</li>
+            <li>When used inside a button, ensure the button has the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">disabled</code> attribute to prevent interaction during loading</li>
+            <li>Always pair with visible text (like "Loading..." or "Submitting...") when possible to provide visual context for all users</li>
+            <li>The spin animation respects <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">prefers-reduced-motion</code> settings automatically via Tailwind's animation utilities</li>
+          </ul>
         </div>
       </div>
 

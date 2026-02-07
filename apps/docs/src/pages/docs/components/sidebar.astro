@@ -6,23 +6,60 @@ const sidebarCode = `<div x-data="mwSidebar(true)" class="flex min-h-screen">
   <aside class="border-r bg-card transition-all duration-300 overflow-hidden shrink-0"
          :style="open ? 'width: 16rem' : 'width: 3.5rem'">
     <div class="p-3 flex items-center justify-between border-b">
-      <span x-show="open" class="font-heading font-semibold text-sm">Workspace</span>
+      <span x-show="open" x-transition class="font-heading font-semibold text-sm">Workspace</span>
       <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon p-1">
-        <!-- Chevron icon -->
+        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/>
+        </svg>
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/>
+        </svg>
       </button>
     </div>
     <nav class="p-2 space-y-1">
       <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
                          bg-accent text-accent-foreground font-medium">
-        <!-- Icon (shrink-0) -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
         <span x-show="open" x-transition class="truncate">Dashboard</span>
       </a>
       <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
-                         text-muted-foreground hover:bg-accent transition-colors">
-        <!-- Icon (shrink-0) -->
-        <span x-show="open" x-transition class="truncate">Team</span>
+                         text-muted-foreground hover:bg-accent hover:text-accent-foreground
+                         transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span x-show="open" x-transition class="truncate">Projects</span>
       </a>
-      <!-- More nav items... -->
+      <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
+                         text-muted-foreground hover:bg-accent hover:text-accent-foreground
+                         transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span x-show="open" x-transition class="truncate">Teams</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
+                         text-muted-foreground hover:bg-accent hover:text-accent-foreground
+                         transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span x-show="open" x-transition class="truncate">Settings</span>
+      </a>
     </nav>
   </aside>
 
@@ -33,70 +70,145 @@ const sidebarCode = `<div x-data="mwSidebar(true)" class="flex min-h-screen">
 ---
 
 <DocsLayout title="Sidebar" description="A collapsible sidebar navigation component" activeComponent="sidebar">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Sidebar</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A collapsible sidebar component for app navigation, with support for menu items, sections, and a toggle button.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Sidebar</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A collapsible sidebar component for app navigation, with support for menu items, sections, and a toggle button.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card p-0 overflow-hidden">
-            <div x-data="mwSidebar(true)" class="flex" style="min-height: 20rem;">
-              <!-- Sidebar -->
-              <aside class="border-r bg-card transition-all duration-300 overflow-hidden shrink-0"
-                     :style="open ? 'width: 16rem' : 'width: 3.5rem'">
-                <div class="p-3 flex items-center justify-between border-b">
-                  <span x-show="open" class="font-heading font-semibold text-sm truncate" x-transition>Workspace</span>
-                  <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon p-1" style="width: 1.75rem; height: 1.75rem;">
-                    <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
-                    <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>
-                  </button>
-                </div>
-                <nav class="p-2 space-y-1">
-                  <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md bg-accent text-accent-foreground font-medium">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    <span x-show="open" x-transition class="truncate">Dashboard</span>
-                  </a>
-                  <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <span x-show="open" x-transition class="truncate">Team</span>
-                  </a>
-                  <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    <span x-show="open" x-transition class="truncate">Projects</span>
-                  </a>
-                  <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                    <span x-show="open" x-transition class="truncate">Settings</span>
-                  </a>
-                </nav>
-              </aside>
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+      <div class="mw-card p-0 overflow-hidden">
+        <div x-data="mwSidebar(true)" class="flex" style="min-height: 24rem;">
+          <!-- Sidebar -->
+          <aside class="border-r bg-card transition-all duration-300 overflow-hidden shrink-0"
+                 :style="open ? 'width: 16rem' : 'width: 3.5rem'">
+            <div class="p-3 flex items-center justify-between border-b">
+              <span x-show="open" x-transition class="font-heading font-semibold text-sm truncate">Workspace</span>
+              <button @click="toggle()"
+                      aria-label="Toggle sidebar"
+                      class="mw-btn mw-btn-ghost mw-btn-icon p-1"
+                      style="width: 1.75rem; height: 1.75rem;">
+                <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/>
+                </svg>
+                <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/>
+                </svg>
+              </button>
+            </div>
+            <nav class="p-2 space-y-1" aria-label="Main navigation">
+              <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md bg-accent text-accent-foreground font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span x-show="open" x-transition class="truncate">Dashboard</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true">
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+                <span x-show="open" x-transition class="truncate">Projects</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span x-show="open" x-transition class="truncate">Teams</span>
+              </a>
+              <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                <span x-show="open" x-transition class="truncate">Settings</span>
+              </a>
+            </nav>
+          </aside>
 
-              <!-- Main Content -->
-              <div class="flex-1 p-6">
-                <h3 class="font-heading font-semibold mb-2">Main Content</h3>
-                <p class="text-sm text-muted-foreground">Click the chevron icon in the sidebar header to collapse or expand the navigation panel.</p>
-              </div>
+          <!-- Main Content Area -->
+          <div class="flex-1 p-6 bg-background">
+            <h3 class="font-heading text-lg font-semibold mb-3">Main Content</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed mb-4">Click the chevron icon in the sidebar header to collapse or expand the navigation panel.</p>
+            <div class="space-y-2">
+              <div class="h-4 bg-muted rounded w-3/4"></div>
+              <div class="h-4 bg-muted rounded w-full"></div>
+              <div class="h-4 bg-muted rounded w-2/3"></div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={sidebarCode} lang="html" />
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+      <CodeBlock code={sidebarCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
+          <div class="mw-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="border-b bg-muted/50">
+                <tr>
+                  <th class="text-left p-3 font-semibold">Property/Method</th>
+                  <th class="text-left p-3 font-semibold">Type</th>
+                  <th class="text-left p-3 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                <tr>
+                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwSidebar(defaultOpen)</code></td>
+                  <td class="p-3 text-muted-foreground">Function</td>
+                  <td class="p-3 text-muted-foreground">Initialize sidebar with default open state (boolean)</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code></td>
+                  <td class="p-3 text-muted-foreground">Boolean</td>
+                  <td class="p-3 text-muted-foreground">Current visibility state of the sidebar</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">toggle()</code></td>
+                  <td class="p-3 text-muted-foreground">Method</td>
+                  <td class="p-3 text-muted-foreground">Toggle sidebar between open and collapsed states</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <!-- Usage Notes -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-          <p class="text-muted-foreground leading-relaxed">The sidebar uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwSidebar(true)"</code> where the boolean argument sets the initial state (open or collapsed). Call <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">toggle()</code> to expand or collapse.</p>
-          <p class="text-muted-foreground leading-relaxed">When collapsed, nav item labels are hidden with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-show="open"</code>, leaving only icons visible. Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">shrink-0</code> to icons so they remain fixed-size during the transition.</p>
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Implementation Notes</h3>
+          <div class="space-y-3">
+            <p class="text-muted-foreground leading-relaxed">The sidebar uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwSidebar(true)"</code> where the boolean argument sets the initial state (open or collapsed).</p>
+            <p class="text-muted-foreground leading-relaxed">When collapsed, nav item labels are hidden with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-show="open"</code>, leaving only icons visible. Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">shrink-0</code> to icons so they remain fixed-size during the transition.</p>
+            <p class="text-muted-foreground leading-relaxed">The sidebar width transitions smoothly using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:style</code> binding: <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open ? 'width: 16rem' : 'width: 3.5rem'</code>.</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
+          <div class="space-y-3">
+            <p class="text-muted-foreground leading-relaxed">Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label="Toggle sidebar"</code> to the toggle button for screen reader users.</p>
+            <p class="text-muted-foreground leading-relaxed">Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> on the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;nav&gt;</code> element to identify it as the main navigation.</p>
+            <p class="text-muted-foreground leading-relaxed">Ensure icons have <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> since the text labels provide the accessible names.</p>
+          </div>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

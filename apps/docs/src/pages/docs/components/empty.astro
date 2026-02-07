@@ -6,59 +6,140 @@ const emptyCode = `<div class="mw-empty">
   <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
        viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-       class="mb-4 opacity-50">
-    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
-    <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
-    <path d="M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1"/>
-    <path d="M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1"/>
+       class="mb-4 opacity-50" aria-hidden="true">
+    <rect x="2" y="3" width="20" height="18" rx="2"/>
+    <path d="M8 7h8"/>
+    <path d="M8 11h6"/>
   </svg>
 
-  <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+  <h3 class="font-heading text-lg font-semibold mb-1">No projects yet</h3>
 
   <p class="text-sm text-muted-foreground max-w-sm mb-4">
-    There are no items to display right now. Try adjusting your
-    filters or create a new item to get started.
+    Get started by creating your first project.
   </p>
 
   <button class="mw-btn mw-btn-primary">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
          viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true">
       <path d="M5 12h14"/>
       <path d="M12 5v14"/>
     </svg>
-    Create new item
+    Create Project
   </button>
+</div>`;
+
+const searchEmptyCode = `<div class="mw-empty">
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+       class="mb-4 opacity-50" aria-hidden="true">
+    <circle cx="11" cy="11" r="8"/>
+    <path d="m21 21-4.35-4.35"/>
+  </svg>
+
+  <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+
+  <p class="text-sm text-muted-foreground max-w-sm mb-4">
+    Try adjusting your search or filters.
+  </p>
 </div>`;
 ---
 
 <DocsLayout title="Empty" description="An empty state placeholder to display when there is no content to show" activeComponent="empty">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Empty</h1>
-          <p class="mt-2 text-lg text-muted-foreground">An empty state placeholder to display when there is no content to show.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Empty</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">An empty state placeholder to display when there is no content to show.</p>
+    </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div class="mw-empty">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4 opacity-50"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1"/><path d="M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1"/></svg>
-              <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
-              <p class="text-sm text-muted-foreground max-w-sm mb-4">There are no items to display right now. Try adjusting your filters or create a new item to get started.</p>
-              <button class="mw-btn mw-btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                Create new item
-              </button>
-            </div>
+    <div class="mw-separator"></div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="mw-card flex items-center justify-center min-h-[320px]">
+          <div class="mw-empty">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4 opacity-50" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="18" rx="2"/>
+              <path d="M8 7h8"/>
+              <path d="M8 11h6"/>
+            </svg>
+            <h3 class="font-heading text-lg font-semibold mb-1">No projects yet</h3>
+            <p class="text-sm text-muted-foreground max-w-sm mb-4">Get started by creating your first project.</p>
+            <button class="mw-btn mw-btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"/>
+                <path d="M12 5v14"/>
+              </svg>
+              Create Project
+            </button>
           </div>
         </div>
 
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={emptyCode} lang="html" />
+        <div class="mw-card flex items-center justify-center min-h-[320px]">
+          <div class="mw-empty">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mb-4 opacity-50" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+            <p class="text-sm text-muted-foreground max-w-sm mb-4">Try adjusting your search or filters.</p>
+          </div>
         </div>
       </div>
+    </div>
 
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Default Empty State</h3>
+          <CodeBlock code={emptyCode} lang="html" />
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Search Empty State</h3>
+          <CodeBlock code={searchEmptyCode} lang="html" />
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
+            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-empty</code> — Flex column layout with centered content, padding, and muted text styling</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Best Practices</h3>
+          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed list-disc list-inside">
+            <li>Use descriptive, contextual messaging that explains why the state is empty</li>
+            <li>Include a clear call-to-action when appropriate (e.g., "Create Project" button)</li>
+            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative icons</li>
+            <li>Keep descriptions concise and actionable</li>
+            <li>Consider different empty states for different contexts (no data, no search results, no permissions, etc.)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed list-disc list-inside">
+            <li>Decorative icons should have <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code></li>
+            <li>Use semantic heading markup (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">h3</code>) for the empty state title</li>
+            <li>Ensure action buttons have descriptive text labels</li>
+            <li>Maintain sufficient color contrast for text readability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

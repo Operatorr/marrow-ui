@@ -2,137 +2,276 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const itemCode = `<div class="divide-y divide-border">
-  <!-- Item with badge -->
-  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+const menuItemCode = `<!-- Settings Menu with Items -->
+<div class="mw-card max-w-md">
+  <div class="mw-menu-label">Settings</div>
+  <div class="mw-menu-item">
     <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-      <!-- Icon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </div>
     <div class="flex-1 min-w-0">
-      <div class="text-sm font-medium">Project Roadmap</div>
-      <div class="text-xs text-muted-foreground">Updated 2 hours ago</div>
-    </div>
-    <span class="mw-badge mw-badge-default">New</span>
-  </div>
-
-  <!-- Item with chevron -->
-  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
-    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-      <!-- Icon SVG -->
-    </div>
-    <div class="flex-1 min-w-0">
-      <div class="text-sm font-medium">Team Members</div>
-      <div class="text-xs text-muted-foreground">Manage your team and permissions</div>
+      <div class="text-sm font-medium">Profile</div>
+      <div class="text-xs text-muted-foreground">Manage your account settings</div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
   </div>
-
-  <!-- Item with count badge -->
-  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+  <div class="mw-menu-item">
     <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-      <!-- Icon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
     </div>
     <div class="flex-1 min-w-0">
-      <div class="text-sm font-medium">Activity Log</div>
-      <div class="text-xs text-muted-foreground">View recent actions and events</div>
+      <div class="text-sm font-medium">Notifications</div>
+      <div class="text-xs text-muted-foreground">Configure alerts and updates</div>
     </div>
-    <span class="mw-badge mw-badge-secondary">12</span>
+    <span class="mw-badge mw-badge-secondary">3</span>
+  </div>
+  <div class="mw-menu-separator"></div>
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Security</div>
+      <div class="text-xs text-muted-foreground">Password and authentication</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  </div>
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Billing</div>
+      <div class="text-xs text-muted-foreground">Plans and payment methods</div>
+    </div>
+    <span class="mw-badge mw-badge-default">Pro</span>
   </div>
 </div>`;
 
-const itemWithoutIconCode = `<div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
-  <div class="flex-1 min-w-0">
-    <div class="text-sm font-medium">General Settings</div>
-    <div class="text-xs text-muted-foreground">Configure your workspace preferences</div>
+const simpleItemCode = `<!-- Simple Menu Items -->
+<div class="mw-card max-w-md">
+  <div class="mw-menu-item">
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">General Settings</div>
+      <div class="text-xs text-muted-foreground">Configure your workspace preferences</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
   </div>
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  <div class="mw-menu-item">
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Privacy & Safety</div>
+      <div class="text-xs text-muted-foreground">Control your data and visibility</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  </div>
+</div>`;
+
+const compactItemCode = `<!-- Compact Items without Description -->
+<div class="mw-card max-w-md">
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Documents</div>
+    </div>
+  </div>
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Downloads</div>
+    </div>
+    <span class="mw-badge mw-badge-secondary">5</span>
+  </div>
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Archive</div>
+    </div>
+  </div>
 </div>`;
 ---
 
-<DocsLayout title="Item" description="A list item component with icon, title, description, and optional trailing content" activeComponent="item">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Item</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A versatile list item component for displaying rows of content with icons, titles, descriptions, and trailing elements like badges or chevrons.</p>
+<DocsLayout title="Item" description="Menu list items with icons, labels, separators, and trailing content" activeComponent="item">
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Item</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A versatile list item component for displaying rows of content with icons, titles, descriptions, and trailing elements like badges or chevrons. Perfect for settings menus, navigation lists, and content dashboards.</p>
+    </div>
+
+    <div class="mw-separator"></div>
+
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card max-w-md">
+        <div class="mw-menu-label">Settings</div>
+        <div class="mw-menu-item">
+          <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">Profile</div>
+            <div class="text-xs text-muted-foreground">Manage your account settings</div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
         </div>
+        <div class="mw-menu-item">
+          <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">Notifications</div>
+            <div class="text-xs text-muted-foreground">Configure alerts and updates</div>
+          </div>
+          <span class="mw-badge mw-badge-secondary">3</span>
+        </div>
+        <div class="mw-menu-separator"></div>
+        <div class="mw-menu-item">
+          <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">Security</div>
+            <div class="text-xs text-muted-foreground">Password and authentication</div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+        <div class="mw-menu-item">
+          <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">Billing</div>
+            <div class="text-xs text-muted-foreground">Plans and payment methods</div>
+          </div>
+          <span class="mw-badge mw-badge-default">Pro</span>
+        </div>
+      </div>
+    </div>
 
-        <div class="mw-separator"></div>
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={menuItemCode} lang="html" />
+    </div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div class="divide-y divide-border">
-              <!-- Item with icon, title, description, and badge -->
-              <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
-                <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="text-sm font-medium">Project Roadmap</div>
-                  <div class="text-xs text-muted-foreground">Updated 2 hours ago</div>
-                </div>
-                <span class="mw-badge mw-badge-default">New</span>
-              </div>
+    <!-- Without Icons -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Without Icons</h2>
+      <p class="text-muted-foreground leading-relaxed">Items can omit the leading icon for a simpler, text-focused layout. This works well for settings pages and simple navigation lists.</p>
+      <div class="mw-card max-w-md">
+        <div class="mw-menu-item">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">General Settings</div>
+            <div class="text-xs text-muted-foreground">Configure your workspace preferences</div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+        <div class="mw-menu-item">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">Privacy & Safety</div>
+            <div class="text-xs text-muted-foreground">Control your data and visibility</div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+      </div>
+      <CodeBlock code={simpleItemCode} lang="html" />
+    </div>
 
-              <!-- Item with icon, title, description, and chevron -->
-              <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
-                <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="text-sm font-medium">Team Members</div>
-                  <div class="text-xs text-muted-foreground">Manage your team and permissions</div>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
-              </div>
-
-              <!-- Item with icon, title, description, and secondary badge -->
-              <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
-                <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="text-sm font-medium">Activity Log</div>
-                  <div class="text-xs text-muted-foreground">View recent actions and events</div>
-                </div>
-                <span class="mw-badge mw-badge-secondary">12</span>
-              </div>
-            </div>
+    <!-- Compact -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Compact</h2>
+      <p class="text-muted-foreground leading-relaxed">Remove the description text for a more compact layout. This is ideal when space is limited or when the item titles are self-explanatory.</p>
+      <div class="mw-card max-w-md">
+        <div class="mw-menu-item">
+          <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">Documents</div>
           </div>
         </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={itemCode} lang="html" />
-        </div>
-
-        <!-- Without Icon -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Without Icon</h2>
-          <p class="text-muted-foreground leading-relaxed">Items can omit the leading icon for a simpler layout.</p>
-          <div class="mw-card">
-            <div class="divide-y divide-border">
-              <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
-                <div class="flex-1 min-w-0">
-                  <div class="text-sm font-medium">General Settings</div>
-                  <div class="text-xs text-muted-foreground">Configure your workspace preferences</div>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
-              </div>
-              <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
-                <div class="flex-1 min-w-0">
-                  <div class="text-sm font-medium">Notifications</div>
-                  <div class="text-xs text-muted-foreground">Choose what alerts you receive</div>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
-              </div>
-            </div>
+        <div class="mw-menu-item">
+          <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
           </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">Downloads</div>
+          </div>
+          <span class="mw-badge mw-badge-secondary">5</span>
+        </div>
+        <div class="mw-menu-item">
+          <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium">Archive</div>
+          </div>
+        </div>
+      </div>
+      <CodeBlock code={compactItemCode} lang="html" />
+    </div>
 
-          <CodeBlock code={itemWithoutIconCode} lang="html" />
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div>
+        <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+        <p class="mt-2 text-muted-foreground leading-relaxed">The following classes are available for menu items:</p>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-border">
+                <th class="text-left py-2 px-3 font-semibold">Class</th>
+                <th class="text-left py-2 px-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr>
+                <td class="py-2 px-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-menu-item</code></td>
+                <td class="py-2 px-3 text-muted-foreground">Base item with flex layout, gap, padding, rounded corners, and hover background</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-menu-label</code></td>
+                <td class="py-2 px-3 text-muted-foreground">Section label with small, bold, muted text and uppercase styling</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-menu-separator</code></td>
+                <td class="py-2 px-3 text-muted-foreground">Thin horizontal divider line between menu sections</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
+      <div>
+        <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+        <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed list-disc list-inside">
+          <li>Wrap interactive items in <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">button</code> or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">a</code> elements for keyboard navigation</li>
+          <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative chevron icons</li>
+          <li>Use semantic HTML for menu structure: <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="menu"</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="menuitem"</code> when appropriate</li>
+          <li>Ensure sufficient color contrast for text and hover states</li>
+          <li>Include visible focus indicators for keyboard users</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-heading text-lg font-semibold">Best Practices</h3>
+        <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed list-disc list-inside">
+          <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-menu-label</code> to organize items into logical groups</li>
+          <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-menu-separator</code> between different sections for visual hierarchy</li>
+          <li>Keep item titles concise and action-oriented</li>
+          <li>Use badges to display counts or status indicators</li>
+          <li>Use chevron icons to indicate that items navigate to a new view</li>
+          <li>Maintain consistent icon sizes within the same menu (typically 16-18px)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

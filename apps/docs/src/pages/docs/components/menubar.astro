@@ -2,7 +2,7 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const menubarCode = `<div class="flex items-center gap-1 border rounded-md border-border p-1 bg-background">
+const menubarCode = `<div class="flex items-center gap-1 border-b border-border px-2 py-1 bg-background">
   <!-- File Menu -->
   <div class="relative" x-data="mwDropdown()">
     <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">File</button>
@@ -15,7 +15,7 @@ const menubarCode = `<div class="flex items-center gap-1 border rounded-md borde
          x-transition:leave-end="opacity-0 scale-95"
          class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
       <div class="mw-menu-item justify-between">
-        <span>New File</span>
+        <span>New</span>
         <span class="flex items-center gap-1">
           <kbd class="mw-kbd">Ctrl</kbd>
           <span class="text-xs text-muted-foreground">+</span>
@@ -34,6 +34,16 @@ const menubarCode = `<div class="flex items-center gap-1 border rounded-md borde
         <span>Save</span>
         <span class="flex items-center gap-1">
           <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">S</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Save As...</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">Shift</kbd>
           <span class="text-xs text-muted-foreground">+</span>
           <kbd class="mw-kbd">S</kbd>
         </span>
@@ -62,10 +72,39 @@ const menubarCode = `<div class="flex items-center gap-1 border rounded-md borde
           <kbd class="mw-kbd">Z</kbd>
         </span>
       </div>
+      <div class="mw-menu-item justify-between">
+        <span>Redo</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">Y</kbd>
+        </span>
+      </div>
       <div class="mw-menu-separator"></div>
-      <div class="mw-menu-item">Cut</div>
-      <div class="mw-menu-item">Copy</div>
-      <div class="mw-menu-item">Paste</div>
+      <div class="mw-menu-item justify-between">
+        <span>Cut</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">X</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Copy</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">C</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Paste</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">V</kbd>
+        </span>
+      </div>
     </div>
   </div>
 
@@ -80,120 +119,321 @@ const menubarCode = `<div class="flex items-center gap-1 border rounded-md borde
          x-transition:leave-start="opacity-100 scale-100"
          x-transition:leave-end="opacity-0 scale-95"
          class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
-      <div class="mw-menu-item">Zoom In</div>
-      <div class="mw-menu-item">Zoom Out</div>
+      <div class="mw-menu-item justify-between">
+        <span>Zoom In</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">+</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Zoom Out</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">-</kbd>
+        </span>
+      </div>
       <div class="mw-menu-separator"></div>
-      <div class="mw-menu-item">Full Screen</div>
-      <div class="mw-menu-item">Toggle Sidebar</div>
+      <div class="mw-menu-item justify-between">
+        <span>Full Screen</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">F11</kbd>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Menu -->
+  <div class="relative" x-data="mwDropdown()">
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">Help</button>
+    <div x-show="open" @click.outside="close()" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+      <div class="mw-menu-item">Documentation</div>
+      <div class="mw-menu-item">Keyboard Shortcuts</div>
+      <div class="mw-menu-separator"></div>
+      <div class="mw-menu-item">About</div>
     </div>
   </div>
 </div>`;
 ---
 
 <DocsLayout title="Menubar" description="A horizontal menu bar with dropdown menus for application-level navigation" activeComponent="menubar">
-      <div class="space-y-8">
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Menubar</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A horizontal menu bar with dropdown menus, commonly used for desktop application-style navigation with File, Edit, View, and Help menus.</p>
+    </div>
+
+    <div class="mw-separator"></div>
+
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="flex items-center gap-1 border-b border-border px-2 py-1 bg-background">
+          <!-- File Menu -->
+          <div class="relative" x-data="mwDropdown()">
+            <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">File</button>
+            <div x-show="open" @click.outside="close()" x-cloak
+                 x-transition:enter="transition ease-out duration-100"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-75"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+              <div class="mw-menu-item justify-between">
+                <span>New</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">N</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Open</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">O</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Save</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">S</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Save As...</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">Shift</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">S</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-separator"></div>
+              <div class="mw-menu-item">Exit</div>
+            </div>
+          </div>
+
+          <!-- Edit Menu -->
+          <div class="relative" x-data="mwDropdown()">
+            <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">Edit</button>
+            <div x-show="open" @click.outside="close()" x-cloak
+                 x-transition:enter="transition ease-out duration-100"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-75"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+              <div class="mw-menu-item justify-between">
+                <span>Undo</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">Z</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Redo</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">Y</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-separator"></div>
+              <div class="mw-menu-item justify-between">
+                <span>Cut</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">X</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Copy</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">C</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Paste</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">V</kbd>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- View Menu -->
+          <div class="relative" x-data="mwDropdown()">
+            <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">View</button>
+            <div x-show="open" @click.outside="close()" x-cloak
+                 x-transition:enter="transition ease-out duration-100"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-75"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+              <div class="mw-menu-item justify-between">
+                <span>Zoom In</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">+</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-item justify-between">
+                <span>Zoom Out</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">Ctrl</kbd>
+                  <span class="text-xs text-muted-foreground">+</span>
+                  <kbd class="mw-kbd">-</kbd>
+                </span>
+              </div>
+              <div class="mw-menu-separator"></div>
+              <div class="mw-menu-item justify-between">
+                <span>Full Screen</span>
+                <span class="flex items-center gap-1">
+                  <kbd class="mw-kbd">F11</kbd>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Help Menu -->
+          <div class="relative" x-data="mwDropdown()">
+            <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">Help</button>
+            <div x-show="open" @click.outside="close()" x-cloak
+                 x-transition:enter="transition ease-out duration-100"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-75"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+              <div class="mw-menu-item">Documentation</div>
+              <div class="mw-menu-item">Keyboard Shortcuts</div>
+              <div class="mw-menu-separator"></div>
+              <div class="mw-menu-item">About</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={menubarCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-4">
         <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Menubar</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A horizontal menu bar with dropdown menus, commonly used for desktop application-style navigation with File, Edit, and View menus.</p>
+          <h3 class="font-heading text-lg font-semibold">Structure</h3>
+          <p class="mt-2 text-muted-foreground leading-relaxed">A menubar is composed of a horizontal container with multiple dropdown menus. Each menu button triggers a popover containing menu items, separators, and optional keyboard shortcut hints.</p>
         </div>
 
-        <div class="mw-separator"></div>
-
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div class="flex items-center gap-1 border rounded-md border-border p-1 bg-background" style="border-radius: var(--marrow-radius);">
-              <!-- File Menu -->
-              <div class="relative" x-data="mwDropdown()">
-                <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">File</button>
-                <div x-show="open" @click.outside="close()" x-cloak
-                     x-transition:enter="transition ease-out duration-100"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-75"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
-                  <div class="mw-menu-item justify-between">
-                    <span>New File</span>
-                    <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">N</kbd></span>
-                  </div>
-                  <div class="mw-menu-item justify-between">
-                    <span>Open</span>
-                    <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">O</kbd></span>
-                  </div>
-                  <div class="mw-menu-item justify-between">
-                    <span>Save</span>
-                    <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">S</kbd></span>
-                  </div>
-                  <div class="mw-menu-separator"></div>
-                  <div class="mw-menu-item">Exit</div>
-                </div>
+        <div>
+          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+          <div class="mt-2 space-y-2 text-sm">
+            <div class="flex flex-col gap-1">
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-popover</code>
+                <span class="text-muted-foreground">Container for the dropdown menu content</span>
               </div>
-
-              <!-- Edit Menu -->
-              <div class="relative" x-data="mwDropdown()">
-                <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">Edit</button>
-                <div x-show="open" @click.outside="close()" x-cloak
-                     x-transition:enter="transition ease-out duration-100"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-75"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
-                  <div class="mw-menu-item justify-between">
-                    <span>Undo</span>
-                    <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">Z</kbd></span>
-                  </div>
-                  <div class="mw-menu-item justify-between">
-                    <span>Redo</span>
-                    <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">Y</kbd></span>
-                  </div>
-                  <div class="mw-menu-separator"></div>
-                  <div class="mw-menu-item justify-between">
-                    <span>Cut</span>
-                    <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">X</kbd></span>
-                  </div>
-                  <div class="mw-menu-item justify-between">
-                    <span>Copy</span>
-                    <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">C</kbd></span>
-                  </div>
-                  <div class="mw-menu-item justify-between">
-                    <span>Paste</span>
-                    <span class="flex items-center gap-1"><kbd class="mw-kbd">Ctrl</kbd><span class="text-xs text-muted-foreground">+</span><kbd class="mw-kbd">V</kbd></span>
-                  </div>
-                </div>
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-menu-item</code>
+                <span class="text-muted-foreground">Individual menu item with hover and focus states</span>
               </div>
-
-              <!-- View Menu -->
-              <div class="relative" x-data="mwDropdown()">
-                <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">View</button>
-                <div x-show="open" @click.outside="close()" x-cloak
-                     x-transition:enter="transition ease-out duration-100"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-75"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
-                  <div class="mw-menu-item">Zoom In</div>
-                  <div class="mw-menu-item">Zoom Out</div>
-                  <div class="mw-menu-separator"></div>
-                  <div class="mw-menu-item">Full Screen</div>
-                  <div class="mw-menu-item">Toggle Sidebar</div>
-                </div>
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-menu-separator</code>
+                <span class="text-muted-foreground">Visual divider between menu item groups</span>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-menu-label</code>
+                <span class="text-muted-foreground">Optional label for menu sections</span>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-kbd</code>
+                <span class="text-muted-foreground">Keyboard shortcut indicator</span>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-btn-ghost</code>
+                <span class="text-muted-foreground">Subtle button style for menu triggers</span>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-btn-sm</code>
+                <span class="text-muted-foreground">Smaller button size for compact menus</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={menubarCode} lang="html" />
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
+          <div class="mt-2 space-y-2 text-sm">
+            <p class="text-muted-foreground leading-relaxed">Each menu uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwDropdown()"</code> for state management.</p>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">toggle()</code>
+                <span class="text-muted-foreground">Toggles the dropdown open/closed state</span>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code>
+                <span class="text-muted-foreground">Closes the dropdown (used with @click.outside)</span>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code>
+                <span class="text-muted-foreground">Boolean property tracking dropdown state</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Layout Tips</h3>
+          <div class="mt-2 space-y-2">
+            <p class="text-muted-foreground leading-relaxed">Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">border-b border-border</code> to create a horizontal divider below the menubar, mimicking native desktop application menus.</p>
+            <p class="text-muted-foreground leading-relaxed">Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">justify-between</code> to menu items to align keyboard shortcuts to the right.</p>
+            <p class="text-muted-foreground leading-relaxed">Combine <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-kbd</code> elements with text separators for multi-key shortcuts (e.g., Ctrl+Shift+S).</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <div class="mt-2 space-y-2">
+            <p class="text-muted-foreground leading-relaxed">Menu buttons should have descriptive labels (File, Edit, View, Help) for screen readers.</p>
+            <p class="text-muted-foreground leading-relaxed">Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-cloak</code> to prevent flash of unstyled content during Alpine.js initialization.</p>
+            <p class="text-muted-foreground leading-relaxed">The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@click.outside</code> directive ensures menus close when clicking elsewhere, matching expected behavior.</p>
+            <p class="text-muted-foreground leading-relaxed">Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@keydown.escape</code> handlers to close menus with the Escape key for keyboard navigation.</p>
+          </div>
         </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

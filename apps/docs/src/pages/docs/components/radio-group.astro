@@ -2,181 +2,304 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const radioGroupCode = `<div x-data="mwRadioGroup('option1')" class="space-y-3">
-  <label class="mw-label">Notification preference</label>
+const radioGroupCode = `<div x-data="mwRadioGroup('all')" class="space-y-3">
+  <label class="mw-label">Notification preferences</label>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option1')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('all')">
     <div class="mw-radio"
-         :data-state="isSelected('option1') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('all') ? 'checked' : 'unchecked'">
     </div>
     <label class="text-sm cursor-pointer">All notifications</label>
   </div>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option2')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('mentions')">
     <div class="mw-radio"
-         :data-state="isSelected('option2') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('mentions') ? 'checked' : 'unchecked'">
     </div>
-    <label class="text-sm cursor-pointer">Important only</label>
+    <label class="text-sm cursor-pointer">Mentions only</label>
   </div>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option3')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('nothing')">
     <div class="mw-radio"
-         :data-state="isSelected('option3') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('nothing') ? 'checked' : 'unchecked'">
     </div>
-    <label class="text-sm cursor-pointer">None</label>
+    <label class="text-sm cursor-pointer">Nothing</label>
   </div>
+
+  <p class="text-xs text-muted-foreground">
+    Selected: <span x-text="selected" class="font-medium text-foreground"></span>
+  </p>
 </div>`;
 
-const radioGroupDescCode = `<div x-data="mwRadioGroup('free')" class="space-y-4">
-  <label class="mw-label">Plan</label>
+const planSelectionCode = `<div x-data="mwRadioGroup('starter')" class="space-y-4">
+  <label class="mw-label">Choose your plan</label>
 
-  <div class="flex items-start gap-3 cursor-pointer" @click="select('free')">
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('starter') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('starter')">
     <div class="mw-radio mt-0.5"
-         :data-state="isSelected('free') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('starter') ? 'checked' : 'unchecked'">
     </div>
-    <div>
-      <div class="text-sm font-medium">Free</div>
-      <div class="text-xs text-muted-foreground">Up to 3 projects with basic features.</div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Starter</div>
+        <div class="text-sm font-semibold">$0/mo</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        Perfect for side projects and experimentation.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Up to 3 projects<br>
+        • 5 GB storage<br>
+        • Community support
+      </div>
     </div>
   </div>
 
-  <div class="flex items-start gap-3 cursor-pointer" @click="select('pro')">
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('pro') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('pro')">
     <div class="mw-radio mt-0.5"
          :data-state="isSelected('pro') ? 'checked' : 'unchecked'">
     </div>
-    <div>
-      <div class="text-sm font-medium">Pro</div>
-      <div class="text-xs text-muted-foreground">Unlimited projects with advanced analytics.</div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Pro</div>
+        <div class="text-sm font-semibold">$19/mo</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        For professionals and growing teams.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Unlimited projects<br>
+        • 100 GB storage<br>
+        • Priority support<br>
+        • Advanced analytics
+      </div>
     </div>
   </div>
 
-  <div class="flex items-start gap-3 cursor-pointer" @click="select('enterprise')">
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('enterprise') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('enterprise')">
     <div class="mw-radio mt-0.5"
          :data-state="isSelected('enterprise') ? 'checked' : 'unchecked'">
     </div>
-    <div>
-      <div class="text-sm font-medium">Enterprise</div>
-      <div class="text-xs text-muted-foreground">Custom solutions with dedicated support.</div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Enterprise</div>
+        <div class="text-sm font-semibold">Custom</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        Custom solutions for large organizations.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Unlimited everything<br>
+        • Custom storage<br>
+        • Dedicated support<br>
+        • SLA & compliance
+      </div>
     </div>
   </div>
 </div>`;
 ---
 
 <DocsLayout title="Radio Group" description="A group of radio buttons for selecting a single option from a set" activeComponent="radio-group">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Radio Group</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A group of radio buttons that allows selecting a single option from a set. Uses Alpine.js for state management.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Radio Group</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A group of radio buttons that allows selecting a single option from a set. Uses Alpine.js for state management and shows the selected state with an indicator dot.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div x-data="mwRadioGroup('option1')" class="space-y-4">
-              <label class="mw-label">Notification preference</label>
-              <div class="space-y-3">
-                <!-- Option 1 -->
-                <div class="flex items-center gap-3 cursor-pointer" @click="select('option1')">
-                  <div class="mw-radio" :data-state="isSelected('option1') ? 'checked' : 'unchecked'"></div>
-                  <label class="text-sm cursor-pointer">All notifications</label>
-                </div>
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div x-data="mwRadioGroup('all')" class="space-y-4">
+          <label class="mw-label">Notification preferences</label>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 cursor-pointer" @click="select('all')">
+              <div class="mw-radio" :data-state="isSelected('all') ? 'checked' : 'unchecked'"></div>
+              <label class="text-sm cursor-pointer">All notifications</label>
+            </div>
 
-                <!-- Option 2 -->
-                <div class="flex items-center gap-3 cursor-pointer" @click="select('option2')">
-                  <div class="mw-radio" :data-state="isSelected('option2') ? 'checked' : 'unchecked'"></div>
-                  <label class="text-sm cursor-pointer">Important only</label>
-                </div>
+            <div class="flex items-center gap-3 cursor-pointer" @click="select('mentions')">
+              <div class="mw-radio" :data-state="isSelected('mentions') ? 'checked' : 'unchecked'"></div>
+              <label class="text-sm cursor-pointer">Mentions only</label>
+            </div>
 
-                <!-- Option 3 -->
-                <div class="flex items-center gap-3 cursor-pointer" @click="select('option3')">
-                  <div class="mw-radio" :data-state="isSelected('option3') ? 'checked' : 'unchecked'"></div>
-                  <label class="text-sm cursor-pointer">None</label>
-                </div>
-              </div>
-              <p class="text-xs text-muted-foreground">Selected: <span x-text="selected" class="font-medium text-foreground"></span></p>
+            <div class="flex items-center gap-3 cursor-pointer" @click="select('nothing')">
+              <div class="mw-radio" :data-state="isSelected('nothing') ? 'checked' : 'unchecked'"></div>
+              <label class="text-sm cursor-pointer">Nothing</label>
             </div>
           </div>
+          <p class="text-xs text-muted-foreground">
+            Selected: <span x-text="selected" class="font-medium text-foreground"></span>
+          </p>
         </div>
+      </div>
+    </div>
 
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={radioGroupCode} lang="html" />
-        </div>
+    <!-- Card Selection -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Plan Selection with Cards</h3>
+      <p class="text-muted-foreground leading-relaxed">Radio groups work great for selecting between different tiers or options with detailed information.</p>
+      <div class="mw-card">
+        <div x-data="mwRadioGroup('starter')" class="space-y-4">
+          <label class="mw-label">Choose your plan</label>
 
-        <!-- With Descriptions -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">With Descriptions</h2>
-          <p class="text-muted-foreground leading-relaxed">Add description text below each label for more context.</p>
-          <div class="mw-card">
-            <div x-data="mwRadioGroup('free')" class="space-y-4">
-              <label class="mw-label">Plan</label>
-              <div class="space-y-4">
-                <div class="flex items-start gap-3 cursor-pointer" @click="select('free')">
-                  <div class="mw-radio mt-0.5" :data-state="isSelected('free') ? 'checked' : 'unchecked'"></div>
-                  <div>
-                    <div class="text-sm font-medium">Free</div>
-                    <div class="text-xs text-muted-foreground">Up to 3 projects with basic features.</div>
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3 cursor-pointer" @click="select('pro')">
-                  <div class="mw-radio mt-0.5" :data-state="isSelected('pro') ? 'checked' : 'unchecked'"></div>
-                  <div>
-                    <div class="text-sm font-medium">Pro</div>
-                    <div class="text-xs text-muted-foreground">Unlimited projects with advanced analytics.</div>
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3 cursor-pointer" @click="select('enterprise')">
-                  <div class="mw-radio mt-0.5" :data-state="isSelected('enterprise') ? 'checked' : 'unchecked'"></div>
-                  <div>
-                    <div class="text-sm font-medium">Enterprise</div>
-                    <div class="text-xs text-muted-foreground">Custom solutions with dedicated support.</div>
-                  </div>
-                </div>
+          <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+               :class="isSelected('starter') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+               @click="select('starter')">
+            <div class="mw-radio mt-0.5" :data-state="isSelected('starter') ? 'checked' : 'unchecked'"></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="font-semibold">Starter</div>
+                <div class="text-sm font-semibold">$0/mo</div>
+              </div>
+              <div class="text-sm text-muted-foreground mt-1">
+                Perfect for side projects and experimentation.
+              </div>
+              <div class="text-xs text-muted-foreground mt-2">
+                • Up to 3 projects<br>
+                • 5 GB storage<br>
+                • Community support
               </div>
             </div>
           </div>
 
-          <CodeBlock code={radioGroupDescCode} lang="html" />
-        </div>
+          <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+               :class="isSelected('pro') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+               @click="select('pro')">
+            <div class="mw-radio mt-0.5" :data-state="isSelected('pro') ? 'checked' : 'unchecked'"></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="font-semibold">Pro</div>
+                <div class="text-sm font-semibold">$19/mo</div>
+              </div>
+              <div class="text-sm text-muted-foreground mt-1">
+                For professionals and growing teams.
+              </div>
+              <div class="text-xs text-muted-foreground mt-2">
+                • Unlimited projects<br>
+                • 100 GB storage<br>
+                • Priority support<br>
+                • Advanced analytics
+              </div>
+            </div>
+          </div>
 
-        <!-- API -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">API</h2>
-          <div class="overflow-x-auto">
-            <table class="mw-table">
-              <thead>
-                <tr>
-                  <th>Property</th>
-                  <th>Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code class="text-sm font-mono">selected</code></td>
-                  <td class="text-muted-foreground">String</td>
-                  <td class="text-muted-foreground">The value of the currently selected radio option</td>
-                </tr>
-                <tr>
-                  <td><code class="text-sm font-mono">select(val)</code></td>
-                  <td class="text-muted-foreground">Method</td>
-                  <td class="text-muted-foreground">Select a radio option by its value</td>
-                </tr>
-                <tr>
-                  <td><code class="text-sm font-mono">isSelected(val)</code></td>
-                  <td class="text-muted-foreground">Method</td>
-                  <td class="text-muted-foreground">Returns true if the given value is currently selected</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+               :class="isSelected('enterprise') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+               @click="select('enterprise')">
+            <div class="mw-radio mt-0.5" :data-state="isSelected('enterprise') ? 'checked' : 'unchecked'"></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <div class="font-semibold">Enterprise</div>
+                <div class="text-sm font-semibold">Custom</div>
+              </div>
+              <div class="text-sm text-muted-foreground mt-1">
+                Custom solutions for large organizations.
+              </div>
+              <div class="text-xs text-muted-foreground mt-2">
+                • Unlimited everything<br>
+                • Custom storage<br>
+                • Dedicated support<br>
+                • SLA & compliance
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={radioGroupCode} lang="html" />
+    </div>
+
+    <!-- Plan Selection Code -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">Plan Selection Code</h3>
+      <CodeBlock code={planSelectionCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div>
+        <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwRadioGroup(initial)"</code> where <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">initial</code> is the default selected value.
+        </p>
+        <div class="overflow-x-auto">
+          <table class="mw-table">
+            <thead>
+              <tr>
+                <th>Property/Method</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="text-sm font-mono">selected</code></td>
+                <td class="text-muted-foreground">String</td>
+                <td class="text-muted-foreground">The currently selected value</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">select(val)</code></td>
+                <td class="text-muted-foreground">Method</td>
+                <td class="text-muted-foreground">Select a radio option by its value</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">isSelected(val)</code></td>
+                <td class="text-muted-foreground">Method</td>
+                <td class="text-muted-foreground">Returns <code class="text-sm font-mono">true</code> if the given value is currently selected</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
+        <div class="overflow-x-auto">
+          <table class="mw-table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code class="text-sm font-mono">.mw-radio</code></td>
+                <td class="text-muted-foreground">Base radio button style (1rem circular, border, flex center)</td>
+              </tr>
+              <tr>
+                <td><code class="text-sm font-mono">[data-state="checked"]</code></td>
+                <td class="text-muted-foreground">Applied when radio is selected, shows inner indicator dot with primary background</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
+        <ul class="space-y-2 text-muted-foreground leading-relaxed">
+          <li>• Use semantic <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">label</code> elements paired with each radio option</li>
+          <li>• Group related radios under a descriptive label using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-label</code></li>
+          <li>• The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">data-state</code> attribute clearly indicates checked/unchecked states</li>
+          <li>• Entire row is clickable via <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@click</code> handler for better usability</li>
+          <li>• Visual indicator (dot) provides clear feedback when an option is selected</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

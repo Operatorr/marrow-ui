@@ -3,117 +3,299 @@ import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
 const toggleGroupCode = `<!-- Single selection toggle group -->
-<div x-data="mwToggleGroup('single', 'center')"
+<div x-data="mwToggleGroup('single', 'center')" role="group" aria-label="Text alignment"
      class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
   <button class="mw-toggle"
           :data-state="isSelected('left') ? 'on' : 'off'"
-          @click="select('left')">
-    <svg ...>Align Left</svg>
+          @click="select('left')"
+          aria-label="Align Left">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="15" x2="3" y1="12" y2="12"/>
+      <line x1="17" x2="3" y1="18" y2="18"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('center') ? 'on' : 'off'"
-          @click="select('center')">
-    <svg ...>Align Center</svg>
+          @click="select('center')"
+          aria-label="Align Center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="17" x2="7" y1="12" y2="12"/>
+      <line x1="19" x2="5" y1="18" y2="18"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('right') ? 'on' : 'off'"
-          @click="select('right')">
-    <svg ...>Align Right</svg>
+          @click="select('right')"
+          aria-label="Align Right">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="21" x2="9" y1="12" y2="12"/>
+      <line x1="21" x2="7" y1="18" y2="18"/>
+    </svg>
   </button>
 </div>
 
 <!-- Multiple selection toggle group -->
-<div x-data="mwToggleGroup('multiple', ['bold'])"
+<div x-data="mwToggleGroup('multiple', ['bold'])" role="group" aria-label="Text formatting"
      class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
   <button class="mw-toggle"
           :data-state="isSelected('bold') ? 'on' : 'off'"
-          @click="select('bold')">
-    <svg ...>Bold</svg>
+          @click="select('bold')"
+          aria-label="Bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('italic') ? 'on' : 'off'"
-          @click="select('italic')">
-    <svg ...>Italic</svg>
+          @click="select('italic')"
+          aria-label="Italic">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" x2="10" y1="4" y2="4"/>
+      <line x1="14" x2="5" y1="20" y2="20"/>
+      <line x1="15" x2="9" y1="4" y2="20"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('underline') ? 'on' : 'off'"
-          @click="select('underline')">
-    <svg ...>Underline</svg>
+          @click="select('underline')"
+          aria-label="Underline">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4v6a6 6 0 0 0 12 0V4"/>
+      <line x1="4" x2="20" y1="20" y2="20"/>
+    </svg>
   </button>
 </div>`;
 ---
 
 <DocsLayout title="Toggle Group" description="A group of toggle buttons where one or multiple can be selected" activeComponent="toggle-group">
-      <div class="space-y-8">
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Toggle Group</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A group of toggle buttons that supports single or multiple selection.</p>
+    </div>
+
+    <div class="mw-separator"></div>
+
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+
+      <div class="mw-card p-6 space-y-6">
+        <!-- Single selection -->
         <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Toggle Group</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A group of toggle buttons that supports single or multiple selection.</p>
+          <p class="text-sm font-medium mb-3">Single Selection - Text Alignment</p>
+          <div x-data="mwToggleGroup('single', 'center')" class="space-y-3">
+            <div role="group" aria-label="Text alignment" class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
+              <button class="mw-toggle"
+                      :data-state="isSelected('left') ? 'on' : 'off'"
+                      @click="select('left')"
+                      aria-label="Align Left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="15" x2="3" y1="12" y2="12"/><line x1="17" x2="3" y1="18" y2="18"/></svg>
+              </button>
+              <button class="mw-toggle"
+                      :data-state="isSelected('center') ? 'on' : 'off'"
+                      @click="select('center')"
+                      aria-label="Align Center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="17" x2="7" y1="12" y2="12"/><line x1="19" x2="5" y1="18" y2="18"/></svg>
+              </button>
+              <button class="mw-toggle"
+                      :data-state="isSelected('right') ? 'on' : 'off'"
+                      @click="select('right')"
+                      aria-label="Align Right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="21" x2="9" y1="12" y2="12"/><line x1="21" x2="7" y1="18" y2="18"/></svg>
+              </button>
+              <button class="mw-toggle"
+                      :data-state="isSelected('justify') ? 'on' : 'off'"
+                      @click="select('justify')"
+                      aria-label="Justify">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+              </button>
+            </div>
+            <p class="text-sm text-muted-foreground">
+              Selected: <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono" x-text="value"></span>
+            </p>
+          </div>
         </div>
 
-        <div class="mw-separator"></div>
+        <!-- Multiple selection -->
+        <div>
+          <p class="text-sm font-medium mb-3">Multiple Selection - Text Formatting</p>
+          <div x-data="mwToggleGroup('multiple', ['bold'])" class="space-y-3">
+            <div role="group" aria-label="Text formatting" class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
+              <button class="mw-toggle"
+                      :data-state="isSelected('bold') ? 'on' : 'off'"
+                      @click="select('bold')"
+                      aria-label="Bold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>
+              </button>
+              <button class="mw-toggle"
+                      :data-state="isSelected('italic') ? 'on' : 'off'"
+                      @click="select('italic')"
+                      aria-label="Italic">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
+              </button>
+              <button class="mw-toggle"
+                      :data-state="isSelected('underline') ? 'on' : 'off'"
+                      @click="select('underline')"
+                      aria-label="Underline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" x2="20" y1="20" y2="20"/></svg>
+              </button>
+            </div>
+            <p class="text-sm text-muted-foreground">
+              Selected: <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono" x-text="value.length > 0 ? value.join(', ') : 'none'"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <!-- Preview: Single Selection -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={toggleGroupCode} lang="html" />
+    </div>
 
-          <div class="mw-card p-6 space-y-6">
-            <!-- Single selection -->
-            <div>
-              <p class="text-sm font-medium mb-3">Single Selection</p>
-              <div x-data="mwToggleGroup('single', 'center')" class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
-                <button class="mw-toggle"
-                        :data-state="isSelected('left') ? 'on' : 'off'"
-                        @click="select('left')"
-                        title="Align Left">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="15" x2="3" y1="12" y2="12"/><line x1="17" x2="3" y1="18" y2="18"/></svg>
-                </button>
-                <button class="mw-toggle"
-                        :data-state="isSelected('center') ? 'on' : 'off'"
-                        @click="select('center')"
-                        title="Align Center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="17" x2="7" y1="12" y2="12"/><line x1="19" x2="5" y1="18" y2="18"/></svg>
-                </button>
-                <button class="mw-toggle"
-                        :data-state="isSelected('right') ? 'on' : 'off'"
-                        @click="select('right')"
-                        title="Align Right">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="3" y1="6" y2="6"/><line x1="21" x2="9" y1="12" y2="12"/><line x1="21" x2="7" y1="18" y2="18"/></svg>
-                </button>
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+
+      <div class="space-y-6">
+        <!-- Alpine.js API -->
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            Initialize with <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwToggleGroup(type, initial)"</span>
+          </p>
+          <div class="mw-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="border-b border-border bg-muted/50">
+                <tr>
+                  <th class="text-left p-3 font-semibold">Parameter</th>
+                  <th class="text-left p-3 font-semibold">Type</th>
+                  <th class="text-left p-3 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="p-3"><span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">type</span></td>
+                  <td class="p-3 text-muted-foreground">String</td>
+                  <td class="p-3 text-muted-foreground">"single" or "multiple" selection mode</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">initial</span></td>
+                  <td class="p-3 text-muted-foreground">String | Array</td>
+                  <td class="p-3 text-muted-foreground">Initial selected value(s)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Methods & Properties -->
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Methods & Properties</h3>
+          <div class="mw-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="border-b border-border bg-muted/50">
+                <tr>
+                  <th class="text-left p-3 font-semibold">Name</th>
+                  <th class="text-left p-3 font-semibold">Type</th>
+                  <th class="text-left p-3 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="p-3"><span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">value</span></td>
+                  <td class="p-3 text-muted-foreground">String | Array</td>
+                  <td class="p-3 text-muted-foreground">Current selected value(s)</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">select(val)</span></td>
+                  <td class="p-3 text-muted-foreground">Method</td>
+                  <td class="p-3 text-muted-foreground">Select or deselect a value</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">isSelected(val)</span></td>
+                  <td class="p-3 text-muted-foreground">Method</td>
+                  <td class="p-3 text-muted-foreground">Check if a value is selected</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CSS Classes -->
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
+          <div class="mw-card overflow-hidden">
+            <table class="w-full text-sm">
+              <thead class="border-b border-border bg-muted/50">
+                <tr>
+                  <th class="text-left p-3 font-semibold">Class</th>
+                  <th class="text-left p-3 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="p-3"><span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-toggle</span></td>
+                  <td class="p-3 text-muted-foreground">Individual toggle button within a group</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Accessibility -->
+        <div>
+          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
+          <div class="mw-card p-4 space-y-3">
+            <div class="flex gap-3">
+              <div class="text-primary mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium">Add <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="group"</span> to the container</p>
               </div>
             </div>
-
-            <!-- Multiple selection -->
-            <div>
-              <p class="text-sm font-medium mb-3">Multiple Selection</p>
-              <div x-data="mwToggleGroup('multiple', ['bold'])" class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
-                <button class="mw-toggle"
-                        :data-state="isSelected('bold') ? 'on' : 'off'"
-                        @click="select('bold')"
-                        title="Bold">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>
-                </button>
-                <button class="mw-toggle"
-                        :data-state="isSelected('italic') ? 'on' : 'off'"
-                        @click="select('italic')"
-                        title="Italic">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
-                </button>
-                <button class="mw-toggle"
-                        :data-state="isSelected('underline') ? 'on' : 'off'"
-                        @click="select('underline')"
-                        title="Underline">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" x2="20" y1="20" y2="20"/></svg>
-                </button>
+            <div class="flex gap-3">
+              <div class="text-primary mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium">Add <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</span> to describe the group purpose</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="text-primary mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium">Add <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</span> to icon-only buttons</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="text-primary mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium">Use <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">data-state</span> attributes to indicate selection state</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="text-primary mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-medium">Buttons are keyboard navigable with Tab and activatable with Space/Enter</p>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={toggleGroupCode} lang="html" />
-        </div>
       </div>
-
+    </div>
+  </div>
 </DocsLayout>

@@ -10,10 +10,10 @@ const labelCode = `<!-- Basic label with input -->
 
 <!-- Label with required indicator -->
 <div class="space-y-2">
-  <label class="mw-label" for="name-input">
-    Full name <span class="text-destructive">*</span>
+  <label class="mw-label" for="password-input">
+    Password <span class="text-destructive">*</span>
   </label>
-  <input type="text" id="name-input" class="mw-input" placeholder="Enter your full name">
+  <input type="password" id="password-input" class="mw-input" placeholder="Enter your password">
 </div>
 
 <!-- Label with description text -->
@@ -23,69 +23,127 @@ const labelCode = `<!-- Basic label with input -->
   <p class="text-xs text-muted-foreground">This will be your public display name.</p>
 </div>`;
 
-const labelDisabledCode = `<div class="space-y-2">
-  <label class="mw-label opacity-50" for="disabled-input">Disabled field</label>
-  <input type="text" id="disabled-input" class="mw-input" placeholder="Cannot edit" disabled>
+const checkboxCode = `<!-- Label with checkbox -->
+<div class="flex items-center gap-2">
+  <input type="checkbox" id="remember-me" class="mw-checkbox">
+  <label class="mw-label cursor-pointer" for="remember-me">Remember me</label>
+</div>
+
+<!-- Label with checkbox and description -->
+<div class="space-y-2">
+  <div class="flex items-center gap-2">
+    <input type="checkbox" id="marketing" class="mw-checkbox">
+    <label class="mw-label cursor-pointer" for="marketing">Marketing emails</label>
+  </div>
+  <p class="text-xs text-muted-foreground ml-6">Receive emails about new products and features.</p>
 </div>`;
 ---
 
 <DocsLayout title="Label" description="Label component for form inputs with optional required indicator" activeComponent="label">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Label</h1>
-          <p class="mt-2 text-lg text-muted-foreground">An accessible label element for form controls. Supports required indicators and pairs naturally with inputs, selects, and textareas.</p>
-        </div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Label</h1>
+      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">An accessible label element for form controls. Supports required indicators and pairs naturally with inputs, selects, and textareas.</p>
+    </div>
 
-        <div class="mw-separator"></div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div class="space-y-6 max-w-sm">
-              <!-- Basic label with input -->
-              <div class="space-y-2">
-                <label class="mw-label" for="email-input">Email address</label>
-                <input type="email" id="email-input" class="mw-input" placeholder="you@example.com">
-              </div>
-
-              <!-- Label with required indicator -->
-              <div class="space-y-2">
-                <label class="mw-label" for="name-input">
-                  Full name <span class="text-destructive">*</span>
-                </label>
-                <input type="text" id="name-input" class="mw-input" placeholder="Enter your full name">
-              </div>
-
-              <!-- Label with description -->
-              <div class="space-y-2">
-                <label class="mw-label" for="username-input">Username</label>
-                <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
-                <p class="text-xs text-muted-foreground">This will be your public display name.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={labelCode} lang="html" />
-        </div>
-
-        <!-- Disabled State -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Disabled State</h2>
-          <p class="text-muted-foreground leading-relaxed">When paired with a disabled input, the label can be visually dimmed to indicate the field is inactive.</p>
-          <div class="mw-card">
-            <div class="space-y-2 max-w-sm">
-              <label class="mw-label opacity-50" for="disabled-input">Disabled field</label>
-              <input type="text" id="disabled-input" class="mw-input" placeholder="Cannot edit" disabled>
-            </div>
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="space-y-6 max-w-sm">
+          <!-- Basic label with input -->
+          <div class="space-y-2">
+            <label class="mw-label" for="email-input">Email address</label>
+            <input type="email" id="email-input" class="mw-input" placeholder="you@example.com">
           </div>
 
-          <CodeBlock code={labelDisabledCode} lang="html" />
+          <!-- Label with required indicator -->
+          <div class="space-y-2">
+            <label class="mw-label" for="password-input">
+              Password <span class="text-destructive">*</span>
+            </label>
+            <input type="password" id="password-input" class="mw-input" placeholder="Enter your password">
+          </div>
+
+          <!-- Label with description -->
+          <div class="space-y-2">
+            <label class="mw-label" for="username-input">Username</label>
+            <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
+            <p class="text-xs text-muted-foreground">This will be your public display name.</p>
+          </div>
         </div>
       </div>
+    </div>
 
+    <!-- With Checkbox -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">With Checkbox</h3>
+      <p class="text-muted-foreground leading-relaxed">Labels paired with checkboxes use inline flex layout. Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">cursor-pointer</code> to the label for better UX.</p>
+      <div class="mw-card">
+        <div class="space-y-4 max-w-sm">
+          <!-- Label with checkbox -->
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="remember-me" class="mw-checkbox">
+            <label class="mw-label cursor-pointer" for="remember-me">Remember me</label>
+          </div>
+
+          <!-- Label with checkbox and description -->
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="marketing" class="mw-checkbox">
+              <label class="mw-label cursor-pointer" for="marketing">Marketing emails</label>
+            </div>
+            <p class="text-xs text-muted-foreground ml-6">Receive emails about new products and features.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={labelCode} lang="html" />
+    </div>
+
+    <!-- With Checkbox Code -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">With Checkbox</h3>
+      <CodeBlock code={checkboxCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+      <p class="text-muted-foreground leading-relaxed">
+        The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-label</code> class provides consistent styling for form labels with 0.875rem font size, medium font weight (500), and foreground color.
+      </p>
+
+      <div class="space-y-4">
+        <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+        <p class="text-muted-foreground leading-relaxed">
+          Always associate labels with their form controls using the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> attribute that matches the input's <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code>. This ensures screen readers announce the label when the input receives focus and makes the label clickable to focus the input.
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-muted-foreground leading-relaxed ml-4">
+          <li>Use the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> attribute to create explicit associations</li>
+          <li>Ensure each input has a unique <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code> value</li>
+          <li>For required fields, use a visual indicator (asterisk) and consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-required="true"</code> to the input</li>
+          <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">cursor-pointer</code> to labels paired with checkboxes or radios for better UX</li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="font-heading text-lg font-semibold">CSS Class</h3>
+        <div class="mw-card">
+          <dl class="space-y-2 font-mono text-sm">
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <dt class="font-semibold min-w-[120px]">.mw-label</dt>
+              <dd class="text-muted-foreground">font-size: 0.875rem; font-weight: 500; color: foreground; line-height: 1</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

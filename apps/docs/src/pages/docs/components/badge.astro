@@ -16,31 +16,160 @@ const badgeCode = `<!-- Default -->
 ---
 
 <DocsLayout title="Badge" description="Displays a small label or status indicator" activeComponent="badge">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Badge</h1>
-          <p class="mt-2 text-lg text-muted-foreground">Displays a small label or status indicator.</p>
-        </div>
-        <div class="mw-separator"></div>
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Badge</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">Displays a small label or status indicator.</p>
+    </div>
+    <div class="mw-separator"></div>
 
-        <!-- Preview -->
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Preview</h2>
-          <div class="mw-card flex items-center justify-center min-h-[200px]">
-            <div class="flex flex-wrap items-center gap-3">
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
+      <div class="mw-card">
+        <div class="space-y-6">
+          <!-- Default Variant -->
+          <div class="space-y-2">
+            <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Default</div>
+            <div class="flex items-center gap-3">
               <span class="mw-badge mw-badge-default">Default</span>
+            </div>
+          </div>
+
+          <!-- Secondary Variant -->
+          <div class="space-y-2">
+            <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Secondary</div>
+            <div class="flex items-center gap-3">
               <span class="mw-badge mw-badge-secondary">Secondary</span>
+            </div>
+          </div>
+
+          <!-- Outline Variant -->
+          <div class="space-y-2">
+            <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Outline</div>
+            <div class="flex items-center gap-3">
               <span class="mw-badge mw-badge-outline">Outline</span>
+            </div>
+          </div>
+
+          <!-- Destructive Variant -->
+          <div class="space-y-2">
+            <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Destructive</div>
+            <div class="flex items-center gap-3">
               <span class="mw-badge mw-badge-destructive">Destructive</span>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Code -->
-        <div class="space-y-3">
-          <h2 class="font-heading text-xl font-semibold">Code</h2>
-          <CodeBlock code={badgeCode} lang="html" />
+    <!-- In Context -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">In Context</h3>
+      <div class="mw-card">
+        <div class="space-y-8">
+          <!-- Notification Count on Button -->
+          <div class="space-y-3">
+            <div class="text-sm font-medium text-muted-foreground">Notification Count</div>
+            <button class="mw-btn mw-btn-outline relative">
+              Messages
+              <span class="mw-badge mw-badge-destructive absolute -top-2 -right-2">5</span>
+            </button>
+          </div>
+
+          <!-- Status Labels in List -->
+          <div class="space-y-3">
+            <div class="text-sm font-medium text-muted-foreground">Status Labels</div>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between p-3 border border-border rounded-lg">
+                <span class="text-sm">Production Server</span>
+                <span class="mw-badge mw-badge-default">Active</span>
+              </div>
+              <div class="flex items-center justify-between p-3 border border-border rounded-lg">
+                <span class="text-sm">Staging Environment</span>
+                <span class="mw-badge mw-badge-secondary">Pending</span>
+              </div>
+              <div class="flex items-center justify-between p-3 border border-border rounded-lg">
+                <span class="text-sm">Development Build</span>
+                <span class="mw-badge mw-badge-outline">Archived</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Version Tags -->
+          <div class="space-y-3">
+            <div class="text-sm font-medium text-muted-foreground">Version Tags</div>
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="mw-badge mw-badge-default">v2.1.0</span>
+              <span class="mw-badge mw-badge-secondary">Beta</span>
+              <span class="mw-badge mw-badge-outline">New</span>
+              <span class="mw-badge mw-badge-destructive">Deprecated</span>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
+      <CodeBlock code={badgeCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+      <div class="space-y-4">
+        <p class="text-muted-foreground leading-relaxed">
+          Badges are compact elements used to display status, counts, or labels. They should be used sparingly to draw attention to important information.
+        </p>
+
+        <div class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
+          <div class="mw-card overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-border">
+                  <th class="text-left p-3 font-semibold">Class</th>
+                  <th class="text-left p-3 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-border">
+                <tr>
+                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge</code></td>
+                  <td class="p-3 text-muted-foreground">Base badge class (required)</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge-default</code></td>
+                  <td class="p-3 text-muted-foreground">Primary colored badge</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge-secondary</code></td>
+                  <td class="p-3 text-muted-foreground">Secondary colored badge</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge-outline</code></td>
+                  <td class="p-3 text-muted-foreground">Outlined badge</td>
+                </tr>
+                <tr>
+                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge-destructive</code></td>
+                  <td class="p-3 text-muted-foreground">Destructive/red badge for errors or warnings</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
+          <ul class="space-y-2 text-muted-foreground leading-relaxed list-disc list-inside">
+            <li>Use semantic HTML elements (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;span&gt;</code> for inline badges)</li>
+            <li>Ensure sufficient color contrast (all variants meet WCAG AA standards)</li>
+            <li>When used for status, consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> for screen readers</li>
+            <li>For notification counts, use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> to provide context (e.g., "5 unread messages")</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </DocsLayout>

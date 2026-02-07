@@ -2,102 +2,341 @@
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
 
-const toggleCode = `<!-- Toggle (unpressed by default) -->
+const toggleCode = `<!-- Single Toggle -->
 <div x-data="mwToggle()">
   <button class="mw-toggle"
           :data-state="pressed ? 'on' : 'off'"
           @click="toggle()"
-          :aria-pressed="pressed">
-    <svg ...>Bold icon</svg>
+          :aria-pressed="pressed"
+          aria-label="Toggle bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+    </svg>
   </button>
 </div>
 
-<!-- Toggle (pressed by default) -->
-<div x-data="mwToggle(true)">
-  <button class="mw-toggle"
-          :data-state="pressed ? 'on' : 'off'"
-          @click="toggle()"
-          :aria-pressed="pressed">
-    <svg ...>Italic icon</svg>
-  </button>
+<!-- Formatting Toolbar -->
+<div class="flex items-center gap-1">
+  <div x-data="mwToggle()">
+    <button class="mw-toggle"
+            :data-state="pressed ? 'on' : 'off'"
+            @click="toggle()"
+            :aria-pressed="pressed"
+            aria-label="Toggle bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+        <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div x-data="mwToggle()">
+    <button class="mw-toggle"
+            :data-state="pressed ? 'on' : 'off'"
+            @click="toggle()"
+            :aria-pressed="pressed"
+            aria-label="Toggle italic">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" x2="10" y1="4" y2="4"/>
+        <line x1="14" x2="5" y1="20" y2="20"/>
+        <line x1="15" x2="9" y1="4" y2="20"/>
+      </svg>
+    </button>
+  </div>
+
+  <div x-data="mwToggle()">
+    <button class="mw-toggle"
+            :data-state="pressed ? 'on' : 'off'"
+            @click="toggle()"
+            :aria-pressed="pressed"
+            aria-label="Toggle underline">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 4v6a6 6 0 0 0 12 0V4"/>
+        <line x1="4" x2="20" y1="20" y2="20"/>
+      </svg>
+    </button>
+  </div>
+
+  <div x-data="mwToggle()">
+    <button class="mw-toggle"
+            :data-state="pressed ? 'on' : 'off'"
+            @click="toggle()"
+            :aria-pressed="pressed"
+            aria-label="Toggle strikethrough">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 4H9a3 3 0 0 0-2.83 4"/>
+        <path d="M14 12a4 4 0 0 1 0 8H6"/>
+        <line x1="4" x2="20" y1="12" y2="12"/>
+      </svg>
+    </button>
+  </div>
 </div>
 
-<!-- Toggle with text label -->
+<!-- Toggle with Text Label -->
 <div x-data="mwToggle()">
   <button class="mw-toggle !aspect-auto px-3 gap-2"
           :data-state="pressed ? 'on' : 'off'"
           @click="toggle()"
           :aria-pressed="pressed">
-    <svg ...>Icon</svg>
-    <span class="text-sm">Wrap</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m12 3-1.9 12.39"/>
+      <path d="M6.6 18.27a9 9 0 1 0 0-12.54"/>
+    </svg>
+    <span class="text-sm">Text Wrap</span>
+  </button>
+</div>
+
+<!-- Pressed by Default -->
+<div x-data="mwToggle(true)">
+  <button class="mw-toggle"
+          :data-state="pressed ? 'on' : 'off'"
+          @click="toggle()"
+          :aria-pressed="pressed"
+          aria-label="Toggle bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+    </svg>
   </button>
 </div>`;
 ---
 
 <DocsLayout title="Toggle" description="A two-state button that can be pressed or unpressed" activeComponent="toggle">
-      <div class="space-y-8">
+  <div class="space-y-8">
+    <div>
+      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Toggle</h1>
+      <p class="mt-2 text-muted-foreground leading-relaxed">A two-state button that toggles between pressed and unpressed states. Commonly used for formatting toolbars and settings.</p>
+    </div>
+
+    <div class="mw-separator"></div>
+
+    <!-- Preview -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
+      <div class="mw-card p-8 flex flex-col gap-6">
+        <!-- Single Toggle -->
         <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Toggle</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A button that toggles between pressed and unpressed states.</p>
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Single Toggle</p>
+          <div x-data="mwToggle()">
+            <button class="mw-toggle"
+                    :data-state="pressed ? 'on' : 'off'"
+                    @click="toggle()"
+                    :aria-pressed="pressed"
+                    aria-label="Toggle bold">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+                <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <div class="mw-separator"></div>
-
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card p-6 flex flex-wrap gap-4">
-            <!-- Unpressed (default) -->
+        <!-- Formatting Toolbar -->
+        <div>
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Formatting Toolbar</p>
+          <div class="flex items-center gap-1">
             <div x-data="mwToggle()">
               <button class="mw-toggle"
                       :data-state="pressed ? 'on' : 'off'"
                       @click="toggle()"
                       :aria-pressed="pressed"
-                      title="Bold">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>
+                      aria-label="Toggle bold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+                  <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+                </svg>
               </button>
             </div>
 
-            <!-- Pressed (default on) -->
-            <div x-data="mwToggle(true)">
-              <button class="mw-toggle"
-                      :data-state="pressed ? 'on' : 'off'"
-                      @click="toggle()"
-                      :aria-pressed="pressed"
-                      title="Italic">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
-              </button>
-            </div>
-
-            <!-- Another toggle -->
             <div x-data="mwToggle()">
               <button class="mw-toggle"
                       :data-state="pressed ? 'on' : 'off'"
                       @click="toggle()"
                       :aria-pressed="pressed"
-                      title="Underline">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" x2="20" y1="20" y2="20"/></svg>
+                      aria-label="Toggle italic">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" x2="10" y1="4" y2="4"/>
+                  <line x1="14" x2="5" y1="20" y2="20"/>
+                  <line x1="15" x2="9" y1="4" y2="20"/>
+                </svg>
               </button>
             </div>
 
-            <!-- With text label -->
             <div x-data="mwToggle()">
-              <button class="mw-toggle !aspect-auto px-3 gap-2"
+              <button class="mw-toggle"
                       :data-state="pressed ? 'on' : 'off'"
                       @click="toggle()"
-                      :aria-pressed="pressed">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 12.39"/><path d="M6.6 18.27a9 9 0 1 0 0-12.54"/></svg>
-                <span class="text-sm">Wrap</span>
+                      :aria-pressed="pressed"
+                      aria-label="Toggle underline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 4v6a6 6 0 0 0 12 0V4"/>
+                  <line x1="4" x2="20" y1="20" y2="20"/>
+                </svg>
+              </button>
+            </div>
+
+            <div x-data="mwToggle()">
+              <button class="mw-toggle"
+                      :data-state="pressed ? 'on' : 'off'"
+                      @click="toggle()"
+                      :aria-pressed="pressed"
+                      aria-label="Toggle strikethrough">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4H9a3 3 0 0 0-2.83 4"/>
+                  <path d="M14 12a4 4 0 0 1 0 8H6"/>
+                  <line x1="4" x2="20" y1="12" y2="12"/>
+                </svg>
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={toggleCode} lang="html" />
+        <!-- Pressed State Display -->
+        <div x-data="{ pressed: false }">
+          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">State Display</p>
+          <div class="flex items-center gap-4">
+            <button class="mw-toggle"
+                    :data-state="pressed ? 'on' : 'off'"
+                    @click="pressed = !pressed"
+                    :aria-pressed="pressed"
+                    aria-label="Toggle bold">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+                <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+              </svg>
+            </button>
+            <span class="text-sm text-muted-foreground">
+              State: <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono" x-text="pressed ? 'pressed' : 'unpressed'"></code>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- With Text -->
+    <div class="space-y-4">
+      <h3 class="font-heading text-lg font-semibold">With Text Label</h3>
+      <div class="mw-card p-8">
+        <div class="flex flex-wrap gap-2">
+          <div x-data="mwToggle()">
+            <button class="mw-toggle !aspect-auto px-3 gap-2"
+                    :data-state="pressed ? 'on' : 'off'"
+                    @click="toggle()"
+                    :aria-pressed="pressed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 3-1.9 12.39"/>
+                <path d="M6.6 18.27a9 9 0 1 0 0-12.54"/>
+              </svg>
+              <span class="text-sm">Text Wrap</span>
+            </button>
+          </div>
+
+          <div x-data="mwToggle(true)">
+            <button class="mw-toggle !aspect-auto px-3 gap-2"
+                    :data-state="pressed ? 'on' : 'off'"
+                    @click="toggle()"
+                    :aria-pressed="pressed">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                <path d="M7 7h10"/>
+                <path d="M7 12h10"/>
+                <path d="M7 17h10"/>
+              </svg>
+              <span class="text-sm">Show Lines</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+      <CodeBlock code={toggleCode} lang="html" />
+    </div>
+
+    <!-- Usage -->
+    <div class="space-y-4">
+      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+
+      <!-- Alpine.js API -->
+      <div>
+        <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
+        <div class="mw-card overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="border-b border-border bg-muted/50">
+              <tr>
+                <th class="text-left p-3 font-semibold">Property/Method</th>
+                <th class="text-left p-3 font-semibold">Type</th>
+                <th class="text-left p-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr>
+                <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwToggle(initial)</code></td>
+                <td class="p-3 text-muted-foreground">Function</td>
+                <td class="p-3 text-muted-foreground">Initialize toggle. Pass <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">true</code> to start pressed.</td>
+              </tr>
+              <tr>
+                <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">pressed</code></td>
+                <td class="p-3 text-muted-foreground">Boolean</td>
+                <td class="p-3 text-muted-foreground">Current pressed state of the toggle.</td>
+              </tr>
+              <tr>
+                <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">toggle()</code></td>
+                <td class="p-3 text-muted-foreground">Method</td>
+                <td class="p-3 text-muted-foreground">Toggle the pressed state.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
+      <!-- CSS Classes -->
+      <div>
+        <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
+        <div class="mw-card overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="border-b border-border bg-muted/50">
+              <tr>
+                <th class="text-left p-3 font-semibold">Class</th>
+                <th class="text-left p-3 font-semibold">Description</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border">
+              <tr>
+                <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-toggle</code></td>
+                <td class="p-3 text-muted-foreground">Base toggle button with square aspect ratio and icon sizing.</td>
+              </tr>
+              <tr>
+                <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-toggle:hover</code></td>
+                <td class="p-3 text-muted-foreground">Hover state with muted background.</td>
+              </tr>
+              <tr>
+                <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-toggle[data-state="on"]</code></td>
+                <td class="p-3 text-muted-foreground">Pressed state with accent background and foreground.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Accessibility -->
+      <div>
+        <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
+        <div class="mw-card p-4 space-y-2">
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Always include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:aria-pressed</code> bound to the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">pressed</code> property to communicate state to assistive technologies.
+          </p>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            For icon-only toggles, add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">title</code> attributes to describe the toggle's purpose.
+          </p>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:data-state</code> binding to update visual state, syncing <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">"on"</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">"off"</code> with the pressed state.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </DocsLayout>
