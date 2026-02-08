@@ -1,45 +1,33 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const horizontalCode = `<div>
-  <h3 class="font-semibold">Marrow UI</h3>
-  <p class="text-sm text-muted-foreground">An open-source UI component library.</p>
-</div>
-
-<div class="mw-separator"></div>
-
-<div class="flex gap-4 text-sm">
-  <span>Documentation</span>
-  <span>Components</span>
-  <span>Themes</span>
-</div>`;
-
-const verticalCode = `<div class="flex items-center h-5">
-  <span class="text-sm">Blog</span>
-  <div class="mw-separator-vertical"></div>
-  <span class="text-sm">Docs</span>
-  <div class="mw-separator-vertical"></div>
-  <span class="text-sm">Source</span>
-</div>`;
+const t = loadTemplate("separator");
+const horizontalCode = t.sections.get("Horizontal")!;
+const verticalCode = t.sections.get("Vertical")!;
 ---
 
 <DocsLayout title="Separator" description="A visual divider to separate content sections" activeComponent="separator">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight">Separator</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A horizontal or vertical line to visually divide content into distinct sections.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Layout & Containers</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Separator</h1>
+      <p class="docs-hero-description mt-3">A horizontal or vertical line to visually divide content into distinct sections. Available in both horizontal and vertical orientations.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-
-      <div>
-        <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Horizontal</p>
-        <div class="mw-card">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Horizontal -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Horizontal</p>
           <div>
             <h3 class="font-heading font-semibold">Marrow UI</h3>
             <p class="text-sm text-muted-foreground">An open-source UI component library.</p>
@@ -51,16 +39,10 @@ const verticalCode = `<div class="flex items-center h-5">
             <span>Themes</span>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Vertical -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Vertical</h3>
-
-      <div>
-        <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Vertical</p>
-        <div class="mw-card">
+        <!-- Vertical -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Vertical</p>
           <div class="flex items-center gap-0 h-5">
             <span class="text-sm">Blog</span>
             <div class="mw-separator-vertical"></div>
@@ -72,64 +54,120 @@ const verticalCode = `<div class="flex items-center h-5">
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-lg mx-auto">
+          <div class="rounded-lg border border-border bg-card p-6 space-y-1">
+            <div>
+              <h3 class="font-heading text-base font-semibold">Account Settings</h3>
+              <p class="text-sm text-muted-foreground mt-1">Manage your profile and preferences.</p>
+            </div>
 
-      <div>
-        <h3 class="font-heading text-lg font-semibold">Horizontal Separator</h3>
-        <CodeBlock code={horizontalCode} lang="html" />
-      </div>
+            <div class="mw-separator"></div>
 
-      <div>
-        <h3 class="font-heading text-lg font-semibold">Vertical Separator</h3>
-        <CodeBlock code={verticalCode} lang="html" />
-      </div>
-    </div>
+            <div class="space-y-3">
+              <h4 class="font-heading text-sm font-semibold">Profile</h4>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Display Name</span>
+                <span class="text-sm text-muted-foreground">Jane Smith</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Email</span>
+                <span class="text-sm text-muted-foreground">jane@example.com</span>
+              </div>
+            </div>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+            <div class="mw-separator"></div>
 
-      <p class="text-muted-foreground leading-relaxed">
-        Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-separator</code> for a horizontal divider that spans the full width with vertical margin. Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-separator-vertical</code> for a vertical divider inside a flex container — make sure the parent has a set height (e.g., <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">h-5</code>) so the line is visible.
-      </p>
+            <div class="space-y-3">
+              <h4 class="font-heading text-sm font-semibold">Security</h4>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Two-factor authentication</span>
+                <span class="mw-badge mw-badge-default">Enabled</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm">Last password change</span>
+                <span class="text-sm text-muted-foreground">3 months ago</span>
+              </div>
+            </div>
 
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
-        <div class="mw-card overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-border">
-                <th class="text-left py-2 px-4 font-semibold">Class</th>
-                <th class="text-left py-2 px-4 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-border">
-                <td class="py-2 px-4 font-mono text-sm">.mw-separator</td>
-                <td class="py-2 px-4 text-muted-foreground">Horizontal separator (1px height, full width, 1rem vertical margin)</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-4 font-mono text-sm">.mw-separator-vertical</td>
-                <td class="py-2 px-4 text-muted-foreground">Vertical separator (1px width, full height, 0.5rem horizontal margin)</td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="mw-separator"></div>
+
+            <div class="space-y-3">
+              <h4 class="font-heading text-sm font-semibold">Danger Zone</h4>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-muted-foreground">Permanently delete your account and all data.</span>
+                <button class="mw-btn mw-btn-destructive mw-btn-sm">Delete</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-        <p class="text-muted-foreground leading-relaxed">
-          For purely decorative separators, no additional ARIA attributes are needed. If the separator serves a semantic purpose (e.g., dividing major sections of content), add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="separator"</code> to improve screen reader experience.
-        </p>
-        <p class="text-muted-foreground leading-relaxed">
-          No JavaScript is required. The separator color is controlled by the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">--marrow-border</code> CSS variable.
-        </p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Horizontal Separator</p>
+          <CodeBlock code={horizontalCode} lang="html" />
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Vertical Separator</p>
+          <CodeBlock code={verticalCode} lang="html" />
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-separator</code></td><td>Horizontal separator (1px height, full width, 1rem vertical margin)</td></tr>
+            <tr><td><code>mw-separator-vertical</code></td><td>Vertical separator (1px width, full height, 0.5rem horizontal margin)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>For purely decorative separators, no additional ARIA attributes are needed</li>
+            <li>If a separator serves a semantic purpose (dividing major content sections), add <code>role="separator"</code></li>
+            <li>No JavaScript is required -- separators are pure CSS</li>
+            <li>The separator color is controlled by the <code>--marrow-border</code> CSS variable</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use horizontal separators to divide stacked content sections</li>
+            <li>Use vertical separators inside flex containers for inline content like breadcrumbs or nav links</li>
+            <li>Ensure the parent of a vertical separator has a set height (e.g., <code>h-5</code>) so the line is visible</li>
+            <li>Separators pair naturally with cards and form sections</li>
+            <li>Avoid overusing separators -- whitespace alone can often provide sufficient visual separation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </div>
 </DocsLayout>

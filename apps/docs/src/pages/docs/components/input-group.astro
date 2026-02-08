@@ -1,72 +1,32 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const inputGroupCode = `<!-- URL Input with Text Prefix -->
-<div class="flex">
-  <span class="inline-flex items-center px-3 text-sm text-muted-foreground
-    border border-r-0 rounded-l-[var(--marrow-radius)]"
-    style="border-color: hsl(var(--marrow-input));
-           background: hsl(var(--marrow-muted));">
-    https://
-  </span>
-  <input type="text" class="mw-input rounded-l-none"
-         placeholder="example.com" />
-</div>
-
-<!-- Search Input with Button Suffix -->
-<div class="flex">
-  <input type="text" class="mw-input rounded-r-none"
-         placeholder="Search..." />
-  <button class="mw-btn mw-btn-primary rounded-l-none">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="11" cy="11" r="8"/>
-      <path d="m21 21-4.3-4.3"/>
-    </svg>
-  </button>
-</div>
-
-<!-- Currency Input with Symbol Prefix -->
-<div class="flex">
-  <span class="inline-flex items-center justify-center px-3 text-sm
-    text-muted-foreground border border-r-0 rounded-l-[var(--marrow-radius)]"
-    style="border-color: hsl(var(--marrow-input));
-           background: hsl(var(--marrow-muted));">
-    $
-  </span>
-  <input type="number" class="mw-input rounded-l-none"
-         placeholder="0.00" step="0.01" />
-</div>
-
-<!-- Phone Input with Country Code Select -->
-<div class="flex">
-  <select class="mw-select rounded-r-none border-r-0"
-          style="min-width: 100px;">
-    <option>+1</option>
-    <option>+44</option>
-    <option>+81</option>
-  </select>
-  <input type="tel" class="mw-input rounded-l-none"
-         placeholder="555-0123" />
-</div>`;
+const inputGroupCode = loadFull("input-group");
 ---
 
 <DocsLayout title="Input Group" description="Combine inputs with prefix or suffix addons like text, icons, or buttons" activeComponent="input-group">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Input Group</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">Combine inputs with prefix or suffix addons like text, icons, or buttons for enhanced context and functionality.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Layout & Containers</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Input Group</h1>
+      <p class="docs-hero-description mt-3">Combine inputs with prefix or suffix addons like text, icons, or buttons for enhanced context and functionality.</p>
+    </header>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
+    <!-- Preview -->
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
         <div class="w-full max-w-md mx-auto space-y-6">
+          <!-- URL Input -->
           <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">URL Prefix</p>
             <label for="url-input" class="mw-label mb-1.5 block">Website URL</label>
             <div class="flex">
               <span class="inline-flex items-center px-3 text-sm text-muted-foreground border border-r-0 rounded-l-[var(--marrow-radius)]" style="border-color: hsl(var(--marrow-input)); background: hsl(var(--marrow-muted));">https://</span>
@@ -74,7 +34,9 @@ const inputGroupCode = `<!-- URL Input with Text Prefix -->
             </div>
           </div>
 
+          <!-- Search Input -->
           <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Button Suffix</p>
             <label for="search-input" class="mw-label mb-1.5 block">Search Products</label>
             <div class="flex">
               <input id="search-input" type="text" class="mw-input rounded-r-none" placeholder="Search..." />
@@ -87,7 +49,9 @@ const inputGroupCode = `<!-- URL Input with Text Prefix -->
             </div>
           </div>
 
+          <!-- Currency Input -->
           <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Symbol Prefix</p>
             <label for="price-input" class="mw-label mb-1.5 block">Price</label>
             <div class="flex">
               <span class="inline-flex items-center justify-center px-3 text-sm text-muted-foreground border border-r-0 rounded-l-[var(--marrow-radius)]" style="border-color: hsl(var(--marrow-input)); background: hsl(var(--marrow-muted));">$</span>
@@ -95,7 +59,9 @@ const inputGroupCode = `<!-- URL Input with Text Prefix -->
             </div>
           </div>
 
+          <!-- Phone Input -->
           <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Select Prefix</p>
             <label for="phone-input" class="mw-label mb-1.5 block">Phone Number</label>
             <div class="flex">
               <select id="country-code" class="mw-select rounded-r-none border-r-0" style="min-width: 100px;" aria-label="Country code">
@@ -107,7 +73,9 @@ const inputGroupCode = `<!-- URL Input with Text Prefix -->
             </div>
           </div>
 
+          <!-- Email Input -->
           <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Icon Prefix</p>
             <label for="email-input" class="mw-label mb-1.5 block">Email Address</label>
             <div class="flex">
               <span class="inline-flex items-center justify-center w-10 border border-r-0 rounded-l-[var(--marrow-radius)] text-muted-foreground" style="border-color: hsl(var(--marrow-input)); background: hsl(var(--marrow-muted));">
@@ -120,7 +88,9 @@ const inputGroupCode = `<!-- URL Input with Text Prefix -->
             </div>
           </div>
 
+          <!-- Username Input -->
           <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Text Suffix</p>
             <label for="username-input" class="mw-label mb-1.5 block">Email Username</label>
             <div class="flex">
               <input id="username-input" type="text" class="mw-input rounded-r-none" placeholder="username" />
@@ -129,56 +99,114 @@ const inputGroupCode = `<!-- URL Input with Text Prefix -->
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={inputGroupCode} lang="html" />
-    </div>
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-lg mx-auto space-y-6">
+          <!-- Search Bar -->
+          <div class="rounded-lg border border-border bg-card p-6 space-y-3">
+            <h3 class="font-heading text-base font-semibold">Product Search</h3>
+            <p class="text-sm text-muted-foreground">Find items in our catalog.</p>
+            <div class="flex">
+              <input type="text" class="mw-input rounded-r-none" placeholder="Search for products..." />
+              <button class="mw-btn mw-btn-primary rounded-l-none" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <span class="ml-1.5">Search</span>
+              </button>
+            </div>
+          </div>
+          <!-- URL Input -->
+          <div class="rounded-lg border border-border bg-card p-6 space-y-3">
+            <h3 class="font-heading text-base font-semibold">Website Configuration</h3>
+            <p class="text-sm text-muted-foreground">Enter your website URL and social profiles.</p>
+            <div class="space-y-3">
+              <div>
+                <label class="mw-label mb-1.5 block">Website</label>
+                <div class="flex">
+                  <span class="inline-flex items-center px-3 text-sm text-muted-foreground border border-r-0 rounded-l-[var(--marrow-radius)]" style="border-color: hsl(var(--marrow-input)); background: hsl(var(--marrow-muted));">https://</span>
+                  <input type="text" class="mw-input rounded-l-none" placeholder="your-site.com" />
+                </div>
+              </div>
+              <div>
+                <label class="mw-label mb-1.5 block">Twitter Handle</label>
+                <div class="flex">
+                  <span class="inline-flex items-center px-3 text-sm text-muted-foreground border border-r-0 rounded-l-[var(--marrow-radius)]" style="border-color: hsl(var(--marrow-input)); background: hsl(var(--marrow-muted));">@</span>
+                  <input type="text" class="mw-input rounded-l-none" placeholder="username" />
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <button class="mw-btn mw-btn-primary mw-btn-sm">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Structure</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Input groups use a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">flex</code> container to combine an <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-input</code> with addon elements. Addons can be text spans, icons, buttons, or select elements positioned as prefix or suffix.
-          </p>
-        </div>
+        <CodeBlock code={inputGroupCode} lang="html" />
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Border Radius</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Remove the appropriate border radius from adjacent elements using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-l-none</code> or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-r-none</code> to create seamless connections. The outer addon elements use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-l-[var(--marrow-radius)]</code> or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-r-[var(--marrow-radius)]</code> to match your theme.
-          </p>
-        </div>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class / Pattern</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-input</code></td><td>Base input class (used with border radius overrides)</td></tr>
+            <tr><td><code>mw-select</code></td><td>Base select class (used as prefix/suffix addon)</td></tr>
+            <tr><td><code>rounded-l-none</code></td><td>Remove left border radius for right-side elements</td></tr>
+            <tr><td><code>rounded-r-none</code></td><td>Remove right border radius for left-side elements</td></tr>
+            <tr><td><code>rounded-l-[var(--marrow-radius)]</code></td><td>Theme-aware left border radius for outer addons</td></tr>
+            <tr><td><code>rounded-r-[var(--marrow-radius)]</code></td><td>Theme-aware right border radius for outer addons</td></tr>
+            <tr><td><code>border-r-0</code> / <code>border-l-0</code></td><td>Remove shared border between adjacent elements</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Addon Styling</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Text and icon addons typically use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">border</code> with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">border-color: hsl(var(--marrow-input))</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">background: hsl(var(--marrow-muted))</code> to match the input appearance. Remove the shared border using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">border-l-0</code> or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">border-r-0</code>.
-          </p>
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Always associate labels with inputs using the <code>for</code> / <code>id</code> attributes</li>
+            <li>For icon-only buttons, provide <code>aria-label</code> attributes</li>
+            <li>Decorative icons should have <code>aria-hidden="true"</code></li>
+            <li>Use appropriate <code>autocomplete</code> and <code>inputmode</code> attributes for enhanced mobile experiences</li>
+            <li>Select addons used as country code pickers should include <code>aria-label</code></li>
+          </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Always associate labels with inputs using the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> attribute. For icon-only buttons, provide <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> attributes. Decorative icons should have <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code>. Use appropriate <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">autocomplete</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">inputmode</code> attributes for enhanced mobile experiences.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Common Patterns</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed list-disc list-inside">
-            <li>URL inputs with protocol prefixes (https://, http://)</li>
-            <li>Search inputs with submit buttons or icons</li>
-            <li>Currency inputs with symbol prefixes ($, €, £)</li>
-            <li>Phone inputs with country code selects</li>
-            <li>Email inputs with domain suffixes (@company.com)</li>
-            <li>Username inputs with platform handles (@twitter, @github)</li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use a <code>flex</code> container to combine an <code>mw-input</code> with addon elements</li>
+            <li>Addon styling uses inline <code>border-color</code> and <code>background</code> to match the input appearance</li>
+            <li>Common patterns: URL prefixes, search buttons, currency symbols, phone country codes, email domain suffixes</li>
+            <li>Remove the appropriate border radius from adjacent elements to create seamless connections</li>
+            <li>Addons can be text spans, icons, buttons, or select elements positioned as prefix or suffix</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

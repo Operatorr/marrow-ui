@@ -2,7 +2,8 @@
 <!-- A toggleable checkbox control with label and checked state indicator -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<!-- Unchecked by default -->
+<!-- @section: Checkbox -->
+<!-- Single Checkbox -->
 <div x-data="mwCheckbox()" class="flex items-center gap-2">
   <button @click="toggle()"
     :data-state="checked ? 'checked' : 'unchecked'"
@@ -21,7 +22,7 @@
   </label>
 </div>
 
-<!-- Checked by default -->
+<!-- Checked by Default -->
 <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
   <button @click="toggle()"
     :data-state="checked ? 'checked' : 'unchecked'"
@@ -38,4 +39,91 @@
   <label @click="toggle()" class="mw-label cursor-pointer select-none">
     Send me email notifications
   </label>
+</div>
+
+<!-- Disabled State -->
+<div x-data="mwCheckbox()" class="flex items-center gap-2 opacity-50 pointer-events-none">
+  <button
+    data-state="unchecked"
+    class="mw-checkbox"
+    role="checkbox"
+    aria-checked="false"
+    disabled>
+    <svg x-show="false"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+  </button>
+  <label class="mw-label cursor-not-allowed select-none">
+    Disabled checkbox
+  </label>
+</div>
+<!-- @section: Checkbox Group -->
+
+<!-- Checkbox Group (Notification Preferences) -->
+<div class="space-y-4">
+  <div>
+    <h3 class="font-heading text-lg font-semibold">Notification Preferences</h3>
+    <p class="text-sm text-muted-foreground mt-1">
+      Choose how you'd like to receive notifications
+    </p>
+  </div>
+
+  <div class="space-y-3">
+    <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        Email notifications
+      </label>
+    </div>
+
+    <div x-data="mwCheckbox(false)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        SMS notifications
+      </label>
+    </div>
+
+    <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        Push notifications
+      </label>
+    </div>
+  </div>
 </div>

@@ -1,15 +1,77 @@
 <!-- Marrow UI: Native Select -->
 <!-- A styled native HTML select element for simple dropdowns -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
+
+<!-- @section: Basic Select -->
+<div class="space-y-2">
+  <label class="mw-label" for="country-select">Country</label>
+  <select id="country-select" class="mw-select">
+    <option value="" disabled selected>Select your country</option>
+    <option value="us">United States</option>
+    <option value="ca">Canada</option>
+    <option value="uk">United Kingdom</option>
+    <option value="au">Australia</option>
+    <option value="de">Germany</option>
+    <option value="fr">France</option>
+  </select>
+</div>
+<!-- @section: Optgroup -->
 
 <div class="space-y-2">
-  <label class="mw-label" for="framework-select">Framework</label>
-  <select id="framework-select" class="mw-select">
-    <option value="" disabled selected>Select a framework</option>
-    <option value="django">Django</option>
-    <option value="laravel">Laravel</option>
-    <option value="rails">Ruby on Rails</option>
-    <option value="express">Express</option>
-    <option value="flask">Flask</option>
+  <label class="mw-label" for="timezone-select">Timezone</label>
+  <select id="timezone-select" class="mw-select">
+    <option value="" disabled selected>Choose a timezone</option>
+    <optgroup label="North America">
+      <option value="est">Eastern (EST)</option>
+      <option value="cst">Central (CST)</option>
+      <option value="mst">Mountain (MST)</option>
+      <option value="pst">Pacific (PST)</option>
+    </optgroup>
+    <optgroup label="Europe">
+      <option value="gmt">GMT (London)</option>
+      <option value="cet">CET (Paris)</option>
+      <option value="eet">EET (Athens)</option>
+    </optgroup>
+    <optgroup label="Asia">
+      <option value="ist">IST (Mumbai)</option>
+      <option value="jst">JST (Tokyo)</option>
+      <option value="hkt">HKT (Hong Kong)</option>
+    </optgroup>
+  </select>
+</div>
+<!-- @section: Form Context -->
+
+<form class="space-y-4 max-w-md">
+<!-- @section: Disabled -->
+  <div class="space-y-2">
+    <label class="mw-label" for="role-select">Role</label>
+    <select id="role-select" class="mw-select" required>
+      <option value="" disabled selected>Select your role</option>
+      <option value="developer">Developer</option>
+      <option value="designer">Designer</option>
+      <option value="manager">Product Manager</option>
+      <option value="marketing">Marketing</option>
+    </select>
+  </div>
+
+  <div class="space-y-2">
+    <label class="mw-label" for="experience-select">Experience Level</label>
+    <select id="experience-select" class="mw-select" required>
+      <option value="junior">Junior (0-2 years)</option>
+      <option value="mid">Mid-level (2-5 years)</option>
+      <option value="senior">Senior (5-10 years)</option>
+      <option value="lead">Lead (10+ years)</option>
+    </select>
+  </div>
+
+  <button type="submit" class="mw-btn mw-btn-primary">
+    Submit
+  </button>
+</form>
+
+<div class="space-y-2">
+  <label class="mw-label opacity-50" for="disabled-select">Region</label>
+  <select id="disabled-select" class="mw-select" disabled>
+    <option value="us">United States</option>
   </select>
 </div>

@@ -1,221 +1,227 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const fieldCode = `<!-- Basic field with helper text -->
-<div class="space-y-2">
-  <label for="field-name" class="mw-label">Name</label>
-  <input id="field-name" type="text" class="mw-input"
-         placeholder="Enter your name"
-         aria-describedby="field-name-desc" />
-  <p id="field-name-desc" class="text-sm text-muted-foreground">
-    This is your public display name.
-  </p>
-</div>
-
-<!-- Required field -->
-<div class="space-y-2">
-  <label for="field-email" class="mw-label">
-    Email <span class="text-destructive">*</span>
-  </label>
-  <input id="field-email" type="email" class="mw-input"
-         placeholder="you@example.com" required
-         aria-describedby="field-email-desc" />
-  <p id="field-email-desc" class="text-sm text-muted-foreground">
-    We will never share your email.
-  </p>
-</div>
-
-<!-- Field with error state -->
-<div class="space-y-2">
-  <label for="field-error" class="mw-label">Username</label>
-  <input id="field-error" type="text" class="mw-input" value="ab"
-         aria-invalid="true" aria-describedby="field-error-msg"
-         style="border-color: hsl(var(--marrow-destructive));" />
-  <p id="field-error-msg" class="text-sm" role="alert"
-     style="color: hsl(var(--marrow-destructive));">
-    Username must be at least 3 characters.
-  </p>
-</div>
-
-<!-- Complete form example -->
-<form class="mw-card max-w-md">
-  <div class="space-y-6">
-    <div>
-      <h3 class="font-heading text-lg font-semibold">Contact Us</h3>
-      <p class="text-sm text-muted-foreground mt-1">
-        Fill out the form below and we'll get back to you.
-      </p>
-    </div>
-
-    <div class="space-y-2">
-      <label for="contact-name" class="mw-label">
-        Name <span class="text-destructive">*</span>
-      </label>
-      <input id="contact-name" type="text" class="mw-input"
-             placeholder="John Doe" required />
-    </div>
-
-    <div class="space-y-2">
-      <label for="contact-email" class="mw-label">
-        Email <span class="text-destructive">*</span>
-      </label>
-      <input id="contact-email" type="email" class="mw-input"
-             placeholder="john@example.com" required
-             aria-describedby="contact-email-desc" />
-      <p id="contact-email-desc" class="text-sm text-muted-foreground">
-        We respond within 24 hours.
-      </p>
-    </div>
-
-    <div class="space-y-2">
-      <label for="contact-message" class="mw-label">
-        Message <span class="text-destructive">*</span>
-      </label>
-      <textarea id="contact-message" class="mw-input min-h-[100px]"
-                placeholder="Tell us how we can help..." required></textarea>
-    </div>
-
-    <button type="submit" class="mw-btn mw-btn-primary w-full">
-      Send Message
-    </button>
-  </div>
-</form>`;
+const fieldCode = loadFull("field");
 ---
 
 <DocsLayout title="Field" description="A complete form field pattern combining label, input, and helper text" activeComponent="field">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Field</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">A complete form field pattern combining label, input, and helper text for accessible and user-friendly forms.</p>
-    </div>
-    <div class="mw-separator"></div>
+  <div class="space-y-12">
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
-        <div class="max-w-md space-y-6">
-          <div class="space-y-2">
-            <label for="field-name" class="mw-label">Name</label>
-            <input id="field-name" type="text" class="mw-input"
-                   placeholder="Enter your name"
-                   aria-describedby="field-name-desc" />
-            <p id="field-name-desc" class="text-sm text-muted-foreground">
-              This is your public display name.
-            </p>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Form Controls</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Field</h1>
+      <p class="docs-hero-description mt-3">A complete form field pattern combining label, input, and helper text for accessible and user-friendly forms.</p>
+    </header>
+
+    <!-- Preview -->
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Basic with Helper Text</p>
+          <div class="max-w-md">
+            <div class="space-y-2">
+              <label for="preview-name" class="mw-label">Name</label>
+              <input id="preview-name" type="text" class="mw-input"
+                     placeholder="Enter your name"
+                     aria-describedby="preview-name-desc" />
+              <p id="preview-name-desc" class="text-sm text-muted-foreground">
+                This is your public display name.
+              </p>
+            </div>
           </div>
+        </div>
 
-          <div class="space-y-2">
-            <label for="field-email" class="mw-label">
-              Email <span class="text-destructive">*</span>
-            </label>
-            <input id="field-email" type="email" class="mw-input"
-                   placeholder="you@example.com" required
-                   aria-describedby="field-email-desc" />
-            <p id="field-email-desc" class="text-sm text-muted-foreground">
-              We will never share your email.
-            </p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Required Field</p>
+          <div class="max-w-md">
+            <div class="space-y-2">
+              <label for="preview-email" class="mw-label">
+                Email <span class="text-destructive">*</span>
+              </label>
+              <input id="preview-email" type="email" class="mw-input"
+                     placeholder="you@example.com" required
+                     aria-describedby="preview-email-desc" />
+              <p id="preview-email-desc" class="text-sm text-muted-foreground">
+                We will never share your email.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Error State</p>
+          <div class="max-w-md">
+            <div class="space-y-2">
+              <label for="preview-error" class="mw-label">Username</label>
+              <input id="preview-error" type="text" class="mw-input" value="ab"
+                     aria-invalid="true" aria-describedby="preview-error-msg"
+                     style="border-color: hsl(var(--marrow-destructive));" />
+              <p id="preview-error-msg" class="text-sm" role="alert"
+                 style="color: hsl(var(--marrow-destructive));">
+                Username must be at least 3 characters.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">With Error</h3>
-      <div class="mw-card">
-        <div class="max-w-md space-y-2">
-          <label for="field-error" class="mw-label">Username</label>
-          <input id="field-error" type="text" class="mw-input" value="ab"
-                 aria-invalid="true" aria-describedby="field-error-msg"
-                 style="border-color: hsl(var(--marrow-destructive));" />
-          <p id="field-error-msg" class="text-sm" role="alert"
-             style="color: hsl(var(--marrow-destructive));">
-            Username must be at least 3 characters.
-          </p>
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="rounded-lg border border-border max-w-md mx-auto">
+          <div class="px-5 py-4 border-b border-border flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="19" x2="19" y1="8" y2="14"/>
+              <line x1="22" x2="16" y1="11" y2="11"/>
+            </svg>
+            <span class="font-heading font-semibold text-sm">Create Account</span>
+          </div>
+          <form class="p-5 space-y-5">
+            <div class="space-y-2">
+              <label for="reg-fullname" class="mw-label">
+                Full Name <span class="text-destructive">*</span>
+              </label>
+              <input id="reg-fullname" type="text" class="mw-input"
+                     placeholder="Jane Smith" required />
+            </div>
+
+            <div class="space-y-2">
+              <label for="reg-email" class="mw-label">
+                Email <span class="text-destructive">*</span>
+              </label>
+              <input id="reg-email" type="email" class="mw-input"
+                     placeholder="jane@example.com" required
+                     aria-describedby="reg-email-desc" />
+              <p id="reg-email-desc" class="text-sm text-muted-foreground">
+                We'll send a confirmation link to this address.
+              </p>
+            </div>
+
+            <div class="space-y-2">
+              <label for="reg-username" class="mw-label">
+                Username <span class="text-destructive">*</span>
+              </label>
+              <input id="reg-username" type="text" class="mw-input" value="jn"
+                     aria-invalid="true" aria-describedby="reg-username-err" required
+                     style="border-color: hsl(var(--marrow-destructive));" />
+              <p id="reg-username-err" class="text-sm" role="alert"
+                 style="color: hsl(var(--marrow-destructive));">
+                Username must be at least 3 characters.
+              </p>
+            </div>
+
+            <div class="space-y-2">
+              <label for="reg-password" class="mw-label">
+                Password <span class="text-destructive">*</span>
+              </label>
+              <input id="reg-password" type="password" class="mw-input"
+                     placeholder="At least 8 characters" required
+                     aria-describedby="reg-password-desc" />
+              <p id="reg-password-desc" class="text-sm text-muted-foreground">
+                Must contain uppercase, lowercase, and a number.
+              </p>
+            </div>
+
+            <div class="space-y-2">
+              <label for="reg-bio" class="mw-label">Bio</label>
+              <textarea id="reg-bio" class="mw-input min-h-[80px]"
+                        placeholder="Tell us about yourself..."
+                        aria-describedby="reg-bio-desc"></textarea>
+              <p id="reg-bio-desc" class="text-sm text-muted-foreground">
+                Optional. Max 160 characters.
+              </p>
+            </div>
+
+            <button type="submit" class="mw-btn mw-btn-primary w-full">
+              Create Account
+            </button>
+          </form>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Form Example</h3>
-      <form class="mw-card max-w-md">
-        <div class="space-y-6">
-          <div>
-            <h4 class="font-heading text-lg font-semibold">Contact Us</h4>
-            <p class="text-sm text-muted-foreground mt-1">
-              Fill out the form below and we'll get back to you.
-            </p>
-          </div>
-
-          <div class="space-y-2">
-            <label for="contact-name" class="mw-label">
-              Name <span class="text-destructive">*</span>
-            </label>
-            <input id="contact-name" type="text" class="mw-input"
-                   placeholder="John Doe" required />
-          </div>
-
-          <div class="space-y-2">
-            <label for="contact-email" class="mw-label">
-              Email <span class="text-destructive">*</span>
-            </label>
-            <input id="contact-email" type="email" class="mw-input"
-                   placeholder="john@example.com" required
-                   aria-describedby="contact-email-desc" />
-            <p id="contact-email-desc" class="text-sm text-muted-foreground">
-              We respond within 24 hours.
-            </p>
-          </div>
-
-          <div class="space-y-2">
-            <label for="contact-message" class="mw-label">
-              Message <span class="text-destructive">*</span>
-            </label>
-            <textarea id="contact-message" class="mw-input min-h-[100px]"
-                      placeholder="Tell us how we can help..." required></textarea>
-          </div>
-
-          <button type="submit" class="mw-btn mw-btn-primary w-full">
-            Send Message
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={fieldCode} lang="html" />
-    </div>
-
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <p class="text-muted-foreground leading-relaxed">
-          Field is a layout pattern that combines <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-label</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-input</code>, and descriptive text to create accessible form fields.
-        </p>
+        <CodeBlock code={fieldCode} lang="html" />
+      </div>
+    </section>
 
-        <div class="space-y-3">
-          <h3 class="font-heading text-lg font-semibold">Pattern Structure</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li>• Wrap each field in a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">space-y-2</code> container</li>
-            <li>• Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-label</code> with a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> attribute</li>
-            <li>• Input must have matching <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code> attribute</li>
-            <li>• Helper text uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">text-sm text-muted-foreground</code></li>
-            <li>• Error text uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">text-sm</code> with destructive color</li>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>mw-label</code></td>
+              <td>Form label styling with proper font weight and size</td>
+            </tr>
+            <tr>
+              <td><code>mw-input</code></td>
+              <td>Base input styling with border, padding, and focus states</td>
+            </tr>
+            <tr>
+              <td><code>mw-card</code></td>
+              <td>Card container for grouping form sections</td>
+            </tr>
+            <tr>
+              <td><code>mw-btn</code></td>
+              <td>Button base class for form submissions</td>
+            </tr>
+            <tr>
+              <td><code>mw-btn-primary</code></td>
+              <td>Primary button variant for submit actions</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Always associate labels with inputs using <code>for</code> and <code>id</code> attributes</li>
+            <li>Use <code>aria-describedby</code> to link helper or error text to the input</li>
+            <li>Add <code>aria-invalid="true"</code> on inputs with validation errors</li>
+            <li>Use <code>role="alert"</code> on error messages so they are announced by screen readers</li>
+            <li>Mark required fields with the <code>required</code> attribute and a visual indicator</li>
           </ul>
         </div>
-
-        <div class="space-y-3">
-          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li>• Always associate labels with inputs using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code></li>
-            <li>• Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-describedby</code> to link helper/error text</li>
-            <li>• Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-invalid="true"</code> on inputs with errors</li>
-            <li>• Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="alert"</code> on error messages</li>
-            <li>• Mark required fields with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">required</code> attribute and visual indicator</li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Wrap each field in a <code>space-y-2</code> container for consistent spacing</li>
+            <li>Use <code>mw-label</code> with a <code>for</code> attribute matching the input's <code>id</code></li>
+            <li>Helper text uses <code>text-sm text-muted-foreground</code> for secondary information</li>
+            <li>Error text uses <code>text-sm</code> with the destructive color for validation messages</li>
+            <li>Group related fields inside a card with <code>space-y-6</code> for vertical rhythm</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

@@ -1,149 +1,160 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const labelCode = `<!-- Basic label with input -->
-<div class="space-y-2">
-  <label class="mw-label" for="email-input">Email address</label>
-  <input type="email" id="email-input" class="mw-input" placeholder="you@example.com">
-</div>
-
-<!-- Label with required indicator -->
-<div class="space-y-2">
-  <label class="mw-label" for="password-input">
-    Password <span class="text-destructive">*</span>
-  </label>
-  <input type="password" id="password-input" class="mw-input" placeholder="Enter your password">
-</div>
-
-<!-- Label with description text -->
-<div class="space-y-2">
-  <label class="mw-label" for="username-input">Username</label>
-  <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
-  <p class="text-xs text-muted-foreground">This will be your public display name.</p>
-</div>`;
-
-const checkboxCode = `<!-- Label with checkbox -->
-<div class="flex items-center gap-2">
-  <input type="checkbox" id="remember-me" class="mw-checkbox">
-  <label class="mw-label cursor-pointer" for="remember-me">Remember me</label>
-</div>
-
-<!-- Label with checkbox and description -->
-<div class="space-y-2">
-  <div class="flex items-center gap-2">
-    <input type="checkbox" id="marketing" class="mw-checkbox">
-    <label class="mw-label cursor-pointer" for="marketing">Marketing emails</label>
-  </div>
-  <p class="text-xs text-muted-foreground ml-6">Receive emails about new products and features.</p>
-</div>`;
+const t = loadTemplate("label");
+const labelCode = t.sections.get("Label")!;
+const checkboxCode = t.sections.get("Checkbox")!;
 ---
 
 <DocsLayout title="Label" description="Label component for form inputs with optional required indicator" activeComponent="label">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Label</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">An accessible label element for form controls. Supports required indicators and pairs naturally with inputs, selects, and textareas.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Typography & Micro</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Label</h1>
+      <p class="docs-hero-description mt-3">An accessible label element for form controls. Supports required indicators and pairs naturally with inputs, selects, and textareas.</p>
+    </header>
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
-        <div class="space-y-6 max-w-sm">
-          <!-- Basic label with input -->
-          <div class="space-y-2">
-            <label class="mw-label" for="email-input">Email address</label>
-            <input type="email" id="email-input" class="mw-input" placeholder="you@example.com">
-          </div>
-
-          <!-- Label with required indicator -->
-          <div class="space-y-2">
-            <label class="mw-label" for="password-input">
-              Password <span class="text-destructive">*</span>
-            </label>
-            <input type="password" id="password-input" class="mw-input" placeholder="Enter your password">
-          </div>
-
-          <!-- Label with description -->
-          <div class="space-y-2">
-            <label class="mw-label" for="username-input">Username</label>
-            <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
-            <p class="text-xs text-muted-foreground">This will be your public display name.</p>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Basic Labels -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Inputs</p>
+          <div class="space-y-6 max-w-sm">
+            <div class="space-y-2">
+              <label class="mw-label" for="preview-email">Email address</label>
+              <input type="email" id="preview-email" class="mw-input" placeholder="you@example.com">
+            </div>
+            <div class="space-y-2">
+              <label class="mw-label" for="preview-password">
+                Password <span class="text-destructive">*</span>
+              </label>
+              <input type="password" id="preview-password" class="mw-input" placeholder="Enter your password">
+            </div>
+            <div class="space-y-2">
+              <label class="mw-label" for="preview-username">Username</label>
+              <input type="text" id="preview-username" class="mw-input" placeholder="marrow-user">
+              <p class="text-xs text-muted-foreground">This will be your public display name.</p>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- With Checkbox -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">With Checkbox</h3>
-      <p class="text-muted-foreground leading-relaxed">Labels paired with checkboxes use inline flex layout. Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">cursor-pointer</code> to the label for better UX.</p>
-      <div class="mw-card">
-        <div class="space-y-4 max-w-sm">
-          <!-- Label with checkbox -->
-          <div class="flex items-center gap-2">
-            <input type="checkbox" id="remember-me" class="mw-checkbox">
-            <label class="mw-label cursor-pointer" for="remember-me">Remember me</label>
-          </div>
-
-          <!-- Label with checkbox and description -->
-          <div class="space-y-2">
+        <!-- With Checkboxes -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Checkboxes</p>
+          <div class="space-y-4 max-w-sm">
             <div class="flex items-center gap-2">
-              <input type="checkbox" id="marketing" class="mw-checkbox">
-              <label class="mw-label cursor-pointer" for="marketing">Marketing emails</label>
+              <input type="checkbox" id="preview-remember" class="mw-checkbox">
+              <label class="mw-label cursor-pointer" for="preview-remember">Remember me</label>
             </div>
-            <p class="text-xs text-muted-foreground ml-6">Receive emails about new products and features.</p>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <input type="checkbox" id="preview-marketing" class="mw-checkbox">
+                <label class="mw-label cursor-pointer" for="preview-marketing">Marketing emails</label>
+              </div>
+              <p class="text-xs text-muted-foreground ml-6">Receive emails about new products and features.</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={labelCode} lang="html" />
-    </div>
-
-    <!-- With Checkbox Code -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">With Checkbox</h3>
-      <CodeBlock code={checkboxCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-      <p class="text-muted-foreground leading-relaxed">
-        The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-label</code> class provides consistent styling for form labels with 0.875rem font size, medium font weight (500), and foreground color.
-      </p>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-        <p class="text-muted-foreground leading-relaxed">
-          Always associate labels with their form controls using the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> attribute that matches the input's <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code>. This ensures screen readers announce the label when the input receives focus and makes the label clickable to focus the input.
-        </p>
-        <ul class="list-disc list-inside space-y-2 text-muted-foreground leading-relaxed ml-4">
-          <li>Use the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> attribute to create explicit associations</li>
-          <li>Ensure each input has a unique <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code> value</li>
-          <li>For required fields, use a visual indicator (asterisk) and consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-required="true"</code> to the input</li>
-          <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">cursor-pointer</code> to labels paired with checkboxes or radios for better UX</li>
-        </ul>
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">CSS Class</h3>
-        <div class="mw-card">
-          <dl class="space-y-2 font-mono text-sm">
-            <div class="flex flex-col sm:flex-row sm:gap-4">
-              <dt class="font-semibold min-w-[120px]">.mw-label</dt>
-              <dd class="text-muted-foreground">font-size: 0.875rem; font-weight: 500; color: foreground; line-height: 1</dd>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-md mx-auto">
+          <div class="rounded-lg border border-border bg-card p-6 space-y-5">
+            <div>
+              <h3 class="font-heading text-base font-semibold">Create Account</h3>
+              <p class="text-sm text-muted-foreground mt-1">Enter your details to get started.</p>
             </div>
-          </dl>
+            <div class="space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label class="mw-label" for="ctx-first">First name <span class="text-destructive">*</span></label>
+                  <input type="text" id="ctx-first" class="mw-input" placeholder="Jane">
+                </div>
+                <div class="space-y-2">
+                  <label class="mw-label" for="ctx-last">Last name <span class="text-destructive">*</span></label>
+                  <input type="text" id="ctx-last" class="mw-input" placeholder="Doe">
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label class="mw-label" for="ctx-email">Email <span class="text-destructive">*</span></label>
+                <input type="email" id="ctx-email" class="mw-input" placeholder="jane@example.com" autocomplete="email">
+              </div>
+              <div class="space-y-2">
+                <label class="mw-label" for="ctx-password">Password <span class="text-destructive">*</span></label>
+                <input type="password" id="ctx-password" class="mw-input" placeholder="At least 8 characters" autocomplete="new-password">
+                <p class="text-xs text-muted-foreground">Must be at least 8 characters with one uppercase letter.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <input type="checkbox" id="ctx-terms" class="mw-checkbox">
+                <label class="mw-label cursor-pointer" for="ctx-terms">I agree to the terms and conditions</label>
+              </div>
+            </div>
+            <button class="mw-btn mw-btn-primary w-full">Create account</button>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={labelCode} lang="html" />
+        <CodeBlock code={checkboxCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-label</code></td><td>Base label style: font-size 0.875rem, font-weight 500, foreground color, line-height 1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Always associate labels with their form controls using the <code>for</code> attribute matching the input's <code>id</code></li>
+            <li>Ensure each input has a unique <code>id</code> value</li>
+            <li>For required fields, use a visual indicator (asterisk) and add <code>aria-required="true"</code> to the input</li>
+            <li>Add <code>cursor-pointer</code> to labels paired with checkboxes or radios for better UX</li>
+            <li>Description text should be linked to the input via <code>aria-describedby</code> for screen readers</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Keep label text concise and descriptive</li>
+            <li>Place labels above inputs for vertical forms, or inline for checkboxes and radios</li>
+            <li>Use the <code>text-destructive</code> class for required field asterisks</li>
+            <li>Add helper text below inputs using <code>text-xs text-muted-foreground</code></li>
+            <li>Group related fields visually with consistent spacing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </div>
 </DocsLayout>

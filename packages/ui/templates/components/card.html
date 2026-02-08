@@ -1,17 +1,59 @@
 <!-- Marrow UI: Card -->
-<!-- A container component for grouping related content with header, body, and footer sections -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- A container component for grouping related content with consistent styling -->
+<!-- Requires: Tailwind CSS, marrow.css -->
+
+<!-- @section: Profile Card -->
+<div class="mw-card">
+  <div class="flex items-center gap-3">
+    <div class="mw-avatar">
+      <span>AJ</span>
+    </div>
+    <div>
+      <h3 class="font-heading font-semibold">Alice Johnson</h3>
+      <p class="text-sm text-muted-foreground">Product Designer</p>
+    </div>
+  </div>
+  <p class="text-sm text-muted-foreground mt-3 leading-relaxed">
+    Passionate about creating intuitive user experiences that solve real problems.
+  </p>
+</div>
+<!-- @section: Notification Card -->
 
 <div class="mw-card">
-  <div class="pb-3 mb-3 border-b border-border">
-    <h3 class="font-heading text-lg font-semibold">Card Title</h3>
-    <p class="text-sm text-muted-foreground mt-1">Card description goes here.</p>
+  <div class="flex gap-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary flex-shrink-0 mt-0.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="flex-1 min-w-0">
+      <h3 class="font-heading font-semibold">New comment on your post</h3>
+      <p class="text-xs text-muted-foreground mt-1">2 minutes ago</p>
+      <p class="text-sm text-muted-foreground mt-2">
+        "Great insights! I'd love to hear more about your approach."
+      </p>
+    </div>
   </div>
-  <div class="py-2">
-    <p class="text-sm text-muted-foreground">This is the card content area.</p>
+</div>
+<!-- @section: Pricing Card -->
+
+<div class="mw-card">
+  <div class="text-center">
+    <h3 class="font-heading text-lg font-semibold">Pro</h3>
+    <div class="mt-2">
+      <span class="text-3xl font-bold">$29</span>
+      <span class="text-muted-foreground">/mo</span>
+    </div>
   </div>
-  <div class="pt-3 mt-3 border-t border-border flex justify-end gap-2">
-    <button class="mw-btn mw-btn-outline mw-btn-sm">Cancel</button>
-    <button class="mw-btn mw-btn-primary mw-btn-sm">Save</button>
-  </div>
+  <ul class="mt-4 space-y-2">
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Unlimited projects
+    </li>
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Advanced analytics
+    </li>
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Priority support
+    </li>
+  </ul>
+  <button class="mw-btn mw-btn-primary w-full mt-4">Get started</button>
 </div>

@@ -1,8 +1,8 @@
 <!-- Marrow UI: Input Group -->
-<!-- An input with prefix or suffix addons for contextual information -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Combine inputs with prefix or suffix addons like text, icons, or buttons -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- With Text Prefix -->
+<!-- URL Input with Text Prefix -->
 <div class="flex">
   <span class="inline-flex items-center px-3 text-sm text-muted-foreground
     border border-r-0 rounded-l-[var(--marrow-radius)]"
@@ -14,36 +14,40 @@
          placeholder="example.com" />
 </div>
 
-<!-- With Text Suffix -->
-<div class="flex">
-  <input type="text" class="mw-input rounded-r-none"
-         placeholder="username" />
-  <span class="inline-flex items-center px-3 text-sm text-muted-foreground
-    border border-l-0 rounded-r-[var(--marrow-radius)]"
-    style="border-color: hsl(var(--marrow-input));
-           background: hsl(var(--marrow-muted));">
-    @gmail.com
-  </span>
-</div>
-
-<!-- With Icon Prefix -->
-<div class="flex">
-  <span class="inline-flex items-center justify-center w-10
-    border border-r-0 rounded-l-[var(--marrow-radius)] text-muted-foreground"
-    style="border-color: hsl(var(--marrow-input));
-           background: hsl(var(--marrow-muted));">
-    <svg ...>...</svg>
-  </span>
-  <input type="email" class="mw-input rounded-l-none"
-         placeholder="you@example.com" />
-</div>
-
-<!-- With Button Suffix -->
+<!-- Search Input with Button Suffix -->
 <div class="flex">
   <input type="text" class="mw-input rounded-r-none"
          placeholder="Search..." />
-  <button class="mw-btn mw-btn-primary"
-    style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
-    <svg ...>...</svg>
+  <button class="mw-btn mw-btn-primary rounded-l-none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/>
+      <path d="m21 21-4.3-4.3"/>
+    </svg>
   </button>
+</div>
+
+<!-- Currency Input with Symbol Prefix -->
+<div class="flex">
+  <span class="inline-flex items-center justify-center px-3 text-sm
+    text-muted-foreground border border-r-0 rounded-l-[var(--marrow-radius)]"
+    style="border-color: hsl(var(--marrow-input));
+           background: hsl(var(--marrow-muted));">
+    $
+  </span>
+  <input type="number" class="mw-input rounded-l-none"
+         placeholder="0.00" step="0.01" />
+</div>
+
+<!-- Phone Input with Country Code Select -->
+<div class="flex">
+  <select class="mw-select rounded-r-none border-r-0"
+          style="min-width: 100px;">
+    <option>+1</option>
+    <option>+44</option>
+    <option>+81</option>
+  </select>
+  <input type="tel" class="mw-input rounded-l-none"
+         placeholder="555-0123" />
 </div>

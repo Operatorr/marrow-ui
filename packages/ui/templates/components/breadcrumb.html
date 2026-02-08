@@ -1,28 +1,89 @@
 <!-- Marrow UI: Breadcrumb -->
 <!-- Displays a hierarchical navigation trail for the current page -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
+
+<!-- @section: Basic Breadcrumb -->
+<nav class="mw-breadcrumb">
+  <a href="#">Home</a>
+  <span>/</span>
+  <a href="#">Products</a>
+  <span>/</span>
+  <a href="#">Electronics</a>
+  <span>/</span>
+  <span class="mw-breadcrumb-current">Headphones</span>
+</nav>
+<!-- @section: Icon Breadcrumb -->
 
 <nav class="mw-breadcrumb">
   <a href="#">Home</a>
 
-  <!-- Separator -->
+  <!-- Chevron separator -->
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
        viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0">
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <a href="#">Documentation</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
     <path d="m9 18 6-6-6-6"/>
   </svg>
 
   <a href="#">Components</a>
 
-  <!-- Separator -->
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
        viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0">
+       class="shrink-0" aria-hidden="true">
     <path d="m9 18 6-6-6-6"/>
   </svg>
 
-  <!-- Current page (no link) -->
   <span class="mw-breadcrumb-current">Breadcrumb</span>
+</nav>
+<!-- @section: Truncated Breadcrumb -->
+
+<nav class="mw-breadcrumb">
+  <a href="#">Home</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <a href="#">Projects</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <!-- Ellipsis for truncated path -->
+  <span>...</span>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <a href="#">Frontend</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <span class="mw-breadcrumb-current">Components</span>
 </nav>

@@ -1,168 +1,214 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const hoverCardCode = `<div x-data="mwHoverCard()" class="relative inline-block">
-  <!-- Trigger -->
-  <a href="#"
-     @mouseenter="enter()"
-     @mouseleave="leave()"
-     class="text-primary font-medium underline underline-offset-4">
-    @alice_johnson
-  </a>
-
-  <!-- Hover Card -->
-  <div x-show="show" x-cloak
-       @mouseenter="enter()" @mouseleave="leave()"
-       x-transition:enter="transition ease-out duration-150"
-       x-transition:enter-start="opacity-0 translate-y-1"
-       x-transition:enter-end="opacity-100 translate-y-0"
-       x-transition:leave="transition ease-in duration-100"
-       x-transition:leave-start="opacity-100 translate-y-0"
-       x-transition:leave-end="opacity-0 translate-y-1"
-       class="absolute left-0 top-full mt-2 z-50 w-80 mw-popover">
-    <div class="flex gap-4">
-      <img src="https://i.pravatar.cc/150?img=5" alt="" class="mw-avatar mw-avatar-lg flex-shrink-0" />
-      <div class="space-y-1">
-        <h4 class="font-heading text-sm font-semibold">Alice Johnson</h4>
-        <p class="text-sm text-muted-foreground">
-          Product designer & creative technologist. Building beautiful interfaces for the modern web.
-        </p>
-        <div class="flex items-center gap-4 pt-1">
-          <span class="text-xs text-muted-foreground">Joined Mar 2023</span>
-          <span class="text-xs text-muted-foreground">2.4k followers</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>`;
+const hoverCardCode = loadFull("hover-card");
 ---
 
 <DocsLayout title="Hover Card" description="A card that appears when hovering over a trigger element for previewing content" activeComponent="hover-card">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Hover Card</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">A card that appears when hovering over a trigger element for previewing content.</p>
-    </div>
-    <div class="mw-separator"></div>
+  <div class="space-y-12">
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card flex items-center justify-center min-h-[280px]">
-        <div x-data="mwHoverCard()" class="relative inline-block">
-          <a href="#" @mouseenter="enter()" @mouseleave="leave()" class="text-primary font-medium underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors duration-200">
-            @alice_johnson
-          </a>
-          <div x-show="show" x-cloak
-               @mouseenter="enter()" @mouseleave="leave()"
-               x-transition:enter="transition ease-out duration-150"
-               x-transition:enter-start="opacity-0 translate-y-1"
-               x-transition:enter-end="opacity-100 translate-y-0"
-               x-transition:leave="transition ease-in duration-100"
-               x-transition:leave-start="opacity-100 translate-y-0"
-               x-transition:leave-end="opacity-0 translate-y-1"
-               class="absolute left-0 top-full mt-2 z-50 w-80 mw-popover">
-            <div class="flex gap-4">
-              <img src="https://i.pravatar.cc/150?img=5" alt="" class="mw-avatar mw-avatar-lg flex-shrink-0" />
-              <div class="space-y-1">
-                <h4 class="font-heading text-sm font-semibold">Alice Johnson</h4>
-                <p class="text-sm text-muted-foreground">
-                  Product designer & creative technologist. Building beautiful interfaces for the modern web.
-                </p>
-                <div class="flex items-center gap-4 pt-1">
-                  <span class="text-xs text-muted-foreground">Joined Mar 2023</span>
-                  <span class="text-xs text-muted-foreground">2.4k followers</span>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Overlays</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Hover Card</h1>
+      <p class="docs-hero-description mt-3">A card that appears when hovering over a trigger element for previewing content.</p>
+    </header>
+
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
+        <div class="flex items-center justify-center min-h-[280px]">
+          <div x-data="mwHoverCard()" class="relative inline-block">
+            <a href="#" @mouseenter="enter()" @mouseleave="leave()" class="text-primary font-medium underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors duration-200">
+              @alice_johnson
+            </a>
+            <div x-show="show" x-cloak
+                 @mouseenter="enter()" @mouseleave="leave()"
+                 x-transition:enter="transition ease-out duration-150"
+                 x-transition:enter-start="opacity-0 translate-y-1"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-100"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 translate-y-1"
+                 class="absolute left-0 top-full mt-2 z-50 w-80 mw-popover">
+              <div class="flex gap-4">
+                <img src="https://i.pravatar.cc/150?img=5" alt="" class="mw-avatar mw-avatar-lg flex-shrink-0" />
+                <div class="space-y-1">
+                  <h4 class="font-heading text-sm font-semibold">Alice Johnson</h4>
+                  <p class="text-sm text-muted-foreground">
+                    Product designer & creative technologist. Building beautiful interfaces for the modern web.
+                  </p>
+                  <div class="flex items-center gap-4 pt-1">
+                    <span class="text-xs text-muted-foreground">Joined Mar 2023</span>
+                    <span class="text-xs text-muted-foreground">2.4k followers</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={hoverCardCode} lang="html" />
-    </div>
-
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
-          <div class="mw-card overflow-hidden">
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-border">
-                    <th class="text-left p-3 font-semibold">Property/Method</th>
-                    <th class="text-left p-3 font-semibold">Type</th>
-                    <th class="text-left p-3 font-semibold">Description</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-border">
-                  <tr>
-                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">show</code></td>
-                    <td class="p-3 text-muted-foreground">Boolean</td>
-                    <td class="p-3 text-muted-foreground">Controls the visibility of the hover card</td>
-                  </tr>
-                  <tr>
-                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">timeout</code></td>
-                    <td class="p-3 text-muted-foreground">Number</td>
-                    <td class="p-3 text-muted-foreground">Internal debounce timer for hover delay</td>
-                  </tr>
-                  <tr>
-                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">enter()</code></td>
-                    <td class="p-3 text-muted-foreground">Function</td>
-                    <td class="p-3 text-muted-foreground">Shows the card after a 200ms delay</td>
-                  </tr>
-                  <tr>
-                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">leave()</code></td>
-                    <td class="p-3 text-muted-foreground">Function</td>
-                    <td class="p-3 text-muted-foreground">Hides the card after a 100ms delay</td>
-                  </tr>
-                </tbody>
-              </table>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="w-full max-w-md mx-auto space-y-4">
+          <div class="rounded-lg border border-border p-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/150?img=12" alt="" class="mw-avatar mw-avatar-sm" />
+              <div x-data="mwHoverCard()" class="relative inline-block">
+                <a href="#" @mouseenter="enter()" @mouseleave="leave()" class="text-sm font-semibold text-primary hover:underline">
+                  @marcus_dev
+                </a>
+                <div x-show="show" x-cloak
+                     @mouseenter="enter()" @mouseleave="leave()"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0 translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 translate-y-1"
+                     class="absolute left-0 top-full mt-2 z-50 w-72 mw-popover">
+                  <div class="flex gap-3">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="" class="mw-avatar flex-shrink-0" />
+                    <div class="space-y-1">
+                      <h4 class="font-heading text-sm font-semibold">Marcus Chen</h4>
+                      <p class="text-xs text-muted-foreground">Full-stack developer. Open source contributor and coffee enthusiast.</p>
+                      <div class="flex items-center gap-3 pt-1">
+                        <span class="text-xs text-muted-foreground">842 followers</span>
+                        <span class="text-xs text-muted-foreground">Following 231</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs text-muted-foreground ml-auto">2h ago</span>
+            </div>
+            <p class="text-sm leading-relaxed">Just shipped a new feature using Marrow UI components. The Alpine.js integration is seamless!</p>
+            <div class="flex items-center gap-4 text-xs text-muted-foreground">
+              <span>12 likes</span>
+              <span>3 replies</span>
             </div>
           </div>
-        </div>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
-          <div class="mw-card overflow-hidden">
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-border">
-                    <th class="text-left p-3 font-semibold">Class</th>
-                    <th class="text-left p-3 font-semibold">Description</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-border">
-                  <tr>
-                    <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-popover</code></td>
-                    <td class="p-3 text-muted-foreground">Styled container for the hover card panel</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="rounded-lg border border-border p-4 space-y-3">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/150?img=5" alt="" class="mw-avatar mw-avatar-sm" />
+              <div x-data="mwHoverCard()" class="relative inline-block">
+                <a href="#" @mouseenter="enter()" @mouseleave="leave()" class="text-sm font-semibold text-primary hover:underline">
+                  @alice_johnson
+                </a>
+                <div x-show="show" x-cloak
+                     @mouseenter="enter()" @mouseleave="leave()"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0 translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 translate-y-1"
+                     class="absolute left-0 top-full mt-2 z-50 w-72 mw-popover">
+                  <div class="flex gap-3">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="" class="mw-avatar flex-shrink-0" />
+                    <div class="space-y-1">
+                      <h4 class="font-heading text-sm font-semibold">Alice Johnson</h4>
+                      <p class="text-xs text-muted-foreground">Product designer & creative technologist. Building beautiful interfaces.</p>
+                      <div class="flex items-center gap-3 pt-1">
+                        <span class="text-xs text-muted-foreground">2.4k followers</span>
+                        <span class="text-xs text-muted-foreground">Following 189</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span class="text-xs text-muted-foreground ml-auto">5h ago</span>
             </div>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
-          <div class="mw-card prose prose-sm max-w-none">
-            <ul class="space-y-2 text-muted-foreground">
-              <li>The hover card uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-cloak</code> to prevent flash of unstyled content</li>
-              <li>Entrance and exit delays prevent accidental triggers while moving the cursor</li>
-              <li>The card remains visible when hovering over it, allowing interaction with its contents</li>
-              <li>Decorative images should use empty <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">alt=""</code> attributes</li>
-              <li>Consider providing keyboard alternatives for touch/keyboard users who cannot hover</li>
-            </ul>
+            <p class="text-sm leading-relaxed">Working on a new design system. Hover cards are such a nice UX pattern for social feeds.</p>
+            <div class="flex items-center gap-4 text-xs text-muted-foreground">
+              <span>28 likes</span>
+              <span>7 replies</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={hoverCardCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Property/Method</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>show</code></td>
+              <td>Boolean</td>
+              <td>Controls the visibility of the hover card</td>
+            </tr>
+            <tr>
+              <td><code>timeout</code></td>
+              <td>Number</td>
+              <td>Internal debounce timer for hover delay</td>
+            </tr>
+            <tr>
+              <td><code>enter()</code></td>
+              <td>Method</td>
+              <td>Shows the card after a 200ms delay</td>
+            </tr>
+            <tr>
+              <td><code>leave()</code></td>
+              <td>Method</td>
+              <td>Hides the card after a 100ms delay</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>mw-popover</code></td>
+              <td>Styled container for the hover card panel</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Entrance and exit delays prevent accidental triggers while moving the cursor</li>
+            <li>The card remains visible when hovering over it, allowing interaction with its contents</li>
+            <li>Decorative images should use empty alt="" attributes</li>
+            <li>Consider providing keyboard alternatives for touch/keyboard users who cannot hover</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use x-cloak to prevent flash of unstyled content</li>
+            <li>Keep hover card content read-only -- avoid forms or complex interactions</li>
+            <li>Show supplementary info (bio, stats) that enriches but is not required</li>
+            <li>Ensure the trigger element is also a navigable link for non-hover users</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </div>
 </DocsLayout>

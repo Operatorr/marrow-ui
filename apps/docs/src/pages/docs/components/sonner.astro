@@ -1,69 +1,29 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const triggerCode = `<button class="mw-btn mw-btn-primary"
-  @click="$store.toasts.add({
-    title: 'Success!',
-    description: 'Your changes have been saved.',
-    type: 'success'
-  })">
-  Show Toast
-</button>`;
-
-const containerCode = `<!-- Place once in your layout -->
-<div x-data class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 w-80"
-     style="pointer-events: none;">
-  <template x-for="toast in $store.toasts.items" :key="toast.id">
-    <div class="mw-card border shadow-lg flex items-start gap-3 p-4"
-         style="pointer-events: auto;"
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0 translate-y-2"
-         x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 translate-y-2">
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-semibold" x-text="toast.title"></p>
-        <p class="text-xs text-muted-foreground mt-0.5"
-           x-text="toast.description"></p>
-      </div>
-      <button @click="$store.toasts.remove(toast.id)"
-              class="shrink-0 text-muted-foreground hover:text-foreground">
-        &times;
-      </button>
-    </div>
-  </template>
-</div>`;
-
-const apiCode = `// Add a toast
-$store.toasts.add({
-  title: 'Success!',
-  description: 'Your changes have been saved.',
-  type: 'success',      // 'default' | 'success' | 'error' | 'warning'
-  duration: 4000        // ms (0 = persist)
-})
-
-// Remove a toast by ID
-$store.toasts.remove(toastId)
-
-// Access all active toasts
-$store.toasts.items   // Array of toast objects`;
+const t = loadTemplate("sonner");
+const triggerCode = t.sections.get("Trigger")!;
+const containerCode = t.sections.get("Container")!;
+const apiCode = t.sections.get("API")!;
 ---
 
 <DocsLayout title="Sonner" description="Toast notifications with auto-dismiss and multiple variants" activeComponent="sonner">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Sonner</h1>
-      <p class="mt-2 text-lg text-muted-foreground">Lightweight toast notifications that appear briefly and dismiss automatically, inspired by the Sonner library.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Feedback & Status</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Sonner</h1>
+      <p class="docs-hero-description mt-3">Lightweight toast notifications that appear briefly and dismiss automatically, inspired by the Sonner library. Supports default, success, error, and warning variants with icons.</p>
+    </header>
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
         <div class="flex flex-wrap gap-2">
           <button class="mw-btn mw-btn-outline"
                   @click={"$store.toasts.add({ title: 'Event created', description: 'Your event has been scheduled successfully.', type: 'default' })"}>
@@ -117,104 +77,109 @@ $store.toasts.items   // Array of toast objects`;
           </div>
         </template>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-
-      <h3 class="font-heading text-lg font-semibold">Trigger a Toast</h3>
-      <CodeBlock code={triggerCode} lang="html" />
-
-      <h3 class="font-heading text-lg font-semibold mt-6">Toast Container</h3>
-      <CodeBlock code={containerCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-
-      <div class="space-y-3">
-        <p class="text-muted-foreground leading-relaxed">
-          Toasts use the Alpine.js global store <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Alpine.store('toasts')</code>. Call <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">$store.toasts.add()</code> from any component to show a notification.
-        </p>
-
-        <p class="text-muted-foreground leading-relaxed">
-          Place the toast container once in your page layout. It will render all active toasts as a stacked list in the bottom-right corner. Toasts auto-dismiss after 4 seconds by default.
-        </p>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-md mx-auto space-y-4">
+          <div class="rounded-lg border border-border bg-card p-5 space-y-4">
+            <h3 class="font-heading text-base font-semibold">Activity Feed</h3>
+            <p class="text-sm text-muted-foreground">Trigger multiple notifications to see them stack in the bottom-right corner.</p>
+            <div class="space-y-2">
+              <button class="mw-btn mw-btn-outline mw-btn-sm w-full justify-start"
+                      @click={"$store.toasts.add({ title: 'New message', description: 'Alex sent you a direct message.', type: 'default' })"}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                New message received
+              </button>
+              <button class="mw-btn mw-btn-outline mw-btn-sm w-full justify-start"
+                      @click={"$store.toasts.add({ title: 'Deploy complete', description: 'Production build deployed successfully.', type: 'success' })"}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                Deploy succeeded
+              </button>
+              <button class="mw-btn mw-btn-outline mw-btn-sm w-full justify-start"
+                      @click={"$store.toasts.add({ title: 'Build failed', description: 'Error in module bundler. Check logs for details.', type: 'error' })"}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                Build error
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <h3 class="font-heading text-lg font-semibold mt-6">API</h3>
-      <CodeBlock code={apiCode} lang="javascript" />
-
-      <div class="mw-table-container">
-        <table class="mw-table">
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>Type</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>title</code></td>
-              <td>string</td>
-              <td>Main heading text of the toast</td>
-            </tr>
-            <tr>
-              <td><code>description</code></td>
-              <td>string</td>
-              <td>Optional description text below the title</td>
-            </tr>
-            <tr>
-              <td><code>type</code></td>
-              <td>string</td>
-              <td>Visual variant: <code>default</code>, <code>success</code>, <code>error</code>, <code>warning</code></td>
-            </tr>
-            <tr>
-              <td><code>duration</code></td>
-              <td>number</td>
-              <td>Auto-dismiss timeout in milliseconds (default: 4000). Set to 0 to persist until manually dismissed</td>
-            </tr>
-          </tbody>
-        </table>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={triggerCode} lang="html" />
+        <CodeBlock code={containerCode} lang="html" />
+        <CodeBlock code={apiCode} lang="javascript" />
       </div>
+    </section>
 
-      <h3 class="font-heading text-lg font-semibold mt-6">Store Methods</h3>
-      <div class="mw-table-container">
-        <table class="mw-table">
-          <thead>
-            <tr>
-              <th>Method</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>$store.toasts.add(toast)</code></td>
-              <td>Add a new toast notification. Returns the toast ID</td>
-            </tr>
-            <tr>
-              <td><code>$store.toasts.remove(id)</code></td>
-              <td>Manually remove a toast by its ID</td>
-            </tr>
-            <tr>
-              <td><code>$store.toasts.items</code></td>
-              <td>Array of all currently active toast objects</td>
-            </tr>
-          </tbody>
-        </table>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="space-y-6">
+        <div class="overflow-x-auto rounded-lg border border-border">
+          <table class="docs-api-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>title</code></td><td>string</td><td>Main heading text of the toast</td></tr>
+              <tr><td><code>description</code></td><td>string</td><td>Optional description text below the title</td></tr>
+              <tr><td><code>type</code></td><td>string</td><td>Visual variant: <code>default</code>, <code>success</code>, <code>error</code>, <code>warning</code></td></tr>
+              <tr><td><code>duration</code></td><td>number</td><td>Auto-dismiss timeout in milliseconds (default: 4000). Set to 0 to persist until manually dismissed</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="overflow-x-auto rounded-lg border border-border">
+          <table class="docs-api-table">
+            <thead>
+              <tr>
+                <th>Store Method</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>$store.toasts.add(toast)</code></td><td>Add a new toast notification. Returns the toast ID</td></tr>
+              <tr><td><code>$store.toasts.remove(id)</code></td><td>Manually remove a toast by its ID</td></tr>
+              <tr><td><code>$store.toasts.items</code></td><td>Array of all currently active toast objects</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+    </section>
 
-      <h3 class="font-heading text-lg font-semibold mt-6">Accessibility</h3>
-      <ul class="list-disc list-inside space-y-2 text-muted-foreground">
-        <li>Toast container uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">pointer-events: none</code> on the wrapper to prevent blocking interactions, with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">pointer-events: auto</code> on individual toasts</li>
-        <li>Dismiss buttons include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label="Dismiss notification"</code> for screen readers</li>
-        <li>Decorative icons are marked with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code></li>
-        <li>For critical alerts, consider using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">duration: 0</code> to require manual dismissal</li>
-        <li>Toast content is announced by screen readers as it appears in the DOM</li>
-      </ul>
-    </div>
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Toast container uses <code>pointer-events: none</code> on the wrapper to prevent blocking interactions, with <code>pointer-events: auto</code> on individual toasts</li>
+            <li>Dismiss buttons include <code>aria-label="Dismiss notification"</code> for screen readers</li>
+            <li>Decorative icons are marked with <code>aria-hidden="true"</code></li>
+            <li>Toast content is announced by screen readers as it appears in the DOM</li>
+            <li>For critical alerts, use <code>duration: 0</code> to require manual dismissal</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Place the toast container once in your page layout</li>
+            <li>Use the appropriate type (<code>default</code>, <code>success</code>, <code>error</code>, <code>warning</code>) to match the message context</li>
+            <li>Keep toast messages concise and actionable</li>
+            <li>Toasts auto-dismiss after 4 seconds by default</li>
+            <li>Access the store via <code>$store.toasts.add()</code> from any Alpine.js component</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </div>
 </DocsLayout>

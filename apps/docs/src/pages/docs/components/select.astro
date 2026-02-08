@@ -1,140 +1,33 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const selectCode = `<div x-data="mwDropdown()" class="relative w-64">
-  <!-- Trigger -->
-  <button
-    @click="toggle()"
-    class="mw-input flex items-center justify-between cursor-pointer"
-    type="button"
-    aria-haspopup="listbox"
-    :aria-expanded="open">
-    <span x-text="$data._selected || 'Select a framework...'"
-          :class="!$data._selected && 'text-muted-foreground'"></span>
-    <svg xmlns="http://www.w3.org/2000/svg"
-         width="16"
-         height="16"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         stroke-width="2"
-         stroke-linecap="round"
-         stroke-linejoin="round"
-         class="text-muted-foreground transition-transform duration-200"
-         :class="open && 'rotate-180'">
-      <path d="m6 9 6 6 6-6"/>
-    </svg>
-  </button>
-
-  <!-- Options -->
-  <div x-show="open"
-       @click.outside="close()"
-       x-cloak
-       x-transition:enter="transition ease-out duration-100"
-       x-transition:enter-start="opacity-0 -translate-y-1"
-       x-transition:enter-end="opacity-100 translate-y-0"
-       x-transition:leave="transition ease-in duration-75"
-       x-transition:leave-start="opacity-100 translate-y-0"
-       x-transition:leave-end="opacity-0 -translate-y-1"
-       class="mw-popover absolute z-10 mt-1 w-full"
-       role="listbox">
-    <button class="mw-menu-item" @click="$data._selected = 'React'; close()" role="option">React</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Vue'; close()" role="option">Vue</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Angular'; close()" role="option">Angular</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Svelte'; close()" role="option">Svelte</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Alpine.js'; close()" role="option">Alpine.js</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Solid'; close()" role="option">Solid</button>
-  </div>
-</div>`;
-
-const searchableSelectCode = `<div x-data="{
-  open: false,
-  selected: '',
-  search: '',
-  options: ['Apple', 'Banana', 'Blueberry', 'Cherry', 'Grape', 'Mango', 'Orange', 'Peach', 'Pear', 'Strawberry'],
-  get filtered() {
-    return this.options.filter(opt =>
-      opt.toLowerCase().includes(this.search.toLowerCase())
-    )
-  },
-  select(option) {
-    this.selected = option;
-    this.search = '';
-    this.open = false;
-  }
-}" class="relative w-64">
-  <!-- Trigger -->
-  <button
-    @click="open = !open"
-    class="mw-input flex items-center justify-between cursor-pointer"
-    type="button">
-    <span x-text="selected || 'Select a fruit...'"
-          :class="!selected && 'text-muted-foreground'"></span>
-    <svg xmlns="http://www.w3.org/2000/svg"
-         width="16"
-         height="16"
-         viewBox="0 0 24 24"
-         fill="none"
-         stroke="currentColor"
-         stroke-width="2"
-         stroke-linecap="round"
-         stroke-linejoin="round"
-         class="text-muted-foreground transition-transform duration-200"
-         :class="open && 'rotate-180'">
-      <path d="m6 9 6 6 6-6"/>
-    </svg>
-  </button>
-
-  <!-- Options with Search -->
-  <div x-show="open"
-       @click.outside="open = false"
-       x-cloak
-       x-transition:enter="transition ease-out duration-100"
-       x-transition:enter-start="opacity-0 -translate-y-1"
-       x-transition:enter-end="opacity-100 translate-y-0"
-       x-transition:leave="transition ease-in duration-75"
-       x-transition:leave-start="opacity-100 translate-y-0"
-       x-transition:leave-end="opacity-0 -translate-y-1"
-       class="mw-popover absolute z-10 mt-1 w-full">
-    <!-- Search Input -->
-    <div class="p-2 border-b border-border">
-      <input
-        type="text"
-        x-model="search"
-        placeholder="Search..."
-        class="w-full px-2 py-1 text-sm bg-transparent border-0 focus:outline-none"
-        @click.stop>
-    </div>
-    <!-- Options List -->
-    <div class="max-h-48 overflow-y-auto">
-      <template x-for="option in filtered" :key="option">
-        <button class="mw-menu-item" @click="select(option)" x-text="option"></button>
-      </template>
-      <div x-show="filtered.length === 0" class="px-3 py-2 text-sm text-muted-foreground">
-        No results found
-      </div>
-    </div>
-  </div>
-</div>`;
+const t = loadTemplate("select");
+const selectCode = t.sections.get("Select")!;
+const searchableSelectCode = t.sections.get("Searchable Select")!;
 ---
 
 <DocsLayout title="Select" description="A custom styled select dropdown with keyboard-friendly options" activeComponent="select">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Select</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A custom select component built with Alpine.js, providing a styled dropdown for choosing from a list of options with full keyboard navigation support.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Form Controls</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Select</h1>
+      <p class="docs-hero-description mt-3">A custom select component built with Alpine.js, providing a styled dropdown for choosing from a list of options with full keyboard navigation support.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
-        <div class="flex flex-wrap gap-6">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Basic Select</p>
           <div x-data="mwDropdown()" class="relative w-64">
-            <!-- Trigger -->
             <button
               @click="toggle()"
               class="mw-input flex items-center justify-between cursor-pointer"
@@ -143,22 +36,8 @@ const searchableSelectCode = `<div x-data="{
               :aria-expanded="open">
               <span x-text="$data._selected || 'Select a framework...'"
                     :class="!$data._selected && 'text-muted-foreground'"></span>
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   width="16"
-                   height="16"
-                   viewBox="0 0 24 24"
-                   fill="none"
-                   stroke="currentColor"
-                   stroke-width="2"
-                   stroke-linecap="round"
-                   stroke-linejoin="round"
-                   class="text-muted-foreground transition-transform duration-200"
-                   :class="open && 'rotate-180'">
-                <path d="m6 9 6 6 6-6"/>
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground transition-transform duration-200" :class="open && 'rotate-180'" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>
-
-            <!-- Options -->
             <div x-show="open"
                  @click.outside="close()"
                  x-cloak
@@ -179,151 +58,172 @@ const searchableSelectCode = `<div x-data="{
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={selectCode} lang="html" />
-    </div>
-
-    <!-- Searchable Select -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Searchable Select</h2>
-      <p class="text-muted-foreground leading-relaxed">Add a search input to filter options in longer lists.</p>
-      <div class="mw-card">
-        <div x-data="{
-          open: false,
-          selected: '',
-          search: '',
-          options: ['Apple', 'Banana', 'Blueberry', 'Cherry', 'Grape', 'Mango', 'Orange', 'Peach', 'Pear', 'Strawberry'],
-          get filtered() {
-            return this.options.filter(opt =>
-              opt.toLowerCase().includes(this.search.toLowerCase())
-            )
-          },
-          select(option) {
-            this.selected = option;
-            this.search = '';
-            this.open = false;
-          }
-        }" class="relative w-64">
-          <!-- Trigger -->
-          <button
-            @click="open = !open"
-            class="mw-input flex items-center justify-between cursor-pointer"
-            type="button">
-            <span x-text="selected || 'Select a fruit...'"
-                  :class="!selected && 'text-muted-foreground'"></span>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="16"
-                 height="16"
-                 viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-                 class="text-muted-foreground transition-transform duration-200"
-                 :class="open && 'rotate-180'">
-              <path d="m6 9 6 6 6-6"/>
-            </svg>
-          </button>
-
-          <!-- Options with Search -->
-          <div x-show="open"
-               @click.outside="open = false"
-               x-cloak
-               x-transition:enter="transition ease-out duration-100"
-               x-transition:enter-start="opacity-0 -translate-y-1"
-               x-transition:enter-end="opacity-100 translate-y-0"
-               x-transition:leave="transition ease-in duration-75"
-               x-transition:leave-start="opacity-100 translate-y-0"
-               x-transition:leave-end="opacity-0 -translate-y-1"
-               class="mw-popover absolute z-10 mt-1 w-full">
-            <!-- Search Input -->
-            <div class="p-2 border-b border-border">
-              <input
-                type="text"
-                x-model="search"
-                placeholder="Search..."
-                class="w-full px-2 py-1 text-sm bg-transparent border-0 focus:outline-none"
-                @click.stop>
-            </div>
-            <!-- Options List -->
-            <div class="max-h-48 overflow-y-auto">
-              <template x-for="option in filtered" x-bind:key="option">
-                <button class="mw-menu-item" @click="select(option)" x-text="option"></button>
-              </template>
-              <div x-show="filtered.length === 0" class="px-3 py-2 text-sm text-muted-foreground">
-                No results found
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Searchable Select</p>
+          <div x-data="{
+            open: false,
+            selected: '',
+            search: '',
+            options: ['Apple', 'Banana', 'Blueberry', 'Cherry', 'Grape', 'Mango', 'Orange', 'Peach', 'Pear', 'Strawberry'],
+            get filtered() {
+              return this.options.filter(opt =>
+                opt.toLowerCase().includes(this.search.toLowerCase())
+              )
+            },
+            select(option) {
+              this.selected = option;
+              this.search = '';
+              this.open = false;
+            }
+          }" class="relative w-64">
+            <button
+              @click="open = !open"
+              class="mw-input flex items-center justify-between cursor-pointer"
+              type="button">
+              <span x-text="selected || 'Select a fruit...'"
+                    :class="!selected && 'text-muted-foreground'"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground transition-transform duration-200" :class="open && 'rotate-180'" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div x-show="open"
+                 @click.outside="open = false"
+                 x-cloak
+                 x-transition:enter="transition ease-out duration-100"
+                 x-transition:enter-start="opacity-0 -translate-y-1"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-75"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 -translate-y-1"
+                 class="mw-popover absolute z-10 mt-1 w-full">
+              <div class="p-2 border-b border-border">
+                <input type="text" x-model="search" placeholder="Search..." class="w-full px-2 py-1 text-sm bg-transparent border-0 focus:outline-none" @click.stop>
+              </div>
+              <div class="max-h-48 overflow-y-auto">
+                <template x-for="option in filtered" x-bind:key="option">
+                  <button class="mw-menu-item" @click="select(option)" x-text="option"></button>
+                </template>
+                <div x-show="filtered.length === 0" class="px-3 py-2 text-sm text-muted-foreground">No results found</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <CodeBlock code={searchableSelectCode} lang="html" />
-    </div>
+    </section>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="mx-auto max-w-md rounded-lg border border-border bg-card p-6 space-y-6">
+          <div>
+            <h3 class="font-heading text-lg font-semibold">Project Settings</h3>
+            <p class="text-sm text-muted-foreground mt-1">Configure your project defaults.</p>
+          </div>
 
+          <div class="space-y-4">
+            <div class="space-y-2">
+              <label class="mw-label">Framework</label>
+              <div x-data="mwDropdown()" class="relative">
+                <button @click="toggle()" class="mw-input flex items-center justify-between cursor-pointer w-full" type="button" aria-haspopup="listbox" :aria-expanded="open">
+                  <span x-text="$data._selected || 'Select framework...'" :class="!$data._selected && 'text-muted-foreground'"></span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground transition-transform duration-200" :class="open && 'rotate-180'" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="open" @click.outside="close()" x-cloak x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1" class="mw-popover absolute z-10 mt-1 w-full" role="listbox">
+                  <button class="mw-menu-item" @click="$data._selected = 'Astro'; close()" role="option">Astro</button>
+                  <button class="mw-menu-item" @click="$data._selected = 'Next.js'; close()" role="option">Next.js</button>
+                  <button class="mw-menu-item" @click="$data._selected = 'Nuxt'; close()" role="option">Nuxt</button>
+                  <button class="mw-menu-item" @click="$data._selected = 'SvelteKit'; close()" role="option">SvelteKit</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label for="ctx-project-name" class="mw-label">Project Name</label>
+              <input type="text" id="ctx-project-name" class="mw-input" placeholder="my-project" />
+            </div>
+
+            <div class="space-y-2">
+              <label class="mw-label">Deployment Region</label>
+              <div x-data="mwDropdown()" class="relative">
+                <button @click="toggle()" class="mw-input flex items-center justify-between cursor-pointer w-full" type="button" aria-haspopup="listbox" :aria-expanded="open">
+                  <span x-text="$data._selected || 'Select region...'" :class="!$data._selected && 'text-muted-foreground'"></span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground transition-transform duration-200" :class="open && 'rotate-180'" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="open" @click.outside="close()" x-cloak x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1" class="mw-popover absolute z-10 mt-1 w-full" role="listbox">
+                  <button class="mw-menu-item" @click="$data._selected = 'US East'; close()" role="option">US East</button>
+                  <button class="mw-menu-item" @click="$data._selected = 'US West'; close()" role="option">US West</button>
+                  <button class="mw-menu-item" @click="$data._selected = 'EU West'; close()" role="option">EU West</button>
+                  <button class="mw-menu-item" @click="$data._selected = 'Asia Pacific'; close()" role="option">Asia Pacific</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="mw-btn mw-btn-primary w-full">Save Settings</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-input</code> - Applied to the trigger button for input styling</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-popover</code> - Container for the dropdown options panel</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-menu-item</code> - Individual option buttons with hover/focus states</li>
+        <CodeBlock code={selectCode} lang="html" />
+        <CodeBlock code={searchableSelectCode} lang="html" />
+      </div>
+    </section>
+
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Property/Method</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>open</code></td><td>Boolean</td><td>Dropdown visibility state</td></tr>
+            <tr><td><code>toggle()</code></td><td>Function</td><td>Toggle the dropdown open/closed</td></tr>
+            <tr><td><code>close()</code></td><td>Function</td><td>Close the dropdown</td></tr>
+            <tr><td><code>$data._selected</code></td><td>String</td><td>Custom property to store selected value</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>mw-input</code></td><td>Applied to the trigger button for input styling</td></tr>
+            <tr><td><code>mw-popover</code></td><td>Container for the dropdown options panel</td></tr>
+            <tr><td><code>mw-menu-item</code></td><td>Individual option buttons with hover/focus states</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>aria-haspopup="listbox"</code> on the trigger button</li>
+            <li>Use <code>:aria-expanded="open"</code> to indicate dropdown state</li>
+            <li>Add <code>role="listbox"</code> to the options container</li>
+            <li>Add <code>role="option"</code> to each option button</li>
+            <li>The <code>mw-menu-item</code> class includes proper focus states for keyboard navigation</li>
           </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js API</h3>
-          <p class="text-muted-foreground leading-relaxed mb-2">The select component uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwDropdown()"</code> which provides:</p>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code> - Boolean state for dropdown visibility</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">toggle()</code> - Toggle the dropdown open/closed</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code> - Close the dropdown</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">$data._selected</code> - Custom property to store selected value</li>
-          </ul>
-          <p class="text-muted-foreground leading-relaxed mt-2">For searchable selects, use custom <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data</code> with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">options</code> array and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">filtered</code> getter for search functionality.</p>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Behavior</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li>Click the trigger button to open/close the dropdown</li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Add a hidden <code>&lt;input type="hidden"&gt;</code> with <code>x-model</code> for form submission</li>
+            <li>Use <code>max-h-48 overflow-y-auto</code> on the options container for long lists</li>
+            <li>For searchable selects, use custom <code>x-data</code> with a filtered getter</li>
             <li>Click outside the dropdown to close it automatically</li>
-            <li>Select an option to update the trigger text and close the dropdown</li>
-            <li>The chevron icon rotates 180° when the dropdown is open</li>
-            <li>Transitions provide smooth enter/exit animations</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-haspopup="listbox"</code> on the trigger button</li>
-            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:aria-expanded="open"</code> to indicate dropdown state</li>
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="listbox"</code> to the options container</li>
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="option"</code> to each option button</li>
-            <li>The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-menu-item</code> class includes proper focus states for keyboard navigation</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Integration Tips</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li>Add a hidden <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;input type="hidden"&gt;</code> with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-model</code> for form submission</li>
-            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">max-h-48 overflow-y-auto</code> on the options container for long lists</li>
-            <li>Store selected values in Alpine.js data for multi-select patterns</li>
-            <li>Customize placeholder text by changing the fallback in <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-text</code></li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

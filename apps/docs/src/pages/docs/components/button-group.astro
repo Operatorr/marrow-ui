@@ -1,64 +1,31 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const buttonGroupCode = `<!-- Basic Button Group (Day/Week/Month Toggle) -->
-<div class="inline-flex -space-x-px">
-  <button class="mw-btn mw-btn-outline rounded-r-none">Day</button>
-  <button class="mw-btn mw-btn-outline rounded-none border-x-0">Week</button>
-  <button class="mw-btn mw-btn-outline rounded-l-none">Month</button>
-</div>
-
-<!-- Outline Button Group with Connected Borders -->
-<div class="inline-flex -space-x-px">
-  <button class="mw-btn mw-btn-outline rounded-r-none">Left</button>
-  <button class="mw-btn mw-btn-outline rounded-none border-x-0">Center</button>
-  <button class="mw-btn mw-btn-outline rounded-l-none">Right</button>
-</div>
-
-<!-- Toolbar-Style Icon Button Group -->
-<div class="inline-flex -space-x-px">
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none" aria-label="Bold">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
-  </button>
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-none border-x-0" aria-label="Italic">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
-  </button>
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-l-none" aria-label="Underline">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16"/><path d="M14 4v16"/><path d="M6 12h8"/></svg>
-  </button>
-</div>
-
-<!-- Primary Button Group with Separators -->
-<div class="inline-flex -space-x-px">
-  <button class="mw-btn mw-btn-primary rounded-r-none">Save</button>
-  <button class="mw-btn mw-btn-primary rounded-none"
-          style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
-    Save & Close
-  </button>
-  <button class="mw-btn mw-btn-primary rounded-l-none"
-          style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
-    Save & New
-  </button>
-</div>`;
+const buttonGroupCode = loadFull("button-group");
 ---
 
 <DocsLayout title="Button Group" description="Group multiple buttons together as a connected set of actions" activeComponent="button-group">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Button Group</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">Group multiple buttons together as a connected set of actions. Perfect for toggles, toolbars, and segmented controls.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Buttons & Actions</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Button Group</h1>
+      <p class="docs-hero-description mt-3">Group multiple buttons together as a connected set of actions. Perfect for toggles, toolbars, and segmented controls.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card flex flex-col items-center justify-center min-h-[240px] gap-8">
-        <!-- Basic toggle group -->
-        <div class="text-center space-y-3">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Time Period Toggle</p>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Time Period Toggle -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Time Period Toggle</p>
           <div class="inline-flex -space-x-px">
             <button class="mw-btn mw-btn-outline rounded-r-none">Day</button>
             <button class="mw-btn mw-btn-outline rounded-none border-x-0">Week</button>
@@ -66,9 +33,9 @@ const buttonGroupCode = `<!-- Basic Button Group (Day/Week/Month Toggle) -->
           </div>
         </div>
 
-        <!-- Outline group -->
-        <div class="text-center space-y-3">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Alignment Controls</p>
+        <!-- Alignment Controls -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Alignment Controls</p>
           <div class="inline-flex -space-x-px">
             <button class="mw-btn mw-btn-outline rounded-r-none">Left</button>
             <button class="mw-btn mw-btn-outline rounded-none border-x-0">Center</button>
@@ -76,9 +43,9 @@ const buttonGroupCode = `<!-- Basic Button Group (Day/Week/Month Toggle) -->
           </div>
         </div>
 
-        <!-- Primary group with separators -->
-        <div class="text-center space-y-3">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Save Actions</p>
+        <!-- Save Actions -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Save Actions</p>
           <div class="inline-flex -space-x-px">
             <button class="mw-btn mw-btn-primary rounded-r-none">Save</button>
             <button class="mw-btn mw-btn-primary rounded-none" style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
@@ -89,16 +56,10 @@ const buttonGroupCode = `<!-- Basic Button Group (Day/Week/Month Toggle) -->
             </button>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- With Icons -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">With Icons</h3>
-      <div class="mw-card flex flex-col items-center justify-center min-h-[200px] gap-8">
-        <!-- Icon-only toolbar group -->
-        <div class="text-center space-y-3">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Text Formatting Toolbar</p>
+        <!-- Icon Toolbar: Text Formatting -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Text Formatting Toolbar</p>
           <div class="inline-flex -space-x-px">
             <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none" aria-label="Bold">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
@@ -112,9 +73,9 @@ const buttonGroupCode = `<!-- Basic Button Group (Day/Week/Month Toggle) -->
           </div>
         </div>
 
-        <!-- Alignment icons -->
-        <div class="text-center space-y-3">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Text Alignment</p>
+        <!-- Icon Toolbar: Text Alignment -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Text Alignment</p>
           <div class="inline-flex -space-x-px">
             <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none" aria-label="Align left">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="17" x2="3" y1="12" y2="12"/><line x1="21" x2="3" y1="18" y2="18"/></svg>
@@ -128,49 +89,141 @@ const buttonGroupCode = `<!-- Basic Button Group (Day/Week/Month Toggle) -->
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-2xl mx-auto">
+          <!-- Text Editor Toolbar -->
+          <div class="rounded-lg border border-border bg-card overflow-hidden">
+            <!-- Toolbar -->
+            <div class="flex flex-wrap items-center gap-3 p-3 border-b border-border bg-muted/30">
+              <!-- File actions -->
+              <div class="inline-flex -space-x-px">
+                <button class="mw-btn mw-btn-ghost mw-btn-sm rounded-r-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  New
+                </button>
+                <button class="mw-btn mw-btn-ghost mw-btn-sm rounded-none border-x-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                  Open
+                </button>
+                <button class="mw-btn mw-btn-ghost mw-btn-sm rounded-l-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Save
+                </button>
+              </div>
+
+              <div class="w-px h-6 bg-border"></div>
+
+              <!-- Text formatting -->
+              <div class="inline-flex -space-x-px">
+                <button class="mw-btn mw-btn-outline mw-btn-icon mw-btn-sm rounded-r-none" aria-label="Bold">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
+                </button>
+                <button class="mw-btn mw-btn-outline mw-btn-icon mw-btn-sm rounded-none border-x-0" aria-label="Italic">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
+                </button>
+                <button class="mw-btn mw-btn-outline mw-btn-icon mw-btn-sm rounded-l-none" aria-label="Underline">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" x2="20" y1="20" y2="20"/></svg>
+                </button>
+              </div>
+
+              <div class="w-px h-6 bg-border"></div>
+
+              <!-- Text alignment -->
+              <div class="inline-flex -space-x-px">
+                <button class="mw-btn mw-btn-outline mw-btn-icon mw-btn-sm rounded-r-none" aria-label="Align left">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="17" x2="3" y1="12" y2="12"/><line x1="21" x2="3" y1="18" y2="18"/></svg>
+                </button>
+                <button class="mw-btn mw-btn-outline mw-btn-icon mw-btn-sm rounded-none border-x-0" aria-label="Align center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="17" x2="7" y1="12" y2="12"/><line x1="21" x2="3" y1="18" y2="18"/></svg>
+                </button>
+                <button class="mw-btn mw-btn-outline mw-btn-icon mw-btn-sm rounded-l-none" aria-label="Align right">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="21" x2="7" y1="12" y2="12"/><line x1="21" x2="3" y1="18" y2="18"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Editor content area -->
+            <div class="p-6 min-h-[160px]">
+              <p class="text-sm leading-relaxed text-muted-foreground">The quick brown fox jumps over the lazy dog. This is an example of a text editor toolbar using button groups to organize related formatting controls into connected sets.</p>
+              <p class="text-sm leading-relaxed text-muted-foreground mt-4">Each group of buttons represents a distinct set of related actions -- file operations, text formatting, and alignment -- visually separated by dividers.</p>
+            </div>
+
+            <!-- Status bar -->
+            <div class="flex items-center justify-between px-4 py-2 border-t border-border bg-muted/30 text-xs text-muted-foreground">
+              <span>Ln 1, Col 1</span>
+              <span>UTF-8</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={buttonGroupCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Structure</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Button groups use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">inline-flex</code> with
-            <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">-space-x-px</code> to connect buttons seamlessly.
-            The first button gets <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-r-none</code>,
-            middle buttons get <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-none</code> and
-            <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">border-x-0</code>,
-            and the last button gets <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rounded-l-none</code>.
-          </p>
-        </div>
+        <CodeBlock code={buttonGroupCode} lang="html" />
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Primary Button Groups</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            When using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-primary</code>, add subtle border separators
-            between buttons using inline styles: <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2)</code>
-            to improve visual separation.
-          </p>
-        </div>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class / Utility</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>inline-flex -space-x-px</code></td><td>Wrapper to connect buttons with overlapping 1px borders</td></tr>
+            <tr><td><code>rounded-r-none</code></td><td>First button -- removes right border-radius</td></tr>
+            <tr><td><code>rounded-none border-x-0</code></td><td>Middle button(s) -- removes all border-radius and side borders</td></tr>
+            <tr><td><code>rounded-l-none</code></td><td>Last button -- removes left border-radius</td></tr>
+            <tr><td><code>mw-btn</code></td><td>Base button class (required on every button)</td></tr>
+            <tr><td><code>mw-btn-outline</code></td><td>Outline variant -- most common for button groups</td></tr>
+            <tr><td><code>mw-btn-primary</code></td><td>Primary variant -- add separator borders between buttons</td></tr>
+            <tr><td><code>mw-btn-ghost</code></td><td>Ghost variant -- for subtle toolbar groups</td></tr>
+            <tr><td><code>mw-btn-icon</code></td><td>Icon-only button modifier (square aspect ratio)</td></tr>
+            <tr><td><code>mw-btn-sm</code></td><td>Small size modifier -- useful in compact toolbars</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <ul class="list-disc list-inside space-y-2 text-muted-foreground leading-relaxed">
-            <li>Icon-only buttons must include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> attributes describing their action</li>
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative icon SVGs</li>
-            <li>For toggle behavior, consider using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="group"</code> on the wrapper and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-pressed</code> on individual buttons</li>
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Wrap button groups in a container with <code>role="group"</code> and an <code>aria-label</code> describing the group purpose</li>
+            <li>Icon-only buttons must include <code>aria-label</code> attributes describing their action</li>
+            <li>Add <code>aria-hidden="true"</code> to decorative icon SVGs inside buttons</li>
+            <li>For toggle behavior, use <code>aria-pressed="true"</code> on the currently active button</li>
             <li>Ensure sufficient color contrast meets WCAG AA standards (4.5:1 for normal text)</li>
           </ul>
         </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>inline-flex -space-x-px</code> on the wrapper to connect buttons seamlessly</li>
+            <li>Apply <code>rounded-r-none</code> to the first button, <code>rounded-none border-x-0</code> to middle buttons, and <code>rounded-l-none</code> to the last button</li>
+            <li>For primary-variant groups, add a subtle <code>border-left</code> separator using <code>hsl(var(--marrow-primary-foreground) / 0.2)</code> for visual distinction</li>
+            <li>Keep groups small (2-5 buttons) -- too many connected buttons become hard to scan</li>
+            <li>Use vertical dividers (<code>w-px h-6 bg-border</code>) to separate distinct groups in a toolbar</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

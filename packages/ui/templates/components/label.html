@@ -1,7 +1,8 @@
 <!-- Marrow UI: Label -->
 <!-- Label component for form inputs with optional required indicator -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Label -->
 <!-- Basic label with input -->
 <div class="space-y-2">
   <label class="mw-label" for="email-input">Email address</label>
@@ -10,10 +11,10 @@
 
 <!-- Label with required indicator -->
 <div class="space-y-2">
-  <label class="mw-label" for="name-input">
-    Full name <span class="text-destructive">*</span>
+  <label class="mw-label" for="password-input">
+    Password <span class="text-destructive">*</span>
   </label>
-  <input type="text" id="name-input" class="mw-input" placeholder="Enter your full name">
+  <input type="password" id="password-input" class="mw-input" placeholder="Enter your password">
 </div>
 
 <!-- Label with description text -->
@@ -21,4 +22,20 @@
   <label class="mw-label" for="username-input">Username</label>
   <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
   <p class="text-xs text-muted-foreground">This will be your public display name.</p>
+</div>
+<!-- @section: Checkbox -->
+
+<!-- Label with checkbox -->
+<div class="flex items-center gap-2">
+  <input type="checkbox" id="remember-me" class="mw-checkbox">
+  <label class="mw-label cursor-pointer" for="remember-me">Remember me</label>
+</div>
+
+<!-- Label with checkbox and description -->
+<div class="space-y-2">
+  <div class="flex items-center gap-2">
+    <input type="checkbox" id="marketing" class="mw-checkbox">
+    <label class="mw-label cursor-pointer" for="marketing">Marketing emails</label>
+  </div>
+  <p class="text-xs text-muted-foreground ml-6">Receive emails about new products and features.</p>
 </div>

@@ -34,6 +34,7 @@ const { title = "Docs", description = "Marrow UI Documentation", activeSection =
 
       <!-- Sidebar -->
       <aside
+        id="docs-sidebar"
         x-bind:class="mobileSidebar ? 'translate-x-0' : '-translate-x-full md:translate-x-0'"
         class="fixed md:sticky top-14 z-30 h-[calc(100vh-3.5rem)] w-64 shrink-0 border-r bg-background overflow-y-auto transition-transform duration-200 md:block"
       >
@@ -41,9 +42,29 @@ const { title = "Docs", description = "Marrow UI Documentation", activeSection =
       </aside>
 
       <!-- Main content -->
-      <main class="flex-1 min-w-0 px-6 py-8 md:px-10 lg:px-16 max-w-4xl">
+      <main class="flex-1 min-w-0 px-6 py-10 md:px-10 lg:px-16 max-w-5xl">
         <slot />
       </main>
     </div>
   </div>
+
+  <script is:inline>
+    (function () {
+      var KEY = 'mw-sidebar-scroll';
+      var sidebar = document.getElementById('docs-sidebar');
+      if (!sidebar) return;
+
+      var saved = sessionStorage.getItem(KEY);
+      if (saved !== null) {
+        sidebar.scrollTop = parseInt(saved, 10);
+      } else {
+        var active = sidebar.querySelector('.bg-accent');
+        if (active) active.scrollIntoView({ block: 'center' });
+      }
+
+      window.addEventListener('beforeunload', function () {
+        sessionStorage.setItem(KEY, sidebar.scrollTop);
+      });
+    })();
+  </script>
 </BaseLayout>

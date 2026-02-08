@@ -1,153 +1,196 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const progressCode = `<div x-data="mwProgress(60)" class="space-y-2">
-  <div class="flex justify-between text-sm">
-    <span class="text-muted-foreground">Progress</span>
-    <span class="font-medium" x-text="value + '%'"></span>
-  </div>
-  <div class="mw-progress">
-    <div class="mw-progress-bar" :style="'width: ' + value + '%'"></div>
-  </div>
-</div>`;
-
-const progressSizesCode = `<!-- Small -->
-<div class="mw-progress" style="height: 0.25rem;">
-  <div class="mw-progress-bar" style="width: 40%;"></div>
-</div>
-
-<!-- Default -->
-<div class="mw-progress">
-  <div class="mw-progress-bar" style="width: 60%;"></div>
-</div>
-
-<!-- Large -->
-<div class="mw-progress" style="height: 1rem;">
-  <div class="mw-progress-bar" style="width: 80%;"></div>
-</div>`;
+const t = loadTemplate("progress");
+const progressCode = t.sections.get("Progress")!;
+const progressSizesCode = t.sections.get("Progress Sizes")!;
 ---
 
 <DocsLayout title="Progress" description="A progress bar component for displaying completion status" activeComponent="progress">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Progress</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A progress bar that visually indicates completion status. Uses Alpine.js to manage the progress value reactively.</p>
-        </div>
+  <div class="space-y-12">
 
-        <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Feedback & Status</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Progress</h1>
+      <p class="docs-hero-description mt-3">A progress bar that visually indicates completion status. Supports multiple sizes and can optionally use Alpine.js to manage the progress value reactively.</p>
+    </header>
 
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div x-data="mwProgress(60)" class="space-y-6">
-              <div class="space-y-2">
-                <div class="flex justify-between text-sm">
-                  <span class="text-muted-foreground">Progress</span>
-                  <span class="font-medium" x-text="value + '%'"></span>
-                </div>
-                <div class="mw-progress">
-                  <div class="mw-progress-bar" :style="'width: ' + value + '%'"></div>
-                </div>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Interactive progress -->
+        <div x-data="mwProgress(60)" class="space-y-6">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Interactive</p>
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="text-muted-foreground">Progress</span>
+                <span class="font-medium" x-text="value + '%'"></span>
               </div>
-
-              <div class="flex items-center gap-2">
-                <button @click="set(0)" class="mw-btn mw-btn-outline mw-btn-sm">0%</button>
-                <button @click="set(25)" class="mw-btn mw-btn-outline mw-btn-sm">25%</button>
-                <button @click="set(50)" class="mw-btn mw-btn-outline mw-btn-sm">50%</button>
-                <button @click="set(75)" class="mw-btn mw-btn-outline mw-btn-sm">75%</button>
-                <button @click="set(100)" class="mw-btn mw-btn-outline mw-btn-sm">100%</button>
+              <div class="mw-progress">
+                <div class="mw-progress-bar" :style="'width: ' + value + '%'"></div>
               </div>
             </div>
+            <div class="flex items-center gap-2 mt-4">
+              <button @click="set(0)" class="mw-btn mw-btn-outline mw-btn-sm">0%</button>
+              <button @click="set(25)" class="mw-btn mw-btn-outline mw-btn-sm">25%</button>
+              <button @click="set(50)" class="mw-btn mw-btn-outline mw-btn-sm">50%</button>
+              <button @click="set(75)" class="mw-btn mw-btn-outline mw-btn-sm">75%</button>
+              <button @click="set(100)" class="mw-btn mw-btn-outline mw-btn-sm">100%</button>
+            </div>
           </div>
-        </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={progressCode} lang="html" />
         </div>
 
         <!-- Sizes -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Sizes</h2>
-          <p class="text-muted-foreground leading-relaxed">Adjust the height of the progress bar using utility classes.</p>
-          <div class="mw-card">
-            <div class="space-y-5">
-              <div class="space-y-1.5">
-                <span class="text-xs text-muted-foreground">Small (h-1)</span>
-                <div class="mw-progress" style="height: 0.25rem;">
-                  <div class="mw-progress-bar" style="width: 40%;"></div>
-                </div>
-              </div>
-              <div class="space-y-1.5">
-                <span class="text-xs text-muted-foreground">Default (h-2)</span>
-                <div class="mw-progress">
-                  <div class="mw-progress-bar" style="width: 60%;"></div>
-                </div>
-              </div>
-              <div class="space-y-1.5">
-                <span class="text-xs text-muted-foreground">Large (h-4)</span>
-                <div class="mw-progress" style="height: 1rem;">
-                  <div class="mw-progress-bar" style="width: 80%;"></div>
-                </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Sizes</p>
+          <div class="space-y-5">
+            <div class="space-y-1.5">
+              <span class="text-xs text-muted-foreground">Small (h-1)</span>
+              <div class="mw-progress" style="height: 0.25rem;">
+                <div class="mw-progress-bar" style="width: 40%;"></div>
               </div>
             </div>
-          </div>
-
-          <CodeBlock code={progressSizesCode} lang="html" />
-        </div>
-
-        <!-- Usage -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-
-          <div>
-            <h3 class="font-heading text-lg font-medium mb-2">CSS Classes</h3>
-            <ul class="list-disc list-inside space-y-1 text-muted-foreground">
-              <li><code class="text-sm font-mono">.mw-progress</code> — Progress track (0.5rem height, full width, rounded, secondary background)</li>
-              <li><code class="text-sm font-mono">.mw-progress-bar</code> — Fill bar (primary background, transitions width)</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 class="font-heading text-lg font-medium mb-2">Alpine.js API</h3>
-            <div class="overflow-x-auto">
-              <table class="mw-table">
-                <thead>
-                  <tr>
-                    <th>Property</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><code class="text-sm font-mono">value</code></td>
-                    <td class="text-muted-foreground">Number</td>
-                    <td class="text-muted-foreground">Current progress value (0 to 100)</td>
-                  </tr>
-                  <tr>
-                    <td><code class="text-sm font-mono">set(v)</code></td>
-                    <td class="text-muted-foreground">Method</td>
-                    <td class="text-muted-foreground">Set the progress value, clamped between 0 and 100</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="space-y-1.5">
+              <span class="text-xs text-muted-foreground">Default (h-2)</span>
+              <div class="mw-progress">
+                <div class="mw-progress-bar" style="width: 60%;"></div>
+              </div>
             </div>
-          </div>
-
-          <div>
-            <h3 class="font-heading text-lg font-medium mb-2">Accessibility</h3>
-            <ul class="list-disc list-inside space-y-1 text-muted-foreground">
-              <li>Add <code class="text-sm font-mono">role="progressbar"</code> to the <code class="text-sm font-mono">.mw-progress</code> element</li>
-              <li>Include <code class="text-sm font-mono">aria-valuenow</code>, <code class="text-sm font-mono">aria-valuemin="0"</code>, and <code class="text-sm font-mono">aria-valuemax="100"</code> attributes</li>
-              <li>Add <code class="text-sm font-mono">aria-label</code> or <code class="text-sm font-mono">aria-labelledby</code> to describe the progress purpose</li>
-              <li>Consider adding <code class="text-sm font-mono">aria-live="polite"</code> for dynamic updates to announce changes to screen readers</li>
-            </ul>
+            <div class="space-y-1.5">
+              <span class="text-xs text-muted-foreground">Large (h-4)</span>
+              <div class="mw-progress" style="height: 1rem;">
+                <div class="mw-progress-bar" style="width: 80%;"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-md mx-auto space-y-4">
+          <div class="rounded-lg border border-border bg-card p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-heading text-base font-semibold">Uploading Files</h3>
+              <span class="text-xs text-muted-foreground">3 of 5</span>
+            </div>
+            <div class="space-y-3">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                    <span class="text-sm truncate">design-mockup.fig</span>
+                  </div>
+                  <span class="text-xs text-green-600 font-medium">Complete</span>
+                </div>
+                <div class="mw-progress" style="height: 0.25rem;">
+                  <div class="mw-progress-bar" style="width: 100%;"></div>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                    <span class="text-sm truncate">presentation.pdf</span>
+                  </div>
+                  <span class="text-xs text-muted-foreground font-medium">67%</span>
+                </div>
+                <div class="mw-progress" style="height: 0.25rem;">
+                  <div class="mw-progress-bar" style="width: 67%;"></div>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between text-sm">
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                    <span class="text-sm truncate">report-data.xlsx</span>
+                  </div>
+                  <span class="text-xs text-muted-foreground font-medium">Queued</span>
+                </div>
+                <div class="mw-progress" style="height: 0.25rem;">
+                  <div class="mw-progress-bar" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={progressCode} lang="html" />
+        <CodeBlock code={progressSizesCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="space-y-6">
+        <div class="overflow-x-auto rounded-lg border border-border">
+          <table class="docs-api-table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>mw-progress</code></td><td>Progress track (0.5rem height, full width, rounded, secondary background)</td></tr>
+              <tr><td><code>mw-progress-bar</code></td><td>Fill bar (primary background, transitions width)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="overflow-x-auto rounded-lg border border-border">
+          <table class="docs-api-table">
+            <thead>
+              <tr>
+                <th>Alpine.js Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>value</code></td><td>Number</td><td>Current progress value (0 to 100)</td></tr>
+              <tr><td><code>set(v)</code></td><td>Method</td><td>Set the progress value, clamped between 0 and 100</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Add <code>role="progressbar"</code> to the <code>.mw-progress</code> element</li>
+            <li>Include <code>aria-valuenow</code>, <code>aria-valuemin="0"</code>, and <code>aria-valuemax="100"</code> attributes</li>
+            <li>Add <code>aria-label</code> or <code>aria-labelledby</code> to describe the progress purpose</li>
+            <li>Consider adding <code>aria-live="polite"</code> for dynamic updates to announce changes to screen readers</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use the small size for inline or compact contexts like file upload lists</li>
+            <li>Pair with a percentage label or status text for clear context</li>
+            <li>Adjust the height using inline styles: <code>0.25rem</code> for small, default is <code>0.5rem</code>, <code>1rem</code> for large</li>
+            <li>The progress bar transitions width smoothly via CSS for a polished feel</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </DocsLayout>

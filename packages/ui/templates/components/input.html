@@ -1,15 +1,13 @@
 <!-- Marrow UI: Input -->
 <!-- A text input field for collecting user data -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Default -->
-<input type="text" class="mw-input" />
-
-<!-- With Placeholder -->
-<input type="email" class="mw-input" placeholder="you@example.com" />
-
-<!-- Disabled -->
-<input type="text" class="mw-input" disabled value="Disabled input" />
+<!-- Basic Input -->
+<div>
+  <label for="email" class="mw-label mb-1.5 block">Email</label>
+  <input type="email" id="email" class="mw-input" placeholder="you@example.com" />
+  <p class="mt-1.5 text-sm text-muted-foreground">We'll never share your email.</p>
+</div>
 
 <!-- With Icon -->
 <div class="relative">
@@ -23,3 +21,19 @@
   <input type="text" class="mw-input" style="padding-left: 2.25rem;"
          placeholder="Search..." />
 </div>
+
+<!-- Error State -->
+<div>
+  <label for="username" class="mw-label mb-1.5 block">Username</label>
+  <input type="text" id="username" class="mw-input"
+         style="border-color: hsl(0 84% 60%);" />
+  <p class="mt-1.5 text-sm" style="color: hsl(0 84% 60%);">
+    Username is already taken
+  </p>
+</div>
+
+<!-- Disabled -->
+<input type="text" class="mw-input" disabled value="Disabled input" />
+
+<!-- File Input -->
+<input type="file" class="mw-input" />

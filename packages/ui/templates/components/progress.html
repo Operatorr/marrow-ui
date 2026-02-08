@@ -2,6 +2,7 @@
 <!-- A progress bar component for displaying completion status -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Progress -->
 <div x-data="mwProgress(60)" class="space-y-2">
   <div class="flex justify-between text-sm">
     <span class="text-muted-foreground">Progress</span>
@@ -10,4 +11,20 @@
   <div class="mw-progress">
     <div class="mw-progress-bar" :style="'width: ' + value + '%'"></div>
   </div>
+</div>
+<!-- @section: Progress Sizes -->
+
+<!-- Small -->
+<div class="mw-progress" style="height: 0.25rem;">
+  <div class="mw-progress-bar" style="width: 40%;"></div>
+</div>
+
+<!-- Default -->
+<div class="mw-progress">
+  <div class="mw-progress-bar" style="width: 60%;"></div>
+</div>
+
+<!-- Large -->
+<div class="mw-progress" style="height: 1rem;">
+  <div class="mw-progress-bar" style="width: 80%;"></div>
 </div>

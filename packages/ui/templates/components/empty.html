@@ -1,32 +1,49 @@
 <!-- Marrow UI: Empty -->
 <!-- An empty state placeholder to display when there is no content to show -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Empty -->
 <div class="mw-empty">
   <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
        viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-       class="mb-4 opacity-50">
-    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
-    <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
-    <path d="M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1"/>
-    <path d="M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1"/>
+       class="mb-4 opacity-50" aria-hidden="true">
+    <rect x="2" y="3" width="20" height="18" rx="2"/>
+    <path d="M8 7h8"/>
+    <path d="M8 11h6"/>
   </svg>
 
-  <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+  <h3 class="font-heading text-lg font-semibold mb-1">No projects yet</h3>
 
   <p class="text-sm text-muted-foreground max-w-sm mb-4">
-    There are no items to display right now. Try adjusting your
-    filters or create a new item to get started.
+    Get started by creating your first project.
   </p>
 
   <button class="mw-btn mw-btn-primary">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
          viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true">
       <path d="M5 12h14"/>
       <path d="M12 5v14"/>
     </svg>
-    Create new item
+    Create Project
   </button>
+</div>
+<!-- @section: Search Empty -->
+
+<div class="mw-empty">
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+       class="mb-4 opacity-50" aria-hidden="true">
+    <circle cx="11" cy="11" r="8"/>
+    <path d="m21 21-4.35-4.35"/>
+  </svg>
+
+  <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+
+  <p class="text-sm text-muted-foreground max-w-sm mb-4">
+    Try adjusting your search or filters.
+  </p>
 </div>

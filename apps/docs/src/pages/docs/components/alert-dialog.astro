@@ -1,67 +1,47 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const alertDialogCode = `<div x-data="mwAlertDialog()">
-  <button @click="show()" class="mw-btn mw-btn-outline">
-    Delete Account
-  </button>
-
-  <template x-if="open">
-    <div class="fixed inset-0 z-50" @keydown.escape.window="cancel()">
-      <!-- Overlay -->
-      <div class="mw-overlay" @click="cancel()"></div>
-
-      <!-- Dialog -->
-      <div class="mw-dialog max-w-md">
-        <h2 class="font-heading text-lg font-semibold">
-          Are you absolutely sure?
-        </h2>
-        <p class="mt-2 text-sm text-muted-foreground">
-          This action cannot be undone. This will permanently
-          delete your account and remove your data from our servers.
-        </p>
-        <div class="mt-6 flex justify-end gap-2">
-          <button @click="cancel()" class="mw-btn mw-btn-outline">
-            Cancel
-          </button>
-          <button @click="confirm()" class="mw-btn mw-btn-destructive">
-            Yes, delete account
-          </button>
-        </div>
-      </div>
-    </div>
-  </template>
-</div>`;
+const alertDialogCode = loadFull("alert-dialog");
 ---
 
 <DocsLayout title="Alert Dialog" description="A modal dialog that interrupts the user with important content and expects a response" activeComponent="alert-dialog">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Alert Dialog</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">
-        A modal dialog that interrupts the user with important content and expects a response. Use this for critical actions that require confirmation.
-      </p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Overlays</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Alert Dialog</h1>
+      <p class="docs-hero-description mt-3">A modal dialog that interrupts the user with important content and expects a response. Use this for critical actions that require confirmation.</p>
+    </header>
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
         <div x-data="mwAlertDialog()" class="flex items-center justify-center py-12">
           <button @click="show()" class="mw-btn mw-btn-outline">
             Delete Account
           </button>
 
-          <template x-if="open">
-            <div class="fixed inset-0 z-50" @keydown.escape.window="cancel()">
-              <!-- Overlay -->
-              <div class="mw-overlay" @click="cancel()"></div>
-
-              <!-- Dialog -->
-              <div class="mw-dialog max-w-md">
+          <template x-teleport="body">
+            <div x-show="open" class="fixed inset-0 z-50" x-cloak @keydown.escape.window="cancel()">
+              <div class="mw-overlay" @click="cancel()"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"></div>
+              <div class="mw-dialog max-w-md"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95">
                 <h2 class="font-heading text-lg font-semibold">
                   Are you absolutely sure?
                 </h2>
@@ -81,131 +61,167 @@ const alertDialogCode = `<div x-data="mwAlertDialog()">
           </template>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={alertDialogCode} lang="html" />
-    </div>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="w-full max-w-lg mx-auto space-y-3">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-heading text-lg font-semibold">My Files</h3>
+            <span class="text-xs text-muted-foreground">3 items</span>
+          </div>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+          <div class="flex items-center justify-between rounded-lg border border-border p-3">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+              <div>
+                <p class="text-sm font-medium">project-brief.pdf</p>
+                <p class="text-xs text-muted-foreground">2.4 MB</p>
+              </div>
+            </div>
+            <div x-data="mwAlertDialog()">
+              <button @click="show()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" aria-label="Delete file">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              </button>
+              <template x-teleport="body">
+                <div x-show="open" class="fixed inset-0 z-50" x-cloak @keydown.escape.window="cancel()">
+                  <div class="mw-overlay" @click="cancel()"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0"></div>
+                  <div class="mw-dialog max-w-md"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 scale-95"
+                    x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-95">
+                    <h2 class="font-heading text-lg font-semibold">Delete project-brief.pdf?</h2>
+                    <p class="mt-2 text-sm text-muted-foreground leading-relaxed">This file will be permanently removed and cannot be recovered. Any shared links will stop working.</p>
+                    <div class="mt-6 flex justify-end gap-2">
+                      <button @click="cancel()" class="mw-btn mw-btn-outline">Cancel</button>
+                      <button @click="confirm()" class="mw-btn mw-btn-destructive">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
 
-      <div class="space-y-6">
-        <!-- CSS Classes -->
-        <div class="space-y-3">
-          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
-          <div class="mw-card overflow-hidden">
-            <table class="w-full text-sm">
-              <thead class="border-b border-border">
-                <tr class="bg-muted/50">
-                  <th class="px-4 py-3 text-left font-semibold">Class</th>
-                  <th class="px-4 py-3 text-left font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="px-4 py-3">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-overlay</code>
-                  </td>
-                  <td class="px-4 py-3 text-muted-foreground">Semi-transparent backdrop overlay</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-dialog</code>
-                  </td>
-                  <td class="px-4 py-3 text-muted-foreground">Dialog panel container (reused from Dialog component)</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="flex items-center justify-between rounded-lg border border-border p-3">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+              <div>
+                <p class="text-sm font-medium">design-assets.zip</p>
+                <p class="text-xs text-muted-foreground">18.7 MB</p>
+              </div>
+            </div>
+            <button class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" aria-label="Delete file">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            </button>
+          </div>
+
+          <div class="flex items-center justify-between rounded-lg border border-border p-3">
+            <div class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+              <div>
+                <p class="text-sm font-medium">meeting-notes.docx</p>
+                <p class="text-xs text-muted-foreground">540 KB</p>
+              </div>
+            </div>
+            <button class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" aria-label="Delete file">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            </button>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Alpine.js API -->
-        <div class="space-y-3">
-          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
-          <p class="text-sm text-muted-foreground leading-relaxed">
-            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwAlertDialog()"</code>
-          </p>
-          <div class="mw-card overflow-hidden">
-            <table class="w-full text-sm">
-              <thead class="border-b border-border">
-                <tr class="bg-muted/50">
-                  <th class="px-4 py-3 text-left font-semibold">Property/Method</th>
-                  <th class="px-4 py-3 text-left font-semibold">Type</th>
-                  <th class="px-4 py-3 text-left font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="px-4 py-3">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code>
-                  </td>
-                  <td class="px-4 py-3 text-muted-foreground">Boolean</td>
-                  <td class="px-4 py-3 text-muted-foreground">Whether the alert dialog is visible</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">show()</code>
-                  </td>
-                  <td class="px-4 py-3 text-muted-foreground">Method</td>
-                  <td class="px-4 py-3 text-muted-foreground">Open the alert dialog</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code>
-                  </td>
-                  <td class="px-4 py-3 text-muted-foreground">Method</td>
-                  <td class="px-4 py-3 text-muted-foreground">Close the alert dialog</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">confirm()</code>
-                  </td>
-                  <td class="px-4 py-3 text-muted-foreground">Method</td>
-                  <td class="px-4 py-3 text-muted-foreground">Dispatch 'confirm' event and close the dialog</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">cancel()</code>
-                  </td>
-                  <td class="px-4 py-3 text-muted-foreground">Method</td>
-                  <td class="px-4 py-3 text-muted-foreground">Dispatch 'cancel' event and close the dialog</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={alertDialogCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Property/Method</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>open</code></td>
+              <td>Boolean</td>
+              <td>Whether the alert dialog is visible</td>
+            </tr>
+            <tr>
+              <td><code>show()</code></td>
+              <td>Method</td>
+              <td>Open the alert dialog</td>
+            </tr>
+            <tr>
+              <td><code>close()</code></td>
+              <td>Method</td>
+              <td>Close the alert dialog</td>
+            </tr>
+            <tr>
+              <td><code>confirm()</code></td>
+              <td>Method</td>
+              <td>Dispatch 'confirm' event and close the dialog</td>
+            </tr>
+            <tr>
+              <td><code>cancel()</code></td>
+              <td>Method</td>
+              <td>Dispatch 'cancel' event and close the dialog</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>mw-overlay</code></td>
+              <td>Semi-transparent backdrop overlay</td>
+            </tr>
+            <tr>
+              <td><code>mw-dialog</code></td>
+              <td>Dialog panel container (reused from Dialog component)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Pressing Escape triggers the cancel action</li>
+            <li>Clicking the overlay backdrop triggers the cancel action</li>
+            <li>Clearly communicate the consequences of the action in the dialog content</li>
+            <li>Listen to @confirm and @cancel events to handle user responses</li>
+          </ul>
         </div>
-
-        <!-- Accessibility -->
-        <div class="space-y-3">
-          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-          <ul class="space-y-2 text-sm text-muted-foreground leading-relaxed">
-            <li class="flex gap-2">
-              <span class="text-primary">•</span>
-              <span>Pressing <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Escape</code> triggers the cancel action</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary">•</span>
-              <span>Clicking the overlay backdrop triggers the cancel action</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary">•</span>
-              <span>Use destructive button styling (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-destructive</code>) for dangerous actions</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary">•</span>
-              <span>Clearly communicate the consequences of the action in the dialog content</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary">•</span>
-              <span>Listen to <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@confirm</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@cancel</code> events to handle user responses</span>
-            </li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use destructive button styling (mw-btn-destructive) for dangerous actions</li>
+            <li>Write specific confirmation text -- "Delete 3 files" is clearer than "Are you sure?"</li>
+            <li>Place the cancel button before the confirm button for left-to-right reading flow</li>
+            <li>Never use alert dialogs for routine, easily reversible actions</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

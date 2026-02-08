@@ -1,261 +1,330 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const comboboxCode = `<div x-data="mwCombobox([
-  { value: 'react', label: 'React' },
-  { value: 'vue', label: 'Vue' },
-  { value: 'angular', label: 'Angular' },
-  { value: 'svelte', label: 'Svelte' },
-  { value: 'solid', label: 'Solid' },
-  { value: 'nextjs', label: 'Next.js' },
-  { value: 'nuxt', label: 'Nuxt' },
-  { value: 'astro', label: 'Astro' }
-])" class="w-full max-w-xs">
-  <div class="relative">
-    <div class="relative">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-        aria-hidden="true">
-        <circle cx="11" cy="11" r="8"/>
-        <path d="m21 21-4.3-4.3"/>
-      </svg>
-      <input type="text"
-        class="mw-input pl-9"
-        placeholder="Search framework..."
-        x-model="search"
-        @focus="open = true"
-        @click="open = true"
-        role="combobox"
-        :aria-expanded="open"
-        aria-controls="framework-listbox"
-        aria-autocomplete="list">
-    </div>
-
-    <div x-show="open"
-      @click.away="open = false"
-      id="framework-listbox"
-      role="listbox"
-      class="absolute z-10 mt-1 w-full mw-popover max-h-[200px] overflow-y-auto"
-      x-transition:enter="transition-[opacity,transform] ease-out duration-100"
-      x-transition:enter-start="opacity-0 -translate-y-1"
-      x-transition:enter-end="opacity-100 translate-y-0"
-      x-transition:leave="transition-[opacity,transform] ease-in duration-75"
-      x-transition:leave-start="opacity-100 translate-y-0"
-      x-transition:leave-end="opacity-0 -translate-y-1">
-      <template x-for="item in filtered" :key="item.value">
-        <button
-          @click="select(item)"
-          class="mw-menu-item"
-          :class="selected?.value === item.value ? 'bg-accent' : ''"
-          role="option"
-          :aria-selected="selected?.value === item.value">
-          <svg x-show="selected?.value === item.value"
-            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            aria-hidden="true">
-            <path d="M20 6 9 17l-5-5"/>
-          </svg>
-          <span x-show="selected?.value !== item.value" class="w-[14px]"></span>
-          <span x-text="item.label"></span>
-        </button>
-      </template>
-      <div x-show="filtered.length === 0"
-        class="px-3 py-2 text-sm text-muted-foreground"
-        role="status">
-        No results found.
-      </div>
-    </div>
-  </div>
-
-  <!-- Selected value display -->
-  <p class="mt-3 text-sm text-muted-foreground" x-show="selected">
-    Selected: <span class="font-medium text-foreground" x-text="selected?.label"></span>
-  </p>
-</div>`;
+const comboboxCode = loadFull("combobox");
 ---
 
 <DocsLayout title="Combobox" description="An autocomplete input that combines a text field with a filterable dropdown list" activeComponent="combobox">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight">Combobox</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">An autocomplete input that combines a text field with a filterable dropdown list. Type to search and filter options, then click to select.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Form Controls</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Combobox</h1>
+      <p class="docs-hero-description mt-3">An autocomplete input that combines a text field with a filterable dropdown list. Type to search and filter options, then click to select.</p>
+    </header>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card flex items-center justify-center min-h-[280px] p-8">
-        <div x-data="mwCombobox([
-          { value: 'react', label: 'React' },
-          { value: 'vue', label: 'Vue' },
-          { value: 'angular', label: 'Angular' },
-          { value: 'svelte', label: 'Svelte' },
-          { value: 'solid', label: 'Solid' },
-          { value: 'nextjs', label: 'Next.js' },
-          { value: 'nuxt', label: 'Nuxt' },
-          { value: 'astro', label: 'Astro' }
-        ])" class="w-full max-w-xs">
-          <div class="relative">
+    <!-- Preview -->
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
+        <div class="flex items-center justify-center min-h-[280px] p-8">
+          <div x-data="mwCombobox([
+            { value: 'react', label: 'React' },
+            { value: 'vue', label: 'Vue' },
+            { value: 'angular', label: 'Angular' },
+            { value: 'svelte', label: 'Svelte' },
+            { value: 'solid', label: 'Solid' },
+            { value: 'nextjs', label: 'Next.js' },
+            { value: 'nuxt', label: 'Nuxt' },
+            { value: 'astro', label: 'Astro' }
+          ])" class="w-full max-w-xs">
             <div class="relative">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                aria-hidden="true">
-                <circle cx="11" cy="11" r="8"/>
-                <path d="m21 21-4.3-4.3"/>
-              </svg>
-              <input type="text"
-                class="mw-input pl-9"
-                placeholder="Search framework..."
-                x-model="search"
-                @focus="open = true"
-                @click="open = true"
-                role="combobox"
-                :aria-expanded="open"
-                aria-controls="framework-listbox"
-                aria-autocomplete="list">
+              <div class="relative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                  aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <input type="text"
+                  class="mw-input pl-9"
+                  placeholder="Search framework..."
+                  x-model="search"
+                  @focus="open = true"
+                  @click="open = true"
+                  role="combobox"
+                  :aria-expanded="open"
+                  aria-controls="framework-listbox"
+                  aria-autocomplete="list">
+              </div>
+
+              <div x-show="open"
+                @click.away="open = false"
+                id="framework-listbox"
+                role="listbox"
+                class="absolute z-10 mt-1 w-full mw-popover max-h-[200px] overflow-y-auto"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="opacity-0 -translate-y-1"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 -translate-y-1">
+                <template x-for="item in filtered" x-bind:key="item.value">
+                  <button
+                    @click="select(item)"
+                    class="mw-menu-item"
+                    :class="selected?.value === item.value ? 'bg-accent' : ''"
+                    role="option"
+                    :aria-selected="selected?.value === item.value">
+                    <svg x-show="selected?.value === item.value"
+                      xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path d="M20 6 9 17l-5-5"/>
+                    </svg>
+                    <span x-show="selected?.value !== item.value" class="w-[14px]"></span>
+                    <span x-text="item.label"></span>
+                  </button>
+                </template>
+                <div x-show="filtered.length === 0"
+                  class="px-3 py-2 text-sm text-muted-foreground"
+                  role="status">
+                  No results found.
+                </div>
+              </div>
             </div>
 
-            <div x-show="open"
-              @click.away="open = false"
-              id="framework-listbox"
-              role="listbox"
-              class="absolute z-10 mt-1 w-full mw-popover max-h-[200px] overflow-y-auto"
-              x-transition:enter="transition-[opacity,transform] ease-out duration-100"
-              x-transition:enter-start="opacity-0 -translate-y-1"
-              x-transition:enter-end="opacity-100 translate-y-0"
-              x-transition:leave="transition-[opacity,transform] ease-in duration-75"
-              x-transition:leave-start="opacity-100 translate-y-0"
-              x-transition:leave-end="opacity-0 -translate-y-1">
-              <template x-for="item in filtered" x-bind:key="item.value">
-                <button
-                  @click="select(item)"
-                  class="mw-menu-item"
-                  :class="selected?.value === item.value ? 'bg-accent' : ''"
-                  role="option"
-                  :aria-selected="selected?.value === item.value">
-                  <svg x-show="selected?.value === item.value"
-                    xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    aria-hidden="true">
-                    <path d="M20 6 9 17l-5-5"/>
-                  </svg>
-                  <span x-show="selected?.value !== item.value" class="w-[14px]"></span>
-                  <span x-text="item.label"></span>
-                </button>
-              </template>
-              <div x-show="filtered.length === 0"
-                class="px-3 py-2 text-sm text-muted-foreground"
-                role="status">
-                No results found.
+            <!-- Selected value display -->
+            <p class="mt-3 text-sm text-muted-foreground" x-show="selected">
+              Selected: <span class="font-medium text-foreground" x-text="selected?.label"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="rounded-lg border border-border max-w-md mx-auto">
+          <div class="px-5 py-4 border-b border-border flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="19" x2="19" y1="8" y2="14"/>
+              <line x1="22" x2="16" y1="11" y2="11"/>
+            </svg>
+            <span class="font-heading font-semibold text-sm">Assign Team Member</span>
+          </div>
+          <div class="p-5 space-y-4">
+            <div class="space-y-2">
+              <label class="mw-label text-sm">Task</label>
+              <p class="text-sm text-muted-foreground">Update homepage hero section</p>
+            </div>
+
+            <div class="space-y-2">
+              <label class="mw-label text-sm">Assignee</label>
+              <div x-data="mwCombobox([
+                { value: 'sarah', label: 'Sarah Chen' },
+                { value: 'marcus', label: 'Marcus Johnson' },
+                { value: 'emily', label: 'Emily Davis' },
+                { value: 'alex', label: 'Alex Rivera' },
+                { value: 'jordan', label: 'Jordan Lee' },
+                { value: 'taylor', label: 'Taylor Kim' }
+              ])" class="w-full">
+                <div class="relative">
+                  <div class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                      aria-hidden="true">
+                      <circle cx="11" cy="11" r="8"/>
+                      <path d="m21 21-4.3-4.3"/>
+                    </svg>
+                    <input type="text"
+                      class="mw-input pl-9"
+                      placeholder="Search team members..."
+                      x-model="search"
+                      @focus="open = true"
+                      @click="open = true"
+                      role="combobox"
+                      :aria-expanded="open"
+                      aria-controls="team-listbox"
+                      aria-autocomplete="list">
+                  </div>
+
+                  <div x-show="open"
+                    @click.away="open = false"
+                    id="team-listbox"
+                    role="listbox"
+                    class="absolute z-10 mt-1 w-full mw-popover max-h-[200px] overflow-y-auto"
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="opacity-0 -translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 -translate-y-1">
+                    <template x-for="item in filtered" x-bind:key="item.value">
+                      <button
+                        @click="select(item)"
+                        class="mw-menu-item"
+                        :class="selected?.value === item.value ? 'bg-accent' : ''"
+                        role="option"
+                        :aria-selected="selected?.value === item.value">
+                        <svg x-show="selected?.value === item.value"
+                          xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                          aria-hidden="true">
+                          <path d="M20 6 9 17l-5-5"/>
+                        </svg>
+                        <span x-show="selected?.value !== item.value" class="w-[14px]"></span>
+                        <span x-text="item.label"></span>
+                      </button>
+                    </template>
+                    <div x-show="filtered.length === 0"
+                      class="px-3 py-2 text-sm text-muted-foreground"
+                      role="status">
+                      No team members found.
+                    </div>
+                  </div>
+                </div>
+
+                <p class="mt-2 text-sm text-muted-foreground" x-show="selected">
+                  Assigned to: <span class="font-medium text-foreground" x-text="selected?.label"></span>
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label class="mw-label text-sm">Priority</label>
+              <div class="flex gap-2">
+                <span class="mw-badge mw-badge-destructive">High</span>
+                <span class="text-sm text-muted-foreground">Due in 3 days</span>
               </div>
             </div>
           </div>
-
-          <!-- Selected value display -->
-          <p class="mt-3 text-sm text-muted-foreground" x-show="selected">
-            Selected: <span class="font-medium text-foreground" x-text="selected?.label"></span>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={comboboxCode} lang="html" />
-    </div>
-
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">
-            Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwCombobox(items)"</code> to initialize a combobox with a searchable dropdown list.
-          </p>
-          <div class="mt-4 mw-card overflow-hidden">
-            <table class="w-full text-sm">
-              <thead class="border-b border-border bg-muted/50">
-                <tr>
-                  <th class="px-4 py-3 text-left font-semibold">Property</th>
-                  <th class="px-4 py-3 text-left font-semibold">Type</th>
-                  <th class="px-4 py-3 text-left font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="px-4 py-3 font-mono text-xs">open</td>
-                  <td class="px-4 py-3 text-muted-foreground">Boolean</td>
-                  <td class="px-4 py-3">Controls dropdown visibility</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-mono text-xs">search</td>
-                  <td class="px-4 py-3 text-muted-foreground">String</td>
-                  <td class="px-4 py-3">Current search query text</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-mono text-xs">selected</td>
-                  <td class="px-4 py-3 text-muted-foreground">Object | null</td>
-                  <td class="px-4 py-3">Currently selected item</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-mono text-xs">items</td>
-                  <td class="px-4 py-3 text-muted-foreground">Array</td>
-                  <td class="px-4 py-3">All available items <code class="px-1.5 py-0.5 bg-muted rounded text-xs font-mono">[&#123;label, value&#125;]</code></td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-mono text-xs">filtered</td>
-                  <td class="px-4 py-3 text-muted-foreground">Array (getter)</td>
-                  <td class="px-4 py-3">Items matching current search query</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-mono text-xs">select(item)</td>
-                  <td class="px-4 py-3 text-muted-foreground">Function</td>
-                  <td class="px-4 py-3">Select an item and close dropdown</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 font-mono text-xs">toggle()</td>
-                  <td class="px-4 py-3 text-muted-foreground">Function</td>
-                  <td class="px-4 py-3">Toggle dropdown open/closed</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="px-5 py-3 border-t border-border flex justify-end gap-2">
+            <button class="mw-btn mw-btn-sm">Cancel</button>
+            <button class="mw-btn mw-btn-primary mw-btn-sm">Assign</button>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">
-            The combobox uses the following Marrow UI classes:
-          </p>
-          <ul class="mt-3 space-y-2 text-sm">
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-input</code> — Text input field with search functionality</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-popover</code> — Dropdown container with border and shadow</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-menu-item</code> — Individual option buttons in the list</li>
-          </ul>
-        </div>
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={comboboxCode} lang="html" />
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-          <ul class="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed">
-            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="combobox"</code> on the input field</li>
-            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="listbox"</code> on the dropdown container</li>
-            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="option"</code> on each selectable item</li>
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:aria-expanded</code> to indicate dropdown state</li>
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:aria-selected</code> to highlight selected option</li>
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative icons</li>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Property/Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>open</code></td>
+              <td>Boolean</td>
+              <td>Controls dropdown visibility</td>
+            </tr>
+            <tr>
+              <td><code>search</code></td>
+              <td>String</td>
+              <td>Current search query text</td>
+            </tr>
+            <tr>
+              <td><code>selected</code></td>
+              <td>Object | null</td>
+              <td>Currently selected item</td>
+            </tr>
+            <tr>
+              <td><code>items</code></td>
+              <td>Array</td>
+              <td>All available items <code>[{'{'}label, value{'}'}]</code></td>
+            </tr>
+            <tr>
+              <td><code>filtered</code></td>
+              <td>Array (getter)</td>
+              <td>Items matching current search query</td>
+            </tr>
+            <tr>
+              <td><code>select(item)</code></td>
+              <td>Function</td>
+              <td>Select an item and close dropdown</td>
+            </tr>
+            <tr>
+              <td><code>toggle()</code></td>
+              <td>Function</td>
+              <td>Toggle dropdown open/closed</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>mw-input</code></td>
+              <td>Text input field with search functionality</td>
+            </tr>
+            <tr>
+              <td><code>mw-popover</code></td>
+              <td>Dropdown container with border and shadow</td>
+            </tr>
+            <tr>
+              <td><code>mw-menu-item</code></td>
+              <td>Individual option buttons in the list</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>role="combobox"</code> on the input field</li>
+            <li>Use <code>role="listbox"</code> on the dropdown container</li>
+            <li>Use <code>role="option"</code> on each selectable item</li>
+            <li>Add <code>:aria-expanded</code> to indicate dropdown state</li>
+            <li>Add <code>:aria-selected</code> to highlight selected option</li>
+            <li>Add <code>aria-hidden="true"</code> to decorative icons</li>
             <li>Keyboard navigation works automatically with focus management</li>
           </ul>
         </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Initialize with <code>x-data="mwCombobox(items)"</code> passing an array of <code>{'{'}value, label{'}'}</code> objects</li>
+            <li>Use <code>x-model="search"</code> on the input for real-time filtering</li>
+            <li>Show a "No results found" message when the filter returns no matches</li>
+            <li>Display the selected value below the input for confirmation</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

@@ -1,55 +1,28 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const resizableCode = `<div x-data="mwResizable(30)" class="flex h-96 select-none border rounded-md overflow-hidden">
-  <!-- Left Panel (Sidebar) -->
-  <div class="overflow-auto p-4 bg-muted/30"
-       :style="'width:' + Math.max(10, Math.min(90, split)) + '%'">
-    <h3 class="font-semibold mb-3">Sidebar</h3>
-    <nav class="space-y-2">
-      <a href="#" class="block px-3 py-2 rounded-md bg-primary text-primary-foreground text-sm">Dashboard</a>
-      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Projects</a>
-      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Settings</a>
-      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Team</a>
-    </nav>
-  </div>
-
-  <!-- Drag Handle -->
-  <div class="mw-resizable-handle"
-       @mousedown="startDrag($event)"
-       @touchstart.prevent="startDrag($event)"></div>
-
-  <!-- Right Panel (Content) -->
-  <div class="overflow-auto p-6 flex-1">
-    <h3 class="font-semibold text-lg mb-2">Main Content</h3>
-    <p class="text-sm text-muted-foreground mb-4">
-      Current split: <span x-text="Math.round(split)"></span>%
-    </p>
-    <p class="text-sm text-muted-foreground leading-relaxed">
-      Drag the divider to adjust the layout. The sidebar is constrained
-      between 10% and 90% width to prevent panels from collapsing entirely.
-      Try resizing to see how the layout adapts.
-    </p>
-  </div>
-</div>`;
+const resizableCode = loadFull("resizable");
 ---
 
 <DocsLayout title="Resizable" description="Resizable panels with a draggable divider" activeComponent="resizable">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Resizable</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">
-        Resizable panels let users adjust the layout by dragging a divider between two panes.
-      </p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Layout & Containers</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Resizable</h1>
+      <p class="docs-hero-description mt-3">Resizable panels let users adjust the layout by dragging a divider between two panes. Supports mouse and touch input with configurable initial split.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
         <div x-data="mwResizable(30)" class="flex h-96 select-none border rounded-md overflow-hidden">
           <!-- Left Panel (Sidebar) -->
           <div class="overflow-auto p-4 bg-muted/30"
@@ -82,118 +55,142 @@ const resizableCode = `<div x-data="mwResizable(30)" class="flex h-96 select-non
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-3xl mx-auto">
+          <div class="rounded-lg border border-border bg-card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="font-heading text-base font-semibold">Code Editor</h3>
+              <div class="flex gap-2">
+                <span class="mw-badge mw-badge-secondary">main.js</span>
+                <button class="mw-btn mw-btn-ghost mw-btn-sm mw-btn-icon" aria-label="Settings">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+            <div x-data="mwResizable(25)" class="flex h-72 select-none border rounded-md overflow-hidden">
+              <div class="overflow-auto p-3 bg-muted/30 text-xs"
+                   :style="'width:' + Math.max(10, Math.min(90, split)) + '%'">
+                <p class="font-semibold text-sm mb-2">Files</p>
+                <div class="space-y-1">
+                  <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-primary/10 text-primary text-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                    main.js
+                  </div>
+                  <div class="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-accent text-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                    styles.css
+                  </div>
+                  <div class="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-accent text-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                    index.html
+                  </div>
+                  <div class="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-accent text-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                    config.json
+                  </div>
+                </div>
+              </div>
+              <div class="mw-resizable-handle"
+                   @mousedown="startDrag($event)"
+                   @touchstart.prevent="startDrag($event)"></div>
+              <div class="overflow-auto p-4 flex-1 font-mono text-xs leading-relaxed text-muted-foreground">
+                <pre class="whitespace-pre-wrap"><span class="text-primary">import</span> Alpine <span class="text-primary">from</span> <span class="text-green-400">'alpinejs'</span>;
+<span class="text-primary">import</span> collapse <span class="text-primary">from</span> <span class="text-green-400">'@alpinejs/collapse'</span>;
+
+Alpine.plugin(collapse);
+
+Alpine.data(<span class="text-green-400">'app'</span>, () =&gt; ({'{'}
+  count: <span class="text-orange-400">0</span>,
+  increment() {'{'}
+    <span class="text-primary">this</span>.count++;
+  {'}'}
+{'}'}));
+
+Alpine.start();</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={resizableCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js API</h3>
-          <p class="text-muted-foreground leading-relaxed mb-4">
-            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwResizable(initialSplit)"</code> where <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">initialSplit</code> is a number between 0 and 100 representing the starting split percentage.
-          </p>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b">
-                  <th class="text-left py-2 px-3 font-semibold">Property</th>
-                  <th class="text-left py-2 px-3 font-semibold">Type</th>
-                  <th class="text-left py-2 px-3 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="text-muted-foreground">
-                <tr class="border-b">
-                  <td class="py-2 px-3 font-mono text-xs">split</td>
-                  <td class="py-2 px-3">Number</td>
-                  <td class="py-2 px-3">Current split percentage (0-100)</td>
-                </tr>
-                <tr class="border-b">
-                  <td class="py-2 px-3 font-mono text-xs">dragging</td>
-                  <td class="py-2 px-3">Boolean</td>
-                  <td class="py-2 px-3">Whether currently dragging the handle</td>
-                </tr>
-                <tr class="border-b">
-                  <td class="py-2 px-3 font-mono text-xs">startDrag(e)</td>
-                  <td class="py-2 px-3">Function</td>
-                  <td class="py-2 px-3">Begin drag operation (called on mousedown/touchstart)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <CodeBlock code={resizableCode} lang="html" />
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b">
-                  <th class="text-left py-2 px-3 font-semibold">Class</th>
-                  <th class="text-left py-2 px-3 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="text-muted-foreground">
-                <tr class="border-b">
-                  <td class="py-2 px-3 font-mono text-xs">mw-resizable-handle</td>
-                  <td class="py-2 px-3">4px wide drag handle with border background, col-resize cursor, and hover primary color</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Implementation Notes</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>The left panel width is bound to the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">split</code> value using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:style</code> binding</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>The right panel uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">flex-1</code> to fill the remaining space</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Math.max(10, Math.min(90, split))</code> constraints to prevent panels from collapsing entirely</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Both mouse and touch events are supported via <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@mousedown</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@touchstart</code></span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">select-none</code> to the container to prevent text selection during drag</span>
-            </li>
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Alpine.js API</p>
+      <div class="overflow-x-auto rounded-lg border border-border mb-6">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Property / Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mwResizable(initialSplit)</code></td><td>Component</td><td>Initialize with a split percentage (0-100)</td></tr>
+            <tr><td><code>split</code></td><td>Number</td><td>Current split percentage (0-100)</td></tr>
+            <tr><td><code>dragging</code></td><td>Boolean</td><td>Whether currently dragging the handle</td></tr>
+            <tr><td><code>startDrag(e)</code></td><td>Method</td><td>Begin drag operation (called on mousedown/touchstart)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">CSS Classes</p>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-resizable-handle</code></td><td>4px wide drag handle with border background, col-resize cursor, and hover primary color</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>The drag handle has a <code>col-resize</code> cursor to indicate draggability</li>
+            <li>Consider adding <code>aria-label</code> to the handle for screen reader users</li>
+            <li>For keyboard navigation, consider adding keyboard event handlers to adjust split with arrow keys</li>
+            <li>Add <code>role="separator"</code> with <code>aria-orientation="vertical"</code> to the handle element</li>
           </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>The drag handle has a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">col-resize</code> cursor to indicate draggability</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> to the handle for screen reader users</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>For keyboard navigation, consider adding keyboard event handlers to adjust split percentage with arrow keys</span>
-            </li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>The left panel width is bound to the <code>split</code> value using <code>:style</code> binding</li>
+            <li>The right panel uses <code>flex-1</code> to fill the remaining space</li>
+            <li>Use <code>Math.max(10, Math.min(90, split))</code> constraints to prevent panels from collapsing entirely</li>
+            <li>Both mouse and touch events are supported via <code>@mousedown</code> and <code>@touchstart</code></li>
+            <li>Add <code>select-none</code> to the container to prevent text selection during drag</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

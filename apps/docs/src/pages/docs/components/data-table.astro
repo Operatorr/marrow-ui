@@ -1,114 +1,26 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const dataTableCode = `<div x-data="{
-  sortCol: 'invoice',
-  sortAsc: true,
-  rows: [
-    { invoice: 'INV-2024-001', name: 'Alice Johnson', email: 'alice@acme.com', status: 'Paid', amount: 1250.00, date: '2024-01-15' },
-    { invoice: 'INV-2024-002', name: 'Bob Smith', email: 'bob@techcorp.com', status: 'Pending', amount: 890.50, date: '2024-01-18' },
-    { invoice: 'INV-2024-003', name: 'Carol White', email: 'carol@design.io', status: 'Overdue', amount: 2150.00, date: '2024-01-10' },
-    { invoice: 'INV-2024-004', name: 'David Brown', email: 'david@startup.com', status: 'Paid', amount: 3400.00, date: '2024-01-20' },
-    { invoice: 'INV-2024-005', name: 'Eva Martinez', email: 'eva@agency.co', status: 'Pending', amount: 1680.75, date: '2024-01-22' },
-    { invoice: 'INV-2024-006', name: 'Frank Garcia', email: 'frank@solutions.net', status: 'Paid', amount: 975.00, date: '2024-01-25' }
-  ],
-  sort(col) {
-    if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
-    else { this.sortCol = col; this.sortAsc = true; }
-  },
-  get sorted() {
-    return [...this.rows].sort((a, b) => {
-      let valA = a[this.sortCol];
-      let valB = b[this.sortCol];
-      if (this.sortCol === 'amount') {
-        return this.sortAsc ? valA - valB : valB - valA;
-      }
-      valA = String(valA).toLowerCase();
-      valB = String(valB).toLowerCase();
-      return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valB);
-    });
-  }
-}">
-  <div class="overflow-x-auto">
-    <table class="mw-table">
-      <thead>
-        <tr>
-          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('invoice')">
-            <span class="inline-flex items-center gap-1">
-              Invoice
-              <svg x-show="sortCol === 'invoice'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-            </span>
-          </th>
-          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('name')">
-            <span class="inline-flex items-center gap-1">
-              Name
-              <svg x-show="sortCol === 'name'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-            </span>
-          </th>
-          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('email')">
-            <span class="inline-flex items-center gap-1">
-              Email
-              <svg x-show="sortCol === 'email'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-            </span>
-          </th>
-          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('status')">
-            <span class="inline-flex items-center gap-1">
-              Status
-              <svg x-show="sortCol === 'status'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-            </span>
-          </th>
-          <th class="cursor-pointer select-none hover:text-foreground transition-colors text-right" @click="sort('amount')">
-            <span class="inline-flex items-center gap-1 justify-end">
-              Amount
-              <svg x-show="sortCol === 'amount'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-            </span>
-          </th>
-          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('date')">
-            <span class="inline-flex items-center gap-1">
-              Date
-              <svg x-show="sortCol === 'date'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <template x-for="row in sorted" :key="row.invoice">
-          <tr>
-            <td class="font-mono text-sm" x-text="row.invoice"></td>
-            <td class="font-medium" x-text="row.name"></td>
-            <td class="text-muted-foreground" x-text="row.email"></td>
-            <td>
-              <span class="mw-badge"
-                :class="{
-                  'mw-badge-default': row.status === 'Paid',
-                  'mw-badge-secondary': row.status === 'Pending',
-                  'mw-badge-destructive': row.status === 'Overdue'
-                }"
-                x-text="row.status"></span>
-            </td>
-            <td class="text-right font-medium" x-text="'$' + row.amount.toFixed(2)"></td>
-            <td class="text-muted-foreground" x-text="row.date"></td>
-          </tr>
-        </template>
-      </tbody>
-    </table>
-  </div>
-</div>`;
+const dataTableCode = loadFull("data-table");
 ---
 
 <DocsLayout title="Data Table" description="A structured table component with sortable headers for displaying tabular data" activeComponent="data-table">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Data Table</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">A structured table component with sortable headers for displaying tabular data.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Data Display</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Data Table</h1>
+      <p class="docs-hero-description mt-3">A structured table component with sortable headers for displaying tabular data. Click column headers to sort ascending or descending.</p>
+    </header>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card p-0 overflow-hidden" x-data={`{
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage" x-data={`{
         sortCol: 'invoice',
         sortAsc: true,
         rows: [
@@ -201,52 +113,177 @@ const dataTableCode = `<div x-data="{
           </table>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={dataTableCode} lang="html" />
-    </div>
-
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
-          <div class="overflow-x-auto">
-            <table class="mw-table">
-              <thead>
-                <tr>
-                  <th>Class</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-table</code></td>
-                  <td>Base table styles with borders, padding, and hover states</td>
-                </tr>
-              </tbody>
-            </table>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage" x-data={`{
+        sortCol: 'name',
+        sortAsc: true,
+        selected: [],
+        rows: [
+          { id: 1, name: 'Alice Johnson', email: 'alice@acme.com', role: 'Admin', status: 'Active', lastLogin: '2 hours ago' },
+          { id: 2, name: 'Bob Smith', email: 'bob@techcorp.com', role: 'Editor', status: 'Active', lastLogin: '1 day ago' },
+          { id: 3, name: 'Carol White', email: 'carol@design.io', role: 'Viewer', status: 'Inactive', lastLogin: '2 weeks ago' },
+          { id: 4, name: 'David Brown', email: 'david@startup.com', role: 'Editor', status: 'Active', lastLogin: '5 minutes ago' },
+          { id: 5, name: 'Eva Martinez', email: 'eva@agency.co', role: 'Admin', status: 'Active', lastLogin: '3 days ago' }
+        ],
+        toggleSelect(id) {
+          const idx = this.selected.indexOf(id);
+          if (idx > -1) this.selected.splice(idx, 1);
+          else this.selected.push(id);
+        },
+        toggleAll() {
+          if (this.selected.length === this.rows.length) this.selected = [];
+          else this.selected = this.rows.map(r => r.id);
+        },
+        sort(col) {
+          if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
+          else { this.sortCol = col; this.sortAsc = true; }
+        },
+        get sorted() {
+          return [...this.rows].sort((a, b) => {
+            let valA = String(a[this.sortCol]).toLowerCase();
+            let valB = String(b[this.sortCol]).toLowerCase();
+            return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+          });
+        }
+      }`}>
+        <div class="w-full max-w-4xl mx-auto space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-heading text-lg font-semibold">User Management</h3>
+              <p class="text-sm text-muted-foreground">Manage team members and their permissions.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="mw-btn mw-btn-outline mw-btn-sm" x-show="selected.length > 0" x-text="'Delete (' + selected.length + ')'"></button>
+              <button class="mw-btn mw-btn-primary mw-btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                Add User
+              </button>
+            </div>
+          </div>
+          <div class="rounded-lg border border-border overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="mw-table">
+                <thead>
+                  <tr>
+                    <th class="w-10">
+                      <button @click="toggleAll()" class="mw-checkbox" :data-state="selected.length === rows.length ? 'checked' : 'unchecked'" role="checkbox" :aria-checked="selected.length === rows.length ? 'true' : 'false'" aria-label="Select all users">
+                        <svg x-show="selected.length === rows.length" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                      </button>
+                    </th>
+                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('name')">
+                      <span class="inline-flex items-center gap-1">Name
+                        <svg x-show="sortCol === 'name'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                      </span>
+                    </th>
+                    <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('email')">
+                      <span class="inline-flex items-center gap-1">Email
+                        <svg x-show="sortCol === 'email'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                      </span>
+                    </th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Last Login</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template x-for="row in sorted" x-bind:key="row.id">
+                    <tr :class="selected.includes(row.id) ? 'bg-muted/50' : ''">
+                      <td>
+                        <button @click="toggleSelect(row.id)" class="mw-checkbox" :data-state="selected.includes(row.id) ? 'checked' : 'unchecked'" role="checkbox" :aria-checked="selected.includes(row.id) ? 'true' : 'false'" :aria-label="'Select ' + row.name">
+                          <svg x-show="selected.includes(row.id)" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                        </button>
+                      </td>
+                      <td class="font-medium" x-text="row.name"></td>
+                      <td class="text-muted-foreground" x-text="row.email"></td>
+                      <td><span class="mw-badge mw-badge-outline" x-text="row.role"></span></td>
+                      <td>
+                        <span class="mw-badge" :class="row.status === 'Active' ? 'mw-badge-default' : 'mw-badge-secondary'" x-text="row.status"></span>
+                      </td>
+                      <td class="text-muted-foreground text-sm" x-text="row.lastLogin"></td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-sm text-muted-foreground">
+            <span x-text="selected.length + ' of ' + rows.length + ' user(s) selected'"></span>
+            <span>5 total users</span>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js Integration</h3>
-          <p class="text-muted-foreground leading-relaxed">This example uses Alpine.js for client-side sorting. Click any column header to sort by that column. Click again to reverse the sort order. The chevron icon indicates the current sort column and direction.</p>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={dataTableCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-table</code></td><td>Base table styles with borders, padding, and hover states</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Alpine.js Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>sortCol</code></td><td>String</td><td>Currently sorted column key</td></tr>
+            <tr><td><code>sortAsc</code></td><td>Boolean</td><td>Sort direction -- <code>true</code> for ascending</td></tr>
+            <tr><td><code>rows</code></td><td>Array</td><td>Source data array of row objects</td></tr>
+            <tr><td><code>sort(col)</code></td><td>Function</td><td>Toggle sort on a column; reverses direction if already active</td></tr>
+            <tr><td><code>sorted</code></td><td>Array (getter)</td><td>Computed sorted copy of <code>rows</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use semantic <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;th&gt;</code>, and <code>&lt;td&gt;</code> elements</li>
+            <li>Add <code>aria-hidden="true"</code> to decorative sort indicator icons</li>
+            <li>Consider adding <code>aria-sort</code> attributes to sortable column headers</li>
+            <li>Wrap the table in <code>overflow-x-auto</code> for responsive horizontal scrolling</li>
+            <li>Ensure sufficient color contrast for all badge status variants</li>
+          </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <ul class="list-disc list-inside space-y-2 text-muted-foreground leading-relaxed">
-            <li>Use semantic <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;table&gt;</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;thead&gt;</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;tbody&gt;</code>, <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;th&gt;</code>, and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;td&gt;</code> elements</li>
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative sort icons</li>
-            <li>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-sort</code> attributes to sortable column headers</li>
-            <li>Ensure sufficient color contrast for text and badges</li>
-            <li>Wrap table in <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">overflow-x-auto</code> for responsive scrolling on small screens</li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Provide a clear visual indicator for which column is currently sorted</li>
+            <li>Default to a sensible sort order that matches user expectations</li>
+            <li>Use <code>font-mono</code> for identifier columns (invoice numbers, IDs) for alignment</li>
+            <li>For large datasets, add server-side sorting and pagination instead of client-side</li>
+            <li>Consider adding row selection checkboxes for bulk actions</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

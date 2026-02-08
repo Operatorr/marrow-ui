@@ -1,64 +1,44 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const dialogCode = `<div x-data="mwDialog()">
-  <button @click="show()" class="mw-btn mw-btn-outline">Open Dialog</button>
-
-  <template x-if="open">
-    <div>
-      <div class="mw-overlay" @click="close()"></div>
-      <div class="mw-dialog" @keydown.escape.window="close()">
-        <div class="flex flex-col space-y-1.5 mb-4">
-          <h3 class="font-heading text-lg font-semibold">Edit Profile</h3>
-          <p class="text-sm text-muted-foreground">
-            Make changes to your profile here. Click save when you're done.
-          </p>
-        </div>
-
-        <div class="space-y-4">
-          <div class="space-y-2">
-            <label class="mw-label">Name</label>
-            <input type="text" class="mw-input" value="John Doe" />
-          </div>
-          <div class="space-y-2">
-            <label class="mw-label">Email</label>
-            <input type="email" class="mw-input" value="john@example.com" />
-          </div>
-        </div>
-
-        <div class="flex justify-end gap-2 mt-6">
-          <button @click="close()" class="mw-btn mw-btn-outline">Cancel</button>
-          <button @click="close()" class="mw-btn mw-btn-primary">Save changes</button>
-        </div>
-
-        <button @click="close()" class="absolute top-3 right-3 mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-        </button>
-      </div>
-    </div>
-  </template>
-</div>`;
+const dialogCode = loadFull("dialog");
 ---
 
 <DocsLayout title="Dialog" description="A modal dialog that interrupts the user with important content and expects a response" activeComponent="dialog">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Dialog</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">A modal dialog that interrupts the user with important content and expects a response.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Overlays</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Dialog</h1>
+      <p class="docs-hero-description mt-3">A modal dialog that interrupts the user with important content and expects a response.</p>
+    </header>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card flex items-center justify-center min-h-[200px]">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
         <div x-data="mwDialog()">
           <button @click="show()" class="mw-btn mw-btn-outline">Open Dialog</button>
-          <template x-if="open">
-            <div>
-              <div class="mw-overlay" @click="close()"></div>
-              <div class="mw-dialog" @keydown.escape.window="close()">
+          <template x-teleport="body">
+            <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+              <div class="mw-overlay" @click="close()"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"></div>
+              <div class="mw-dialog" @keydown.escape.window="close()"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95"
+                x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95">
                 <div class="flex flex-col space-y-1.5 mb-4">
                   <h3 class="font-heading text-lg font-semibold">Edit Profile</h3>
                   <p class="text-sm text-muted-foreground">Make changes to your profile here. Click save when you're done.</p>
@@ -85,98 +65,192 @@ const dialogCode = `<div x-data="mwDialog()">
           </template>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={dialogCode} lang="html" />
-    </div>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="w-full max-w-md mx-auto space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-heading text-lg font-semibold">Account Settings</h3>
+            <span class="mw-badge">Personal</span>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between py-2">
+              <div>
+                <p class="text-sm font-medium">Display Name</p>
+                <p class="text-xs text-muted-foreground">John Doe</p>
+              </div>
+              <div x-data="mwDialog()">
+                <button @click="show()" class="mw-btn mw-btn-ghost mw-btn-sm">Edit</button>
+                <template x-teleport="body">
+                  <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+                    <div class="mw-overlay" @click="close()"
+                      x-transition:enter="transition ease-out duration-300"
+                      x-transition:enter-start="opacity-0"
+                      x-transition:enter-end="opacity-100"
+                      x-transition:leave="transition ease-in duration-200"
+                      x-transition:leave-start="opacity-100"
+                      x-transition:leave-end="opacity-0"></div>
+                    <div class="mw-dialog" @keydown.escape.window="close()"
+                      x-transition:enter="transition ease-out duration-300"
+                      x-transition:enter-start="opacity-0 scale-95"
+                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:leave="transition ease-in duration-200"
+                      x-transition:leave-start="opacity-100 scale-100"
+                      x-transition:leave-end="opacity-0 scale-95">
+                      <div class="flex flex-col space-y-1.5 mb-4">
+                        <h3 class="font-heading text-lg font-semibold">Edit Display Name</h3>
+                        <p class="text-sm text-muted-foreground">Update your display name. This will be visible to other users.</p>
+                      </div>
+                      <div class="space-y-4">
+                        <div class="space-y-2">
+                          <label class="mw-label">Display Name</label>
+                          <input type="text" class="mw-input" value="John Doe" />
+                        </div>
+                      </div>
+                      <div class="flex justify-end gap-2 mt-6">
+                        <button @click="close()" class="mw-btn mw-btn-outline">Cancel</button>
+                        <button @click="close()" class="mw-btn mw-btn-primary">Save</button>
+                      </div>
+                      <button @click="close()" class="absolute top-3 right-3 mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <div class="border-t border-border"></div>
+            <div class="flex items-center justify-between py-2">
+              <div>
+                <p class="text-sm font-medium">Email Address</p>
+                <p class="text-xs text-muted-foreground">john@example.com</p>
+              </div>
+              <div x-data="mwDialog()">
+                <button @click="show()" class="mw-btn mw-btn-ghost mw-btn-sm">Edit</button>
+                <template x-teleport="body">
+                  <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+                    <div class="mw-overlay" @click="close()"
+                      x-transition:enter="transition ease-out duration-300"
+                      x-transition:enter-start="opacity-0"
+                      x-transition:enter-end="opacity-100"
+                      x-transition:leave="transition ease-in duration-200"
+                      x-transition:leave-start="opacity-100"
+                      x-transition:leave-end="opacity-0"></div>
+                    <div class="mw-dialog" @keydown.escape.window="close()"
+                      x-transition:enter="transition ease-out duration-300"
+                      x-transition:enter-start="opacity-0 scale-95"
+                      x-transition:enter-end="opacity-100 scale-100"
+                      x-transition:leave="transition ease-in duration-200"
+                      x-transition:leave-start="opacity-100 scale-100"
+                      x-transition:leave-end="opacity-0 scale-95">
+                      <div class="flex flex-col space-y-1.5 mb-4">
+                        <h3 class="font-heading text-lg font-semibold">Edit Email Address</h3>
+                        <p class="text-sm text-muted-foreground">We'll send a verification link to your new address.</p>
+                      </div>
+                      <div class="space-y-4">
+                        <div class="space-y-2">
+                          <label class="mw-label">Email</label>
+                          <input type="email" class="mw-input" value="john@example.com" />
+                        </div>
+                      </div>
+                      <div class="flex justify-end gap-2 mt-6">
+                        <button @click="close()" class="mw-btn mw-btn-outline">Cancel</button>
+                        <button @click="close()" class="mw-btn mw-btn-primary">Update Email</button>
+                      </div>
+                      <button @click="close()" class="absolute top-3 right-3 mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <div class="border-t border-border"></div>
+            <div class="flex items-center justify-between py-2">
+              <div>
+                <p class="text-sm font-medium">Bio</p>
+                <p class="text-xs text-muted-foreground">Not set</p>
+              </div>
+              <button class="mw-btn mw-btn-ghost mw-btn-sm">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js API</h3>
-          <p class="text-muted-foreground leading-relaxed mb-3">
-            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwDialog()"</code>
-          </p>
-          <div class="mw-card overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead class="border-b border-border">
-                <tr>
-                  <th class="text-left py-3 px-4 font-semibold">Property/Method</th>
-                  <th class="text-left py-3 px-4 font-semibold">Type</th>
-                  <th class="text-left py-3 px-4 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="py-3 px-4 font-mono text-sm">open</td>
-                  <td class="py-3 px-4 text-muted-foreground">Boolean</td>
-                  <td class="py-3 px-4">Dialog visibility state</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-sm">show()</td>
-                  <td class="py-3 px-4 text-muted-foreground">Method</td>
-                  <td class="py-3 px-4">Opens the dialog</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-sm">close()</td>
-                  <td class="py-3 px-4 text-muted-foreground">Method</td>
-                  <td class="py-3 px-4">Closes the dialog</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <CodeBlock code={dialogCode} lang="html" />
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
-          <div class="mw-card overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead class="border-b border-border">
-                <tr>
-                  <th class="text-left py-3 px-4 font-semibold">Class</th>
-                  <th class="text-left py-3 px-4 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="py-3 px-4 font-mono text-sm">mw-overlay</td>
-                  <td class="py-3 px-4">Semi-transparent background overlay</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-sm">mw-dialog</td>
-                  <td class="py-3 px-4">Dialog container with scale and fade transitions</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Property/Method</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>open</code></td>
+              <td>Boolean</td>
+              <td>Dialog visibility state</td>
+            </tr>
+            <tr>
+              <td><code>show()</code></td>
+              <td>Method</td>
+              <td>Opens the dialog</td>
+            </tr>
+            <tr>
+              <td><code>close()</code></td>
+              <td>Method</td>
+              <td>Closes the dialog</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>mw-overlay</code></td>
+              <td>Semi-transparent background overlay</td>
+            </tr>
+            <tr>
+              <td><code>mw-dialog</code></td>
+              <td>Dialog container with scale and fade transitions</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Dialogs automatically close when pressing <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">Escape</code></span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Clicking the overlay closes the dialog by default</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Include descriptive heading and description for screen readers</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Focus management should trap focus within the dialog when open</span>
-            </li>
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Dialogs automatically close when pressing Escape</li>
+            <li>Clicking the overlay closes the dialog by default</li>
+            <li>Include descriptive heading and description for screen readers</li>
+            <li>Focus management should trap focus within the dialog when open</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Always provide a visible close button for mouse and touch users</li>
+            <li>Keep dialog content focused on a single task or decision</li>
+            <li>Use clear action labels -- avoid generic "OK" or "Yes" buttons</li>
+            <li>Include a cancel or dismiss path so users are never trapped</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

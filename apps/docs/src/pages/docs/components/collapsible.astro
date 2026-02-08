@@ -1,78 +1,29 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const collapsibleCode = `<div class="rounded-marrow border border-border p-4" x-data="mwCollapsible()">
-  <div class="flex items-center justify-between">
-    <h4 class="font-heading text-base font-semibold">Your starred repositories</h4>
-    <button
-      @click="toggle()"
-      class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
-      :aria-expanded="open"
-      aria-label="Toggle repositories">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        :class="open ? 'rotate-180' : ''"
-        class="transition-transform duration-200"
-        aria-hidden="true">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-  </div>
-
-  <!-- Collapsible content -->
-  <div x-show="open" x-collapse class="mt-3 space-y-2">
-    <div class="rounded-marrow border border-border bg-card px-4 py-3">
-      <div class="flex items-start justify-between">
-        <div>
-          <h5 class="font-medium">marrow-ui/core</h5>
-          <p class="mt-1 text-sm text-muted-foreground">A modern UI kit for Alpine.js and Tailwind CSS</p>
-        </div>
-        <span class="mw-badge mw-badge-secondary">TypeScript</span>
-      </div>
-    </div>
-    <div class="rounded-marrow border border-border bg-card px-4 py-3">
-      <div class="flex items-start justify-between">
-        <div>
-          <h5 class="font-medium">alpine-components</h5>
-          <p class="mt-1 text-sm text-muted-foreground">Reusable Alpine.js component library</p>
-        </div>
-        <span class="mw-badge mw-badge-secondary">JavaScript</span>
-      </div>
-    </div>
-    <div class="rounded-marrow border border-border bg-card px-4 py-3">
-      <div class="flex items-start justify-between">
-        <div>
-          <h5 class="font-medium">tailwind-utilities</h5>
-          <p class="mt-1 text-sm text-muted-foreground">Custom Tailwind CSS utilities and plugins</p>
-        </div>
-        <span class="mw-badge mw-badge-secondary">CSS</span>
-      </div>
-    </div>
-  </div>
-</div>`;
+const collapsibleCode = loadFull("collapsible");
 ---
 
 <DocsLayout title="Collapsible" description="A component that can be expanded or collapsed to show or hide content" activeComponent="collapsible">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Collapsible</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">A component that can be expanded or collapsed to show or hide content.</p>
-    </div>
-    <div class="mw-separator"></div>
+  <div class="space-y-12">
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card flex items-center justify-center min-h-[400px]">
-        <div class="w-full max-w-md rounded-marrow border border-border p-4" x-data="mwCollapsible()">
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Layout & Containers</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Collapsible</h1>
+      <p class="docs-hero-description mt-3">A component that can be expanded or collapsed to show or hide content. Ideal for progressive disclosure of secondary information.</p>
+    </header>
+
+    <!-- Preview -->
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
+        <div class="w-full max-w-md mx-auto rounded-marrow border border-border p-4" x-data="mwCollapsible()">
           <div class="flex items-center justify-between">
             <h4 class="font-heading text-base font-semibold">Your starred repositories</h4>
             <button
@@ -130,69 +81,129 @@ const collapsibleCode = `<div class="rounded-marrow border border-border p-4" x-
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={collapsibleCode} lang="html" />
-    </div>
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-lg mx-auto">
+          <div class="rounded-lg border border-border bg-card p-6 space-y-5">
+            <div>
+              <h3 class="font-heading text-base font-semibold">Application Settings</h3>
+              <p class="text-sm text-muted-foreground mt-1">Configure your application preferences.</p>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium">Theme</span>
+                <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+                  <option>Dark</option>
+                  <option>Light</option>
+                  <option>System</option>
+                </select>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-medium">Language</span>
+                <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+                  <option>English</option>
+                  <option>Spanish</option>
+                </select>
+              </div>
+            </div>
+            <div class="rounded-marrow border border-border p-4" x-data="mwCollapsible()">
+              <div class="flex items-center justify-between">
+                <h4 class="font-heading text-sm font-semibold">Advanced Options</h4>
+                <button
+                  @click="toggle()"
+                  class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
+                  :aria-expanded="open"
+                  aria-label="Toggle advanced options">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform duration-200" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+              </div>
+              <div x-show="open" x-collapse class="mt-3 space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">Enable debug mode</span>
+                  <span class="text-xs text-muted-foreground">Off</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">Cache duration</span>
+                  <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+                    <option>1 hour</option>
+                    <option>6 hours</option>
+                    <option>24 hours</option>
+                  </select>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm">API rate limit</span>
+                  <span class="text-sm text-muted-foreground">1000 req/min</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <button class="mw-btn mw-btn-primary mw-btn-sm">Save Settings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">
-            The collapsible component uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwCollapsible()</code> for state management.
-          </p>
-        </div>
+        <CodeBlock code={collapsibleCode} lang="html" />
+      </div>
+    </section>
 
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse text-sm">
-            <thead>
-              <tr class="border-b border-border">
-                <th class="px-4 py-3 text-left font-semibold">Property/Method</th>
-                <th class="px-4 py-3 text-left font-semibold">Type</th>
-                <th class="px-4 py-3 text-left font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-border">
-              <tr>
-                <td class="px-4 py-3 font-mono text-sm">open</td>
-                <td class="px-4 py-3 text-muted-foreground">Boolean</td>
-                <td class="px-4 py-3 text-muted-foreground">Whether the collapsible content is visible</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-3 font-mono text-sm">toggle()</td>
-                <td class="px-4 py-3 text-muted-foreground">Function</td>
-                <td class="px-4 py-3 text-muted-foreground">Toggles the open state</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-2">
-              <span class="text-foreground">•</span>
-              <span>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:aria-expanded</code> on the toggle button to indicate state</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-foreground">•</span>
-              <span>Provide an <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> on icon-only toggle buttons</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-foreground">•</span>
-              <span>The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-collapse</code> directive provides smooth transitions</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-foreground">•</span>
-              <span>Chevron icon should rotate to indicate state (use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">:class</code> binding)</span>
-            </li>
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Alpine.js API</p>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Property / Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mwCollapsible()</code></td><td>Component</td><td>Collapsible container component</td></tr>
+            <tr><td><code>open</code></td><td>Boolean</td><td>Whether the collapsible content is visible</td></tr>
+            <tr><td><code>toggle()</code></td><td>Method</td><td>Toggles the open state</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>:aria-expanded</code> on the toggle button to indicate expanded/collapsed state</li>
+            <li>Provide an <code>aria-label</code> on icon-only toggle buttons</li>
+            <li>The <code>x-collapse</code> directive provides smooth expand/collapse transitions</li>
+            <li>Chevron icon rotates to visually indicate state (use <code>:class</code> binding)</li>
+            <li>Add <code>aria-hidden="true"</code> to the chevron SVG since the button already has a label</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use collapsible for secondary content that does not need to be visible by default</li>
+            <li>Unlike accordions, collapsible manages a single section -- use accordions for multiple stacked sections</li>
+            <li>Always provide a clear label in the header so users know what content is hidden</li>
+            <li>Consider starting with the collapsible open if the content is important for first-time users</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

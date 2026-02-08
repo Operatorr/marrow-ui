@@ -1,12 +1,43 @@
 <!-- Marrow UI: Scroll Area -->
 <!-- A scrollable content area with styled scrollbars -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<div class="mw-scroll-area rounded-md border p-4" style="max-height: 200px;">
-  <h4 class="font-semibold mb-3">Scrollable Content</h4>
-  <p class="text-sm text-muted-foreground mb-3">
-    Your scrollable content goes here. The container will
-    show a styled scrollbar when content overflows.
-  </p>
-  <!-- Add more content to trigger scrolling -->
+<!-- Vertical Scroll Area -->
+<div class="mw-scroll-area rounded-md border p-4" style="height: 16rem;">
+  <h4 class="font-heading font-semibold mb-3">Typography Families</h4>
+  <div class="space-y-2">
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Inter</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Geist Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">SF Pro Display</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Helvetica Neue</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Segoe UI</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Roboto</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Open Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Lato</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Montserrat</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Poppins</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Source Sans Pro</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Nunito Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Plus Jakarta Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">DM Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Work Sans</div>
+  </div>
+</div>
+
+<!-- Horizontal Scroll Area -->
+<div class="mw-scroll-area overflow-x-auto">
+  <div class="flex gap-4 p-4 min-w-max">
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card One</h4>
+      <p class="text-sm text-muted-foreground">First card content</p>
+    </div>
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card Two</h4>
+      <p class="text-sm text-muted-foreground">Second card content</p>
+    </div>
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card Three</h4>
+      <p class="text-sm text-muted-foreground">Third card content</p>
+    </div>
+  </div>
 </div>

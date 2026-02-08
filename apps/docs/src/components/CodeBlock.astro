@@ -4,19 +4,40 @@ import { Code } from "astro:components";
 interface Props {
   code: string;
   lang?: "html" | "javascript" | "css" | "js" | "ts" | "typescript" | "json" | "bash" | "shell";
+  filename?: string;
 }
 
-const { code, lang = "html" } = Astro.props;
+const { code, lang = "html", filename } = Astro.props;
+
+const langLabels: Record<string, string> = {
+  html: "HTML",
+  javascript: "JS",
+  js: "JS",
+  css: "CSS",
+  ts: "TS",
+  typescript: "TS",
+  json: "JSON",
+  bash: "Bash",
+  shell: "Shell",
+};
+const langLabel = langLabels[lang] || lang.toUpperCase();
 ---
 
-<div class="mw-code-block relative group" x-data="{ copied: false }">
-  <button
-    class="copy-btn"
-    title="Copy to clipboard"
-    @click={`navigator.clipboard.writeText(${JSON.stringify(code)}).then(() => { copied = true; setTimeout(() => copied = false, 2000) })`}
-  >
-    <svg x-show="!copied" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-    <svg x-show="copied" x-cloak xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-  </button>
+<div class="mw-code-block relative group docs-gradient-border" x-data="{ copied: false }">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-white/[0.06]">
+    <div class="flex items-center gap-2">
+      {filename && <span class="text-xs text-muted-foreground font-mono">{filename}</span>}
+      {!filename && <span class="text-[0.6875rem] font-mono font-semibold uppercase tracking-wider text-muted-foreground/60">{langLabel}</span>}
+    </div>
+    <button
+      class="copy-btn !relative !top-auto !right-auto !opacity-100 flex items-center gap-1.5 text-xs"
+      title="Copy to clipboard"
+      @click={`navigator.clipboard.writeText(${JSON.stringify(code)}).then(() => { copied = true; setTimeout(() => copied = false, 2000) })`}
+    >
+      <svg x-show="!copied" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+      <svg x-show="copied" x-cloak xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      <span x-text="copied ? 'Copied' : 'Copy'" class="hidden sm:inline"></span>
+    </button>
+  </div>
   <Code code={code} lang={lang} theme="github-dark" />
 </div>

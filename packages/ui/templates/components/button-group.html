@@ -1,36 +1,43 @@
 <!-- Marrow UI: Button Group -->
 <!-- Group multiple buttons together as a connected set of actions -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Outline Button Group -->
+<!-- Basic Button Group (Day/Week/Month Toggle) -->
+<div class="inline-flex -space-x-px">
+  <button class="mw-btn mw-btn-outline rounded-r-none">Day</button>
+  <button class="mw-btn mw-btn-outline rounded-none border-x-0">Week</button>
+  <button class="mw-btn mw-btn-outline rounded-l-none">Month</button>
+</div>
+
+<!-- Outline Button Group with Connected Borders -->
 <div class="inline-flex -space-x-px">
   <button class="mw-btn mw-btn-outline rounded-r-none">Left</button>
   <button class="mw-btn mw-btn-outline rounded-none border-x-0">Center</button>
   <button class="mw-btn mw-btn-outline rounded-l-none">Right</button>
 </div>
 
-<!-- Icon-only Button Group -->
+<!-- Toolbar-Style Icon Button Group -->
 <div class="inline-flex -space-x-px">
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none">
-    <!-- Icon SVG -->
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none" aria-label="Bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
   </button>
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-none border-x-0">
-    <!-- Icon SVG -->
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-none border-x-0" aria-label="Italic">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
   </button>
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-l-none">
-    <!-- Icon SVG -->
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-l-none" aria-label="Underline">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16"/><path d="M14 4v16"/><path d="M6 12h8"/></svg>
   </button>
 </div>
 
-<!-- Primary Button Group -->
+<!-- Primary Button Group with Separators -->
 <div class="inline-flex -space-x-px">
-  <button class="mw-btn mw-btn-primary rounded-r-none">Bold</button>
+  <button class="mw-btn mw-btn-primary rounded-r-none">Save</button>
   <button class="mw-btn mw-btn-primary rounded-none"
           style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
-    Italic
+    Save & Close
   </button>
   <button class="mw-btn mw-btn-primary rounded-l-none"
           style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
-    Underline
+    Save & New
   </button>
 </div>

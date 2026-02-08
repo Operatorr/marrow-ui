@@ -5,8 +5,8 @@
 <div x-data="mwContextMenu()">
   <!-- Right-click trigger area -->
   <div @contextmenu="show($event)"
-    class="flex items-center justify-center h-[150px] border-2 border-dashed border-border rounded-marrow text-sm text-muted-foreground">
-    Right-click here to open context menu
+    class="flex items-center justify-center h-[200px] border-2 border-dashed border-border rounded-marrow text-sm text-muted-foreground cursor-default">
+    Right-click here
   </div>
 
   <!-- Context Menu -->
@@ -14,25 +14,44 @@
     @click.away="close()"
     @keydown.escape.window="close()"
     :style="'position: fixed; left: ' + x + 'px; top: ' + y + 'px; z-index: 50;'"
-    class="mw-popover w-48">
+    x-transition:enter="transition ease-out duration-100"
+    x-transition:enter-start="opacity-0 scale-95"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-75"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+    class="mw-popover w-56">
     <button @click="close()" class="mw-menu-item">
-      Share
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      Back
+      <span class="ml-auto text-xs text-muted-foreground">Alt+←</span>
     </button>
     <button @click="close()" class="mw-menu-item">
-      Copy
-      <span class="ml-auto text-xs text-muted-foreground">Ctrl+C</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      Forward
+      <span class="ml-auto text-xs text-muted-foreground">Alt+→</span>
     </button>
     <button @click="close()" class="mw-menu-item">
-      Edit
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+      Reload
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+R</span>
     </button>
     <div class="mw-menu-separator"></div>
     <button @click="close()" class="mw-menu-item">
-      Rename
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Save As...
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+S</span>
+    </button>
+    <button @click="close()" class="mw-menu-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+      Print
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+P</span>
     </button>
     <div class="mw-menu-separator"></div>
-    <button @click="close()" class="mw-menu-item text-destructive">
-      Delete
-      <span class="ml-auto text-xs text-muted-foreground">Del</span>
+    <button @click="close()" class="mw-menu-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      View Source
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+U</span>
     </button>
   </div>
 </div>

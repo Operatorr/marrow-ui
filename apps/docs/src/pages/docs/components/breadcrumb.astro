@@ -1,328 +1,236 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const basicBreadcrumbCode = `<nav class="mw-breadcrumb">
-  <a href="#">Home</a>
-  <span>/</span>
-  <a href="#">Products</a>
-  <span>/</span>
-  <a href="#">Electronics</a>
-  <span>/</span>
-  <span class="mw-breadcrumb-current">Headphones</span>
-</nav>`;
-
-const iconBreadcrumbCode = `<nav class="mw-breadcrumb">
-  <a href="#">Home</a>
-
-  <!-- Chevron separator -->
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0" aria-hidden="true">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-
-  <a href="#">Documentation</a>
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0" aria-hidden="true">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-
-  <a href="#">Components</a>
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0" aria-hidden="true">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-
-  <span class="mw-breadcrumb-current">Breadcrumb</span>
-</nav>`;
-
-const truncatedBreadcrumbCode = `<nav class="mw-breadcrumb">
-  <a href="#">Home</a>
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0" aria-hidden="true">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-
-  <a href="#">Projects</a>
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0" aria-hidden="true">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-
-  <!-- Ellipsis for truncated path -->
-  <span>...</span>
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0" aria-hidden="true">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-
-  <a href="#">Frontend</a>
-
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0" aria-hidden="true">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-
-  <span class="mw-breadcrumb-current">Components</span>
-</nav>`;
+const t = loadTemplate("breadcrumb");
+const basicBreadcrumbCode = t.sections.get("Basic Breadcrumb")!;
+const iconBreadcrumbCode = t.sections.get("Icon Breadcrumb")!;
+const truncatedBreadcrumbCode = t.sections.get("Truncated Breadcrumb")!;
 ---
 
 <DocsLayout title="Breadcrumb" description="Displays a hierarchical navigation trail for the current page" activeComponent="breadcrumb">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Breadcrumb</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">Displays a hierarchical navigation trail for the current page.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
-
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card flex items-center justify-center min-h-[200px]">
-        <nav class="mw-breadcrumb" aria-label="Breadcrumb">
-          <a href="#">Home</a>
-          <span>/</span>
-          <a href="#">Products</a>
-          <span>/</span>
-          <a href="#">Electronics</a>
-          <span>/</span>
-          <span class="mw-breadcrumb-current">Headphones</span>
-        </nav>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Navigation</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
       </div>
-    </div>
+      <h1 class="docs-hero-title">Breadcrumb</h1>
+      <p class="docs-hero-description mt-3">Displays a hierarchical navigation trail for the current page. Helps users understand their location within a site and navigate back to parent pages.</p>
+    </header>
 
-    <!-- With Icons -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">With Icons</h3>
-      <div class="mw-card flex items-center justify-center min-h-[200px]">
-        <nav class="mw-breadcrumb" aria-label="Breadcrumb">
-          <a href="#">Home</a>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Basic -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Basic with Slashes</p>
+          <nav class="mw-breadcrumb" aria-label="Breadcrumb">
+            <a href="#">Home</a>
+            <span>/</span>
+            <a href="#">Products</a>
+            <span>/</span>
+            <a href="#">Electronics</a>
+            <span>/</span>
+            <span class="mw-breadcrumb-current">Headphones</span>
+          </nav>
+        </div>
 
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-               viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="shrink-0" aria-hidden="true">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
+        <!-- With Icons -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Chevron Icons</p>
+          <nav class="mw-breadcrumb" aria-label="Breadcrumb">
+            <a href="#">Home</a>
 
-          <a href="#">Documentation</a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="shrink-0" aria-hidden="true">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
 
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-               viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="shrink-0" aria-hidden="true">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
+            <a href="#">Documentation</a>
 
-          <a href="#">Components</a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="shrink-0" aria-hidden="true">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
 
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-               viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="shrink-0" aria-hidden="true">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
+            <a href="#">Components</a>
 
-          <span class="mw-breadcrumb-current">Breadcrumb</span>
-        </nav>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="shrink-0" aria-hidden="true">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+
+            <span class="mw-breadcrumb-current">Breadcrumb</span>
+          </nav>
+        </div>
+
+        <!-- Truncated Path -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Truncated Path</p>
+          <nav class="mw-breadcrumb" aria-label="Breadcrumb">
+            <a href="#">Home</a>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="shrink-0" aria-hidden="true">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+
+            <a href="#">Projects</a>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="shrink-0" aria-hidden="true">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+
+            <span>...</span>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="shrink-0" aria-hidden="true">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+
+            <a href="#">Frontend</a>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="shrink-0" aria-hidden="true">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+
+            <span class="mw-breadcrumb-current">Components</span>
+          </nav>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Truncated Path -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Truncated Path</h3>
-      <p class="text-sm text-muted-foreground leading-relaxed">
-        Use ellipsis to collapse long paths and maintain readability.
-      </p>
-      <div class="mw-card flex items-center justify-center min-h-[200px]">
-        <nav class="mw-breadcrumb" aria-label="Breadcrumb">
-          <a href="#">Home</a>
-
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-               viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="shrink-0" aria-hidden="true">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
-
-          <a href="#">Projects</a>
-
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-               viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="shrink-0" aria-hidden="true">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
-
-          <span>...</span>
-
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-               viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="shrink-0" aria-hidden="true">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
-
-          <a href="#">Frontend</a>
-
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-               viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="shrink-0" aria-hidden="true">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
-
-          <span class="mw-breadcrumb-current">Components</span>
-        </nav>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="rounded-lg border border-border overflow-hidden">
+          <!-- File manager toolbar -->
+          <div class="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-muted/30">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true">
+              <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>
+            </svg>
+            <nav class="mw-breadcrumb" aria-label="File path">
+              <a href="#">Home</a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              <a href="#">Documents</a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              <a href="#">Projects</a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              <span class="mw-breadcrumb-current">Design Assets</span>
+            </nav>
+          </div>
+          <!-- File list -->
+          <div class="divide-y divide-border">
+            <div class="flex items-center gap-3 px-4 py-2.5 hover:bg-accent/30 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 shrink-0" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+              <span class="text-sm">Icons</span>
+              <span class="text-xs text-muted-foreground ml-auto">12 items</span>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-2.5 hover:bg-accent/30 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 shrink-0" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+              <span class="text-sm">Mockups</span>
+              <span class="text-xs text-muted-foreground ml-auto">8 items</span>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-2.5 hover:bg-accent/30 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="text-sm">brand-guidelines.pdf</span>
+              <span class="text-xs text-muted-foreground ml-auto">2.4 MB</span>
+            </div>
+            <div class="flex items-center gap-3 px-4 py-2.5 hover:bg-accent/30 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="text-sm">color-palette.fig</span>
+              <span class="text-xs text-muted-foreground ml-auto">1.1 MB</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
         <div>
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Basic</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Basic</p>
           <CodeBlock code={basicBreadcrumbCode} lang="html" />
         </div>
-
         <div>
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">With Icons</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Icons</p>
           <CodeBlock code={iconBreadcrumbCode} lang="html" />
         </div>
-
         <div>
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Truncated</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Truncated</p>
           <CodeBlock code={truncatedBreadcrumbCode} lang="html" />
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>mw-breadcrumb</code></td>
+              <td>Container for breadcrumb navigation. Uses flexbox with gap and muted text color.</td>
+            </tr>
+            <tr>
+              <td><code>mw-breadcrumb a</code></td>
+              <td>Link styling with hover state and smooth transition.</td>
+            </tr>
+            <tr>
+              <td><code>mw-breadcrumb-current</code></td>
+              <td>Current/active page indicator. Uses foreground color with medium font weight.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
+    <section>
+      <span class="docs-section-label">Guidelines</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
-          <div class="mw-card overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-border">
-                  <th class="text-left py-3 px-4 font-semibold">Class</th>
-                  <th class="text-left py-3 px-4 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="py-3 px-4">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-breadcrumb</code>
-                  </td>
-                  <td class="py-3 px-4 text-muted-foreground">
-                    Container for breadcrumb navigation. Uses flexbox with gap and muted text color.
-                  </td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-breadcrumb a</code>
-                  </td>
-                  <td class="py-3 px-4 text-muted-foreground">
-                    Link styling with hover state and smooth transition.
-                  </td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4">
-                    <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-breadcrumb-current</code>
-                  </td>
-                  <td class="py-3 px-4 text-muted-foreground">
-                    Current/active page indicator. Uses foreground color with medium font weight.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Wrap breadcrumb in a <code>&lt;nav&gt;</code> element with <code>aria-label="Breadcrumb"</code></li>
+            <li>Use <code>aria-hidden="true"</code> on separator icons to prevent screen reader announcement</li>
+            <li>Current page should not be a link; use a <code>&lt;span&gt;</code> with <code>mw-breadcrumb-current</code></li>
+            <li>Consider adding <code>aria-current="page"</code> to the current page element</li>
+            <li>Ensure sufficient color contrast between links and background</li>
+          </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
-          <div class="mw-card space-y-3">
-            <p class="text-muted-foreground leading-relaxed">
-              Breadcrumbs help users understand their location within a website's hierarchy and provide quick navigation to parent pages.
-            </p>
-            <ul class="space-y-2 text-muted-foreground leading-relaxed">
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Wrap breadcrumb in a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;nav&gt;</code> element with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label="Breadcrumb"</code></span>
-              </li>
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> on separator icons to prevent screen reader announcement</span>
-              </li>
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Current page should not be a link; use a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;span&gt;</code> with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-breadcrumb-current</code></span>
-              </li>
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Ensure sufficient color contrast between links and background</span>
-              </li>
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-current="page"</code> to the current page element</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Best Practices</h3>
-          <div class="mw-card space-y-3">
-            <ul class="space-y-2 text-muted-foreground leading-relaxed">
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Keep breadcrumb trails concise; truncate middle items if the path is very long</span>
-              </li>
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Use chevrons or slashes as separators for visual clarity</span>
-              </li>
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Position breadcrumbs near the top of the page, above the main heading</span>
-              </li>
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Always start with "Home" or the root-level page</span>
-              </li>
-              <li class="flex gap-2">
-                <span class="text-primary shrink-0">•</span>
-                <span>Reflect the actual site hierarchy, not the user's navigation history</span>
-              </li>
-            </ul>
-          </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Keep breadcrumb trails concise; truncate middle items if the path is very long</li>
+            <li>Use chevrons or slashes as separators for visual clarity</li>
+            <li>Position breadcrumbs near the top of the page, above the main heading</li>
+            <li>Always start with "Home" or the root-level page</li>
+            <li>Reflect the actual site hierarchy, not the user's navigation history</li>
+          </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

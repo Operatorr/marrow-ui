@@ -1,79 +1,37 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const variantsCode = `<!-- Variants -->
-<button class="mw-btn mw-btn-primary">Primary</button>
-<button class="mw-btn mw-btn-secondary">Secondary</button>
-<button class="mw-btn mw-btn-outline">Outline</button>
-<button class="mw-btn mw-btn-ghost">Ghost</button>
-<button class="mw-btn mw-btn-destructive">Destructive</button>
-<button class="mw-btn mw-btn-link">Link</button>`;
-
-const sizesCode = `<!-- Sizes -->
-<button class="mw-btn mw-btn-primary mw-btn-sm">Small</button>
-<button class="mw-btn mw-btn-primary">Default</button>
-<button class="mw-btn mw-btn-primary mw-btn-lg">Large</button>`;
-
-const iconButtonCode = `<!-- Icon Button -->
-<button class="mw-btn mw-btn-outline mw-btn-icon">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 12h14"/>
-    <path d="M12 5v14"/>
-  </svg>
-</button>`;
-
-const withIconCode = `<!-- With Icon -->
-<button class="mw-btn mw-btn-primary">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-       viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-    <polyline points="7 10 12 15 17 10"/>
-    <line x1="12" x2="12" y1="15" y2="3"/>
-  </svg>
-  Download
-</button>`;
-
-const loadingCode = `<!-- Loading State -->
-<button class="mw-btn mw-btn-primary" disabled>
-  <svg class="animate-spin motion-safe:animate-spin h-4 w-4"
-       xmlns="http://www.w3.org/2000/svg" fill="none"
-       viewBox="0 0 24 24">
-    <circle class="opacity-25" cx="12" cy="12" r="10"
-            stroke="currentColor" stroke-width="4"></circle>
-    <path class="opacity-75" fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-  </svg>
-  Loading...
-</button>`;
-
-const buttonAsLinkCode = `<!-- Button as Link -->
-<a class="mw-btn mw-btn-primary" href="#">
-  Link Button
-</a>`;
-
-const disabledCode = `<!-- Disabled -->
-<button class="mw-btn mw-btn-primary" disabled>Disabled</button>`;
+const t = loadTemplate("button");
+const variantsCode = t.sections.get("Variants")!;
+const sizesCode = t.sections.get("Sizes")!;
+const iconButtonCode = t.sections.get("Icon Button")!;
+const withIconCode = t.sections.get("With Icon")!;
+const loadingCode = t.sections.get("Loading State")!;
+const disabledCode = t.sections.get("Disabled")!;
 ---
 
 <DocsLayout title="Button" description="Displays a button or a component that looks like a button" activeComponent="button">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Button</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">Displays a button or a component that looks like a button.</p>
-    </div>
-    <div class="mw-separator"></div>
+  <div class="space-y-12">
+
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Buttons & Actions</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Button</h1>
+      <p class="docs-hero-description mt-3">Displays a button or a component that looks like a button. Supports multiple variants, sizes, icons, and loading states.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card space-y-6">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
         <!-- Variants -->
         <div>
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">Variants</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Variants</p>
           <div class="flex flex-wrap items-center gap-3">
             <button class="mw-btn mw-btn-primary">Primary</button>
             <button class="mw-btn mw-btn-secondary">Secondary</button>
@@ -83,244 +41,170 @@ const disabledCode = `<!-- Disabled -->
             <button class="mw-btn mw-btn-link">Link</button>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Sizes -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Sizes</h3>
-      <div class="mw-card">
-        <div class="flex flex-wrap items-center gap-3">
-          <button class="mw-btn mw-btn-primary mw-btn-sm">Small</button>
-          <button class="mw-btn mw-btn-primary">Default</button>
-          <button class="mw-btn mw-btn-primary mw-btn-lg">Large</button>
+        <!-- Sizes -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Sizes</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="mw-btn mw-btn-primary mw-btn-sm">Small</button>
+            <button class="mw-btn mw-btn-primary">Default</button>
+            <button class="mw-btn mw-btn-primary mw-btn-lg">Large</button>
+          </div>
+        </div>
+
+        <!-- Icon Buttons -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Icon Only</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="mw-btn mw-btn-primary mw-btn-icon" aria-label="Add">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </button>
+            <button class="mw-btn mw-btn-outline mw-btn-icon" aria-label="Add">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </button>
+            <button class="mw-btn mw-btn-ghost mw-btn-icon" aria-label="Add">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- With Icons -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Icon</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="mw-btn mw-btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              Download
+            </button>
+            <button class="mw-btn mw-btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
+              Upload
+            </button>
+            <button class="mw-btn mw-btn-secondary">
+              Send
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading & Disabled -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Loading & Disabled</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <button class="mw-btn mw-btn-primary" disabled>
+              <svg class="animate-spin motion-safe:animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Loading...
+            </button>
+            <button class="mw-btn mw-btn-primary" disabled>Disabled</button>
+            <button class="mw-btn mw-btn-outline" disabled>Disabled</button>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Icon Button -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Icon Button</h3>
-      <div class="mw-card">
-        <div class="flex flex-wrap items-center gap-3">
-          <button class="mw-btn mw-btn-primary mw-btn-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-          </button>
-          <button class="mw-btn mw-btn-outline mw-btn-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-          </button>
-          <button class="mw-btn mw-btn-ghost mw-btn-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-          </button>
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-md mx-auto space-y-6">
+          <!-- Simulated dialog footer -->
+          <div class="rounded-lg border border-border bg-card p-5 space-y-4">
+            <div>
+              <h3 class="font-heading text-base font-semibold">Delete project?</h3>
+              <p class="text-sm text-muted-foreground mt-1">This action cannot be undone. All files and settings associated with "Landing Page v2" will be permanently removed.</p>
+            </div>
+            <div class="flex justify-end gap-2">
+              <button class="mw-btn mw-btn-outline">Cancel</button>
+              <button class="mw-btn mw-btn-destructive">Delete project</button>
+            </div>
+          </div>
+          <!-- Simulated toolbar -->
+          <div class="rounded-lg border border-border bg-card p-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-green-500"></span>
+              <span class="text-sm font-medium">3 items selected</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="mw-btn mw-btn-ghost mw-btn-sm">Deselect all</button>
+              <button class="mw-btn mw-btn-primary mw-btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Export
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- With Icon -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">With Icon</h3>
-      <div class="mw-card">
-        <div class="flex flex-wrap items-center gap-3">
-          <button class="mw-btn mw-btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-            Download
-          </button>
-          <button class="mw-btn mw-btn-outline">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
-            Upload
-          </button>
-          <button class="mw-btn mw-btn-secondary">
-            Send
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Loading State -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Loading State</h3>
-      <div class="mw-card">
-        <div class="flex flex-wrap items-center gap-3">
-          <button class="mw-btn mw-btn-primary" disabled>
-            <svg class="animate-spin motion-safe:animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Loading...
-          </button>
-          <button class="mw-btn mw-btn-outline" disabled>
-            <svg class="animate-spin motion-safe:animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Processing
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Button as Link -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Button as Link</h3>
-      <div class="mw-card">
-        <div class="flex flex-wrap items-center gap-3">
-          <a class="mw-btn mw-btn-primary" href="#">
-            Link Button
-          </a>
-          <a class="mw-btn mw-btn-outline" href="#">
-            Learn More
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Disabled -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Disabled State</h3>
-      <div class="mw-card">
-        <div class="flex flex-wrap items-center gap-3">
-          <button class="mw-btn mw-btn-primary" disabled>Disabled</button>
-          <button class="mw-btn mw-btn-secondary" disabled>Disabled</button>
-          <button class="mw-btn mw-btn-outline" disabled>Disabled</button>
-        </div>
-      </div>
-    </div>
+    </section>
 
     <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Variants</h3>
-          <CodeBlock code={variantsCode} lang="html" />
-        </div>
+        <CodeBlock code={variantsCode} lang="html" />
+        <CodeBlock code={sizesCode} lang="html" />
+        <CodeBlock code={iconButtonCode} lang="html" />
+        <CodeBlock code={withIconCode} lang="html" />
+        <CodeBlock code={loadingCode} lang="html" />
+        <CodeBlock code={disabledCode} lang="html" />
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Sizes</h3>
-          <CodeBlock code={sizesCode} lang="html" />
-        </div>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-btn</code></td><td>Base button class (required)</td></tr>
+            <tr><td><code>mw-btn-primary</code></td><td>Primary variant</td></tr>
+            <tr><td><code>mw-btn-secondary</code></td><td>Secondary variant</td></tr>
+            <tr><td><code>mw-btn-outline</code></td><td>Outline variant</td></tr>
+            <tr><td><code>mw-btn-ghost</code></td><td>Ghost variant (transparent background)</td></tr>
+            <tr><td><code>mw-btn-destructive</code></td><td>Destructive variant (for dangerous actions)</td></tr>
+            <tr><td><code>mw-btn-link</code></td><td>Link variant (looks like a link)</td></tr>
+            <tr><td><code>mw-btn-sm</code></td><td>Small size modifier</td></tr>
+            <tr><td><code>mw-btn-lg</code></td><td>Large size modifier</td></tr>
+            <tr><td><code>mw-btn-icon</code></td><td>Icon-only button (square aspect ratio)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Icon Button</h3>
-          <CodeBlock code={iconButtonCode} lang="html" />
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use native <code>&lt;button&gt;</code> elements for actions and <code>&lt;a&gt;</code> elements for navigation</li>
+            <li>Add <code>aria-label</code> to icon-only buttons to describe their purpose</li>
+            <li>Use the <code>disabled</code> attribute to disable buttons — this prevents interaction and announces state to screen readers</li>
+            <li>Add <code>aria-hidden="true"</code> to decorative icons within buttons</li>
+            <li>Loading states should include descriptive text (e.g., "Loading..."), not just a spinner</li>
+          </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">With Icon</h3>
-          <CodeBlock code={withIconCode} lang="html" />
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Loading State</h3>
-          <CodeBlock code={loadingCode} lang="html" />
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Button as Link</h3>
-          <CodeBlock code={buttonAsLinkCode} lang="html" />
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Disabled</h3>
-          <CodeBlock code={disabledCode} lang="html" />
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>mw-btn-primary</code> for the main action on a page</li>
+            <li>Use <code>mw-btn-destructive</code> for actions that delete or remove data</li>
+            <li>Avoid multiple primary buttons in the same section</li>
+            <li>Keep button text concise and action-oriented (e.g., "Save", "Delete", "Continue")</li>
+            <li>For loading states, disable the button to prevent double-submission</li>
+          </ul>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
-          <div class="mw-card overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-border">
-                  <th class="text-left py-2 pr-4 font-semibold">Class</th>
-                  <th class="text-left py-2 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn</code></td>
-                  <td class="py-2 text-muted-foreground">Base button class (required)</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-primary</code></td>
-                  <td class="py-2 text-muted-foreground">Primary variant</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-secondary</code></td>
-                  <td class="py-2 text-muted-foreground">Secondary variant</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-outline</code></td>
-                  <td class="py-2 text-muted-foreground">Outline variant</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-ghost</code></td>
-                  <td class="py-2 text-muted-foreground">Ghost variant (transparent background)</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-destructive</code></td>
-                  <td class="py-2 text-muted-foreground">Destructive variant (for dangerous actions)</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-link</code></td>
-                  <td class="py-2 text-muted-foreground">Link variant (looks like a link)</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-sm</code></td>
-                  <td class="py-2 text-muted-foreground">Small size modifier</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-lg</code></td>
-                  <td class="py-2 text-muted-foreground">Large size modifier</td>
-                </tr>
-                <tr>
-                  <td class="py-2 pr-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-icon</code></td>
-                  <td class="py-2 text-muted-foreground">Icon-only button (square aspect ratio)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <div class="mw-card space-y-3 text-muted-foreground leading-relaxed">
-            <p>
-              The button component follows accessible design patterns:
-            </p>
-            <ul class="list-disc list-inside space-y-2 ml-2">
-              <li>Use native <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;button&gt;</code> elements for actions and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;a&gt;</code> elements for navigation</li>
-              <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> to icon-only buttons to describe their purpose</li>
-              <li>Use the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">disabled</code> attribute to disable buttons, which prevents interaction and announces the state to screen readers</li>
-              <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative icons within buttons</li>
-              <li>Ensure sufficient color contrast between button text and background (all variants meet WCAG AA standards)</li>
-              <li>Loading states should include descriptive text (e.g., "Loading...") not just a spinner</li>
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Best Practices</h3>
-          <div class="mw-card space-y-3 text-muted-foreground leading-relaxed">
-            <ul class="list-disc list-inside space-y-2 ml-2">
-              <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-primary</code> for the main action on a page</li>
-              <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn-destructive</code> for actions that delete or remove data</li>
-              <li>Avoid multiple primary buttons in the same section</li>
-              <li>Keep button text concise and action-oriented (e.g., "Save", "Delete", "Continue")</li>
-              <li>When using icons, ensure they reinforce the button's purpose</li>
-              <li>For loading states, disable the button to prevent double-submission</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </DocsLayout>

@@ -1,57 +1,31 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const directionCode = `<!-- LTR (default) -->
-<div class="mw-card" dir="ltr">
-  <div class="flex items-center gap-3 mb-2">
-    <div class="mw-avatar">LR</div>
-    <div>
-      <h4 class="font-heading font-semibold text-sm">Left-to-Right</h4>
-      <p class="text-xs text-muted-foreground">This card uses the default LTR direction.</p>
-    </div>
-  </div>
-  <p class="text-sm text-muted-foreground">
-    Content flows from left to right.
-  </p>
-</div>
-
-<!-- RTL -->
-<div class="mw-card" dir="rtl">
-  <div class="flex items-center gap-3 mb-2">
-    <div class="mw-avatar">RL</div>
-    <div>
-      <h4 class="font-heading font-semibold text-sm">من اليمين إلى اليسار</h4>
-      <p class="text-xs text-muted-foreground">هذه البطاقة تستخدم اتجاه RTL.</p>
-    </div>
-  </div>
-  <p class="text-sm text-muted-foreground">
-    المحتوى يتدفق من اليمين إلى اليسار.
-  </p>
-</div>
-
-<!-- Apply RTL to the entire page -->
-<html dir="rtl">
-  ...
-</html>`;
+const directionCode = loadFull("direction");
 ---
 
 <DocsLayout title="Direction" description="Support for right-to-left (RTL) layouts using the dir attribute" activeComponent="direction">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Direction</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">Support for right-to-left (RTL) layouts using the dir attribute.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Typography & Micro</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Direction</h1>
+      <p class="docs-hero-description mt-3">Support for right-to-left (RTL) layouts using the dir attribute.</p>
+    </header>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
-        <div class="grid md:grid-cols-2 gap-6">
-          <!-- LTR Example -->
-          <div class="space-y-3">
-            <h3 class="font-heading text-lg font-semibold">LTR (Left-to-Right)</h3>
+    <!-- Preview -->
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">LTR (Left-to-Right)</p>
+          <div class="max-w-sm">
             <div class="mw-card" dir="ltr">
               <div class="flex items-center gap-3 mb-3">
                 <div class="mw-avatar">LR</div>
@@ -69,10 +43,11 @@ const directionCode = `<!-- LTR (default) -->
               </p>
             </div>
           </div>
+        </div>
 
-          <!-- RTL Example -->
-          <div class="space-y-3">
-            <h3 class="font-heading text-lg font-semibold">RTL (Right-to-Left)</h3>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">RTL (Right-to-Left)</p>
+          <div class="max-w-sm">
             <div class="mw-card" dir="rtl">
               <div class="flex items-center gap-3 mb-3">
                 <div class="mw-avatar">RL</div>
@@ -92,44 +67,119 @@ const directionCode = `<!-- LTR (default) -->
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={directionCode} lang="html" />
-    </div>
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Multi-Language Settings Panel</p>
+        <div class="rounded-lg border border-border overflow-hidden max-w-lg mx-auto">
+          <div class="p-4 border-b border-border">
+            <h3 class="font-heading font-semibold text-sm">Language & Direction Settings</h3>
+            <p class="text-xs text-muted-foreground mt-1">Configure text direction for your application</p>
+          </div>
+          <div class="p-4 space-y-4">
+            <!-- LTR Example -->
+            <div class="rounded-lg border border-border p-3" dir="ltr">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="mw-badge mw-badge-secondary">EN</span>
+                  <span class="text-sm font-medium">English</span>
+                </div>
+                <span class="text-xs text-muted-foreground">LTR</span>
+              </div>
+              <p class="text-xs text-muted-foreground">This text is displayed left-to-right, which is the standard direction for English and most European languages.</p>
+              <div class="mt-2">
+                <input type="text" class="mw-input text-sm" placeholder="Search settings..." />
+              </div>
+            </div>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Setting Direction</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Use the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">dir</code> attribute on any HTML element to control text direction. Set it to <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">ltr</code> for left-to-right or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rtl</code> for right-to-left layouts.
-          </p>
-        </div>
+            <!-- RTL Example -->
+            <div class="rounded-lg border border-border p-3" dir="rtl">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="mw-badge mw-badge-secondary">AR</span>
+                  <span class="text-sm font-medium">العربية</span>
+                </div>
+                <span class="text-xs text-muted-foreground">RTL</span>
+              </div>
+              <p class="text-xs text-muted-foreground">يتم عرض هذا النص من اليمين إلى اليسار، وهو الاتجاه المعتمد للغة العربية.</p>
+              <div class="mt-2">
+                <input type="text" class="mw-input text-sm" placeholder="البحث في الإعدادات..." />
+              </div>
+            </div>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Component Compatibility</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            All Marrow UI components automatically adapt to RTL layouts. Flexbox, grid, padding, margin, and border styles will flip appropriately when <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">dir="rtl"</code> is set on a parent element.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Setting the correct text direction is essential for accessibility and internationalization. Screen readers and browsers rely on the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">dir</code> attribute to properly render and announce content in languages that use right-to-left scripts.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Page-Wide RTL</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            For a complete RTL experience, set <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">dir="rtl"</code> on the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;html&gt;</code> element. This will apply RTL layout to the entire page, including all components and text content.
-          </p>
+            <!-- Hebrew RTL Example -->
+            <div class="rounded-lg border border-border p-3" dir="rtl">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="mw-badge mw-badge-secondary">HE</span>
+                  <span class="text-sm font-medium">עברית</span>
+                </div>
+                <span class="text-xs text-muted-foreground">RTL</span>
+              </div>
+              <p class="text-xs text-muted-foreground">טקסט זה מוצג מימין לשמאל, שהוא הכיוון הסטנדרטי לעברית.</p>
+              <div class="mt-2">
+                <input type="text" class="mw-input text-sm" placeholder="חפש הגדרות..." />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={directionCode} lang="html" />
+      </div>
+    </section>
+
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>dir="ltr"</code></td>
+              <td>Sets left-to-right text direction (default for most languages)</td>
+            </tr>
+            <tr>
+              <td><code>dir="rtl"</code></td>
+              <td>Sets right-to-left text direction for Arabic, Hebrew, Persian, etc.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Setting the correct text direction is essential for accessibility and internationalization</li>
+            <li>Screen readers and browsers rely on the <code>dir</code> attribute to properly render and announce content</li>
+            <li>For a complete RTL experience, set <code>dir="rtl"</code> on the <code>&lt;html&gt;</code> element</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use the <code>dir</code> attribute on any HTML element to control text direction</li>
+            <li>All Marrow UI components automatically adapt to RTL layouts</li>
+            <li>Flexbox, grid, padding, margin, and border styles flip appropriately when <code>dir="rtl"</code> is set</li>
+            <li>Set <code>dir="rtl"</code> on the <code>&lt;html&gt;</code> element for page-wide RTL layout</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </div>
 </DocsLayout>

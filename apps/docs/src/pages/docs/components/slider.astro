@@ -1,199 +1,269 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const sliderCode = `<div x-data="mwSlider(0, 100, 50)" class="space-y-4">
-  <div class="flex items-center justify-between">
-    <label class="mw-label">Volume</label>
-    <span class="text-sm text-muted-foreground" x-text="value + '%'"></span>
-  </div>
-
-  <div class="relative pt-1">
-    <!-- Visual track -->
-    <div class="mw-slider-track">
-      <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
-    </div>
-    <!-- Invisible native range input -->
-    <input type="range" :min="min" :max="max"
-           x-model="value" @input="handleInput($event)"
-           class="absolute inset-0 w-full opacity-0 cursor-pointer"
-           style="margin: 0; height: 0.375rem;">
-  </div>
-</div>`;
-
-const temperatureCode = `<div x-data="mwSlider(0, 50, 25)" class="space-y-4">
-  <div class="flex items-center justify-between">
-    <label class="mw-label">Temperature</label>
-    <span class="text-sm text-muted-foreground">
-      <span x-text="value"></span>&deg;C
-    </span>
-  </div>
-
-  <div class="relative pt-1">
-    <div class="mw-slider-track">
-      <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
-    </div>
-    <input type="range" :min="min" :max="max"
-           x-model="value" @input="handleInput($event)"
-           class="absolute inset-0 w-full opacity-0 cursor-pointer"
-           style="margin: 0; height: 0.375rem;">
-  </div>
-
-  <div class="flex justify-between text-xs text-muted-foreground">
-    <span>0&deg;C</span>
-    <span>25&deg;C</span>
-    <span>50&deg;C</span>
-  </div>
-</div>`;
+const t = loadTemplate("slider");
+const sliderCode = t.sections.get("Slider")!;
+const temperatureCode = t.sections.get("Temperature")!;
 ---
 
 <DocsLayout title="Slider" description="A range slider input for selecting numeric values" activeComponent="slider">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight">Slider</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A styled range input that lets users select a value within a defined range by dragging a thumb along a track.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Form Controls</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Slider</h1>
+      <p class="docs-hero-description mt-3">A styled range input that lets users select a value within a defined range by dragging a thumb along a track.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card">
-        <div x-data="mwSlider(0, 100, 50)" class="space-y-4">
-          <div class="flex items-center justify-between">
-            <label class="mw-label">Volume</label>
-            <span class="text-sm text-muted-foreground" x-text="value + '%'"></span>
-          </div>
-          <div class="relative pt-1">
-            <div class="mw-slider-track">
-              <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Default</p>
+          <div class="max-w-sm">
+            <div x-data="mwSlider(0, 100, 50)" class="space-y-4">
+              <div class="flex items-center justify-between">
+                <label class="mw-label">Volume</label>
+                <span class="text-sm text-muted-foreground" x-text="value + '%'"></span>
+              </div>
+              <div class="relative pt-1">
+                <div class="mw-slider-track">
+                  <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+                </div>
+                <input type="range" :min="min" :max="max" x-model="value" @input="handleInput($event)"
+                       class="absolute inset-0 w-full opacity-0 cursor-pointer" style="margin: 0; height: 0.375rem;">
+              </div>
             </div>
-            <input type="range" :min="min" :max="max" x-model="value" @input="handleInput($event)"
-                   class="absolute inset-0 w-full opacity-0 cursor-pointer" style="margin: 0; height: 0.375rem;">
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Custom Range with Tick Marks</p>
+          <div class="max-w-sm">
+            <div x-data="mwSlider(0, 50, 25)" class="space-y-4">
+              <div class="flex items-center justify-between">
+                <label class="mw-label">Temperature</label>
+                <span class="text-sm text-muted-foreground"><span x-text="value"></span>&deg;C</span>
+              </div>
+              <div class="relative pt-1">
+                <div class="mw-slider-track">
+                  <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+                </div>
+                <input type="range" :min="min" :max="max" x-model="value" @input="handleInput($event)"
+                       class="absolute inset-0 w-full opacity-0 cursor-pointer" style="margin: 0; height: 0.375rem;">
+              </div>
+              <div class="flex justify-between text-xs text-muted-foreground">
+                <span>0&deg;C</span>
+                <span>25&deg;C</span>
+                <span>50&deg;C</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="rounded-lg border border-border max-w-md mx-auto">
+          <div class="px-5 py-4 border-b border-border flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+              <circle cx="12" cy="13" r="3"/>
+            </svg>
+            <span class="font-heading font-semibold text-sm">Image Adjustments</span>
+          </div>
+          <div class="p-5 space-y-5">
+            <div x-data="mwSlider(0, 100, 65)" class="space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="mw-label text-sm">
+                  <span class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="4"/>
+                      <path d="M12 2v2"/>
+                      <path d="M12 20v2"/>
+                      <path d="m4.93 4.93 1.41 1.41"/>
+                      <path d="m17.66 17.66 1.41 1.41"/>
+                      <path d="M2 12h2"/>
+                      <path d="M20 12h2"/>
+                      <path d="m6.34 17.66-1.41 1.41"/>
+                      <path d="m19.07 4.93-1.41 1.41"/>
+                    </svg>
+                    Brightness
+                  </span>
+                </label>
+                <span class="text-xs text-muted-foreground font-mono" x-text="value + '%'"></span>
+              </div>
+              <div class="relative pt-1">
+                <div class="mw-slider-track">
+                  <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+                </div>
+                <input type="range" :min="min" :max="max" x-model="value" @input="handleInput($event)"
+                       class="absolute inset-0 w-full opacity-0 cursor-pointer" style="margin: 0; height: 0.375rem;">
+              </div>
+            </div>
+
+            <div x-data="mwSlider(0, 100, 50)" class="space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="mw-label text-sm">
+                  <span class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 2a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+                    </svg>
+                    Contrast
+                  </span>
+                </label>
+                <span class="text-xs text-muted-foreground font-mono" x-text="value + '%'"></span>
+              </div>
+              <div class="relative pt-1">
+                <div class="mw-slider-track">
+                  <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+                </div>
+                <input type="range" :min="min" :max="max" x-model="value" @input="handleInput($event)"
+                       class="absolute inset-0 w-full opacity-0 cursor-pointer" style="margin: 0; height: 0.375rem;">
+              </div>
+            </div>
+
+            <div x-data="mwSlider(0, 100, 70)" class="space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="mw-label text-sm">
+                  <span class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                    Saturation
+                  </span>
+                </label>
+                <span class="text-xs text-muted-foreground font-mono" x-text="value + '%'"></span>
+              </div>
+              <div class="relative pt-1">
+                <div class="mw-slider-track">
+                  <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+                </div>
+                <input type="range" :min="min" :max="max" x-model="value" @input="handleInput($event)"
+                       class="absolute inset-0 w-full opacity-0 cursor-pointer" style="margin: 0; height: 0.375rem;">
+              </div>
+            </div>
+          </div>
+          <div class="px-5 py-3 border-t border-border flex justify-end gap-2">
+            <button class="mw-btn mw-btn-sm">Reset</button>
+            <button class="mw-btn mw-btn-primary mw-btn-sm">Apply</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={sliderCode} lang="html" />
-    </div>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={sliderCode} lang="html" />
+        <CodeBlock code={temperatureCode} lang="html" />
+      </div>
+    </section>
 
-    <!-- Custom Range Example -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Custom Range</h2>
-      <p class="text-muted-foreground leading-relaxed">You can customize the min/max range and display format. This example shows a temperature slider from 0°C to 50°C with tick marks.</p>
-      <div class="mw-card">
-        <div x-data="mwSlider(0, 50, 25)" class="space-y-4">
-          <div class="flex items-center justify-between">
-            <label class="mw-label">Temperature</label>
-            <span class="text-sm text-muted-foreground"><span x-text="value"></span>&deg;C</span>
-          </div>
-          <div class="relative pt-1">
-            <div class="mw-slider-track">
-              <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
-            </div>
-            <input type="range" :min="min" :max="max" x-model="value" @input="handleInput($event)"
-                   class="absolute inset-0 w-full opacity-0 cursor-pointer" style="margin: 0; height: 0.375rem;">
-          </div>
-          <div class="flex justify-between text-xs text-muted-foreground">
-            <span>0&deg;C</span>
-            <span>25&deg;C</span>
-            <span>50&deg;C</span>
-          </div>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Property/Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>min</code></td>
+              <td>Number</td>
+              <td>Minimum value</td>
+            </tr>
+            <tr>
+              <td><code>max</code></td>
+              <td>Number</td>
+              <td>Maximum value</td>
+            </tr>
+            <tr>
+              <td><code>value</code></td>
+              <td>Number</td>
+              <td>Current value (use with <code>x-model</code>)</td>
+            </tr>
+            <tr>
+              <td><code>percentage</code></td>
+              <td>Number</td>
+              <td>Current value as percentage (0-100), computed getter</td>
+            </tr>
+            <tr>
+              <td><code>handleInput(e)</code></td>
+              <td>Function</td>
+              <td>Process input events from the range element</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>mw-slider-track</code></td>
+              <td>The slider track container (0.375rem height, rounded, secondary background)</td>
+            </tr>
+            <tr>
+              <td><code>mw-slider-range</code></td>
+              <td>The filled portion of the track (absolute positioned, primary background)</td>
+            </tr>
+            <tr>
+              <td><code>mw-slider-thumb</code></td>
+              <td>The draggable thumb handle (1.25rem circle, white background, primary border, shadow)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Uses a native <code>&lt;input type="range"&gt;</code> element layered on top of the visual track for full keyboard support (arrow keys, Home, End, Page Up/Down) and screen reader announcements</li>
+            <li>Use a <code>&lt;label&gt;</code> element to describe the slider's purpose</li>
+            <li>Consider adding <code>aria-valuetext</code> for formatted values (e.g., "$50" instead of "50")</li>
+            <li>Display the current value visually for users who cannot use the slider</li>
+            <li>Ensure sufficient color contrast between the track and range fill</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Initialize with <code>x-data="mwSlider(min, max, initial)"</code> to set the range and starting value</li>
+            <li>Use the <code>percentage</code> getter to drive the visual fill width</li>
+            <li>Add tick marks or labels for ranges where specific values matter</li>
+            <li>Show the current numeric value alongside the slider for precision</li>
+          </ul>
         </div>
       </div>
-      <CodeBlock code={temperatureCode} lang="html" />
-    </div>
+    </section>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-      <p class="text-muted-foreground leading-relaxed">Initialize the slider with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwSlider(min, max, initial)"</code>. The component manages the current value and provides a computed percentage for the visual fill bar.</p>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b">
-                <th class="text-left py-2 pr-4 font-semibold">Property/Method</th>
-                <th class="text-left py-2 pr-4 font-semibold">Type</th>
-                <th class="text-left py-2 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y">
-              <tr>
-                <td class="py-2 pr-4 font-mono text-xs">min</td>
-                <td class="py-2 pr-4 text-muted-foreground">Number</td>
-                <td class="py-2">Minimum value</td>
-              </tr>
-              <tr>
-                <td class="py-2 pr-4 font-mono text-xs">max</td>
-                <td class="py-2 pr-4 text-muted-foreground">Number</td>
-                <td class="py-2">Maximum value</td>
-              </tr>
-              <tr>
-                <td class="py-2 pr-4 font-mono text-xs">value</td>
-                <td class="py-2 pr-4 text-muted-foreground">Number</td>
-                <td class="py-2">Current value (use with <code class="px-1.5 py-0.5 bg-muted rounded text-xs font-mono">x-model</code>)</td>
-              </tr>
-              <tr>
-                <td class="py-2 pr-4 font-mono text-xs">percentage</td>
-                <td class="py-2 pr-4 text-muted-foreground">Number</td>
-                <td class="py-2">Current value as percentage (0–100), computed getter</td>
-              </tr>
-              <tr>
-                <td class="py-2 pr-4 font-mono text-xs">handleInput(e)</td>
-                <td class="py-2 pr-4 text-muted-foreground">Function</td>
-                <td class="py-2">Process input events from the range element</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
-        <div class="overflow-x-auto">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b">
-                <th class="text-left py-2 pr-4 font-semibold">Class</th>
-                <th class="text-left py-2 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y">
-              <tr>
-                <td class="py-2 pr-4 font-mono text-xs">.mw-slider-track</td>
-                <td class="py-2">The slider track container (0.375rem height, rounded, secondary background)</td>
-              </tr>
-              <tr>
-                <td class="py-2 pr-4 font-mono text-xs">.mw-slider-range</td>
-                <td class="py-2">The filled portion of the track (absolute positioned, primary background)</td>
-              </tr>
-              <tr>
-                <td class="py-2 pr-4 font-mono text-xs">.mw-slider-thumb</td>
-                <td class="py-2">The draggable thumb handle (1.25rem circle, white background, primary border, shadow)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-        <p class="text-muted-foreground leading-relaxed">The slider uses a native <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;input type="range"&gt;</code> element layered on top of the visual track. This ensures full keyboard support (arrow keys, Home, End, Page Up/Down) and proper screen reader announcements. The native input is transparent but maintains the correct dimensions for hit-testing.</p>
-        <ul class="list-disc list-inside space-y-1 text-muted-foreground leading-relaxed">
-          <li>Use a <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;label&gt;</code> element to describe the slider's purpose</li>
-          <li>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-valuetext</code> for formatted values (e.g., "$50" instead of "50")</li>
-          <li>Display the current value visually for users who cannot use the slider</li>
-          <li>Ensure sufficient color contrast between the track and range fill</li>
-        </ul>
-      </div>
-    </div>
   </div>
 </DocsLayout>

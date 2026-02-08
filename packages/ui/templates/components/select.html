@@ -2,20 +2,96 @@
 <!-- A custom styled select dropdown with keyboard-friendly options -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Select -->
 <div x-data="mwDropdown()" class="relative w-64">
   <!-- Trigger -->
-  <button @click="toggle()" class="mw-input flex items-center justify-between cursor-pointer" type="button">
-    <span x-text="$data._selected || 'Select a fruit...'"
+  <button
+    @click="toggle()"
+    class="mw-input flex items-center justify-between cursor-pointer"
+    type="button"
+    aria-haspopup="listbox"
+    :aria-expanded="open">
+    <span x-text="$data._selected || 'Select a framework...'"
           :class="!$data._selected && 'text-muted-foreground'"></span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" class="text-muted-foreground">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="16"
+         height="16"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         class="text-muted-foreground transition-transform duration-200"
+         :class="open && 'rotate-180'">
       <path d="m6 9 6 6 6-6"/>
     </svg>
   </button>
 
   <!-- Options -->
-  <div x-show="open" @click.outside="close()" x-cloak
+  <div x-show="open"
+       @click.outside="close()"
+       x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 -translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 -translate-y-1"
+       class="mw-popover absolute z-10 mt-1 w-full"
+       role="listbox">
+    <button class="mw-menu-item" @click="$data._selected = 'React'; close()" role="option">React</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Vue'; close()" role="option">Vue</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Angular'; close()" role="option">Angular</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Svelte'; close()" role="option">Svelte</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Alpine.js'; close()" role="option">Alpine.js</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Solid'; close()" role="option">Solid</button>
+  </div>
+</div>
+<!-- @section: Searchable Select -->
+
+<div x-data="{
+  open: false,
+  selected: '',
+  search: '',
+  options: ['Apple', 'Banana', 'Blueberry', 'Cherry', 'Grape', 'Mango', 'Orange', 'Peach', 'Pear', 'Strawberry'],
+  get filtered() {
+    return this.options.filter(opt =>
+      opt.toLowerCase().includes(this.search.toLowerCase())
+    )
+  },
+  select(option) {
+    this.selected = option;
+    this.search = '';
+    this.open = false;
+  }
+}" class="relative w-64">
+  <!-- Trigger -->
+  <button
+    @click="open = !open"
+    class="mw-input flex items-center justify-between cursor-pointer"
+    type="button">
+    <span x-text="selected || 'Select a fruit...'"
+          :class="!selected && 'text-muted-foreground'"></span>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="16"
+         height="16"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         class="text-muted-foreground transition-transform duration-200"
+         :class="open && 'rotate-180'">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </button>
+
+  <!-- Options with Search -->
+  <div x-show="open"
+       @click.outside="open = false"
+       x-cloak
        x-transition:enter="transition ease-out duration-100"
        x-transition:enter-start="opacity-0 -translate-y-1"
        x-transition:enter-end="opacity-100 translate-y-0"
@@ -23,11 +99,23 @@
        x-transition:leave-start="opacity-100 translate-y-0"
        x-transition:leave-end="opacity-0 -translate-y-1"
        class="mw-popover absolute z-10 mt-1 w-full">
-    <button class="mw-menu-item" @click="$data._selected = 'Apple'; close()">Apple</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Banana'; close()">Banana</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Blueberry'; close()">Blueberry</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Cherry'; close()">Cherry</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Grape'; close()">Grape</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Mango'; close()">Mango</button>
+    <!-- Search Input -->
+    <div class="p-2 border-b border-border">
+      <input
+        type="text"
+        x-model="search"
+        placeholder="Search..."
+        class="w-full px-2 py-1 text-sm bg-transparent border-0 focus:outline-none"
+        @click.stop>
+    </div>
+    <!-- Options List -->
+    <div class="max-h-48 overflow-y-auto">
+      <template x-for="option in filtered" :key="option">
+        <button class="mw-menu-item" @click="select(option)" x-text="option"></button>
+      </template>
+      <div x-show="filtered.length === 0" class="px-3 py-2 text-sm text-muted-foreground">
+        No results found
+      </div>
+    </div>
   </div>
 </div>

@@ -1,137 +1,133 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const spinnerCode = `<!-- Small -->
-<div class="mw-spinner" style="width: 1rem; height: 1rem;"></div>
-
-<!-- Default -->
-<div class="mw-spinner"></div>
-
-<!-- Large -->
-<div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"></div>
-
-<!-- Inline with text -->
-<div class="flex items-center gap-3">
-  <div class="mw-spinner"></div>
-  <span class="text-sm text-muted-foreground">Loading data...</span>
-</div>
-
-<!-- Inside a button -->
-<button class="mw-btn mw-btn-primary" disabled>
-  <div class="mw-spinner"
-       style="width: 1rem; height: 1rem;
-              border-color: hsl(var(--marrow-primary-foreground) / 0.3);
-              border-top-color: hsl(var(--marrow-primary-foreground));"></div>
-  Submitting...
-</button>`;
+const spinnerCode = loadFull("spinner");
 ---
 
 <DocsLayout title="Spinner" description="A loading spinner indicator for asynchronous operations" activeComponent="spinner">
-      <div class="space-y-8">
+  <div class="space-y-12">
+
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Feedback & Status</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Spinner</h1>
+      <p class="docs-hero-description mt-3">An animated loading indicator to signal that content or an action is in progress. Pure CSS with no JavaScript required.</p>
+    </header>
+
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Sizes -->
         <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Spinner</h1>
-          <p class="mt-2 text-lg text-muted-foreground">An animated loading indicator to signal that content or an action is in progress.</p>
-        </div>
-
-        <div class="mw-separator"></div>
-
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card">
-            <div class="flex items-center gap-8">
-              <!-- Small -->
-              <div class="flex flex-col items-center gap-2">
-                <div class="mw-spinner" style="width: 1rem; height: 1rem;"></div>
-                <span class="text-xs text-muted-foreground">Small</span>
-              </div>
-              <!-- Default -->
-              <div class="flex flex-col items-center gap-2">
-                <div class="mw-spinner"></div>
-                <span class="text-xs text-muted-foreground">Default</span>
-              </div>
-              <!-- Large -->
-              <div class="flex flex-col items-center gap-2">
-                <div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"></div>
-                <span class="text-xs text-muted-foreground">Large</span>
-              </div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Sizes</p>
+          <div class="flex items-center gap-8">
+            <div class="flex flex-col items-center gap-2">
+              <div class="mw-spinner" style="width: 1rem; height: 1rem;"></div>
+              <span class="text-xs text-muted-foreground">Small</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <div class="mw-spinner"></div>
+              <span class="text-xs text-muted-foreground">Default</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"></div>
+              <span class="text-xs text-muted-foreground">Large</span>
             </div>
           </div>
         </div>
 
         <!-- Inline with Text -->
-        <div class="space-y-4">
-          <h3 class="font-heading text-lg font-semibold">Inline with Text</h3>
-          <div class="mw-card">
-            <div class="flex items-center gap-3">
-              <div class="mw-spinner"></div>
-              <span class="text-sm text-muted-foreground">Loading data...</span>
-            </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Inline with Text</p>
+          <div class="flex items-center gap-3">
+            <div class="mw-spinner"></div>
+            <span class="text-sm text-muted-foreground">Loading data...</span>
           </div>
         </div>
 
         <!-- Inside a Button -->
-        <div class="space-y-4">
-          <h3 class="font-heading text-lg font-semibold">Inside a Button</h3>
-          <div class="mw-card">
-            <button class="mw-btn mw-btn-primary" disabled>
-              <div class="mw-spinner" style="width: 1rem; height: 1rem; border-color: hsl(var(--marrow-primary-foreground) / 0.3); border-top-color: hsl(var(--marrow-primary-foreground));"></div>
-              Submitting...
-            </button>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Inside a Button</p>
+          <button class="mw-btn mw-btn-primary" disabled>
+            <div class="mw-spinner" style="width: 1rem; height: 1rem; border-color: hsl(var(--marrow-primary-foreground) / 0.3); border-top-color: hsl(var(--marrow-primary-foreground));"></div>
+            Submitting...
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-lg mx-auto space-y-4">
+          <div class="rounded-lg border border-border bg-card p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-heading text-base font-semibold">Recent Orders</h3>
+              <button class="mw-btn mw-btn-ghost mw-btn-sm">Refresh</button>
+            </div>
+            <div class="flex flex-col items-center justify-center py-12 text-center">
+              <div class="mw-spinner" style="width: 2rem; height: 2rem; border-width: 3px;"></div>
+              <p class="mt-4 text-sm text-muted-foreground">Loading order data...</p>
+              <p class="text-xs text-muted-foreground/60 mt-1">This may take a moment</p>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={spinnerCode} lang="html" />
-        </div>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={spinnerCode} lang="html" />
+      </div>
+    </section>
 
-        <!-- Usage -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-          <p class="text-muted-foreground leading-relaxed">Apply the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">.mw-spinner</code> class to an empty <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;div&gt;</code>. The default size is 1.25rem (20px). Override size with inline styles:</p>
-          <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
-            <li><strong>Small</strong> &mdash; <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">width: 1rem; height: 1rem;</code></li>
-            <li><strong>Default</strong> &mdash; no override needed (1.25rem)</li>
-            <li><strong>Large</strong> &mdash; <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">width: 2rem; height: 2rem; border-width: 3px;</code></li>
-          </ul>
-          <p class="text-muted-foreground leading-relaxed">When using inside a button, override the border colors to match the button foreground color so the spinner remains visible against the button background. No JavaScript is required.</p>
-        </div>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-spinner</code></td><td>Base spinner class. Displays a 1.25rem circular border with spin animation (0.6s linear infinite). Default border is muted with primary-colored top border for the spinning effect.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <!-- CSS Classes -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">CSS Classes</h2>
-          <div class="mw-card overflow-hidden">
-            <table class="mw-table">
-              <thead>
-                <tr>
-                  <th>Class</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>.mw-spinner</code></td>
-                  <td>Base spinner class. Displays a 1.25rem circular border with spin animation (0.6s linear infinite). Default border is muted with primary-colored top border for the spinning effect.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Accessibility -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Accessibility</h2>
-          <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="status"</code> to the spinner container to announce loading state changes to screen readers</li>
-            <li>Include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label="Loading"</code> or similar to provide context for assistive technologies</li>
-            <li>When used inside a button, ensure the button has the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">disabled</code> attribute to prevent interaction during loading</li>
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Add <code>role="status"</code> to the spinner container to announce loading state changes to screen readers</li>
+            <li>Include <code>aria-label="Loading"</code> or similar to provide context for assistive technologies</li>
+            <li>When used inside a button, ensure the button has the <code>disabled</code> attribute to prevent interaction during loading</li>
             <li>Always pair with visible text (like "Loading..." or "Submitting...") when possible to provide visual context for all users</li>
-            <li>The spin animation respects <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">prefers-reduced-motion</code> settings automatically via Tailwind's animation utilities</li>
+            <li>The spin animation respects <code>prefers-reduced-motion</code> settings automatically via Tailwind's animation utilities</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Apply <code>.mw-spinner</code> to an empty <code>&lt;div&gt;</code> element -- no JavaScript required</li>
+            <li>Override size with inline styles: <code>1rem</code> for small, default is <code>1.25rem</code>, <code>2rem</code> for large</li>
+            <li>When inside a button, override border colors to match the button foreground for visibility</li>
+            <li>Use larger spinners for full-section or full-card loading states</li>
+            <li>Pair with descriptive text so users understand what is loading</li>
           </ul>
         </div>
       </div>
+    </section>
 
+  </div>
 </DocsLayout>

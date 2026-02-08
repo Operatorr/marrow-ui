@@ -1,13 +1,14 @@
 <!-- Marrow UI: Field -->
 <!-- A complete form field pattern combining label, input, and helper text -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Default field -->
+<!-- Basic field with helper text -->
 <div class="space-y-2">
   <label for="field-name" class="mw-label">Name</label>
   <input id="field-name" type="text" class="mw-input"
-         placeholder="Enter your name" />
-  <p class="text-sm text-muted-foreground">
+         placeholder="Enter your name"
+         aria-describedby="field-name-desc" />
+  <p id="field-name-desc" class="text-sm text-muted-foreground">
     This is your public display name.
   </p>
 </div>
@@ -18,18 +19,65 @@
     Email <span class="text-destructive">*</span>
   </label>
   <input id="field-email" type="email" class="mw-input"
-         placeholder="you@example.com" />
-  <p class="text-sm text-muted-foreground">
+         placeholder="you@example.com" required
+         aria-describedby="field-email-desc" />
+  <p id="field-email-desc" class="text-sm text-muted-foreground">
     We will never share your email.
   </p>
 </div>
 
-<!-- Error state -->
+<!-- Field with error state -->
 <div class="space-y-2">
   <label for="field-error" class="mw-label">Username</label>
   <input id="field-error" type="text" class="mw-input" value="ab"
+         aria-invalid="true" aria-describedby="field-error-msg"
          style="border-color: hsl(var(--marrow-destructive));" />
-  <p class="text-sm" style="color: hsl(var(--marrow-destructive));">
+  <p id="field-error-msg" class="text-sm" role="alert"
+     style="color: hsl(var(--marrow-destructive));">
     Username must be at least 3 characters.
   </p>
 </div>
+
+<!-- Complete form example -->
+<form class="mw-card max-w-md">
+  <div class="space-y-6">
+    <div>
+      <h3 class="font-heading text-lg font-semibold">Contact Us</h3>
+      <p class="text-sm text-muted-foreground mt-1">
+        Fill out the form below and we'll get back to you.
+      </p>
+    </div>
+
+    <div class="space-y-2">
+      <label for="contact-name" class="mw-label">
+        Name <span class="text-destructive">*</span>
+      </label>
+      <input id="contact-name" type="text" class="mw-input"
+             placeholder="John Doe" required />
+    </div>
+
+    <div class="space-y-2">
+      <label for="contact-email" class="mw-label">
+        Email <span class="text-destructive">*</span>
+      </label>
+      <input id="contact-email" type="email" class="mw-input"
+             placeholder="john@example.com" required
+             aria-describedby="contact-email-desc" />
+      <p id="contact-email-desc" class="text-sm text-muted-foreground">
+        We respond within 24 hours.
+      </p>
+    </div>
+
+    <div class="space-y-2">
+      <label for="contact-message" class="mw-label">
+        Message <span class="text-destructive">*</span>
+      </label>
+      <textarea id="contact-message" class="mw-input min-h-[100px]"
+                placeholder="Tell us how we can help..." required></textarea>
+    </div>
+
+    <button type="submit" class="mw-btn mw-btn-primary w-full">
+      Send Message
+    </button>
+  </div>
+</form>

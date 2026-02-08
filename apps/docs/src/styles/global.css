@@ -47,6 +47,11 @@
   --marrow-font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ── Docs Heading Font ────────────────────────────────────────────── */
+:root {
+  --marrow-font-heading: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+}
+
 .light {
   --marrow-primary: 220 90% 56%;
   --marrow-primary-foreground: 0 0% 100%;
@@ -73,4 +78,143 @@
   --marrow-sidebar-accent: 220 14% 96%;
   --marrow-sidebar-accent-foreground: 222 47% 11%;
   --marrow-sidebar-ring: 220 90% 56%;
+}
+
+/* ── Docs Page Utility Classes ───────────────────────────────────── */
+
+/* Preview stage: elevated container with dot-grid background */
+.docs-stage {
+  position: relative;
+  padding: 2.5rem;
+  border-radius: var(--marrow-radius);
+  background-color: hsl(var(--marrow-card));
+  border: 1px solid hsl(var(--marrow-border));
+  border-top: 2px solid hsl(var(--marrow-primary) / 0.4);
+  background-image: radial-gradient(circle, hsl(var(--marrow-border) / 0.4) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Section label: monospace uppercase marker */
+.docs-section-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: hsl(var(--marrow-muted-foreground));
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* API reference table */
+.docs-api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.docs-api-table thead {
+  border-bottom: 2px solid hsl(var(--marrow-primary) / 0.2);
+}
+.docs-api-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: hsl(var(--marrow-muted-foreground));
+}
+.docs-api-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid hsl(var(--marrow-border) / 0.5);
+}
+.docs-api-table tbody tr:hover {
+  background: hsl(var(--marrow-accent) / 0.3);
+}
+.docs-api-table code {
+  font-size: 0.8125rem;
+  padding: 0.125rem 0.375rem;
+  background: hsl(var(--marrow-muted));
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Note/callout box */
+.docs-note {
+  padding: 1rem 1.25rem;
+  border-radius: var(--marrow-radius);
+  border-left: 3px solid hsl(var(--marrow-primary) / 0.6);
+  background: hsl(var(--marrow-card) / 0.6);
+  font-size: 0.875rem;
+  color: hsl(var(--marrow-muted-foreground));
+  line-height: 1.6;
+}
+.docs-note p:first-child { margin-top: 0; }
+.docs-note p:last-child { margin-bottom: 0; }
+.docs-note ul { margin: 0.5rem 0; padding-left: 1.25rem; }
+.docs-note li { margin-bottom: 0.25rem; }
+.docs-note code {
+  font-size: 0.8125rem;
+  padding: 0.125rem 0.375rem;
+  background: hsl(var(--marrow-muted));
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Component metadata badges */
+.docs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--marrow-border));
+  color: hsl(var(--marrow-muted-foreground));
+  background: hsl(var(--marrow-muted) / 0.5);
+}
+.docs-badge-primary {
+  border-color: hsl(var(--marrow-primary) / 0.3);
+  color: hsl(var(--marrow-primary));
+  background: hsl(var(--marrow-primary) / 0.1);
+}
+
+/* Gradient top border for sections */
+.docs-gradient-border {
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(
+    to right,
+    hsl(var(--marrow-primary) / 0.6),
+    hsl(var(--marrow-primary) / 0.1)
+  ) 1;
+}
+
+/* Scroll-triggered fade-in */
+@keyframes docs-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.docs-animate-in {
+  animation: docs-fade-up 0.4s ease-out both;
+}
+
+/* Component page hero heading */
+.docs-hero-title {
+  font-family: var(--marrow-font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: hsl(var(--marrow-foreground));
+}
+@media (min-width: 768px) {
+  .docs-hero-title { font-size: 3rem; }
+}
+.docs-hero-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: hsl(var(--marrow-muted-foreground));
+  max-width: 38rem;
 }

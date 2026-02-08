@@ -2,6 +2,7 @@
 <!-- A range slider input for selecting numeric values -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Slider -->
 <div x-data="mwSlider(0, 100, 50)" class="space-y-4">
   <div class="flex items-center justify-between">
     <label class="mw-label">Volume</label>
@@ -18,5 +19,31 @@
            x-model="value" @input="handleInput($event)"
            class="absolute inset-0 w-full opacity-0 cursor-pointer"
            style="margin: 0; height: 0.375rem;">
+  </div>
+</div>
+<!-- @section: Temperature -->
+
+<div x-data="mwSlider(0, 50, 25)" class="space-y-4">
+  <div class="flex items-center justify-between">
+    <label class="mw-label">Temperature</label>
+    <span class="text-sm text-muted-foreground">
+      <span x-text="value"></span>&deg;C
+    </span>
+  </div>
+
+  <div class="relative pt-1">
+    <div class="mw-slider-track">
+      <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+    </div>
+    <input type="range" :min="min" :max="max"
+           x-model="value" @input="handleInput($event)"
+           class="absolute inset-0 w-full opacity-0 cursor-pointer"
+           style="margin: 0; height: 0.375rem;">
+  </div>
+
+  <div class="flex justify-between text-xs text-muted-foreground">
+    <span>0&deg;C</span>
+    <span>25&deg;C</span>
+    <span>50&deg;C</span>
   </div>
 </div>

@@ -51,7 +51,7 @@ module.exports = {
   // ─── THEME MODE ─────────────────────────────────────────────────────
   // Controls the default color scheme.
   // Options: "light" | "dark"
-  theme: "light",
+  theme: "dark",
 
   // ─── COLORS ─────────────────────────────────────────────────────────
   // All colors use HSL format: "H S% L%"
@@ -333,13 +333,14 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A vertically stacked set of interactive headings that reveal content -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Single Accordion -->
 <div x-data="mwAccordion()">
   <!-- Item 1 -->
   <div class="border-b border-border">
-    <button @click="toggle('item-1')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
-      Is it accessible?
-      <svg :class="isOpen('item-1') && 'rotate-180'"
+    <button @click="toggle('shipping')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      What are your shipping options?
+      <svg :class="isOpen('shipping') && 'rotate-180'"
            class="h-4 w-4 shrink-0 transition-transform duration-200"
            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -347,19 +348,19 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
         <path d="m6 9 6 6 6-6"/>
       </svg>
     </button>
-    <div x-show="isOpen('item-1')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground">
-        Yes. It adheres to the WAI-ARIA design pattern.
+    <div x-show="isOpen('shipping')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
+        We offer standard shipping (5-7 business days), express shipping (2-3 business days), and overnight delivery. Free shipping is available on orders over $50.
       </div>
     </div>
   </div>
 
   <!-- Item 2 -->
   <div class="border-b border-border">
-    <button @click="toggle('item-2')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
-      Is it styled?
-      <svg :class="isOpen('item-2') && 'rotate-180'"
+    <button @click="toggle('returns')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      What is your return policy?
+      <svg :class="isOpen('returns') && 'rotate-180'"
            class="h-4 w-4 shrink-0 transition-transform duration-200"
            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -367,19 +368,19 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
         <path d="m6 9 6 6 6-6"/>
       </svg>
     </button>
-    <div x-show="isOpen('item-2')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground">
-        Yes. It comes with default styles that match the other components.
+    <div x-show="isOpen('returns')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
+        You can return any unused items within 30 days of purchase for a full refund. Items must be in original condition with tags attached.
       </div>
     </div>
   </div>
 
   <!-- Item 3 -->
   <div class="border-b border-border">
-    <button @click="toggle('item-3')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
-      Is it animated?
-      <svg :class="isOpen('item-3') && 'rotate-180'"
+    <button @click="toggle('payment')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      What payment methods do you accept?
+      <svg :class="isOpen('payment') && 'rotate-180'"
            class="h-4 w-4 shrink-0 transition-transform duration-200"
            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -387,9 +388,129 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
         <path d="m6 9 6 6 6-6"/>
       </svg>
     </button>
-    <div x-show="isOpen('item-3')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground">
-        Yes. It uses Alpine.js x-collapse for smooth animations.
+    <div x-show="isOpen('payment')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
+        We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, and Google Pay.
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 4 -->
+  <div class="border-b border-border">
+    <button @click="toggle('warranty')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      Do you offer a warranty?
+      <svg :class="isOpen('warranty') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('warranty')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
+        All products come with a 1-year manufacturer's warranty covering defects in materials and workmanship. Extended warranty options are available at checkout.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- @section: Multi Accordion -->
+
+<div x-data="mwAccordionMulti()">
+  <!-- General Settings -->
+  <div class="border-b border-border">
+    <button @click="toggle('general')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      General Settings
+      <svg :class="isOpen('general') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('general')" x-collapse>
+      <div class="pb-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium">Language</span>
+          <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+            <option>English</option>
+            <option>Spanish</option>
+            <option>French</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium">Timezone</span>
+          <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+            <option>UTC-8 (Pacific)</option>
+            <option>UTC-5 (Eastern)</option>
+            <option>UTC+0 (GMT)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="border-b border-border">
+    <button @click="toggle('notifications')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      Notifications
+      <svg :class="isOpen('notifications') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('notifications')" x-collapse>
+      <div class="pb-4 space-y-3">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" checked class="rounded border-border">
+          <span class="text-sm">Email notifications</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="checkbox" checked class="rounded border-border">
+          <span class="text-sm">Push notifications</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="rounded border-border">
+          <span class="text-sm">SMS notifications</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy -->
+  <div class="border-b border-border">
+    <button @click="toggle('privacy')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      Privacy & Security
+      <svg :class="isOpen('privacy') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('privacy')" x-collapse>
+      <div class="pb-4 space-y-3">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" checked class="rounded border-border">
+          <span class="text-sm">Two-factor authentication</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="rounded border-border">
+          <span class="text-sm">Show activity status</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="checkbox" checked class="rounded border-border">
+          <span class="text-sm">Require password for purchases</span>
+        </label>
       </div>
     </div>
   </div>
@@ -408,13 +529,25 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     Delete Account
   </button>
 
-  <template x-if="open">
-    <div class="fixed inset-0 z-50" @keydown.escape.window="cancel()">
+  <template x-teleport="body">
+    <div x-show="open" class="fixed inset-0 z-50" x-cloak @keydown.escape.window="cancel()">
       <!-- Overlay -->
-      <div class="mw-overlay" @click="cancel()"></div>
+      <div class="mw-overlay" @click="cancel()"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"></div>
 
       <!-- Dialog -->
-      <div class="mw-dialog max-w-md">
+      <div class="mw-dialog max-w-md"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95">
         <h2 class="font-heading text-lg font-semibold">
           Are you absolutely sure?
         </h2>
@@ -441,9 +574,9 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Alert -->
 <!-- Displays a callout for important information or feedback -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Default Alert -->
+<!-- Default Alert (Info) -->
 <div class="mw-alert">
   <div class="flex items-start gap-3">
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -455,29 +588,68 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
       <path d="M12 8h.01"/>
     </svg>
     <div>
-      <h5 class="font-medium leading-none tracking-tight">Heads up!</h5>
+      <h5 class="font-medium leading-none tracking-tight">CLI Tool Available</h5>
       <p class="mt-1 text-sm text-muted-foreground">
-        You can add components to your app using the CLI.
+        You can add components to your app using the CLI: <code>npx marrow-ui add alert</code>
       </p>
     </div>
   </div>
 </div>
 
-<!-- Destructive Alert -->
+<!-- Destructive Alert (Error) -->
 <div class="mw-alert mw-alert-destructive">
   <div class="flex items-start gap-3">
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
          viewBox="0 0 24 24" fill="none" stroke="currentColor"
          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
          class="mt-0.5 shrink-0">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" x2="12" y1="8" y2="12"/>
+      <line x1="12" x2="12.01" y1="16" y2="16"/>
+    </svg>
+    <div>
+      <h5 class="font-medium leading-none tracking-tight">Form Validation Error</h5>
+      <p class="mt-1 text-sm">
+        Please fix the following errors before submitting: Email address is required.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Success Alert -->
+<div class="mw-alert">
+  <div class="flex items-start gap-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         class="mt-0.5 shrink-0 text-green-600">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+      <polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <div>
+      <h5 class="font-medium leading-none tracking-tight">Changes Saved</h5>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Your profile settings have been updated successfully.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Warning Alert -->
+<div class="mw-alert">
+  <div class="flex items-start gap-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         class="mt-0.5 shrink-0 text-amber-600">
       <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
       <path d="M12 9v4"/>
       <path d="M12 17h.01"/>
     </svg>
     <div>
-      <h5 class="font-medium leading-none tracking-tight">Error</h5>
-      <p class="mt-1 text-sm">
-        Your session has expired. Please log in again.
+      <h5 class="font-medium leading-none tracking-tight">Unsaved Changes</h5>
+      <p class="mt-1 text-sm text-muted-foreground">
+        You have unsaved changes. Save your work before navigating away from this page.
       </p>
     </div>
   </div>
@@ -489,27 +661,48 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Aspect Ratio -->
 <!-- Displays content within a desired ratio using pure CSS -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- 16:9 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+<!-- 16:9 Video Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
      style="aspect-ratio: 16 / 9;">
-  <img src="your-image.jpg"
-       alt="Description"
+  <img src="your-video-thumbnail.jpg"
+       alt="Video thumbnail"
        class="h-full w-full object-cover" />
 </div>
 
-<!-- 1:1 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+<!-- 1:1 Square Profile Photo -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
      style="aspect-ratio: 1 / 1;">
+  <img src="your-profile-photo.jpg"
+       alt="Profile photo"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 4:3 Classic Photo -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
+     style="aspect-ratio: 4 / 3;">
+  <img src="your-photo.jpg"
+       alt="Photo description"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 21:9 Ultra-wide Banner -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
+     style="aspect-ratio: 21 / 9;">
+  <img src="your-banner.jpg"
+       alt="Banner image"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- Using Tailwind Utilities -->
+<div class="aspect-video overflow-hidden rounded-[var(--marrow-radius)] bg-muted">
   <img src="your-image.jpg"
        alt="Description"
        class="h-full w-full object-cover" />
 </div>
 
-<!-- 4:3 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
-     style="aspect-ratio: 4 / 3;">
+<div class="aspect-square overflow-hidden rounded-[var(--marrow-radius)] bg-muted">
   <img src="your-image.jpg"
        alt="Description"
        class="h-full w-full object-cover" />
@@ -521,36 +714,50 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Avatar -->
 <!-- An image element with a fallback for representing the user -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Image Avatar -->
+<!-- Default Size -->
 <div class="mw-avatar">
-  <img src="https://i.pravatar.cc/150?img=32" alt="User avatar" />
+  <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
+</div>
+
+<!-- Small Size -->
+<div class="mw-avatar mw-avatar-sm">
+  <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
+</div>
+
+<!-- Large Size -->
+<div class="mw-avatar mw-avatar-lg">
+  <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
 </div>
 
 <!-- Fallback Initials -->
 <div class="mw-avatar">
-  <span>JD</span>
+  <span>AJ</span>
 </div>
 
-<!-- Small -->
-<div class="mw-avatar mw-avatar-sm">
-  <img src="avatar.jpg" alt="User avatar" />
+<!-- Avatar Group (Overlapping) -->
+<div class="flex -space-x-4">
+  <div class="mw-avatar ring-2 ring-background">
+    <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
+  </div>
+  <div class="mw-avatar ring-2 ring-background">
+    <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
+  </div>
+  <div class="mw-avatar ring-2 ring-background">
+    <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
+  </div>
+  <div class="mw-avatar ring-2 ring-background">
+    <span>+3</span>
+  </div>
 </div>
 
-<!-- Default -->
-<div class="mw-avatar">
-  <img src="avatar.jpg" alt="User avatar" />
-</div>
-
-<!-- Large -->
-<div class="mw-avatar mw-avatar-lg">
-  <img src="avatar.jpg" alt="User avatar" />
-</div>
-
-<!-- Large with Fallback -->
-<div class="mw-avatar mw-avatar-lg">
-  <span>AB</span>
+<!-- With Status Indicator -->
+<div class="relative inline-block">
+  <div class="mw-avatar">
+    <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
+  </div>
+  <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-background"></span>
 </div>
 ```
 
@@ -559,7 +766,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Badge -->
 <!-- Displays a small label or status indicator -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
 <!-- Default -->
 <span class="mw-badge mw-badge-default">Default</span>
@@ -579,31 +786,92 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Breadcrumb -->
 <!-- Displays a hierarchical navigation trail for the current page -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
+
+<!-- @section: Basic Breadcrumb -->
+<nav class="mw-breadcrumb">
+  <a href="#">Home</a>
+  <span>/</span>
+  <a href="#">Products</a>
+  <span>/</span>
+  <a href="#">Electronics</a>
+  <span>/</span>
+  <span class="mw-breadcrumb-current">Headphones</span>
+</nav>
+<!-- @section: Icon Breadcrumb -->
 
 <nav class="mw-breadcrumb">
   <a href="#">Home</a>
 
-  <!-- Separator -->
+  <!-- Chevron separator -->
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
        viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0">
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <a href="#">Documentation</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
     <path d="m9 18 6-6-6-6"/>
   </svg>
 
   <a href="#">Components</a>
 
-  <!-- Separator -->
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
        viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       class="shrink-0">
+       class="shrink-0" aria-hidden="true">
     <path d="m9 18 6-6-6-6"/>
   </svg>
 
-  <!-- Current page (no link) -->
   <span class="mw-breadcrumb-current">Breadcrumb</span>
+</nav>
+<!-- @section: Truncated Breadcrumb -->
+
+<nav class="mw-breadcrumb">
+  <a href="#">Home</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <a href="#">Projects</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <!-- Ellipsis for truncated path -->
+  <span>...</span>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <a href="#">Frontend</a>
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       class="shrink-0" aria-hidden="true">
+    <path d="m9 18 6-6-6-6"/>
+  </svg>
+
+  <span class="mw-breadcrumb-current">Components</span>
 </nav>
 ```
 
@@ -612,38 +880,45 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Button Group -->
 <!-- Group multiple buttons together as a connected set of actions -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Outline Button Group -->
+<!-- Basic Button Group (Day/Week/Month Toggle) -->
+<div class="inline-flex -space-x-px">
+  <button class="mw-btn mw-btn-outline rounded-r-none">Day</button>
+  <button class="mw-btn mw-btn-outline rounded-none border-x-0">Week</button>
+  <button class="mw-btn mw-btn-outline rounded-l-none">Month</button>
+</div>
+
+<!-- Outline Button Group with Connected Borders -->
 <div class="inline-flex -space-x-px">
   <button class="mw-btn mw-btn-outline rounded-r-none">Left</button>
   <button class="mw-btn mw-btn-outline rounded-none border-x-0">Center</button>
   <button class="mw-btn mw-btn-outline rounded-l-none">Right</button>
 </div>
 
-<!-- Icon-only Button Group -->
+<!-- Toolbar-Style Icon Button Group -->
 <div class="inline-flex -space-x-px">
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none">
-    <!-- Icon SVG -->
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-r-none" aria-label="Bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
   </button>
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-none border-x-0">
-    <!-- Icon SVG -->
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-none border-x-0" aria-label="Italic">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
   </button>
-  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-l-none">
-    <!-- Icon SVG -->
+  <button class="mw-btn mw-btn-outline mw-btn-icon rounded-l-none" aria-label="Underline">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16"/><path d="M14 4v16"/><path d="M6 12h8"/></svg>
   </button>
 </div>
 
-<!-- Primary Button Group -->
+<!-- Primary Button Group with Separators -->
 <div class="inline-flex -space-x-px">
-  <button class="mw-btn mw-btn-primary rounded-r-none">Bold</button>
+  <button class="mw-btn mw-btn-primary rounded-r-none">Save</button>
   <button class="mw-btn mw-btn-primary rounded-none"
           style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
-    Italic
+    Save & Close
   </button>
   <button class="mw-btn mw-btn-primary rounded-l-none"
           style="border-left: 1px solid hsl(var(--marrow-primary-foreground) / 0.2);">
-    Underline
+    Save & New
   </button>
 </div>
 ```
@@ -653,8 +928,9 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Button -->
 <!-- Displays a button or a component that looks like a button -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Variants -->
 <!-- Variants -->
 <button class="mw-btn mw-btn-primary">Primary</button>
 <button class="mw-btn mw-btn-secondary">Secondary</button>
@@ -662,14 +938,16 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <button class="mw-btn mw-btn-ghost">Ghost</button>
 <button class="mw-btn mw-btn-destructive">Destructive</button>
 <button class="mw-btn mw-btn-link">Link</button>
+<!-- @section: Sizes -->
 
 <!-- Sizes -->
 <button class="mw-btn mw-btn-primary mw-btn-sm">Small</button>
 <button class="mw-btn mw-btn-primary">Default</button>
 <button class="mw-btn mw-btn-primary mw-btn-lg">Large</button>
+<!-- @section: Icon Button -->
 
 <!-- Icon Button -->
-<button class="mw-btn mw-btn-outline mw-btn-icon">
+<button class="mw-btn mw-btn-outline mw-btn-icon" aria-label="Add item">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
        viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -677,6 +955,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     <path d="M12 5v14"/>
   </svg>
 </button>
+<!-- @section: With Icon -->
 
 <!-- With Icon -->
 <button class="mw-btn mw-btn-primary">
@@ -689,6 +968,21 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   </svg>
   Download
 </button>
+<!-- @section: Loading State -->
+
+<!-- Loading State -->
+<button class="mw-btn mw-btn-primary" disabled>
+  <svg class="animate-spin motion-safe:animate-spin h-4 w-4"
+       xmlns="http://www.w3.org/2000/svg" fill="none"
+       viewBox="0 0 24 24">
+    <circle class="opacity-25" cx="12" cy="12" r="10"
+            stroke="currentColor" stroke-width="4"></circle>
+    <path class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+  </svg>
+  Loading...
+</button>
+<!-- @section: Disabled -->
 
 <!-- Disabled -->
 <button class="mw-btn mw-btn-primary" disabled>Disabled</button>
@@ -704,38 +998,50 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <div x-data="mwCalendar()" class="mw-card w-[280px] p-3">
   <!-- Month Navigation -->
   <div class="flex items-center justify-between mb-4">
-    <button @click="prevMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+    <button @click="prevMonth()"
+            class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
+            aria-label="Previous month">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
         <path d="m15 18-6-6 6-6"/>
       </svg>
     </button>
     <span class="text-sm font-medium"
-          x-text="monthName + ' ' + currentYear"></span>
-    <button @click="nextMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
+          x-text="monthName + ' ' + currentYear"
+          role="heading"
+          aria-level="2"
+          aria-live="polite"></span>
+    <button @click="nextMonth()"
+            class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
+            aria-label="Next month">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
         <path d="m9 18 6-6-6-6"/>
       </svg>
     </button>
   </div>
 
   <!-- Day of week headers -->
-  <div class="grid grid-cols-7 mb-1">
+  <div class="grid grid-cols-7 mb-1" role="row">
     <template x-for="day in ['Su','Mo','Tu','We','Th','Fr','Sa']" :key="day">
       <div class="text-center text-xs font-medium text-muted-foreground py-1"
-           x-text="day"></div>
+           x-text="day"
+           role="columnheader"></div>
     </template>
   </div>
 
   <!-- Day grid -->
-  <div class="grid grid-cols-7">
+  <div class="grid grid-cols-7" role="grid" aria-label="Calendar days">
     <template x-for="(day, index) in days" :key="index">
       <button
         @click="selectDate(day)"
         :disabled="!day"
+        :aria-label="day ? 'Select ' + monthName + ' ' + day + ', ' + currentYear : ''"
+        :aria-pressed="isSelected(day)"
         :class="{
           'bg-primary text-primary-foreground hover:bg-primary/90': isSelected(day),
           'bg-accent': isToday(day) && !isSelected(day),
@@ -743,10 +1049,28 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
           'opacity-0 pointer-events-none': !day
         }"
         class="h-8 w-8 mx-auto rounded-[var(--marrow-radius)] text-sm
-               flex items-center justify-center transition-colors"
+               flex items-center justify-center
+               transition-[background-color,color,opacity]"
+        role="gridcell"
         x-text="day || ''">
       </button>
     </template>
+  </div>
+
+  <!-- Selected date display -->
+  <div class="mt-4 pt-4 border-t border-border text-sm text-center"
+       x-show="selected"
+       x-transition:enter="transition-[opacity,transform] duration-200"
+       x-transition:enter-start="opacity-0 translate-y-[-8px]"
+       x-transition:enter-end="opacity-100 translate-y-0">
+    <span class="text-muted-foreground">Selected: </span>
+    <span class="font-medium"
+          x-text="selected ? selected.toLocaleDateString('en-US', {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          }) : ''"></span>
   </div>
 </div>
 ```
@@ -755,21 +1079,63 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
 ```html
 <!-- Marrow UI: Card -->
-<!-- A container component for grouping related content with header, body, and footer sections -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- A container component for grouping related content with consistent styling -->
+<!-- Requires: Tailwind CSS, marrow.css -->
+
+<!-- @section: Profile Card -->
+<div class="mw-card">
+  <div class="flex items-center gap-3">
+    <div class="mw-avatar">
+      <span>AJ</span>
+    </div>
+    <div>
+      <h3 class="font-heading font-semibold">Alice Johnson</h3>
+      <p class="text-sm text-muted-foreground">Product Designer</p>
+    </div>
+  </div>
+  <p class="text-sm text-muted-foreground mt-3 leading-relaxed">
+    Passionate about creating intuitive user experiences that solve real problems.
+  </p>
+</div>
+<!-- @section: Notification Card -->
 
 <div class="mw-card">
-  <div class="pb-3 mb-3 border-b border-border">
-    <h3 class="font-heading text-lg font-semibold">Card Title</h3>
-    <p class="text-sm text-muted-foreground mt-1">Card description goes here.</p>
+  <div class="flex gap-3">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary flex-shrink-0 mt-0.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="flex-1 min-w-0">
+      <h3 class="font-heading font-semibold">New comment on your post</h3>
+      <p class="text-xs text-muted-foreground mt-1">2 minutes ago</p>
+      <p class="text-sm text-muted-foreground mt-2">
+        "Great insights! I'd love to hear more about your approach."
+      </p>
+    </div>
   </div>
-  <div class="py-2">
-    <p class="text-sm text-muted-foreground">This is the card content area.</p>
+</div>
+<!-- @section: Pricing Card -->
+
+<div class="mw-card">
+  <div class="text-center">
+    <h3 class="font-heading text-lg font-semibold">Pro</h3>
+    <div class="mt-2">
+      <span class="text-3xl font-bold">$29</span>
+      <span class="text-muted-foreground">/mo</span>
+    </div>
   </div>
-  <div class="pt-3 mt-3 border-t border-border flex justify-end gap-2">
-    <button class="mw-btn mw-btn-outline mw-btn-sm">Cancel</button>
-    <button class="mw-btn mw-btn-primary mw-btn-sm">Save</button>
-  </div>
+  <ul class="mt-4 space-y-2">
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Unlimited projects
+    </li>
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Advanced analytics
+    </li>
+    <li class="flex items-center gap-2 text-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      Priority support
+    </li>
+  </ul>
+  <button class="mw-btn mw-btn-primary w-full mt-4">Get started</button>
 </div>
 ```
 
@@ -780,46 +1146,81 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A slideshow component for cycling through content with navigation controls -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<div x-data="mwCarousel(3)">
+<div x-data="mwCarousel(4)">
   <div class="relative overflow-hidden rounded-marrow border border-border">
     <!-- Slides -->
-    <div class="relative min-h-[200px]">
-      <div x-show="current === 0" class="flex items-center justify-center h-[200px] bg-muted/30">
-        <div class="text-center">
-          <p class="text-lg font-semibold">Slide 1</p>
-          <p class="text-sm text-muted-foreground">First slide content</p>
+    <div class="relative h-[280px]">
+      <div x-show="current === 0"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+        <div class="text-center space-y-2">
+          <p class="text-2xl font-bold">Welcome</p>
+          <p class="text-muted-foreground">Slide 1 of 4</p>
         </div>
       </div>
-      <div x-show="current === 1" class="flex items-center justify-center h-[200px] bg-muted/30">
-        <div class="text-center">
-          <p class="text-lg font-semibold">Slide 2</p>
-          <p class="text-sm text-muted-foreground">Second slide content</p>
+      <div x-show="current === 1"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-secondary/20 to-secondary/5">
+        <div class="text-center space-y-2">
+          <p class="text-2xl font-bold">Features</p>
+          <p class="text-muted-foreground">Slide 2 of 4</p>
         </div>
       </div>
-      <div x-show="current === 2" class="flex items-center justify-center h-[200px] bg-muted/30">
-        <div class="text-center">
-          <p class="text-lg font-semibold">Slide 3</p>
-          <p class="text-sm text-muted-foreground">Third slide content</p>
+      <div x-show="current === 2"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-accent/20 to-accent/5">
+        <div class="text-center space-y-2">
+          <p class="text-2xl font-bold">Benefits</p>
+          <p class="text-muted-foreground">Slide 3 of 4</p>
+        </div>
+      </div>
+      <div x-show="current === 3"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted/40 to-muted/10">
+        <div class="text-center space-y-2">
+          <p class="text-2xl font-bold">Get Started</p>
+          <p class="text-muted-foreground">Slide 4 of 4</p>
         </div>
       </div>
     </div>
 
     <!-- Prev/Next Buttons -->
     <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Previous slide">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
     </button>
     <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 mw-btn mw-btn-outline mw-btn-icon bg-background/80 backdrop-blur-sm" aria-label="Next slide">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
     </button>
   </div>
 
   <!-- Dot Indicators -->
-  <div class="flex justify-center gap-2 mt-3">
+  <div class="flex justify-center gap-2 mt-4" role="group" aria-label="Slide navigation">
     <template x-for="i in count" :key="i">
       <button @click="goTo(i - 1)"
         :class="current === i - 1 ? 'bg-primary' : 'bg-muted-foreground/30'"
         class="w-2 h-2 rounded-full transition-colors"
-        :aria-label="'Go to slide ' + i"></button>
+        :aria-label="'Go to slide ' + i"
+        :aria-current="current === i - 1 ? 'true' : 'false'"></button>
     </template>
   </div>
 </div>
@@ -829,9 +1230,10 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
 ```html
 <!-- Marrow UI: Chart -->
-<!-- Simple CSS-based bar chart for visualizing data, with guidance for production charting libraries -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- CSS-only bar chart patterns for simple data visualization using Marrow theme colors -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Horizontal Chart -->
 <div class="mw-card">
   <h3 class="font-heading font-semibold mb-1">Monthly Revenue</h3>
   <p class="text-sm text-muted-foreground mb-4">Jan &ndash; Jun 2025</p>
@@ -857,9 +1259,109 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
       </div>
       <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$5,200</span>
     </div>
-    <!-- Add more bars as needed -->
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Apr</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 90%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$9,000</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">May</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 72%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$7,200</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Jun</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 100%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$10,000</span>
+    </div>
   </div>
 </div>
+<!-- @section: Vertical Chart -->
+
+<div class="mw-card">
+  <h3 class="font-heading font-semibold mb-1">Page Views</h3>
+  <p class="text-sm text-muted-foreground mb-4">Weekly traffic</p>
+  <div class="flex items-end justify-between gap-3 h-40">
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 65%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Mon</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 78%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Tue</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 52%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Wed</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 90%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Thu</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 72%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Fri</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 100%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Sat</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 85%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Sun</span>
+    </div>
+  </div>
+</div>
+<!-- @section: Chart.js -->
+
+<!-- Example: Chart.js integration with Marrow UI -->
+<div class="mw-card">
+  <h3 class="font-heading font-semibold mb-4">Analytics Dashboard</h3>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Revenue',
+        data: [6500, 7800, 5200, 9000, 7200, 10000],
+        backgroundColor: 'hsl(var(--marrow-primary))',
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+</script>
 ```
 
 ### Checkbox
@@ -869,7 +1371,8 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A toggleable checkbox control with label and checked state indicator -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<!-- Unchecked by default -->
+<!-- @section: Checkbox -->
+<!-- Single Checkbox -->
 <div x-data="mwCheckbox()" class="flex items-center gap-2">
   <button @click="toggle()"
     :data-state="checked ? 'checked' : 'unchecked'"
@@ -888,7 +1391,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   </label>
 </div>
 
-<!-- Checked by default -->
+<!-- Checked by Default -->
 <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
   <button @click="toggle()"
     :data-state="checked ? 'checked' : 'unchecked'"
@@ -906,6 +1409,93 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     Send me email notifications
   </label>
 </div>
+
+<!-- Disabled State -->
+<div x-data="mwCheckbox()" class="flex items-center gap-2 opacity-50 pointer-events-none">
+  <button
+    data-state="unchecked"
+    class="mw-checkbox"
+    role="checkbox"
+    aria-checked="false"
+    disabled>
+    <svg x-show="false"
+      xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+  </button>
+  <label class="mw-label cursor-not-allowed select-none">
+    Disabled checkbox
+  </label>
+</div>
+<!-- @section: Checkbox Group -->
+
+<!-- Checkbox Group (Notification Preferences) -->
+<div class="space-y-4">
+  <div>
+    <h3 class="font-heading text-lg font-semibold">Notification Preferences</h3>
+    <p class="text-sm text-muted-foreground mt-1">
+      Choose how you'd like to receive notifications
+    </p>
+  </div>
+
+  <div class="space-y-3">
+    <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        Email notifications
+      </label>
+    </div>
+
+    <div x-data="mwCheckbox(false)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        SMS notifications
+      </label>
+    </div>
+
+    <div x-data="mwCheckbox(true)" class="flex items-center gap-2">
+      <button @click="toggle()"
+        :data-state="checked ? 'checked' : 'unchecked'"
+        class="mw-checkbox"
+        role="checkbox"
+        :aria-checked="checked">
+        <svg x-show="checked"
+          xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </button>
+      <label @click="toggle()" class="mw-label cursor-pointer select-none">
+        Push notifications
+      </label>
+    </div>
+  </div>
+</div>
 ```
 
 ### Collapsible
@@ -915,34 +1505,60 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A component that can be expanded or collapsed to show or hide content -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<div x-data="mwCollapsible()">
+<div class="rounded-marrow border border-border p-4" x-data="mwCollapsible()">
   <div class="flex items-center justify-between">
-    <h4 class="text-sm font-semibold">@marrow-ui/components</h4>
-    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        :class="open ? 'rotate-180' : ''" class="transition-transform">
+    <h4 class="font-heading text-base font-semibold">Your starred repositories</h4>
+    <button
+      @click="toggle()"
+      class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
+      :aria-expanded="open"
+      aria-label="Toggle repositories">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        :class="open ? 'rotate-180' : ''"
+        class="transition-transform duration-200"
+        aria-hidden="true">
         <path d="m6 9 6 6 6-6"/>
       </svg>
     </button>
   </div>
 
-  <!-- Always visible item -->
-  <div class="mt-2 rounded-marrow border border-border px-3 py-2 text-sm">
-    <span class="text-muted-foreground">marrow-ui/card.html</span>
-  </div>
-
   <!-- Collapsible content -->
-  <div x-show="open" x-collapse class="mt-1 space-y-1">
-    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
-      <span class="text-muted-foreground">marrow-ui/button.html</span>
+  <div x-show="open" x-collapse class="mt-3 space-y-2">
+    <div class="rounded-marrow border border-border bg-card px-4 py-3">
+      <div class="flex items-start justify-between">
+        <div>
+          <h5 class="font-medium">marrow-ui/core</h5>
+          <p class="mt-1 text-sm text-muted-foreground">A modern UI kit for Alpine.js and Tailwind CSS</p>
+        </div>
+        <span class="mw-badge mw-badge-secondary">TypeScript</span>
+      </div>
     </div>
-    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
-      <span class="text-muted-foreground">marrow-ui/dialog.html</span>
+    <div class="rounded-marrow border border-border bg-card px-4 py-3">
+      <div class="flex items-start justify-between">
+        <div>
+          <h5 class="font-medium">alpine-components</h5>
+          <p class="mt-1 text-sm text-muted-foreground">Reusable Alpine.js component library</p>
+        </div>
+        <span class="mw-badge mw-badge-secondary">JavaScript</span>
+      </div>
     </div>
-    <div class="rounded-marrow border border-border px-3 py-2 text-sm">
-      <span class="text-muted-foreground">marrow-ui/tabs.html</span>
+    <div class="rounded-marrow border border-border bg-card px-4 py-3">
+      <div class="flex items-start justify-between">
+        <div>
+          <h5 class="font-medium">tailwind-utilities</h5>
+          <p class="mt-1 text-sm text-muted-foreground">Custom Tailwind CSS utilities and plugins</p>
+        </div>
+        <span class="mw-badge mw-badge-secondary">CSS</span>
+      </div>
     </div>
   </div>
 </div>
@@ -961,14 +1577,17 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   { value: 'angular', label: 'Angular' },
   { value: 'svelte', label: 'Svelte' },
   { value: 'solid', label: 'Solid' },
-  { value: 'alpine', label: 'Alpine.js' }
-])">
+  { value: 'nextjs', label: 'Next.js' },
+  { value: 'nuxt', label: 'Nuxt' },
+  { value: 'astro', label: 'Astro' }
+])" class="w-full max-w-xs">
   <div class="relative">
     <div class="relative">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
         viewBox="0 0 24 24" fill="none" stroke="currentColor"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+        class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+        aria-hidden="true">
         <circle cx="11" cy="11" r="8"/>
         <path d="m21 21-4.3-4.3"/>
       </svg>
@@ -977,29 +1596,54 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
         placeholder="Search framework..."
         x-model="search"
         @focus="open = true"
-        @click="open = true">
+        @click="open = true"
+        role="combobox"
+        :aria-expanded="open"
+        aria-controls="framework-listbox"
+        aria-autocomplete="list">
     </div>
 
-    <div x-show="open" @click.away="open = false"
-      class="absolute z-10 mt-1 w-full mw-popover max-h-[200px] overflow-y-auto">
+    <div x-show="open"
+      @click.away="open = false"
+      id="framework-listbox"
+      role="listbox"
+      class="absolute z-10 mt-1 w-full mw-popover max-h-[200px] overflow-y-auto"
+      x-transition:enter="transition ease-out duration-100"
+      x-transition:enter-start="opacity-0 -translate-y-1"
+      x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-75"
+      x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-1">
       <template x-for="item in filtered" :key="item.value">
-        <button @click="select(item)" class="mw-menu-item"
-          :class="selected?.value === item.value ? 'bg-accent' : ''">
+        <button
+          @click="select(item)"
+          class="mw-menu-item"
+          :class="selected?.value === item.value ? 'bg-accent' : ''"
+          role="option"
+          :aria-selected="selected?.value === item.value">
           <svg x-show="selected?.value === item.value"
             xmlns="http://www.w3.org/2000/svg" width="14" height="14"
             viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
             <path d="M20 6 9 17l-5-5"/>
           </svg>
           <span x-show="selected?.value !== item.value" class="w-[14px]"></span>
           <span x-text="item.label"></span>
         </button>
       </template>
-      <div x-show="filtered.length === 0" class="px-3 py-2 text-sm text-muted-foreground">
+      <div x-show="filtered.length === 0"
+        class="px-3 py-2 text-sm text-muted-foreground"
+        role="status">
         No results found.
       </div>
     </div>
   </div>
+
+  <!-- Selected value display -->
+  <p class="mt-3 text-sm text-muted-foreground" x-show="selected">
+    Selected: <span class="font-medium text-foreground" x-text="selected?.label"></span>
+  </p>
 </div>
 ```
 
@@ -1007,15 +1651,16 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
 ```html
 <!-- Marrow UI: Command -->
-<!-- A command palette overlay for quick navigation and actions, triggered with Ctrl+K -->
+<!-- A command palette overlay for quick navigation and actions, triggered with keyboard shortcuts -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<div x-data="mwCommand()" @keydown.window.ctrl.k.prevent="show()">
+<div x-data="mwCommand()" @keydown.window.meta.k.prevent="show()">
   <!-- Trigger Button -->
   <button @click="show()" class="mw-btn mw-btn-outline gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
     Search...
     <span class="flex items-center gap-0.5 ml-2">
-      <span class="mw-kbd">Ctrl</span>
+      <span class="mw-kbd">⌘</span>
       <span class="mw-kbd">K</span>
     </span>
   </button>
@@ -1023,37 +1668,68 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   <!-- Command Palette Overlay -->
   <template x-teleport="body">
     <div x-show="open" class="fixed inset-0 z-50" x-cloak>
-      <div class="mw-overlay" @click="close()"></div>
+      <div class="mw-overlay" @click="close()"
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"></div>
       <div class="fixed top-[20%] left-1/2 -translate-x-1/2 z-51 w-full max-w-lg"
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
         @keydown.escape.window="close()">
         <div class="bg-popover border border-border rounded-marrow shadow-lg overflow-hidden">
           <!-- Search Input -->
           <div class="flex items-center border-b border-border px-3">
-            <svg ...search icon.../>
-            <input type="text" x-model="search"
-              class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none"
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" x-model="search" x-ref="searchInput"
+              x-init="$watch('open', v => { if (v) $nextTick(() => $refs.searchInput.focus()) })"
+              class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none placeholder:text-muted-foreground"
               placeholder="Type a command or search...">
           </div>
 
           <!-- Results -->
           <div class="max-h-[300px] overflow-y-auto p-1">
-            <div class="mw-menu-label">Suggestions</div>
-            <button x-show="matchesSearch('Calendar')" class="mw-menu-item">
-              Calendar
-            </button>
-            <button x-show="matchesSearch('Settings')" class="mw-menu-item">
-              Settings
-            </button>
+            <!-- Suggestions Group -->
+            <div x-show="matchesSearch('Calendar') || matchesSearch('Search') || matchesSearch('Calculator')">
+              <div class="mw-menu-label">Suggestions</div>
+              <button x-show="matchesSearch('Calendar')" @click="close()" class="mw-menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                Calendar
+              </button>
+              <button x-show="matchesSearch('Search')" @click="close()" class="mw-menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                Search Emoji
+              </button>
+              <button x-show="matchesSearch('Calculator')" @click="close()" class="mw-menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="14"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                Calculator
+              </button>
+            </div>
 
-            <div class="mw-menu-separator"></div>
+            <div class="mw-menu-separator" x-show="(matchesSearch('Calendar') || matchesSearch('Search') || matchesSearch('Calculator')) && (matchesSearch('Profile') || matchesSearch('Billing') || matchesSearch('Preferences'))"></div>
 
-            <div class="mw-menu-label">Account</div>
-            <button x-show="matchesSearch('Profile')" class="mw-menu-item">
-              Profile
-            </button>
-            <button x-show="matchesSearch('Billing')" class="mw-menu-item">
-              Billing
-            </button>
+            <!-- Settings Group -->
+            <div x-show="matchesSearch('Profile') || matchesSearch('Billing') || matchesSearch('Preferences')">
+              <div class="mw-menu-label">Settings</div>
+              <button x-show="matchesSearch('Profile')" @click="close()" class="mw-menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Profile
+              </button>
+              <button x-show="matchesSearch('Billing')" @click="close()" class="mw-menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                Billing
+              </button>
+              <button x-show="matchesSearch('Preferences')" @click="close()" class="mw-menu-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                Preferences
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1072,8 +1748,8 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <div x-data="mwContextMenu()">
   <!-- Right-click trigger area -->
   <div @contextmenu="show($event)"
-    class="flex items-center justify-center h-[150px] border-2 border-dashed border-border rounded-marrow text-sm text-muted-foreground">
-    Right-click here to open context menu
+    class="flex items-center justify-center h-[200px] border-2 border-dashed border-border rounded-marrow text-sm text-muted-foreground cursor-default">
+    Right-click here
   </div>
 
   <!-- Context Menu -->
@@ -1081,25 +1757,44 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     @click.away="close()"
     @keydown.escape.window="close()"
     :style="'position: fixed; left: ' + x + 'px; top: ' + y + 'px; z-index: 50;'"
-    class="mw-popover w-48">
+    x-transition:enter="transition ease-out duration-100"
+    x-transition:enter-start="opacity-0 scale-95"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-75"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+    class="mw-popover w-56">
     <button @click="close()" class="mw-menu-item">
-      Share
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      Back
+      <span class="ml-auto text-xs text-muted-foreground">Alt+←</span>
     </button>
     <button @click="close()" class="mw-menu-item">
-      Copy
-      <span class="ml-auto text-xs text-muted-foreground">Ctrl+C</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      Forward
+      <span class="ml-auto text-xs text-muted-foreground">Alt+→</span>
     </button>
     <button @click="close()" class="mw-menu-item">
-      Edit
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+      Reload
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+R</span>
     </button>
     <div class="mw-menu-separator"></div>
     <button @click="close()" class="mw-menu-item">
-      Rename
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Save As...
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+S</span>
+    </button>
+    <button @click="close()" class="mw-menu-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+      Print
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+P</span>
     </button>
     <div class="mw-menu-separator"></div>
-    <button @click="close()" class="mw-menu-item text-destructive">
-      Delete
-      <span class="ml-auto text-xs text-muted-foreground">Del</span>
+    <button @click="close()" class="mw-menu-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      View Source
+      <span class="ml-auto text-xs text-muted-foreground">Ctrl+U</span>
     </button>
   </div>
 </div>
@@ -1113,14 +1808,15 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
 <div x-data="{
-  sortCol: 'name',
+  sortCol: 'invoice',
   sortAsc: true,
   rows: [
-    { name: 'Alice Johnson', email: 'alice@example.com', role: 'Admin', status: 'Active' },
-    { name: 'Bob Smith', email: 'bob@example.com', role: 'Editor', status: 'Active' },
-    { name: 'Carol White', email: 'carol@example.com', role: 'Viewer', status: 'Inactive' },
-    { name: 'David Brown', email: 'david@example.com', role: 'Editor', status: 'Active' },
-    { name: 'Eva Martinez', email: 'eva@example.com', role: 'Admin', status: 'Active' }
+    { invoice: 'INV-2024-001', name: 'Alice Johnson', email: 'alice@acme.com', status: 'Paid', amount: 1250.00, date: '2024-01-15' },
+    { invoice: 'INV-2024-002', name: 'Bob Smith', email: 'bob@techcorp.com', status: 'Pending', amount: 890.50, date: '2024-01-18' },
+    { invoice: 'INV-2024-003', name: 'Carol White', email: 'carol@design.io', status: 'Overdue', amount: 2150.00, date: '2024-01-10' },
+    { invoice: 'INV-2024-004', name: 'David Brown', email: 'david@startup.com', status: 'Paid', amount: 3400.00, date: '2024-01-20' },
+    { invoice: 'INV-2024-005', name: 'Eva Martinez', email: 'eva@agency.co', status: 'Pending', amount: 1680.75, date: '2024-01-22' },
+    { invoice: 'INV-2024-006', name: 'Frank Garcia', email: 'frank@solutions.net', status: 'Paid', amount: 975.00, date: '2024-01-25' }
   ],
   sort(col) {
     if (this.sortCol === col) { this.sortAsc = !this.sortAsc; }
@@ -1128,9 +1824,14 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   },
   get sorted() {
     return [...this.rows].sort((a, b) => {
-      const valA = a[this.sortCol].toLowerCase();
-      const valB = b[this.sortCol].toLowerCase();
-      return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+      let valA = a[this.sortCol];
+      let valB = b[this.sortCol];
+      if (this.sortCol === 'amount') {
+        return this.sortAsc ? valA - valB : valB - valA;
+      }
+      valA = String(valA).toLowerCase();
+      valB = String(valB).toLowerCase();
+      return this.sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valB);
     });
   }
 }">
@@ -1138,29 +1839,61 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     <table class="mw-table">
       <thead>
         <tr>
-          <th class="cursor-pointer select-none" @click="sort('name')">
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('invoice')">
             <span class="inline-flex items-center gap-1">
-              Name
-              <svg x-show="sortCol === 'name'" ...chevron icon...
-                :class="sortAsc ? '' : 'rotate-180'"></svg>
+              Invoice
+              <svg x-show="sortCol === 'invoice'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
             </span>
           </th>
-          <th class="cursor-pointer select-none" @click="sort('email')">Email</th>
-          <th class="cursor-pointer select-none" @click="sort('role')">Role</th>
-          <th class="cursor-pointer select-none" @click="sort('status')">Status</th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('name')">
+            <span class="inline-flex items-center gap-1">
+              Name
+              <svg x-show="sortCol === 'name'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('email')">
+            <span class="inline-flex items-center gap-1">
+              Email
+              <svg x-show="sortCol === 'email'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('status')">
+            <span class="inline-flex items-center gap-1">
+              Status
+              <svg x-show="sortCol === 'status'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors text-right" @click="sort('amount')">
+            <span class="inline-flex items-center gap-1 justify-end">
+              Amount
+              <svg x-show="sortCol === 'amount'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
+          <th class="cursor-pointer select-none hover:text-foreground transition-colors" @click="sort('date')">
+            <span class="inline-flex items-center gap-1">
+              Date
+              <svg x-show="sortCol === 'date'" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="sortAsc ? '' : 'rotate-180'" class="transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </th>
         </tr>
       </thead>
       <tbody>
-        <template x-for="row in sorted" :key="row.email">
+        <template x-for="row in sorted" :key="row.invoice">
           <tr>
+            <td class="font-mono text-sm" x-text="row.invoice"></td>
             <td class="font-medium" x-text="row.name"></td>
             <td class="text-muted-foreground" x-text="row.email"></td>
-            <td><span class="mw-badge mw-badge-secondary" x-text="row.role"></span></td>
             <td>
               <span class="mw-badge"
-                :class="row.status === 'Active' ? 'mw-badge-default' : 'mw-badge-outline'"
+                :class="{
+                  'mw-badge-default': row.status === 'Paid',
+                  'mw-badge-secondary': row.status === 'Pending',
+                  'mw-badge-destructive': row.status === 'Overdue'
+                }"
                 x-text="row.status"></span>
             </td>
+            <td class="text-right font-medium" x-text="'$' + row.amount.toFixed(2)"></td>
+            <td class="text-muted-foreground" x-text="row.date"></td>
           </tr>
         </template>
       </tbody>
@@ -1177,15 +1910,19 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
 <div x-data="mwDatePicker()">
+  <label class="block text-sm font-medium mb-2">Event Date</label>
   <div class="relative">
     <!-- Trigger Button -->
-    <button @click="toggle()" class="mw-input flex items-center justify-between text-left cursor-pointer">
+    <button
+      @click="toggle()"
+      type="button"
+      class="mw-input flex items-center justify-between text-left cursor-pointer w-full">
       <span :class="selected ? 'text-foreground' : 'text-muted-foreground'"
         x-text="formatted"></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
         viewBox="0 0 24 24" fill="none" stroke="currentColor"
         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="text-muted-foreground">
+        class="text-muted-foreground shrink-0" aria-hidden="true">
         <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
         <line x1="16" x2="16" y1="2" y2="6"/>
         <line x1="8" x2="8" y1="2" y2="6"/>
@@ -1195,16 +1932,34 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
     <!-- Calendar Dropdown -->
     <div x-show="open" @click.away="open = false" x-cloak
-      class="absolute z-10 mt-1 mw-popover p-3 w-[280px]">
+      class="absolute z-10 mt-1 mw-popover p-3 w-[280px]"
+      x-transition:enter="transition ease-out duration-100"
+      x-transition:enter-start="opacity-0 -translate-y-1"
+      x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-75"
+      x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-1">
 
       <!-- Month Navigation -->
       <div class="flex items-center justify-between mb-3">
-        <button @click="prevMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
-          <svg ...left chevron.../>
+        <button @click="prevMonth()" type="button"
+          class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
+          aria-label="Previous month">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
         </button>
         <span class="text-sm font-medium" x-text="monthName + ' ' + currentYear"></span>
-        <button @click="nextMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm">
-          <svg ...right chevron.../>
+        <button @click="nextMonth()" type="button"
+          class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
+          aria-label="Next month">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
         </button>
       </div>
 
@@ -1220,13 +1975,14 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
         <template x-for="(day, index) in days" :key="index">
           <button
             @click="selectDate(day)"
+            type="button"
             :disabled="!day"
             :class="{
               'bg-primary text-primary-foreground': isSelected(day),
               'hover:bg-accent': day && !isSelected(day),
               'invisible': !day
             }"
-            class="w-8 h-8 text-sm rounded-marrow flex items-center justify-center"
+            class="w-8 h-8 text-sm rounded-marrow flex items-center justify-center transition-colors"
             x-text="day || ''">
           </button>
         </template>
@@ -1246,10 +2002,22 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <div x-data="mwDialog()">
   <button @click="show()" class="mw-btn mw-btn-outline">Open Dialog</button>
 
-  <template x-if="open">
-    <div>
-      <div class="mw-overlay" @click="close()"></div>
-      <div class="mw-dialog" @keydown.escape.window="close()">
+  <template x-teleport="body">
+    <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+      <div class="mw-overlay" @click="close()"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"></div>
+      <div class="mw-dialog" @keydown.escape.window="close()"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95">
         <div class="flex flex-col space-y-1.5 mb-4">
           <h3 class="font-heading text-lg font-semibold">Edit Profile</h3>
           <p class="text-sm text-muted-foreground">
@@ -1287,7 +2055,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Direction -->
 <!-- Support for right-to-left (RTL) layouts using the dir attribute -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
 <!-- LTR (default) -->
 <div class="mw-card" dir="ltr">
@@ -1333,9 +2101,15 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <div x-data="mwSheet()">
   <button @click="show()" class="mw-btn mw-btn-outline">Open Drawer</button>
 
-  <template x-if="open">
-    <div>
-      <div class="mw-overlay" @click="close()"></div>
+  <template x-teleport="body">
+    <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+      <div class="mw-overlay" @click="close()"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"></div>
       <div class="mw-sheet mw-sheet-bottom rounded-t-lg"
            @keydown.escape.window="close()"
            x-transition:enter="transition ease-out duration-300"
@@ -1349,22 +2123,32 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
         <div class="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted-foreground/20 mb-4 mt-1"></div>
 
         <div class="space-y-2 text-center mb-6">
-          <h3 class="font-heading text-lg font-semibold">Edit Profile</h3>
+          <h3 class="font-heading text-lg font-semibold">Share</h3>
           <p class="text-sm text-muted-foreground">
-            Make changes to your profile. Click save when you're done.
+            Share this content with your friends.
           </p>
         </div>
 
-        <div class="space-y-4 max-w-sm mx-auto">
-          <div class="space-y-2">
-            <label class="mw-label">Name</label>
-            <input type="text" class="mw-input" value="John Doe" />
-          </div>
-          <div class="space-y-2">
-            <label class="mw-label">Username</label>
-            <input type="text" class="mw-input" value="@johndoe" />
-          </div>
-          <button @click="close()" class="mw-btn mw-btn-primary w-full">Save changes</button>
+        <div class="space-y-3 max-w-sm mx-auto">
+          <button class="mw-btn mw-btn-outline w-full justify-start gap-3">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+            </svg>
+            Share on Twitter
+          </button>
+          <button class="mw-btn mw-btn-outline w-full justify-start gap-3">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Share on Facebook
+          </button>
+          <button class="mw-btn mw-btn-outline w-full justify-start gap-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+            </svg>
+            Copy Link
+          </button>
+          <button @click="close()" class="mw-btn mw-btn-secondary w-full mt-2">Cancel</button>
         </div>
       </div>
     </div>
@@ -1381,7 +2165,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
 <div x-data="mwDropdown()" @click.outside="close()" class="relative">
   <button @click="toggle()" class="mw-btn mw-btn-outline">
-    Options
+    My Account
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
   </button>
 
@@ -1397,17 +2181,30 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     <div class="mw-menu-label">My Account</div>
     <div class="mw-menu-separator"></div>
 
-    <button class="mw-menu-item" @click="close()">Profile</button>
-    <button class="mw-menu-item" @click="close()">Settings</button>
-    <button class="mw-menu-item" @click="close()">Billing</button>
+    <button class="mw-menu-item" @click="close()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Profile
+      <span class="ml-auto text-xs text-muted-foreground">⌘P</span>
+    </button>
+    <button class="mw-menu-item" @click="close()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      Settings
+      <span class="ml-auto text-xs text-muted-foreground">⌘S</span>
+    </button>
 
     <div class="mw-menu-separator"></div>
     <div class="mw-menu-label">Team</div>
 
-    <button class="mw-menu-item" @click="close()">Invite members</button>
+    <button class="mw-menu-item" @click="close()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+      Invite members
+    </button>
 
     <div class="mw-menu-separator"></div>
-    <button class="mw-menu-item text-destructive" @click="close()">Log out</button>
+    <button class="mw-menu-item text-destructive" @click="close()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+      Log out
+    </button>
   </div>
 </div>
 ```
@@ -1417,35 +2214,52 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Empty -->
 <!-- An empty state placeholder to display when there is no content to show -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Empty -->
 <div class="mw-empty">
   <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
        viewBox="0 0 24 24" fill="none" stroke="currentColor"
        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-       class="mb-4 opacity-50">
-    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
-    <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
-    <path d="M10 12a1 1 0 0 0-1 1v1a1 1 0 0 1-1 1 1 1 0 0 1 1 1v1a1 1 0 0 0 1 1"/>
-    <path d="M14 18a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1 1 1 0 0 1-1-1v-1a1 1 0 0 0-1-1"/>
+       class="mb-4 opacity-50" aria-hidden="true">
+    <rect x="2" y="3" width="20" height="18" rx="2"/>
+    <path d="M8 7h8"/>
+    <path d="M8 11h6"/>
   </svg>
 
-  <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+  <h3 class="font-heading text-lg font-semibold mb-1">No projects yet</h3>
 
   <p class="text-sm text-muted-foreground max-w-sm mb-4">
-    There are no items to display right now. Try adjusting your
-    filters or create a new item to get started.
+    Get started by creating your first project.
   </p>
 
   <button class="mw-btn mw-btn-primary">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
          viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true">
       <path d="M5 12h14"/>
       <path d="M12 5v14"/>
     </svg>
-    Create new item
+    Create Project
   </button>
+</div>
+<!-- @section: Search Empty -->
+
+<div class="mw-empty">
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+       viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+       class="mb-4 opacity-50" aria-hidden="true">
+    <circle cx="11" cy="11" r="8"/>
+    <path d="m21 21-4.35-4.35"/>
+  </svg>
+
+  <h3 class="font-heading text-lg font-semibold mb-1">No results found</h3>
+
+  <p class="text-sm text-muted-foreground max-w-sm mb-4">
+    Try adjusting your search or filters.
+  </p>
 </div>
 ```
 
@@ -1454,14 +2268,15 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Field -->
 <!-- A complete form field pattern combining label, input, and helper text -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Default field -->
+<!-- Basic field with helper text -->
 <div class="space-y-2">
   <label for="field-name" class="mw-label">Name</label>
   <input id="field-name" type="text" class="mw-input"
-         placeholder="Enter your name" />
-  <p class="text-sm text-muted-foreground">
+         placeholder="Enter your name"
+         aria-describedby="field-name-desc" />
+  <p id="field-name-desc" class="text-sm text-muted-foreground">
     This is your public display name.
   </p>
 </div>
@@ -1472,21 +2287,68 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     Email <span class="text-destructive">*</span>
   </label>
   <input id="field-email" type="email" class="mw-input"
-         placeholder="you@example.com" />
-  <p class="text-sm text-muted-foreground">
+         placeholder="you@example.com" required
+         aria-describedby="field-email-desc" />
+  <p id="field-email-desc" class="text-sm text-muted-foreground">
     We will never share your email.
   </p>
 </div>
 
-<!-- Error state -->
+<!-- Field with error state -->
 <div class="space-y-2">
   <label for="field-error" class="mw-label">Username</label>
   <input id="field-error" type="text" class="mw-input" value="ab"
+         aria-invalid="true" aria-describedby="field-error-msg"
          style="border-color: hsl(var(--marrow-destructive));" />
-  <p class="text-sm" style="color: hsl(var(--marrow-destructive));">
+  <p id="field-error-msg" class="text-sm" role="alert"
+     style="color: hsl(var(--marrow-destructive));">
     Username must be at least 3 characters.
   </p>
 </div>
+
+<!-- Complete form example -->
+<form class="mw-card max-w-md">
+  <div class="space-y-6">
+    <div>
+      <h3 class="font-heading text-lg font-semibold">Contact Us</h3>
+      <p class="text-sm text-muted-foreground mt-1">
+        Fill out the form below and we'll get back to you.
+      </p>
+    </div>
+
+    <div class="space-y-2">
+      <label for="contact-name" class="mw-label">
+        Name <span class="text-destructive">*</span>
+      </label>
+      <input id="contact-name" type="text" class="mw-input"
+             placeholder="John Doe" required />
+    </div>
+
+    <div class="space-y-2">
+      <label for="contact-email" class="mw-label">
+        Email <span class="text-destructive">*</span>
+      </label>
+      <input id="contact-email" type="email" class="mw-input"
+             placeholder="john@example.com" required
+             aria-describedby="contact-email-desc" />
+      <p id="contact-email-desc" class="text-sm text-muted-foreground">
+        We respond within 24 hours.
+      </p>
+    </div>
+
+    <div class="space-y-2">
+      <label for="contact-message" class="mw-label">
+        Message <span class="text-destructive">*</span>
+      </label>
+      <textarea id="contact-message" class="mw-input min-h-[100px]"
+                placeholder="Tell us how we can help..." required></textarea>
+    </div>
+
+    <button type="submit" class="mw-btn mw-btn-primary w-full">
+      Send Message
+    </button>
+  </div>
+</form>
 ```
 
 ### Hover Card
@@ -1502,7 +2364,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
      @mouseenter="enter()"
      @mouseleave="leave()"
      class="text-primary font-medium underline underline-offset-4">
-    @marrow-ui
+    @alice_johnson
   </a>
 
   <!-- Hover Card -->
@@ -1514,17 +2376,17 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
        x-transition:leave="transition ease-in duration-100"
        x-transition:leave-start="opacity-100 translate-y-0"
        x-transition:leave-end="opacity-0 translate-y-1"
-       class="absolute left-0 top-full mt-2 z-50 w-80 mw-card">
+       class="absolute left-0 top-full mt-2 z-50 w-80 mw-popover">
     <div class="flex gap-4">
-      <div class="mw-avatar mw-avatar-lg flex-shrink-0">MU</div>
+      <img src="https://i.pravatar.cc/150?img=5" alt="" class="mw-avatar mw-avatar-lg flex-shrink-0" />
       <div class="space-y-1">
-        <h4 class="font-heading text-sm font-semibold">Marrow UI</h4>
+        <h4 class="font-heading text-sm font-semibold">Alice Johnson</h4>
         <p class="text-sm text-muted-foreground">
-          A copy-paste UI kit built with Tailwind CSS and Alpine.js.
+          Product designer & creative technologist. Building beautiful interfaces for the modern web.
         </p>
         <div class="flex items-center gap-4 pt-1">
-          <span class="text-xs text-muted-foreground">Joined Dec 2024</span>
-          <span class="text-xs text-muted-foreground">1.2k followers</span>
+          <span class="text-xs text-muted-foreground">Joined Mar 2023</span>
+          <span class="text-xs text-muted-foreground">2.4k followers</span>
         </div>
       </div>
     </div>
@@ -1536,10 +2398,10 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
 ```html
 <!-- Marrow UI: Input Group -->
-<!-- An input with prefix or suffix addons for contextual information -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Combine inputs with prefix or suffix addons like text, icons, or buttons -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- With Text Prefix -->
+<!-- URL Input with Text Prefix -->
 <div class="flex">
   <span class="inline-flex items-center px-3 text-sm text-muted-foreground
     border border-r-0 rounded-l-[var(--marrow-radius)]"
@@ -1551,38 +2413,42 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
          placeholder="example.com" />
 </div>
 
-<!-- With Text Suffix -->
-<div class="flex">
-  <input type="text" class="mw-input rounded-r-none"
-         placeholder="username" />
-  <span class="inline-flex items-center px-3 text-sm text-muted-foreground
-    border border-l-0 rounded-r-[var(--marrow-radius)]"
-    style="border-color: hsl(var(--marrow-input));
-           background: hsl(var(--marrow-muted));">
-    @gmail.com
-  </span>
-</div>
-
-<!-- With Icon Prefix -->
-<div class="flex">
-  <span class="inline-flex items-center justify-center w-10
-    border border-r-0 rounded-l-[var(--marrow-radius)] text-muted-foreground"
-    style="border-color: hsl(var(--marrow-input));
-           background: hsl(var(--marrow-muted));">
-    <svg ...>...</svg>
-  </span>
-  <input type="email" class="mw-input rounded-l-none"
-         placeholder="you@example.com" />
-</div>
-
-<!-- With Button Suffix -->
+<!-- Search Input with Button Suffix -->
 <div class="flex">
   <input type="text" class="mw-input rounded-r-none"
          placeholder="Search..." />
-  <button class="mw-btn mw-btn-primary"
-    style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
-    <svg ...>...</svg>
+  <button class="mw-btn mw-btn-primary rounded-l-none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/>
+      <path d="m21 21-4.3-4.3"/>
+    </svg>
   </button>
+</div>
+
+<!-- Currency Input with Symbol Prefix -->
+<div class="flex">
+  <span class="inline-flex items-center justify-center px-3 text-sm
+    text-muted-foreground border border-r-0 rounded-l-[var(--marrow-radius)]"
+    style="border-color: hsl(var(--marrow-input));
+           background: hsl(var(--marrow-muted));">
+    $
+  </span>
+  <input type="number" class="mw-input rounded-l-none"
+         placeholder="0.00" step="0.01" />
+</div>
+
+<!-- Phone Input with Country Code Select -->
+<div class="flex">
+  <select class="mw-select rounded-r-none border-r-0"
+          style="min-width: 100px;">
+    <option>+1</option>
+    <option>+44</option>
+    <option>+81</option>
+  </select>
+  <input type="tel" class="mw-input rounded-l-none"
+         placeholder="555-0123" />
 </div>
 ```
 
@@ -1594,33 +2460,39 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
 <div x-data="mwInputOTP(6)">
-  <p class="text-sm text-muted-foreground mb-4">
-    Enter the 6-digit code sent to your email.
-  </p>
+  <div class="text-center space-y-4">
+    <div>
+      <h3 class="font-heading text-lg font-semibold">Enter verification code</h3>
+      <p class="text-sm text-muted-foreground mt-1">
+        We sent a code to your email
+      </p>
+    </div>
 
-  <div class="flex items-center gap-2 justify-center">
-    <template x-for="(val, index) in values" :key="index">
-      <div class="flex items-center">
-        <input
-          :x-ref="'otp' + index"
-          type="text"
-          inputmode="numeric"
-          maxlength="1"
-          class="mw-input w-10 h-12 text-center text-lg font-semibold"
-          :value="values[index]"
-          @input="handleInput(index, $event)"
-          @keydown="handleKeydown(index, $event)"
-        />
-        <!-- Optional separator after 3rd digit -->
-        <template x-if="index === 2">
-          <div class="mx-1 text-muted-foreground">-</div>
-        </template>
-      </div>
-    </template>
+    <div class="flex items-center gap-2 justify-center">
+      <template x-for="(val, index) in values" :key="index">
+        <div class="flex items-center">
+          <input
+            :x-ref="'otp' + index"
+            type="text"
+            inputmode="numeric"
+            maxlength="1"
+            class="mw-input w-10 h-12 text-center text-lg font-semibold"
+            :value="values[index]"
+            @input="handleInput(index, $event)"
+            @keydown="handleKeydown(index, $event)"
+          />
+          <!-- Separator after 3rd digit -->
+          <template x-if="index === 2">
+            <div class="mx-1 text-muted-foreground">-</div>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <p class="text-sm text-muted-foreground">
+      Code: <span x-text="code" class="font-mono font-semibold text-foreground"></span>
+    </p>
   </div>
-
-  <!-- Access the full code with: -->
-  <p x-text="code"></p>
 </div>
 ```
 
@@ -1629,16 +2501,14 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Input -->
 <!-- A text input field for collecting user data -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Default -->
-<input type="text" class="mw-input" />
-
-<!-- With Placeholder -->
-<input type="email" class="mw-input" placeholder="you@example.com" />
-
-<!-- Disabled -->
-<input type="text" class="mw-input" disabled value="Disabled input" />
+<!-- Basic Input -->
+<div>
+  <label for="email" class="mw-label mb-1.5 block">Email</label>
+  <input type="email" id="email" class="mw-input" placeholder="you@example.com" />
+  <p class="mt-1.5 text-sm text-muted-foreground">We'll never share your email.</p>
+</div>
 
 <!-- With Icon -->
 <div class="relative">
@@ -1652,50 +2522,124 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   <input type="text" class="mw-input" style="padding-left: 2.25rem;"
          placeholder="Search..." />
 </div>
+
+<!-- Error State -->
+<div>
+  <label for="username" class="mw-label mb-1.5 block">Username</label>
+  <input type="text" id="username" class="mw-input"
+         style="border-color: hsl(0 84% 60%);" />
+  <p class="mt-1.5 text-sm" style="color: hsl(0 84% 60%);">
+    Username is already taken
+  </p>
+</div>
+
+<!-- Disabled -->
+<input type="text" class="mw-input" disabled value="Disabled input" />
+
+<!-- File Input -->
+<input type="file" class="mw-input" />
 ```
 
 ### Item
 
 ```html
 <!-- Marrow UI: Item -->
-<!-- A list item component with icon, title, description, and optional trailing content -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Menu list items with icons, labels, separators, and trailing content -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<div class="divide-y divide-border">
-  <!-- Item with badge -->
-  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+<!-- @section: Menu Item -->
+<!-- Settings Menu with Items -->
+<div class="mw-card max-w-md">
+  <div class="mw-menu-label">Settings</div>
+  <div class="mw-menu-item">
     <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-      <!-- Icon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </div>
     <div class="flex-1 min-w-0">
-      <div class="text-sm font-medium">Project Roadmap</div>
-      <div class="text-xs text-muted-foreground">Updated 2 hours ago</div>
-    </div>
-    <span class="mw-badge mw-badge-default">New</span>
-  </div>
-
-  <!-- Item with chevron -->
-  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
-    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-      <!-- Icon SVG -->
-    </div>
-    <div class="flex-1 min-w-0">
-      <div class="text-sm font-medium">Team Members</div>
-      <div class="text-xs text-muted-foreground">Manage your team and permissions</div>
+      <div class="text-sm font-medium">Profile</div>
+      <div class="text-xs text-muted-foreground">Manage your account settings</div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
   </div>
-
-  <!-- Item with count badge -->
-  <div class="flex items-center gap-3 px-4 py-3 hover:bg-accent/50 transition-colors cursor-pointer">
+  <div class="mw-menu-item">
     <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
-      <!-- Icon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
     </div>
     <div class="flex-1 min-w-0">
-      <div class="text-sm font-medium">Activity Log</div>
-      <div class="text-xs text-muted-foreground">View recent actions and events</div>
+      <div class="text-sm font-medium">Notifications</div>
+      <div class="text-xs text-muted-foreground">Configure alerts and updates</div>
     </div>
-    <span class="mw-badge mw-badge-secondary">12</span>
+    <span class="mw-badge mw-badge-secondary">3</span>
+  </div>
+  <div class="mw-menu-separator"></div>
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Security</div>
+      <div class="text-xs text-muted-foreground">Password and authentication</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  </div>
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-9 h-9 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Billing</div>
+      <div class="text-xs text-muted-foreground">Plans and payment methods</div>
+    </div>
+    <span class="mw-badge mw-badge-default">Pro</span>
+  </div>
+</div>
+<!-- @section: Simple Item -->
+
+<!-- Simple Menu Items -->
+<div class="mw-card max-w-md">
+  <div class="mw-menu-item">
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">General Settings</div>
+      <div class="text-xs text-muted-foreground">Configure your workspace preferences</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  </div>
+  <div class="mw-menu-item">
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Privacy & Safety</div>
+      <div class="text-xs text-muted-foreground">Control your data and visibility</div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="m9 18 6-6-6-6"/></svg>
+  </div>
+</div>
+<!-- @section: Compact Item -->
+
+<!-- Compact Items without Description -->
+<div class="mw-card max-w-md">
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Documents</div>
+    </div>
+  </div>
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Downloads</div>
+    </div>
+    <span class="mw-badge mw-badge-secondary">5</span>
+  </div>
+  <div class="mw-menu-item">
+    <div class="flex items-center justify-center w-8 h-8 rounded-md bg-primary/10 text-primary shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/><path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/></svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-sm font-medium">Archive</div>
+    </div>
   </div>
 </div>
 ```
@@ -1705,32 +2649,63 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Kbd -->
 <!-- Keyboard shortcut indicator for displaying key combinations -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Kbd -->
 <!-- Single key -->
 <kbd class="mw-kbd">K</kbd>
 
 <!-- Key combination -->
 <span class="flex items-center gap-1">
-  <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">⌘</kbd>
   <kbd class="mw-kbd">K</kbd>
 </span>
 
 <!-- Three-key combination -->
 <span class="flex items-center gap-1">
   <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
   <kbd class="mw-kbd">Shift</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
   <kbd class="mw-kbd">P</kbd>
 </span>
 
 <!-- Inline with text -->
-<p>Press <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
-  <kbd class="mw-kbd">K</kbd> to open the command palette.
-</p>
+<p>Press <kbd class="mw-kbd">⌘</kbd> <kbd class="mw-kbd">K</kbd> to open command palette.</p>
+<!-- @section: Kbd Shortcuts -->
+
+<!-- Common shortcuts -->
+<div class="space-y-3">
+  <div class="flex items-center justify-between">
+    <span>Copy</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">C</kbd>
+    </span>
+  </div>
+  <div class="flex items-center justify-between">
+    <span>Paste</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">V</kbd>
+    </span>
+  </div>
+  <div class="flex items-center justify-between">
+    <span>Undo</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">Z</kbd>
+    </span>
+  </div>
+</div>
+<!-- @section: Kbd Usage -->
+
+<div class="mw-menu-item justify-between">
+  <span>Command Palette</span>
+  <span class="flex items-center gap-1">
+    <kbd class="mw-kbd">Ctrl</kbd>
+    <kbd class="mw-kbd">Shift</kbd>
+    <kbd class="mw-kbd">P</kbd>
+  </span>
+</div>
 ```
 
 ### Label
@@ -1738,8 +2713,9 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Label -->
 <!-- Label component for form inputs with optional required indicator -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Label -->
 <!-- Basic label with input -->
 <div class="space-y-2">
   <label class="mw-label" for="email-input">Email address</label>
@@ -1748,10 +2724,10 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
 <!-- Label with required indicator -->
 <div class="space-y-2">
-  <label class="mw-label" for="name-input">
-    Full name <span class="text-destructive">*</span>
+  <label class="mw-label" for="password-input">
+    Password <span class="text-destructive">*</span>
   </label>
-  <input type="text" id="name-input" class="mw-input" placeholder="Enter your full name">
+  <input type="password" id="password-input" class="mw-input" placeholder="Enter your password">
 </div>
 
 <!-- Label with description text -->
@@ -1759,6 +2735,22 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   <label class="mw-label" for="username-input">Username</label>
   <input type="text" id="username-input" class="mw-input" placeholder="marrow-user">
   <p class="text-xs text-muted-foreground">This will be your public display name.</p>
+</div>
+<!-- @section: Checkbox -->
+
+<!-- Label with checkbox -->
+<div class="flex items-center gap-2">
+  <input type="checkbox" id="remember-me" class="mw-checkbox">
+  <label class="mw-label cursor-pointer" for="remember-me">Remember me</label>
+</div>
+
+<!-- Label with checkbox and description -->
+<div class="space-y-2">
+  <div class="flex items-center gap-2">
+    <input type="checkbox" id="marketing" class="mw-checkbox">
+    <label class="mw-label cursor-pointer" for="marketing">Marketing emails</label>
+  </div>
+  <p class="text-xs text-muted-foreground ml-6">Receive emails about new products and features.</p>
 </div>
 ```
 
@@ -1769,7 +2761,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A horizontal menu bar with dropdown menus for application-level navigation -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<div class="flex items-center gap-1 border rounded-md border-border p-1 bg-background">
+<div class="flex items-center gap-1 border-b border-border px-2 py-1 bg-background">
   <!-- File Menu -->
   <div class="relative" x-data="mwDropdown()">
     <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">File</button>
@@ -1782,7 +2774,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
          x-transition:leave-end="opacity-0 scale-95"
          class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
       <div class="mw-menu-item justify-between">
-        <span>New File</span>
+        <span>New</span>
         <span class="flex items-center gap-1">
           <kbd class="mw-kbd">Ctrl</kbd>
           <span class="text-xs text-muted-foreground">+</span>
@@ -1801,6 +2793,16 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
         <span>Save</span>
         <span class="flex items-center gap-1">
           <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">S</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Save As...</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">Shift</kbd>
           <span class="text-xs text-muted-foreground">+</span>
           <kbd class="mw-kbd">S</kbd>
         </span>
@@ -1829,10 +2831,39 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
           <kbd class="mw-kbd">Z</kbd>
         </span>
       </div>
+      <div class="mw-menu-item justify-between">
+        <span>Redo</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">Y</kbd>
+        </span>
+      </div>
       <div class="mw-menu-separator"></div>
-      <div class="mw-menu-item">Cut</div>
-      <div class="mw-menu-item">Copy</div>
-      <div class="mw-menu-item">Paste</div>
+      <div class="mw-menu-item justify-between">
+        <span>Cut</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">X</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Copy</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">C</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Paste</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">V</kbd>
+        </span>
+      </div>
     </div>
   </div>
 
@@ -1847,11 +2878,47 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
          x-transition:leave-start="opacity-100 scale-100"
          x-transition:leave-end="opacity-0 scale-95"
          class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
-      <div class="mw-menu-item">Zoom In</div>
-      <div class="mw-menu-item">Zoom Out</div>
+      <div class="mw-menu-item justify-between">
+        <span>Zoom In</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">+</kbd>
+        </span>
+      </div>
+      <div class="mw-menu-item justify-between">
+        <span>Zoom Out</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">Ctrl</kbd>
+          <span class="text-xs text-muted-foreground">+</span>
+          <kbd class="mw-kbd">-</kbd>
+        </span>
+      </div>
       <div class="mw-menu-separator"></div>
-      <div class="mw-menu-item">Full Screen</div>
-      <div class="mw-menu-item">Toggle Sidebar</div>
+      <div class="mw-menu-item justify-between">
+        <span>Full Screen</span>
+        <span class="flex items-center gap-1">
+          <kbd class="mw-kbd">F11</kbd>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Menu -->
+  <div class="relative" x-data="mwDropdown()">
+    <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-sm">Help</button>
+    <div x-show="open" @click.outside="close()" x-cloak
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         class="mw-popover absolute left-0 top-full mt-1 z-50 min-w-[12rem]">
+      <div class="mw-menu-item">Documentation</div>
+      <div class="mw-menu-item">Keyboard Shortcuts</div>
+      <div class="mw-menu-separator"></div>
+      <div class="mw-menu-item">About</div>
     </div>
   </div>
 </div>
@@ -1862,17 +2929,79 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Native Select -->
 <!-- A styled native HTML select element for simple dropdowns -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
+
+<!-- @section: Basic Select -->
+<div class="space-y-2">
+  <label class="mw-label" for="country-select">Country</label>
+  <select id="country-select" class="mw-select">
+    <option value="" disabled selected>Select your country</option>
+    <option value="us">United States</option>
+    <option value="ca">Canada</option>
+    <option value="uk">United Kingdom</option>
+    <option value="au">Australia</option>
+    <option value="de">Germany</option>
+    <option value="fr">France</option>
+  </select>
+</div>
+<!-- @section: Optgroup -->
 
 <div class="space-y-2">
-  <label class="mw-label" for="framework-select">Framework</label>
-  <select id="framework-select" class="mw-select">
-    <option value="" disabled selected>Select a framework</option>
-    <option value="django">Django</option>
-    <option value="laravel">Laravel</option>
-    <option value="rails">Ruby on Rails</option>
-    <option value="express">Express</option>
-    <option value="flask">Flask</option>
+  <label class="mw-label" for="timezone-select">Timezone</label>
+  <select id="timezone-select" class="mw-select">
+    <option value="" disabled selected>Choose a timezone</option>
+    <optgroup label="North America">
+      <option value="est">Eastern (EST)</option>
+      <option value="cst">Central (CST)</option>
+      <option value="mst">Mountain (MST)</option>
+      <option value="pst">Pacific (PST)</option>
+    </optgroup>
+    <optgroup label="Europe">
+      <option value="gmt">GMT (London)</option>
+      <option value="cet">CET (Paris)</option>
+      <option value="eet">EET (Athens)</option>
+    </optgroup>
+    <optgroup label="Asia">
+      <option value="ist">IST (Mumbai)</option>
+      <option value="jst">JST (Tokyo)</option>
+      <option value="hkt">HKT (Hong Kong)</option>
+    </optgroup>
+  </select>
+</div>
+<!-- @section: Form Context -->
+
+<form class="space-y-4 max-w-md">
+<!-- @section: Disabled -->
+  <div class="space-y-2">
+    <label class="mw-label" for="role-select">Role</label>
+    <select id="role-select" class="mw-select" required>
+      <option value="" disabled selected>Select your role</option>
+      <option value="developer">Developer</option>
+      <option value="designer">Designer</option>
+      <option value="manager">Product Manager</option>
+      <option value="marketing">Marketing</option>
+    </select>
+  </div>
+
+  <div class="space-y-2">
+    <label class="mw-label" for="experience-select">Experience Level</label>
+    <select id="experience-select" class="mw-select" required>
+      <option value="junior">Junior (0-2 years)</option>
+      <option value="mid">Mid-level (2-5 years)</option>
+      <option value="senior">Senior (5-10 years)</option>
+      <option value="lead">Lead (10+ years)</option>
+    </select>
+  </div>
+
+  <button type="submit" class="mw-btn mw-btn-primary">
+    Submit
+  </button>
+</form>
+
+<div class="space-y-2">
+  <label class="mw-label opacity-50" for="disabled-select">Region</label>
+  <select id="disabled-select" class="mw-select" disabled>
+    <option value="us">United States</option>
   </select>
 </div>
 ```
@@ -1881,10 +3010,108 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
 ```html
 <!-- Marrow UI: Navigation Menu -->
-<!-- A horizontal navigation menu with links and active state indicator -->
+<!-- Horizontal navigation with dropdown mega-menus for site-level navigation -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<nav class="flex items-center gap-1">
+<!-- @section: Nav Menu -->
+<nav class="border-b border-border" role="navigation" aria-label="Main navigation">
+  <div class="flex items-center gap-1 px-6 py-2">
+    <!-- Logo/Brand -->
+    <a href="#" class="px-3 py-2 text-lg font-semibold text-foreground">Acme</a>
+
+    <div class="flex-1 flex items-center gap-1">
+      <!-- Products with Dropdown -->
+      <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
+        <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+          Products
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+
+        <div x-show="open"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="absolute left-0 top-full mt-1 w-96 mw-card p-6 shadow-lg"
+             style="display: none;">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-3">
+              <h3 class="font-heading text-sm font-semibold text-foreground">For Developers</h3>
+              <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                <div class="font-medium">API Platform</div>
+                <div class="text-xs text-muted-foreground">REST & GraphQL APIs</div>
+              </a>
+              <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                <div class="font-medium">SDK Libraries</div>
+                <div class="text-xs text-muted-foreground">Multiple languages supported</div>
+              </a>
+            </div>
+            <div class="space-y-3">
+              <h3 class="font-heading text-sm font-semibold text-foreground">For Business</h3>
+              <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                <div class="font-medium">Analytics</div>
+                <div class="text-xs text-muted-foreground">Real-time insights</div>
+              </a>
+              <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                <div class="font-medium">Enterprise</div>
+                <div class="text-xs text-muted-foreground">Custom solutions</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions with Dropdown -->
+      <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
+        <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+          Solutions
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+
+        <div x-show="open"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="absolute left-0 top-full mt-1 w-72 mw-card p-4 shadow-lg"
+             style="display: none;">
+          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+            <div class="font-medium">E-commerce</div>
+            <div class="text-xs text-muted-foreground">Build online stores</div>
+          </a>
+          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+            <div class="font-medium">SaaS Platforms</div>
+            <div class="text-xs text-muted-foreground">Scale your service</div>
+          </a>
+          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+            <div class="font-medium">Mobile Apps</div>
+            <div class="text-xs text-muted-foreground">iOS & Android support</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Regular Links -->
+      <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Pricing</a>
+      <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Docs</a>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Sign In</button>
+      <button class="mw-btn mw-btn-primary mw-btn-sm">Get Started</button>
+    </div>
+  </div>
+</nav>
+<!-- @section: Nav Simple -->
+
+<nav class="flex items-center gap-1" role="navigation" aria-label="Main navigation">
   <!-- Active link -->
   <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Dashboard</a>
 
@@ -1892,6 +3119,17 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Projects</a>
   <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Team</a>
   <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Settings</a>
+</nav>
+<!-- @section: Nav Border -->
+
+<nav class="flex items-center gap-6 border-b border-border" role="navigation" aria-label="Main navigation">
+  <!-- Active link with bottom border -->
+  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-primary text-foreground -mb-px transition-colors">Dashboard</a>
+
+  <!-- Inactive links -->
+  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Projects</a>
+  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Team</a>
+  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Settings</a>
 </nav>
 ```
 
@@ -1911,11 +3149,12 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   <div class="mw-pagination">
     <!-- Previous button -->
     <button @click="prev()" :disabled="current === 1"
-            class="mw-pagination-item">
+            class="mw-pagination-item"
+            aria-label="Previous page">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round"
-           stroke-linejoin="round">
+           stroke-linejoin="round" aria-hidden="true">
         <path d="m15 18-6-6 6-6"/>
       </svg>
     </button>
@@ -1924,6 +3163,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     <template x-for="page in pages" :key="page">
       <button @click="goTo(page)"
               :data-active="current === page ? '' : undefined"
+              :aria-current="current === page ? 'page' : undefined"
               class="mw-pagination-item"
               x-text="page">
       </button>
@@ -1931,11 +3171,12 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
     <!-- Next button -->
     <button @click="next()" :disabled="current === totalPages"
-            class="mw-pagination-item">
+            class="mw-pagination-item"
+            aria-label="Next page">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2" stroke-linecap="round"
-           stroke-linejoin="round">
+           stroke-linejoin="round" aria-hidden="true">
         <path d="m9 18 6-6-6-6"/>
       </svg>
     </button>
@@ -1964,20 +3205,24 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
        x-transition:leave="transition ease-in duration-75"
        x-transition:leave-start="opacity-100 scale-100"
        x-transition:leave-end="opacity-0 scale-95"
-       class="absolute left-0 top-full mt-2 z-50 w-72 rounded-md border border-border bg-popover p-4 shadow-md">
-    <div class="space-y-3">
+       class="mw-popover absolute left-0 top-full mt-2 z-50 w-80">
+    <div class="space-y-4">
       <div>
-        <h4 class="font-medium text-sm">Dimensions</h4>
-        <p class="text-xs text-muted-foreground">Set the dimensions for the layer.</p>
+        <h4 class="font-medium text-sm">Settings</h4>
+        <p class="text-xs text-muted-foreground">Configure the dimensions for this element.</p>
       </div>
-      <div class="grid gap-2">
+      <div class="space-y-3">
         <div class="grid grid-cols-3 items-center gap-3">
-          <label class="mw-label text-xs">Width</label>
-          <input type="text" class="mw-input col-span-2" value="100%">
+          <label for="popover-width" class="mw-label text-xs">Width</label>
+          <input type="text" id="popover-width" class="mw-input col-span-2" value="100%">
         </div>
         <div class="grid grid-cols-3 items-center gap-3">
-          <label class="mw-label text-xs">Height</label>
-          <input type="text" class="mw-input col-span-2" value="25px">
+          <label for="popover-height" class="mw-label text-xs">Height</label>
+          <input type="text" id="popover-height" class="mw-input col-span-2" value="25px">
+        </div>
+        <div class="grid grid-cols-3 items-center gap-3">
+          <label for="popover-max-width" class="mw-label text-xs">Max Width</label>
+          <input type="text" id="popover-max-width" class="mw-input col-span-2" value="none">
         </div>
       </div>
     </div>
@@ -1992,6 +3237,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A progress bar component for displaying completion status -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Progress -->
 <div x-data="mwProgress(60)" class="space-y-2">
   <div class="flex justify-between text-sm">
     <span class="text-muted-foreground">Progress</span>
@@ -2000,6 +3246,22 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   <div class="mw-progress">
     <div class="mw-progress-bar" :style="'width: ' + value + '%'"></div>
   </div>
+</div>
+<!-- @section: Progress Sizes -->
+
+<!-- Small -->
+<div class="mw-progress" style="height: 0.25rem;">
+  <div class="mw-progress-bar" style="width: 40%;"></div>
+</div>
+
+<!-- Default -->
+<div class="mw-progress">
+  <div class="mw-progress-bar" style="width: 60%;"></div>
+</div>
+
+<!-- Large -->
+<div class="mw-progress" style="height: 1rem;">
+  <div class="mw-progress-bar" style="width: 80%;"></div>
 </div>
 ```
 
@@ -2010,28 +3272,106 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A group of radio buttons for selecting a single option from a set -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<div x-data="mwRadioGroup('option1')" class="space-y-3">
-  <label class="mw-label">Notification preference</label>
+<!-- @section: Radio Group -->
+<div x-data="mwRadioGroup('all')" class="space-y-3">
+  <label class="mw-label">Notification preferences</label>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option1')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('all')">
     <div class="mw-radio"
-         :data-state="isSelected('option1') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('all') ? 'checked' : 'unchecked'">
     </div>
     <label class="text-sm cursor-pointer">All notifications</label>
   </div>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option2')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('mentions')">
     <div class="mw-radio"
-         :data-state="isSelected('option2') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('mentions') ? 'checked' : 'unchecked'">
     </div>
-    <label class="text-sm cursor-pointer">Important only</label>
+    <label class="text-sm cursor-pointer">Mentions only</label>
   </div>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option3')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('nothing')">
     <div class="mw-radio"
-         :data-state="isSelected('option3') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('nothing') ? 'checked' : 'unchecked'">
     </div>
-    <label class="text-sm cursor-pointer">None</label>
+    <label class="text-sm cursor-pointer">Nothing</label>
+  </div>
+
+  <p class="text-xs text-muted-foreground">
+    Selected: <span x-text="selected" class="font-medium text-foreground"></span>
+  </p>
+</div>
+<!-- @section: Plan Selection -->
+
+<div x-data="mwRadioGroup('starter')" class="space-y-4">
+  <label class="mw-label">Choose your plan</label>
+
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('starter') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('starter')">
+    <div class="mw-radio mt-0.5"
+         :data-state="isSelected('starter') ? 'checked' : 'unchecked'">
+    </div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Starter</div>
+        <div class="text-sm font-semibold">$0/mo</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        Perfect for side projects and experimentation.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Up to 3 projects<br>
+        • 5 GB storage<br>
+        • Community support
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('pro') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('pro')">
+    <div class="mw-radio mt-0.5"
+         :data-state="isSelected('pro') ? 'checked' : 'unchecked'">
+    </div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Pro</div>
+        <div class="text-sm font-semibold">$19/mo</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        For professionals and growing teams.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Unlimited projects<br>
+        • 100 GB storage<br>
+        • Priority support<br>
+        • Advanced analytics
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('enterprise') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('enterprise')">
+    <div class="mw-radio mt-0.5"
+         :data-state="isSelected('enterprise') ? 'checked' : 'unchecked'">
+    </div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Enterprise</div>
+        <div class="text-sm font-semibold">Custom</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        Custom solutions for large organizations.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Unlimited everything<br>
+        • Custom storage<br>
+        • Dedicated support<br>
+        • SLA & compliance
+      </div>
+    </div>
   </div>
 </div>
 ```
@@ -2043,11 +3383,17 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- Resizable panels with a draggable divider -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<div x-data="mwResizable(50)" class="flex h-64 select-none border rounded-md overflow-hidden">
-  <!-- Left Panel -->
-  <div class="overflow-auto p-4" :style="'width:' + split + '%'">
-    <h3 class="font-semibold mb-2">Left Panel</h3>
-    <p class="text-sm text-muted-foreground">Resizable content here.</p>
+<div x-data="mwResizable(30)" class="flex h-96 select-none border rounded-md overflow-hidden">
+  <!-- Left Panel (Sidebar) -->
+  <div class="overflow-auto p-4 bg-muted/30"
+       :style="'width:' + Math.max(10, Math.min(90, split)) + '%'">
+    <h3 class="font-semibold mb-3">Sidebar</h3>
+    <nav class="space-y-2">
+      <a href="#" class="block px-3 py-2 rounded-md bg-primary text-primary-foreground text-sm">Dashboard</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Projects</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Settings</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Team</a>
+    </nav>
   </div>
 
   <!-- Drag Handle -->
@@ -2055,10 +3401,17 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
        @mousedown="startDrag($event)"
        @touchstart.prevent="startDrag($event)"></div>
 
-  <!-- Right Panel -->
-  <div class="overflow-auto p-4 flex-1">
-    <h3 class="font-semibold mb-2">Right Panel</h3>
-    <p class="text-sm text-muted-foreground">This fills the remaining space.</p>
+  <!-- Right Panel (Content) -->
+  <div class="overflow-auto p-6 flex-1">
+    <h3 class="font-semibold text-lg mb-2">Main Content</h3>
+    <p class="text-sm text-muted-foreground mb-4">
+      Current split: <span x-text="Math.round(split)"></span>%
+    </p>
+    <p class="text-sm text-muted-foreground leading-relaxed">
+      Drag the divider to adjust the layout. The sidebar is constrained
+      between 10% and 90% width to prevent panels from collapsing entirely.
+      Try resizing to see how the layout adapts.
+    </p>
   </div>
 </div>
 ```
@@ -2068,15 +3421,46 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Scroll Area -->
 <!-- A scrollable content area with styled scrollbars -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<div class="mw-scroll-area rounded-md border p-4" style="max-height: 200px;">
-  <h4 class="font-semibold mb-3">Scrollable Content</h4>
-  <p class="text-sm text-muted-foreground mb-3">
-    Your scrollable content goes here. The container will
-    show a styled scrollbar when content overflows.
-  </p>
-  <!-- Add more content to trigger scrolling -->
+<!-- Vertical Scroll Area -->
+<div class="mw-scroll-area rounded-md border p-4" style="height: 16rem;">
+  <h4 class="font-heading font-semibold mb-3">Typography Families</h4>
+  <div class="space-y-2">
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Inter</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Geist Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">SF Pro Display</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Helvetica Neue</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Segoe UI</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Roboto</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Open Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Lato</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Montserrat</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Poppins</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Source Sans Pro</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Nunito Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Plus Jakarta Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">DM Sans</div>
+    <div class="px-3 py-2 text-sm bg-accent/50 rounded-md">Work Sans</div>
+  </div>
+</div>
+
+<!-- Horizontal Scroll Area -->
+<div class="mw-scroll-area overflow-x-auto">
+  <div class="flex gap-4 p-4 min-w-max">
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card One</h4>
+      <p class="text-sm text-muted-foreground">First card content</p>
+    </div>
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card Two</h4>
+      <p class="text-sm text-muted-foreground">Second card content</p>
+    </div>
+    <div class="mw-card w-64 shrink-0">
+      <h4 class="font-heading font-semibold mb-2">Card Three</h4>
+      <p class="text-sm text-muted-foreground">Third card content</p>
+    </div>
+  </div>
 </div>
 ```
 
@@ -2087,20 +3471,96 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A custom styled select dropdown with keyboard-friendly options -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Select -->
 <div x-data="mwDropdown()" class="relative w-64">
   <!-- Trigger -->
-  <button @click="toggle()" class="mw-input flex items-center justify-between cursor-pointer" type="button">
-    <span x-text="$data._selected || 'Select a fruit...'"
+  <button
+    @click="toggle()"
+    class="mw-input flex items-center justify-between cursor-pointer"
+    type="button"
+    aria-haspopup="listbox"
+    :aria-expanded="open">
+    <span x-text="$data._selected || 'Select a framework...'"
           :class="!$data._selected && 'text-muted-foreground'"></span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-         stroke-linejoin="round" class="text-muted-foreground">
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="16"
+         height="16"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         class="text-muted-foreground transition-transform duration-200"
+         :class="open && 'rotate-180'">
       <path d="m6 9 6 6 6-6"/>
     </svg>
   </button>
 
   <!-- Options -->
-  <div x-show="open" @click.outside="close()" x-cloak
+  <div x-show="open"
+       @click.outside="close()"
+       x-cloak
+       x-transition:enter="transition ease-out duration-100"
+       x-transition:enter-start="opacity-0 -translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-75"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 -translate-y-1"
+       class="mw-popover absolute z-10 mt-1 w-full"
+       role="listbox">
+    <button class="mw-menu-item" @click="$data._selected = 'React'; close()" role="option">React</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Vue'; close()" role="option">Vue</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Angular'; close()" role="option">Angular</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Svelte'; close()" role="option">Svelte</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Alpine.js'; close()" role="option">Alpine.js</button>
+    <button class="mw-menu-item" @click="$data._selected = 'Solid'; close()" role="option">Solid</button>
+  </div>
+</div>
+<!-- @section: Searchable Select -->
+
+<div x-data="{
+  open: false,
+  selected: '',
+  search: '',
+  options: ['Apple', 'Banana', 'Blueberry', 'Cherry', 'Grape', 'Mango', 'Orange', 'Peach', 'Pear', 'Strawberry'],
+  get filtered() {
+    return this.options.filter(opt =>
+      opt.toLowerCase().includes(this.search.toLowerCase())
+    )
+  },
+  select(option) {
+    this.selected = option;
+    this.search = '';
+    this.open = false;
+  }
+}" class="relative w-64">
+  <!-- Trigger -->
+  <button
+    @click="open = !open"
+    class="mw-input flex items-center justify-between cursor-pointer"
+    type="button">
+    <span x-text="selected || 'Select a fruit...'"
+          :class="!selected && 'text-muted-foreground'"></span>
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="16"
+         height="16"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         class="text-muted-foreground transition-transform duration-200"
+         :class="open && 'rotate-180'">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </button>
+
+  <!-- Options with Search -->
+  <div x-show="open"
+       @click.outside="open = false"
+       x-cloak
        x-transition:enter="transition ease-out duration-100"
        x-transition:enter-start="opacity-0 -translate-y-1"
        x-transition:enter-end="opacity-100 translate-y-0"
@@ -2108,12 +3568,24 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
        x-transition:leave-start="opacity-100 translate-y-0"
        x-transition:leave-end="opacity-0 -translate-y-1"
        class="mw-popover absolute z-10 mt-1 w-full">
-    <button class="mw-menu-item" @click="$data._selected = 'Apple'; close()">Apple</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Banana'; close()">Banana</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Blueberry'; close()">Blueberry</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Cherry'; close()">Cherry</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Grape'; close()">Grape</button>
-    <button class="mw-menu-item" @click="$data._selected = 'Mango'; close()">Mango</button>
+    <!-- Search Input -->
+    <div class="p-2 border-b border-border">
+      <input
+        type="text"
+        x-model="search"
+        placeholder="Search..."
+        class="w-full px-2 py-1 text-sm bg-transparent border-0 focus:outline-none"
+        @click.stop>
+    </div>
+    <!-- Options List -->
+    <div class="max-h-48 overflow-y-auto">
+      <template x-for="option in filtered" :key="option">
+        <button class="mw-menu-item" @click="select(option)" x-text="option"></button>
+      </template>
+      <div x-show="filtered.length === 0" class="px-3 py-2 text-sm text-muted-foreground">
+        No results found
+      </div>
+    </div>
   </div>
 </div>
 ```
@@ -2123,8 +3595,9 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Separator -->
 <!-- A visual divider to separate content sections -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Horizontal -->
 <div>
   <h3 class="font-semibold">Marrow UI</h3>
   <p class="text-sm text-muted-foreground">An open-source UI component library.</p>
@@ -2136,6 +3609,15 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   <span>Documentation</span>
   <span>Components</span>
   <span>Themes</span>
+</div>
+<!-- @section: Vertical -->
+
+<div class="flex items-center h-5">
+  <span class="text-sm">Blog</span>
+  <div class="mw-separator-vertical"></div>
+  <span class="text-sm">Docs</span>
+  <div class="mw-separator-vertical"></div>
+  <span class="text-sm">Source</span>
 </div>
 ```
 
@@ -2149,8 +3631,8 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <div x-data="mwSheet()">
   <button @click="show()" class="mw-btn mw-btn-outline">Open Sheet</button>
 
-  <template x-if="open">
-    <div>
+  <template x-teleport="body">
+    <div x-show="open" class="fixed inset-0 z-50" x-cloak>
       <!-- Overlay -->
       <div class="mw-overlay" @click="close()"
            x-transition:enter="transition ease-out duration-300"
@@ -2196,23 +3678,60 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   <aside class="border-r bg-card transition-all duration-300 overflow-hidden shrink-0"
          :style="open ? 'width: 16rem' : 'width: 3.5rem'">
     <div class="p-3 flex items-center justify-between border-b">
-      <span x-show="open" class="font-heading font-semibold text-sm">Workspace</span>
+      <span x-show="open" x-transition class="font-heading font-semibold text-sm">Workspace</span>
       <button @click="toggle()" class="mw-btn mw-btn-ghost mw-btn-icon p-1">
-        <!-- Chevron icon -->
+        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/>
+        </svg>
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/>
+        </svg>
       </button>
     </div>
     <nav class="p-2 space-y-1">
       <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
                          bg-accent text-accent-foreground font-medium">
-        <!-- Icon (shrink-0) -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
         <span x-show="open" x-transition class="truncate">Dashboard</span>
       </a>
       <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
-                         text-muted-foreground hover:bg-accent transition-colors">
-        <!-- Icon (shrink-0) -->
-        <span x-show="open" x-transition class="truncate">Team</span>
+                         text-muted-foreground hover:bg-accent hover:text-accent-foreground
+                         transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+          <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span x-show="open" x-transition class="truncate">Projects</span>
       </a>
-      <!-- More nav items... -->
+      <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
+                         text-muted-foreground hover:bg-accent hover:text-accent-foreground
+                         transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span x-show="open" x-transition class="truncate">Teams</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-2.5 py-2 text-sm rounded-md
+                         text-muted-foreground hover:bg-accent hover:text-accent-foreground
+                         transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="2" class="shrink-0">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span x-show="open" x-transition class="truncate">Settings</span>
+      </a>
     </nav>
   </aside>
 
@@ -2227,8 +3746,9 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Skeleton -->
 <!-- Placeholder loading animations for content that is not yet available -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Card Skeleton -->
 <div class="mw-card">
   <div class="flex items-center gap-4">
     <!-- Avatar placeholder -->
@@ -2244,6 +3764,23 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     <div class="mw-skeleton" style="height: 0.75rem; width: 75%;"></div>
   </div>
 </div>
+<!-- @section: Text Skeleton -->
+
+<div class="mw-card">
+  <div class="space-y-3">
+    <div class="mw-skeleton" style="height: 1rem; width: 35%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 100%;"></div>
+    <div class="mw-skeleton" style="height: 0.75rem; width: 80%;"></div>
+  </div>
+</div>
+<!-- @section: Avatar Skeleton -->
+
+<div class="flex gap-3">
+  <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+  <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+  <div class="mw-skeleton rounded-full" style="width: 2.5rem; height: 2.5rem;"></div>
+</div>
 ```
 
 ### Slider
@@ -2253,6 +3790,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A range slider input for selecting numeric values -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Slider -->
 <div x-data="mwSlider(0, 100, 50)" class="space-y-4">
   <div class="flex items-center justify-between">
     <label class="mw-label">Volume</label>
@@ -2271,6 +3809,32 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
            style="margin: 0; height: 0.375rem;">
   </div>
 </div>
+<!-- @section: Temperature -->
+
+<div x-data="mwSlider(0, 50, 25)" class="space-y-4">
+  <div class="flex items-center justify-between">
+    <label class="mw-label">Temperature</label>
+    <span class="text-sm text-muted-foreground">
+      <span x-text="value"></span>&deg;C
+    </span>
+  </div>
+
+  <div class="relative pt-1">
+    <div class="mw-slider-track">
+      <div class="mw-slider-range" :style="'width: ' + percentage + '%'"></div>
+    </div>
+    <input type="range" :min="min" :max="max"
+           x-model="value" @input="handleInput($event)"
+           class="absolute inset-0 w-full opacity-0 cursor-pointer"
+           style="margin: 0; height: 0.375rem;">
+  </div>
+
+  <div class="flex justify-between text-xs text-muted-foreground">
+    <span>0&deg;C</span>
+    <span>25&deg;C</span>
+    <span>50&deg;C</span>
+  </div>
+</div>
 ```
 
 ### Sonner
@@ -2280,6 +3844,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- Toast notifications with auto-dismiss and multiple variants -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Trigger -->
 <button class="mw-btn mw-btn-primary"
   @click="$store.toasts.add({
     title: 'Success!',
@@ -2288,6 +3853,47 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   })">
   Show Toast
 </button>
+<!-- @section: Container -->
+
+<!-- Place once in your layout -->
+<div x-data class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 w-80"
+     style="pointer-events: none;">
+  <template x-for="toast in $store.toasts.items" :key="toast.id">
+    <div class="mw-card border shadow-lg flex items-start gap-3 p-4"
+         style="pointer-events: auto;"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 translate-y-2">
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-semibold" x-text="toast.title"></p>
+        <p class="text-xs text-muted-foreground mt-0.5"
+           x-text="toast.description"></p>
+      </div>
+      <button @click="$store.toasts.remove(toast.id)"
+              class="shrink-0 text-muted-foreground hover:text-foreground">
+        &times;
+      </button>
+    </div>
+  </template>
+</div>
+<!-- @section: API -->
+
+// Add a toast
+$store.toasts.add({
+  title: 'Success!',
+  description: 'Your changes have been saved.',
+  type: 'success',      // 'default' | 'success' | 'error' | 'warning'
+  duration: 4000        // ms (0 = persist)
+})
+
+// Remove a toast by ID
+$store.toasts.remove(toastId)
+
+// Access all active toasts
+$store.toasts.items   // Array of toast objects
 ```
 
 ### Spinner
@@ -2295,7 +3901,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Spinner -->
 <!-- A loading spinner indicator for asynchronous operations -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
 <!-- Small -->
 <div class="mw-spinner" style="width: 1rem; height: 1rem;"></div>
@@ -2329,31 +3935,8 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A toggle switch for on/off states -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<!-- Switch (off by default) -->
-<div class="flex items-center gap-3" x-data="mwSwitch()">
-  <button class="mw-switch"
-          :data-state="checked ? 'checked' : 'unchecked'"
-          @click="toggle()"
-          role="switch"
-          :aria-checked="checked">
-    <span class="mw-switch-thumb"></span>
-  </button>
-  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
-</div>
-
-<!-- Switch (on by default) -->
-<div class="flex items-center gap-3" x-data="mwSwitch(true)">
-  <button class="mw-switch"
-          :data-state="checked ? 'checked' : 'unchecked'"
-          @click="toggle()"
-          role="switch"
-          :aria-checked="checked">
-    <span class="mw-switch-thumb"></span>
-  </button>
-  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
-</div>
-
-<!-- Switch with label -->
+<!-- @section: Switch -->
+<!-- Switch with label and state display -->
 <div class="flex items-center gap-3" x-data="mwSwitch()">
   <button class="mw-switch"
           :data-state="checked ? 'checked' : 'unchecked'"
@@ -2363,7 +3946,22 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
           id="airplane-mode">
     <span class="mw-switch-thumb"></span>
   </button>
-  <label for="airplane-mode" class="mw-label cursor-pointer">Airplane Mode</label>
+  <div class="flex items-center gap-2">
+    <label for="airplane-mode" class="mw-label cursor-pointer">Airplane Mode</label>
+    <span class="text-sm text-muted-foreground" x-text="checked ? 'On' : 'Off'"></span>
+  </div>
+</div>
+
+<!-- Switch (default on) -->
+<div class="flex items-center gap-3" x-data="mwSwitch(true)">
+  <button class="mw-switch"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          @click="toggle()"
+          role="switch"
+          :aria-checked="checked">
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
 </div>
 
 <!-- Disabled switch -->
@@ -2377,6 +3975,69 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   </button>
   <span class="text-sm text-muted-foreground">Disabled</span>
 </div>
+<!-- @section: Settings -->
+
+<div class="space-y-6">
+  <!-- Wi-Fi -->
+  <div class="flex items-center justify-between" x-data="mwSwitch(true)">
+    <div class="space-y-0.5">
+      <label class="mw-label cursor-pointer">Wi-Fi</label>
+      <p class="text-sm text-muted-foreground">Connect to wireless networks</p>
+    </div>
+    <button class="mw-switch"
+            :data-state="checked ? 'checked' : 'unchecked'"
+            @click="toggle()"
+            role="switch"
+            :aria-checked="checked">
+      <span class="mw-switch-thumb"></span>
+    </button>
+  </div>
+
+  <!-- Bluetooth -->
+  <div class="flex items-center justify-between" x-data="mwSwitch()">
+    <div class="space-y-0.5">
+      <label class="mw-label cursor-pointer">Bluetooth</label>
+      <p class="text-sm text-muted-foreground">Connect to nearby devices</p>
+    </div>
+    <button class="mw-switch"
+            :data-state="checked ? 'checked' : 'unchecked'"
+            @click="toggle()"
+            role="switch"
+            :aria-checked="checked">
+      <span class="mw-switch-thumb"></span>
+    </button>
+  </div>
+
+  <!-- Dark Mode -->
+  <div class="flex items-center justify-between" x-data="mwSwitch(true)">
+    <div class="space-y-0.5">
+      <label class="mw-label cursor-pointer">Dark Mode</label>
+      <p class="text-sm text-muted-foreground">Use dark color scheme</p>
+    </div>
+    <button class="mw-switch"
+            :data-state="checked ? 'checked' : 'unchecked'"
+            @click="toggle()"
+            role="switch"
+            :aria-checked="checked">
+      <span class="mw-switch-thumb"></span>
+    </button>
+  </div>
+
+  <!-- Notifications -->
+  <div class="flex items-center justify-between" x-data="mwSwitch(true)">
+    <div class="space-y-0.5">
+      <label class="mw-label cursor-pointer">Notifications</label>
+      <p class="text-sm text-muted-foreground">Receive app notifications</p>
+    </div>
+    <button class="mw-switch"
+            :data-state="checked ? 'checked' : 'unchecked'"
+            @click="toggle()"
+            role="switch"
+            :aria-checked="checked">
+      <span class="mw-switch-thumb"></span>
+    </button>
+  </div>
+</div>
 ```
 
 ### Table
@@ -2384,8 +4045,9 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 ```html
 <!-- Marrow UI: Table -->
 <!-- A data table for displaying structured information -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Table -->
 <div class="overflow-x-auto">
   <table class="mw-table">
     <thead>
@@ -2430,6 +4092,22 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
     </tbody>
   </table>
 </div>
+<!-- @section: Usage -->
+
+<table class="mw-table">
+  <thead>
+    <tr>
+      <th>Header 1</th>
+      <th>Header 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 ### Tabs
@@ -2455,19 +4133,28 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
   <!-- Tab panels -->
   <div class="mt-4">
-    <div x-show="isActive('tab1')">
+    <div x-show="isActive('tab1')"
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100">
       <h3 class="font-heading font-semibold">Account Settings</h3>
       <p class="text-sm text-muted-foreground">Update your account information.</p>
       <!-- Panel content -->
     </div>
 
-    <div x-show="isActive('tab2')" x-cloak>
+    <div x-show="isActive('tab2')" x-cloak
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100">
       <h3 class="font-heading font-semibold">Change Password</h3>
       <p class="text-sm text-muted-foreground">Update your password.</p>
       <!-- Panel content -->
     </div>
 
-    <div x-show="isActive('tab3')" x-cloak>
+    <div x-show="isActive('tab3')" x-cloak
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100">
       <h3 class="font-heading font-semibold">Notification Preferences</h3>
       <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
       <!-- Panel content -->
@@ -2483,22 +4170,45 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A multi-line text input field -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<!-- Default textarea -->
+<!-- Basic textarea with label -->
 <div class="space-y-2">
-  <label class="mw-label">Message</label>
-  <textarea class="mw-textarea"></textarea>
+  <label for="message" class="mw-label">Your message</label>
+  <textarea id="message" class="mw-textarea" placeholder="Share your thoughts..."></textarea>
 </div>
 
-<!-- With placeholder -->
+<!-- With description -->
 <div class="space-y-2">
-  <label class="mw-label">Message</label>
-  <textarea class="mw-textarea" placeholder="Type your message here..."></textarea>
+  <label for="feedback" class="mw-label">Feedback</label>
+  <textarea
+    id="feedback"
+    class="mw-textarea"
+    placeholder="Tell us what you think..."
+  ></textarea>
+  <p class="text-sm text-muted-foreground">Your feedback helps us improve.</p>
 </div>
 
-<!-- Disabled -->
+<!-- With character count (Alpine.js) -->
+<div class="space-y-2" x-data="{ message: '', maxChars: 280 }">
+  <label for="tweet" class="mw-label">Message</label>
+  <textarea
+    id="tweet"
+    class="mw-textarea"
+    x-model="message"
+    :maxlength="maxChars"
+    placeholder="What's happening?"
+  ></textarea>
+  <p class="text-sm text-muted-foreground" x-text="\`\${message.length} / \${maxChars} characters\`"></p>
+</div>
+
+<!-- Disabled state -->
 <div class="space-y-2">
-  <label class="mw-label">Message</label>
-  <textarea class="mw-textarea" disabled placeholder="This textarea is disabled..."></textarea>
+  <label for="disabled-textarea" class="mw-label text-muted-foreground">Comments (Closed)</label>
+  <textarea
+    id="disabled-textarea"
+    class="mw-textarea"
+    disabled
+    placeholder="Comments are currently disabled..."
+  ></textarea>
 </div>
 ```
 
@@ -2540,13 +4250,13 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
          x-transition:leave-end="opacity-0 translate-y-2">
       <!-- Icon (conditional on toast.type) -->
       <template x-if="toast.type === 'success'">
-        <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" ...></svg>
+        <svg class="w-5 h-5 text-green-500 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
       </template>
       <template x-if="toast.type === 'error'">
-        <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" ...></svg>
+        <svg class="w-5 h-5 text-red-500 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" x2="9" y1="9" y2="15"/><line x1="9" x2="15" y1="9" y2="15"/></svg>
       </template>
       <template x-if="toast.type === 'info'">
-        <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" ...></svg>
+        <svg class="w-5 h-5 text-blue-500 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
       </template>
       <!-- Content -->
       <div class="flex-1 min-w-0">
@@ -2555,8 +4265,8 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
       </div>
       <!-- Close button -->
       <button @click="$store.toasts.remove(toast.id)"
-              class="shrink-0 text-muted-foreground hover:text-foreground">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              class="shrink-0 text-muted-foreground hover:text-foreground transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
   </template>
@@ -2570,43 +4280,73 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A group of toggle buttons where one or multiple can be selected -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Single -->
 <!-- Single selection toggle group -->
-<div x-data="mwToggleGroup('single', 'center')"
+<div x-data="mwToggleGroup('single', 'center')" role="group" aria-label="Text alignment"
      class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
   <button class="mw-toggle"
           :data-state="isSelected('left') ? 'on' : 'off'"
-          @click="select('left')">
-    <svg ...>Align Left</svg>
+          @click="select('left')"
+          aria-label="Align Left">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="15" x2="3" y1="12" y2="12"/>
+      <line x1="17" x2="3" y1="18" y2="18"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('center') ? 'on' : 'off'"
-          @click="select('center')">
-    <svg ...>Align Center</svg>
+          @click="select('center')"
+          aria-label="Align Center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="17" x2="7" y1="12" y2="12"/>
+      <line x1="19" x2="5" y1="18" y2="18"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('right') ? 'on' : 'off'"
-          @click="select('right')">
-    <svg ...>Align Right</svg>
+          @click="select('right')"
+          aria-label="Align Right">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="21" x2="9" y1="12" y2="12"/>
+      <line x1="21" x2="7" y1="18" y2="18"/>
+    </svg>
   </button>
 </div>
+<!-- @section: Multiple -->
 
 <!-- Multiple selection toggle group -->
-<div x-data="mwToggleGroup('multiple', ['bold'])"
+<div x-data="mwToggleGroup('multiple', ['bold'])" role="group" aria-label="Text formatting"
      class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
   <button class="mw-toggle"
           :data-state="isSelected('bold') ? 'on' : 'off'"
-          @click="select('bold')">
-    <svg ...>Bold</svg>
+          @click="select('bold')"
+          aria-label="Bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('italic') ? 'on' : 'off'"
-          @click="select('italic')">
-    <svg ...>Italic</svg>
+          @click="select('italic')"
+          aria-label="Italic">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" x2="10" y1="4" y2="4"/>
+      <line x1="14" x2="5" y1="20" y2="20"/>
+      <line x1="15" x2="9" y1="4" y2="20"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('underline') ? 'on' : 'off'"
-          @click="select('underline')">
-    <svg ...>Underline</svg>
+          @click="select('underline')"
+          aria-label="Underline">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4v6a6 6 0 0 0 12 0V4"/>
+      <line x1="4" x2="20" y1="20" y2="20"/>
+    </svg>
   </button>
 </div>
 ```
@@ -2618,34 +4358,102 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <!-- A two-state button that can be pressed or unpressed -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<!-- Toggle (unpressed by default) -->
+<!-- Single Toggle -->
 <div x-data="mwToggle()">
   <button class="mw-toggle"
           :data-state="pressed ? 'on' : 'off'"
           @click="toggle()"
-          :aria-pressed="pressed">
-    <svg ...>Bold icon</svg>
+          :aria-pressed="pressed"
+          aria-label="Toggle bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+    </svg>
   </button>
 </div>
 
-<!-- Toggle (pressed by default) -->
-<div x-data="mwToggle(true)">
-  <button class="mw-toggle"
-          :data-state="pressed ? 'on' : 'off'"
-          @click="toggle()"
-          :aria-pressed="pressed">
-    <svg ...>Italic icon</svg>
-  </button>
+<!-- Formatting Toolbar -->
+<div class="flex items-center gap-1">
+  <div x-data="mwToggle()">
+    <button class="mw-toggle"
+            :data-state="pressed ? 'on' : 'off'"
+            @click="toggle()"
+            :aria-pressed="pressed"
+            aria-label="Toggle bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+        <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div x-data="mwToggle()">
+    <button class="mw-toggle"
+            :data-state="pressed ? 'on' : 'off'"
+            @click="toggle()"
+            :aria-pressed="pressed"
+            aria-label="Toggle italic">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" x2="10" y1="4" y2="4"/>
+        <line x1="14" x2="5" y1="20" y2="20"/>
+        <line x1="15" x2="9" y1="4" y2="20"/>
+      </svg>
+    </button>
+  </div>
+
+  <div x-data="mwToggle()">
+    <button class="mw-toggle"
+            :data-state="pressed ? 'on' : 'off'"
+            @click="toggle()"
+            :aria-pressed="pressed"
+            aria-label="Toggle underline">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 4v6a6 6 0 0 0 12 0V4"/>
+        <line x1="4" x2="20" y1="20" y2="20"/>
+      </svg>
+    </button>
+  </div>
+
+  <div x-data="mwToggle()">
+    <button class="mw-toggle"
+            :data-state="pressed ? 'on' : 'off'"
+            @click="toggle()"
+            :aria-pressed="pressed"
+            aria-label="Toggle strikethrough">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 4H9a3 3 0 0 0-2.83 4"/>
+        <path d="M14 12a4 4 0 0 1 0 8H6"/>
+        <line x1="4" x2="20" y1="12" y2="12"/>
+      </svg>
+    </button>
+  </div>
 </div>
 
-<!-- Toggle with text label -->
+<!-- Toggle with Text Label -->
 <div x-data="mwToggle()">
   <button class="mw-toggle !aspect-auto px-3 gap-2"
           :data-state="pressed ? 'on' : 'off'"
           @click="toggle()"
           :aria-pressed="pressed">
-    <svg ...>Icon</svg>
-    <span class="text-sm">Wrap</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m12 3-1.9 12.39"/>
+      <path d="M6.6 18.27a9 9 0 1 0 0-12.54"/>
+    </svg>
+    <span class="text-sm">Text Wrap</span>
+  </button>
+</div>
+
+<!-- Pressed by Default -->
+<div x-data="mwToggle(true)">
+  <button class="mw-toggle"
+          :data-state="pressed ? 'on' : 'off'"
+          @click="toggle()"
+          :aria-pressed="pressed"
+          aria-label="Toggle bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+    </svg>
   </button>
 </div>
 ```
@@ -2666,6 +4474,7 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   </button>
   <div x-show="show"
        x-cloak
+       role="tooltip"
        x-transition:enter="transition ease-out duration-150"
        x-transition:enter-start="opacity-0 translate-y-1"
        x-transition:enter-end="opacity-100 translate-y-0"
@@ -2681,11 +4490,19 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 <div x-data="mwTooltip()" class="relative inline-block">
   <button class="mw-btn mw-btn-ghost mw-btn-icon"
           @mouseenter="enter()"
-          @mouseleave="leave()">
-    <svg ...>Icon</svg>
+          @mouseleave="leave()"
+          aria-label="More information">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
   </button>
   <div x-show="show"
        x-cloak
+       role="tooltip"
+       x-transition:enter="transition ease-out duration-150"
+       x-transition:enter-start="opacity-0 translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-100"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-1"
        class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
     More information
   </div>
@@ -2700,8 +4517,60 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
   </span>
   <div x-show="show"
        x-cloak
+       role="tooltip"
+       x-transition:enter="transition ease-out duration-150"
+       x-transition:enter-start="opacity-0 translate-y-1"
+       x-transition:enter-end="opacity-100 translate-y-0"
+       x-transition:leave="transition ease-in duration-100"
+       x-transition:leave-start="opacity-100 translate-y-0"
+       x-transition:leave-end="opacity-0 translate-y-1"
        class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
     A helpful explanation
+  </div>
+</div>
+
+<!-- Tooltip with different positions -->
+<div class="flex gap-4">
+  <!-- Top tooltip -->
+  <div x-data="mwTooltip()" class="relative inline-block">
+    <button class="mw-btn mw-btn-primary"
+            @mouseenter="enter()"
+            @mouseleave="leave()">
+      Top
+    </button>
+    <div x-show="show"
+         x-cloak
+         role="tooltip"
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0 translate-y-1"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-100"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 translate-y-1"
+         class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+      Tooltip on top
+    </div>
+  </div>
+
+  <!-- Bottom tooltip -->
+  <div x-data="mwTooltip()" class="relative inline-block">
+    <button class="mw-btn mw-btn-primary"
+            @mouseenter="enter()"
+            @mouseleave="leave()">
+      Bottom
+    </button>
+    <div x-show="show"
+         x-cloak
+         role="tooltip"
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0 -translate-y-1"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-100"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-1"
+         class="mw-tooltip absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50">
+      Tooltip on bottom
+    </div>
   </div>
 </div>
 ```
@@ -2710,47 +4579,98 @@ Alpine.store('toasts').add({ title: 'Success', description: 'Done!', variant: 'd
 
 ```html
 <!-- Marrow UI: Typography -->
-<!-- Heading levels, body text, inline code, blockquotes, and lists -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Type scale, headings, paragraphs, inline elements, and text utilities -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Headings -->
-<h1 class="font-heading text-4xl font-extrabold tracking-tight lg:text-5xl">Heading 1</h1>
-<h2 class="font-heading text-3xl font-semibold tracking-tight border-b pb-2">Heading 2</h2>
-<h3 class="font-heading text-2xl font-semibold tracking-tight">Heading 3</h3>
-<h4 class="font-heading text-xl font-semibold tracking-tight">Heading 4</h4>
-<h5 class="font-heading text-lg font-semibold tracking-tight">Heading 5</h5>
-<h6 class="font-heading text-base font-semibold tracking-tight">Heading 6</h6>
+<!-- @section: Headings -->
+<!-- Heading Level 1 -->
+<h1 class="font-heading text-4xl font-extrabold tracking-tight lg:text-5xl">
+  The Future of Web Development
+</h1>
 
-<!-- Paragraph -->
-<p class="leading-7">Standard body text with comfortable line height.</p>
+<!-- Heading Level 2 with Border -->
+<h2 class="font-heading text-3xl font-semibold tracking-tight border-b pb-2">
+  Getting Started
+</h2>
 
-<!-- Lead paragraph -->
-<p class="text-lg text-muted-foreground leading-relaxed">A lead paragraph for introductions.</p>
+<!-- Heading Level 3 -->
+<h3 class="font-heading text-2xl font-semibold tracking-tight">
+  Core Concepts
+</h3>
 
-<!-- Small text -->
-<p class="text-sm text-muted-foreground">Small muted text for secondary info.</p>
+<!-- Heading Level 4 -->
+<h4 class="font-heading text-xl font-semibold tracking-tight">
+  Installation
+</h4>
+<!-- @section: Paragraph -->
 
-<!-- Inline code -->
-<p>Use the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn</code> class.</p>
+<!-- Lead Paragraph -->
+<p class="text-xl text-muted-foreground leading-relaxed">
+  This is a lead paragraph that introduces your content with a larger,
+  more prominent style to capture attention.
+</p>
 
-<!-- Blockquote -->
+<!-- Standard Paragraph -->
+<p class="leading-7">
+  The standard paragraph uses the body font with comfortable line height
+  for optimal readability. It's perfect for longer blocks of text content.
+</p>
+
+<!-- Large Text -->
+<p class="text-lg leading-7">
+  Slightly larger text for emphasis without using a full heading.
+</p>
+
+<!-- Small Text -->
+<p class="text-sm text-muted-foreground">
+  Small, muted text for secondary information, captions, or metadata.
+</p>
+
+<!-- Muted Text -->
+<p class="text-muted-foreground">
+  Muted text at normal size for de-emphasized content.
+</p>
+<!-- @section: Inline -->
+
+<!-- Bold and Italic -->
+<p class="leading-7">
+  You can use <strong>bold text</strong> for emphasis and <em>italic text</em>
+  for subtle highlighting.
+</p>
+
+<!-- Inline Code -->
+<p class="leading-7">
+  Install the package with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">npm install marrow-ui</code>
+  and import components using the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-</code> prefix.
+</p>
+
+<!-- Links -->
+<p class="leading-7">
+  Check out the <a href="/docs" class="text-primary hover:underline">documentation</a>
+  for more details.
+</p>
+<!-- @section: Blockquote -->
+
 <blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground">
-  "A meaningful quote goes here."
-  <footer class="mt-2 text-sm not-italic">&mdash; Author Name</footer>
+  "The details are not the details. They make the design."
+  <footer class="mt-2 text-sm not-italic">&mdash; Charles Eames</footer>
 </blockquote>
+<!-- @section: Lists -->
 
-<!-- Unordered list -->
+<!-- Unordered List -->
 <ul class="list-disc pl-6 space-y-1 leading-7">
-  <li>First item</li>
-  <li>Second item</li>
-  <li>Third item</li>
+  <li>Utility-first CSS with Tailwind</li>
+  <li>Alpine.js for interactivity</li>
+  <li>Fully customizable theme system</li>
+  <li>No complex build process</li>
 </ul>
 
-<!-- Ordered list -->
+<!-- Ordered List -->
 <ol class="list-decimal pl-6 space-y-1 leading-7">
-  <li>Step one</li>
-  <li>Step two</li>
-  <li>Step three</li>
+  <li>Install Marrow UI via npm</li>
+  <li>Configure your theme</li>
+  <li>Import the CSS and JS</li>
+  <li>Start building components</li>
 </ol>
 ```
 

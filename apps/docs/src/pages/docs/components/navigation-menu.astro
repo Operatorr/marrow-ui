@@ -1,288 +1,321 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const navMenuCode = `<nav class="border-b border-border" role="navigation" aria-label="Main navigation">
-  <div class="flex items-center gap-1 px-6 py-2">
-    <!-- Logo/Brand -->
-    <a href="#" class="px-3 py-2 text-lg font-semibold text-foreground">Acme</a>
-
-    <div class="flex-1 flex items-center gap-1">
-      <!-- Products with Dropdown -->
-      <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
-        <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-          Products
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true">
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-        </button>
-
-        <div x-show="open"
-             x-transition:enter="transition ease-out duration-200"
-             x-transition:enter-start="opacity-0 scale-95"
-             x-transition:enter-end="opacity-100 scale-100"
-             x-transition:leave="transition ease-in duration-150"
-             x-transition:leave-start="opacity-100 scale-100"
-             x-transition:leave-end="opacity-0 scale-95"
-             class="absolute left-0 top-full mt-1 w-96 mw-card p-6 shadow-lg"
-             style="display: none;">
-          <div class="grid grid-cols-2 gap-4">
-            <div class="space-y-3">
-              <h3 class="font-heading text-sm font-semibold text-foreground">For Developers</h3>
-              <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                <div class="font-medium">API Platform</div>
-                <div class="text-xs text-muted-foreground">REST & GraphQL APIs</div>
-              </a>
-              <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                <div class="font-medium">SDK Libraries</div>
-                <div class="text-xs text-muted-foreground">Multiple languages supported</div>
-              </a>
-            </div>
-            <div class="space-y-3">
-              <h3 class="font-heading text-sm font-semibold text-foreground">For Business</h3>
-              <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                <div class="font-medium">Analytics</div>
-                <div class="text-xs text-muted-foreground">Real-time insights</div>
-              </a>
-              <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                <div class="font-medium">Enterprise</div>
-                <div class="text-xs text-muted-foreground">Custom solutions</div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Solutions with Dropdown -->
-      <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
-        <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-          Solutions
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true">
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-        </button>
-
-        <div x-show="open"
-             x-transition:enter="transition ease-out duration-200"
-             x-transition:enter-start="opacity-0 scale-95"
-             x-transition:enter-end="opacity-100 scale-100"
-             x-transition:leave="transition ease-in duration-150"
-             x-transition:leave-start="opacity-100 scale-100"
-             x-transition:leave-end="opacity-0 scale-95"
-             class="absolute left-0 top-full mt-1 w-72 mw-card p-4 shadow-lg"
-             style="display: none;">
-          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-            <div class="font-medium">E-commerce</div>
-            <div class="text-xs text-muted-foreground">Build online stores</div>
-          </a>
-          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-            <div class="font-medium">SaaS Platforms</div>
-            <div class="text-xs text-muted-foreground">Scale your service</div>
-          </a>
-          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-            <div class="font-medium">Mobile Apps</div>
-            <div class="text-xs text-muted-foreground">iOS & Android support</div>
-          </a>
-        </div>
-      </div>
-
-      <!-- Regular Links -->
-      <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Pricing</a>
-      <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Docs</a>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <button class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Sign In</button>
-      <button class="mw-btn mw-btn-primary mw-btn-sm">Get Started</button>
-    </div>
-  </div>
-</nav>`;
-
-const navSimpleCode = `<nav class="flex items-center gap-1" role="navigation" aria-label="Main navigation">
-  <!-- Active link -->
-  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Dashboard</a>
-
-  <!-- Inactive links -->
-  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Projects</a>
-  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Team</a>
-  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Settings</a>
-</nav>`;
-
-const navBorderCode = `<nav class="flex items-center gap-6 border-b border-border" role="navigation" aria-label="Main navigation">
-  <!-- Active link with bottom border -->
-  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-primary text-foreground -mb-px transition-colors">Dashboard</a>
-
-  <!-- Inactive links -->
-  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Projects</a>
-  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Team</a>
-  <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Settings</a>
-</nav>`;
+const t = loadTemplate("navigation-menu");
+const navMenuCode = t.sections.get("Nav Menu")!;
+const navSimpleCode = t.sections.get("Nav Simple")!;
+const navBorderCode = t.sections.get("Nav Border")!;
 ---
 
 <DocsLayout title="Navigation Menu" description="Horizontal navigation with dropdown mega-menus for site-level navigation" activeComponent="navigation-menu">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Navigation Menu</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A horizontal navigation menu with dropdown mega-menu panels. Perfect for site-level navigation with organized product categories and solutions.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Navigation</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Navigation Menu</h1>
+      <p class="docs-hero-description mt-3">A horizontal navigation menu with dropdown mega-menu panels. Perfect for site-level navigation with organized product categories and solutions.</p>
+    </header>
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card overflow-visible">
-        <nav class="border-b border-border" role="navigation" aria-label="Main navigation">
-          <div class="flex items-center gap-1 px-6 py-2">
-            <!-- Logo/Brand -->
-            <a href="#" class="px-3 py-2 text-lg font-semibold text-foreground">Acme</a>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Mega Menu -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Mega Menu with Dropdowns</p>
+          <div class="overflow-visible rounded-md border border-border">
+            <nav class="border-b border-border" role="navigation" aria-label="Main navigation">
+              <div class="flex items-center gap-1 px-6 py-2">
+                <a href="#" class="px-3 py-2 text-lg font-semibold text-foreground">Acme</a>
 
-            <div class="flex-1 flex items-center gap-1">
-              <!-- Products with Dropdown -->
-              <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
-                <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                  Products
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true">
-                    <path d="m6 9 6 6 6-6"/>
-                  </svg>
-                </button>
+                <div class="flex-1 flex items-center gap-1">
+                  <!-- Products with Dropdown -->
+                  <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
+                    <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                      Products
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"/>
+                      </svg>
+                    </button>
 
-                <div x-show="open"
-                     x-transition:enter="transition ease-out duration-200"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-150"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="absolute left-0 top-full mt-1 w-96 mw-card p-6 shadow-lg z-50"
-                     style="display: none;">
-                  <div class="grid grid-cols-2 gap-4">
-                    <div class="space-y-3">
-                      <h3 class="font-heading text-sm font-semibold text-foreground">For Developers</h3>
-                      <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                        <div class="font-medium">API Platform</div>
-                        <div class="text-xs text-muted-foreground">REST & GraphQL APIs</div>
-                      </a>
-                      <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                        <div class="font-medium">SDK Libraries</div>
-                        <div class="text-xs text-muted-foreground">Multiple languages supported</div>
-                      </a>
+                    <div x-show="open"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="absolute left-0 top-full mt-1 w-96 mw-card p-6 shadow-lg z-50"
+                         style="display: none;">
+                      <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-3">
+                          <h3 class="font-heading text-sm font-semibold text-foreground">For Developers</h3>
+                          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                            <div class="font-medium">API Platform</div>
+                            <div class="text-xs text-muted-foreground">REST & GraphQL APIs</div>
+                          </a>
+                          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                            <div class="font-medium">SDK Libraries</div>
+                            <div class="text-xs text-muted-foreground">Multiple languages supported</div>
+                          </a>
+                        </div>
+                        <div class="space-y-3">
+                          <h3 class="font-heading text-sm font-semibold text-foreground">For Business</h3>
+                          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                            <div class="font-medium">Analytics</div>
+                            <div class="text-xs text-muted-foreground">Real-time insights</div>
+                          </a>
+                          <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                            <div class="font-medium">Enterprise</div>
+                            <div class="text-xs text-muted-foreground">Custom solutions</div>
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                    <div class="space-y-3">
-                      <h3 class="font-heading text-sm font-semibold text-foreground">For Business</h3>
+                  </div>
+
+                  <!-- Solutions with Dropdown -->
+                  <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
+                    <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                      Solutions
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"/>
+                      </svg>
+                    </button>
+
+                    <div x-show="open"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="absolute left-0 top-full mt-1 w-72 mw-card p-4 shadow-lg z-50"
+                         style="display: none;">
                       <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                        <div class="font-medium">Analytics</div>
-                        <div class="text-xs text-muted-foreground">Real-time insights</div>
+                        <div class="font-medium">E-commerce</div>
+                        <div class="text-xs text-muted-foreground">Build online stores</div>
                       </a>
                       <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                        <div class="font-medium">Enterprise</div>
-                        <div class="text-xs text-muted-foreground">Custom solutions</div>
+                        <div class="font-medium">SaaS Platforms</div>
+                        <div class="text-xs text-muted-foreground">Scale your service</div>
+                      </a>
+                      <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                        <div class="font-medium">Mobile Apps</div>
+                        <div class="text-xs text-muted-foreground">iOS & Android support</div>
                       </a>
                     </div>
                   </div>
+
+                  <!-- Regular Links -->
+                  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Pricing</a>
+                  <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Docs</a>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <button class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Sign In</button>
+                  <button class="mw-btn mw-btn-primary mw-btn-sm">Get Started</button>
                 </div>
               </div>
+            </nav>
+          </div>
+        </div>
 
-              <!-- Solutions with Dropdown -->
-              <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
-                <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                  Solutions
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true">
-                    <path d="m6 9 6 6 6-6"/>
-                  </svg>
-                </button>
+        <!-- Simple Navigation -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Simple Navigation</p>
+          <nav class="flex items-center gap-1" role="navigation" aria-label="Simple navigation">
+            <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Dashboard</a>
+            <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Projects</a>
+            <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Team</a>
+            <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Settings</a>
+          </nav>
+        </div>
 
-                <div x-show="open"
-                     x-transition:enter="transition ease-out duration-200"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-150"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="absolute left-0 top-full mt-1 w-72 mw-card p-4 shadow-lg z-50"
-                     style="display: none;">
-                  <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                    <div class="font-medium">E-commerce</div>
-                    <div class="text-xs text-muted-foreground">Build online stores</div>
-                  </a>
-                  <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                    <div class="font-medium">SaaS Platforms</div>
-                    <div class="text-xs text-muted-foreground">Scale your service</div>
-                  </a>
-                  <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
-                    <div class="font-medium">Mobile Apps</div>
-                    <div class="text-xs text-muted-foreground">iOS & Android support</div>
-                  </a>
+        <!-- With Border Bottom -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Border Bottom</p>
+          <nav class="flex items-center gap-6 border-b border-border" role="navigation" aria-label="Border navigation">
+            <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-primary text-foreground -mb-px transition-colors">Dashboard</a>
+            <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Projects</a>
+            <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Team</a>
+            <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Settings</a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="rounded-lg border border-border overflow-visible">
+          <!-- Site header with nav -->
+          <nav class="border-b border-border" role="navigation" aria-label="Site navigation">
+            <div class="flex items-center gap-1 px-6 py-2">
+              <a href="#" class="px-3 py-2 text-lg font-semibold text-foreground">CloudStack</a>
+              <div class="flex-1 flex items-center gap-1">
+                <div x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" class="relative">
+                  <button @click="open = !open" class="inline-flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                    Platform
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="open ? 'rotate-180' : ''" class="transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </button>
+                  <div x-show="open"
+                       x-transition:enter="transition ease-out duration-200"
+                       x-transition:enter-start="opacity-0 scale-95"
+                       x-transition:enter-end="opacity-100 scale-100"
+                       x-transition:leave="transition ease-in duration-150"
+                       x-transition:leave-start="opacity-100 scale-100"
+                       x-transition:leave-end="opacity-0 scale-95"
+                       class="absolute left-0 top-full mt-1 w-72 mw-card p-4 shadow-lg z-50" style="display: none;">
+                    <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                      <div class="font-medium">Compute</div>
+                      <div class="text-xs text-muted-foreground">Virtual machines & containers</div>
+                    </a>
+                    <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                      <div class="font-medium">Storage</div>
+                      <div class="text-xs text-muted-foreground">Object & block storage</div>
+                    </a>
+                    <a href="#" class="block px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">
+                      <div class="font-medium">Networking</div>
+                      <div class="text-xs text-muted-foreground">CDN, DNS & load balancing</div>
+                    </a>
+                  </div>
                 </div>
+                <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Pricing</a>
+                <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Docs</a>
               </div>
-
-              <!-- Regular Links -->
-              <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Pricing</a>
-              <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Docs</a>
+              <div class="flex items-center gap-2">
+                <button class="mw-btn mw-btn-ghost mw-btn-sm">Log in</button>
+                <button class="mw-btn mw-btn-primary mw-btn-sm">Sign up</button>
+              </div>
             </div>
-
-            <div class="flex items-center gap-2">
-              <button class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Sign In</button>
-              <button class="mw-btn mw-btn-primary mw-btn-sm">Get Started</button>
+          </nav>
+          <!-- Page content -->
+          <div class="p-6">
+            <h3 class="font-heading text-lg font-semibold mb-2">Welcome to CloudStack</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed mb-4">Deploy your applications globally with our scalable cloud infrastructure.</p>
+            <div class="space-y-2">
+              <div class="h-3 bg-muted rounded w-3/4"></div>
+              <div class="h-3 bg-muted rounded w-full"></div>
+              <div class="h-3 bg-muted rounded w-2/3"></div>
             </div>
           </div>
-        </nav>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={navMenuCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
         <div>
-          <h3 class="font-heading text-lg font-semibold">Interaction</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">Dropdown menus use Alpine.js <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data</span> for state management. Menus open on hover (<span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@mouseenter</span> / <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@mouseleave</span>) and can also be toggled on click for keyboard/touch navigation.</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Mega Menu</p>
+          <CodeBlock code={navMenuCode} lang="html" />
         </div>
         <div>
-          <h3 class="font-heading text-lg font-semibold">Styling</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">Active links use <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">bg-accent</span> and <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">text-accent-foreground</span>. Inactive links use <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">text-muted-foreground</span> with <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">hover:bg-accent/50</span> states. Dropdown panels use <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-card</span> for consistent elevation and borders.</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Simple Navigation</p>
+          <CodeBlock code={navSimpleCode} lang="html" />
         </div>
         <div>
-          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">Always wrap navigation in a <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;nav&gt;</span> element with <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="navigation"</span> and <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</span> to identify the navigation landmark. Use semantic <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;button&gt;</span> elements for dropdown triggers and ensure keyboard navigation works properly.</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Border Bottom</p>
+          <CodeBlock code={navBorderCode} lang="html" />
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Simple Navigation -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Simple Navigation</h2>
-      <p class="text-muted-foreground leading-relaxed">A basic horizontal navigation menu with active state styling.</p>
-      <div class="mw-card">
-        <nav class="flex items-center gap-1" role="navigation" aria-label="Simple navigation">
-          <a href="#" class="px-3 py-2 text-sm font-medium rounded-md bg-accent text-accent-foreground transition-colors">Dashboard</a>
-          <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Projects</a>
-          <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Team</a>
-          <a href="#" class="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors">Settings</a>
-        </nav>
-      </div>
-      <CodeBlock code={navSimpleCode} lang="html" />
-    </div>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="space-y-6">
+        <!-- Alpine.js API -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Alpine.js Interaction</p>
+          <div class="overflow-x-auto rounded-lg border border-border">
+            <table class="docs-api-table">
+              <thead><tr><th>Directive</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>x-data="{'{'} open: false {'}'}"</code></td>
+                  <td>Initializes dropdown state for each menu trigger</td>
+                </tr>
+                <tr>
+                  <td><code>@mouseenter / @mouseleave</code></td>
+                  <td>Opens/closes dropdown on hover for desktop users</td>
+                </tr>
+                <tr>
+                  <td><code>@click="open = !open"</code></td>
+                  <td>Toggles dropdown on click for keyboard/touch navigation</td>
+                </tr>
+                <tr>
+                  <td><code>x-show="open"</code></td>
+                  <td>Conditionally renders the dropdown panel</td>
+                </tr>
+                <tr>
+                  <td><code>x-transition</code></td>
+                  <td>Animates dropdown enter/leave with scale and opacity</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <!-- With Border Bottom -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">With Border Bottom</h2>
-      <p class="text-muted-foreground leading-relaxed">An alternative style using a bottom border to indicate the active link. Common for tab-style navigation.</p>
-      <div class="mw-card">
-        <nav class="flex items-center gap-6 border-b border-border" role="navigation" aria-label="Border navigation">
-          <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-primary text-foreground -mb-px transition-colors">Dashboard</a>
-          <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Projects</a>
-          <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Team</a>
-          <a href="#" class="px-1 py-3 text-sm font-medium border-b-2 border-transparent text-muted-foreground hover:text-foreground hover:border-border -mb-px transition-colors">Settings</a>
-        </nav>
+        <!-- Styling Classes -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Styling Classes</p>
+          <div class="overflow-x-auto rounded-lg border border-border">
+            <table class="docs-api-table">
+              <thead><tr><th>Class / Pattern</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>bg-accent text-accent-foreground</code></td>
+                  <td>Active link styling with accent background</td>
+                </tr>
+                <tr>
+                  <td><code>text-muted-foreground hover:bg-accent/50</code></td>
+                  <td>Inactive link with hover state</td>
+                </tr>
+                <tr>
+                  <td><code>mw-card</code></td>
+                  <td>Used for dropdown panels with consistent elevation and borders</td>
+                </tr>
+                <tr>
+                  <td><code>border-b-2 border-primary</code></td>
+                  <td>Bottom border active indicator for tab-style variant</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <CodeBlock code={navBorderCode} lang="html" />
-    </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Wrap navigation in a <code>&lt;nav&gt;</code> element with <code>role="navigation"</code> and <code>aria-label</code></li>
+            <li>Use semantic <code>&lt;button&gt;</code> elements for dropdown triggers</li>
+            <li>Add <code>aria-hidden="true"</code> to decorative chevron icons</li>
+            <li>Ensure dropdown menus are keyboard accessible and can be dismissed with Escape</li>
+            <li>Consider adding <code>aria-expanded</code> to dropdown trigger buttons</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Keep top-level navigation items to 5-7 items maximum</li>
+            <li>Use mega-menu dropdowns for organizing complex product or solution categories</li>
+            <li>Provide both hover and click interactions for cross-device compatibility</li>
+            <li>Use <code>z-50</code> on dropdown panels to ensure they appear above other content</li>
+            <li>Consider a mobile hamburger menu for responsive layouts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </div>
 </DocsLayout>

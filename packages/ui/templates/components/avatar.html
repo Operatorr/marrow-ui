@@ -1,33 +1,47 @@
 <!-- Marrow UI: Avatar -->
 <!-- An image element with a fallback for representing the user -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- Image Avatar -->
+<!-- Default Size -->
 <div class="mw-avatar">
-  <img src="https://i.pravatar.cc/150?img=32" alt="User avatar" />
+  <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
+</div>
+
+<!-- Small Size -->
+<div class="mw-avatar mw-avatar-sm">
+  <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
+</div>
+
+<!-- Large Size -->
+<div class="mw-avatar mw-avatar-lg">
+  <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
 </div>
 
 <!-- Fallback Initials -->
 <div class="mw-avatar">
-  <span>JD</span>
+  <span>AJ</span>
 </div>
 
-<!-- Small -->
-<div class="mw-avatar mw-avatar-sm">
-  <img src="avatar.jpg" alt="User avatar" />
+<!-- Avatar Group (Overlapping) -->
+<div class="flex -space-x-4">
+  <div class="mw-avatar ring-2 ring-background">
+    <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
+  </div>
+  <div class="mw-avatar ring-2 ring-background">
+    <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
+  </div>
+  <div class="mw-avatar ring-2 ring-background">
+    <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
+  </div>
+  <div class="mw-avatar ring-2 ring-background">
+    <span>+3</span>
+  </div>
 </div>
 
-<!-- Default -->
-<div class="mw-avatar">
-  <img src="avatar.jpg" alt="User avatar" />
-</div>
-
-<!-- Large -->
-<div class="mw-avatar mw-avatar-lg">
-  <img src="avatar.jpg" alt="User avatar" />
-</div>
-
-<!-- Large with Fallback -->
-<div class="mw-avatar mw-avatar-lg">
-  <span>AB</span>
+<!-- With Status Indicator -->
+<div class="relative inline-block">
+  <div class="mw-avatar">
+    <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
+  </div>
+  <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-background"></span>
 </div>

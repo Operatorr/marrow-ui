@@ -1,154 +1,71 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const headingsCode = `<!-- Heading Level 1 -->
-<h1 class="font-heading text-4xl font-extrabold tracking-tight lg:text-5xl">
-  The Future of Web Development
-</h1>
-
-<!-- Heading Level 2 with Border -->
-<h2 class="font-heading text-3xl font-semibold tracking-tight border-b pb-2">
-  Getting Started
-</h2>
-
-<!-- Heading Level 3 -->
-<h3 class="font-heading text-2xl font-semibold tracking-tight">
-  Core Concepts
-</h3>
-
-<!-- Heading Level 4 -->
-<h4 class="font-heading text-xl font-semibold tracking-tight">
-  Installation
-</h4>`;
-
-const paragraphCode = `<!-- Lead Paragraph -->
-<p class="text-xl text-muted-foreground leading-relaxed">
-  This is a lead paragraph that introduces your content with a larger,
-  more prominent style to capture attention.
-</p>
-
-<!-- Standard Paragraph -->
-<p class="leading-7">
-  The standard paragraph uses the body font with comfortable line height
-  for optimal readability. It's perfect for longer blocks of text content.
-</p>
-
-<!-- Large Text -->
-<p class="text-lg leading-7">
-  Slightly larger text for emphasis without using a full heading.
-</p>
-
-<!-- Small Text -->
-<p class="text-sm text-muted-foreground">
-  Small, muted text for secondary information, captions, or metadata.
-</p>
-
-<!-- Muted Text -->
-<p class="text-muted-foreground">
-  Muted text at normal size for de-emphasized content.
-</p>`;
-
-const inlineCode = `<!-- Bold and Italic -->
-<p class="leading-7">
-  You can use <strong>bold text</strong> for emphasis and <em>italic text</em>
-  for subtle highlighting.
-</p>
-
-<!-- Inline Code -->
-<p class="leading-7">
-  Install the package with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">npm install marrow-ui</code>
-  and import components using the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-</code> prefix.
-</p>
-
-<!-- Links -->
-<p class="leading-7">
-  Check out the <a href="/docs" class="text-primary hover:underline">documentation</a>
-  for more details.
-</p>`;
-
-const blockquoteCode = `<blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground">
-  "The details are not the details. They make the design."
-  <footer class="mt-2 text-sm not-italic">&mdash; Charles Eames</footer>
-</blockquote>`;
-
-const listsCode = `<!-- Unordered List -->
-<ul class="list-disc pl-6 space-y-1 leading-7">
-  <li>Utility-first CSS with Tailwind</li>
-  <li>Alpine.js for interactivity</li>
-  <li>Fully customizable theme system</li>
-  <li>No complex build process</li>
-</ul>
-
-<!-- Ordered List -->
-<ol class="list-decimal pl-6 space-y-1 leading-7">
-  <li>Install Marrow UI via npm</li>
-  <li>Configure your theme</li>
-  <li>Import the CSS and JS</li>
-  <li>Start building components</li>
-</ol>`;
+const t = loadTemplate("typography");
+const headingsCode = t.sections.get("Headings")!;
+const paragraphCode = t.sections.get("Paragraph")!;
+const inlineCode = t.sections.get("Inline")!;
+const blockquoteCode = t.sections.get("Blockquote")!;
+const listsCode = t.sections.get("Lists")!;
 ---
 
 <DocsLayout title="Typography" description="Type scale, headings, paragraphs, inline elements, and text utilities" activeComponent="typography">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight">Typography</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">
-        A complete typography system built on CSS custom properties. Marrow provides a semantic type scale,
-        dual font system (heading + body), and utility classes for all text styling needs.
-      </p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Typography & Micro</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Typography</h1>
+      <p class="docs-hero-description mt-3">A complete typography system built on CSS custom properties. Provides a semantic type scale, dual font system (heading + body), and utility classes for all text styling needs.</p>
+    </header>
 
-    <!-- Heading Scale -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card p-6 space-y-6">
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Heading 1 &mdash; 4xl/5xl Extrabold</p>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Heading Scale -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Heading 1 &mdash; 4xl/5xl Extrabold</p>
           <h1 class="font-heading text-4xl font-extrabold tracking-tight lg:text-5xl">
             The Future of Web Development
           </h1>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Heading 2 &mdash; 3xl Semibold</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Heading 2 &mdash; 3xl Semibold</p>
           <h2 class="font-heading text-3xl font-semibold tracking-tight border-b pb-2">
             Building Modern Interfaces
           </h2>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Heading 3 &mdash; 2xl Semibold</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Heading 3 &mdash; 2xl Semibold</p>
           <h3 class="font-heading text-2xl font-semibold tracking-tight">
             Core Design Principles
           </h3>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Heading 4 &mdash; xl Semibold</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Heading 4 &mdash; xl Semibold</p>
           <h4 class="font-heading text-xl font-semibold tracking-tight">
             Getting Started with Marrow
           </h4>
         </div>
-      </div>
-    </div>
 
-    <!-- Paragraph Styles -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Paragraph Styles</h3>
-      <div class="mw-card p-6 space-y-6">
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Lead Paragraph &mdash; xl Muted</p>
+        <!-- Paragraph Styles -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Lead Paragraph &mdash; xl Muted</p>
           <p class="text-xl text-muted-foreground leading-relaxed">
             This is a lead paragraph that introduces your content. It uses a larger font size and muted color
             to serve as a bridge between headings and body text, perfect for article introductions.
           </p>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Standard Paragraph &mdash; Base Size</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Standard Paragraph &mdash; Base Size</p>
           <p class="leading-7">
             The standard paragraph style uses the body font with a comfortable line height optimized for
             readability. This is the default text style you'll use for most content. It balances density
@@ -156,45 +73,33 @@ const listsCode = `<!-- Unordered List -->
           </p>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Large Text &mdash; lg Size</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Large Text &mdash; lg Size</p>
           <p class="text-lg leading-7">
             Slightly larger text for emphasis without reaching for a full heading. Useful for callouts
             or important statements within your content.
           </p>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Small Text &mdash; sm Muted</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Small Text &mdash; sm Muted</p>
           <p class="text-sm text-muted-foreground">
             Small, muted text for secondary information like timestamps, captions, helper text below
             form fields, or legal disclaimers.
           </p>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Muted Text &mdash; Base Muted</p>
-          <p class="text-muted-foreground">
-            Normal-sized text with muted color for de-emphasized content that still needs to be readable.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Inline Elements -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Inline Elements</h3>
-      <div class="mw-card p-6 space-y-6">
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Bold &amp; Italic</p>
+        <!-- Inline Elements -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Bold & Italic</p>
           <p class="leading-7">
             You can use <strong>bold text</strong> for strong emphasis and <em>italic text</em>
             for subtle highlighting or to indicate technical terms, foreign words, or thoughts.
           </p>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Inline Code</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Inline Code</p>
           <p class="leading-7">
             Install the package with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">npm install marrow-ui</code>
             and use the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-btn</code> class on any
@@ -202,35 +107,28 @@ const listsCode = `<!-- Unordered List -->
           </p>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Links</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Links</p>
           <p class="leading-7">
             Check out the <a href="/docs/installation" class="text-primary hover:underline">installation guide</a>
             to get started, or browse the <a href="/docs/components/button" class="text-primary hover:underline">component library</a>
             for examples and code snippets.
           </p>
         </div>
-      </div>
-    </div>
 
-    <!-- Blockquote -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Blockquote</h3>
-      <div class="mw-card p-6">
-        <blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground">
-          "The details are not the details. They make the design. The connections, the connections,
-          the connections. It will in the end be these details that give the product its life."
-          <footer class="mt-2 text-sm not-italic">&mdash; Charles Eames</footer>
-        </blockquote>
-      </div>
-    </div>
+        <!-- Blockquote -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Blockquote</p>
+          <blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground">
+            "The details are not the details. They make the design. The connections, the connections,
+            the connections. It will in the end be these details that give the product its life."
+            <footer class="mt-2 text-sm not-italic">&mdash; Charles Eames</footer>
+          </blockquote>
+        </div>
 
-    <!-- Lists -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Lists</h3>
-      <div class="mw-card p-6 space-y-6">
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Unordered List</p>
+        <!-- Lists -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Unordered List</p>
           <ul class="list-disc pl-6 space-y-1 leading-7">
             <li>Utility-first CSS powered by Tailwind</li>
             <li>Alpine.js for lightweight interactivity</li>
@@ -240,8 +138,8 @@ const listsCode = `<!-- Unordered List -->
           </ul>
         </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Ordered List</p>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Ordered List</p>
           <ol class="list-decimal pl-6 space-y-1 leading-7">
             <li>Install Marrow UI via npm or script tag</li>
             <li>Configure your theme in marrow.config.js</li>
@@ -251,81 +149,100 @@ const listsCode = `<!-- Unordered List -->
           </ol>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <article class="max-w-2xl mx-auto space-y-6">
+          <h1 class="font-heading text-4xl font-extrabold tracking-tight">Building Accessible Interfaces</h1>
+          <p class="text-xl text-muted-foreground leading-relaxed">
+            A practical guide to creating web experiences that work for everyone, from semantic markup to keyboard navigation.
+          </p>
+          <h2 class="font-heading text-3xl font-semibold tracking-tight border-b pb-2">Why Accessibility Matters</h2>
+          <p class="leading-7">
+            The web was designed to be <strong>universal</strong>. When we build with accessibility in mind, we create better experiences for <em>all</em> users, not just those with disabilities. It's a win for usability, SEO, and inclusion.
+          </p>
+          <blockquote class="border-l-4 border-primary pl-4 italic text-muted-foreground">
+            "The power of the Web is in its universality. Access by everyone regardless of disability is an essential aspect."
+            <footer class="mt-2 text-sm not-italic">&mdash; Tim Berners-Lee</footer>
+          </blockquote>
+          <h3 class="font-heading text-2xl font-semibold tracking-tight">Getting Started</h3>
+          <p class="leading-7">
+            Start by using semantic HTML elements like <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;nav&gt;</code>,
+            <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;main&gt;</code>, and
+            <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;article&gt;</code>. These provide built-in meaning to assistive technology.
+          </p>
+          <h4 class="font-heading text-xl font-semibold tracking-tight">Key Principles</h4>
+          <ol class="list-decimal pl-6 space-y-1 leading-7">
+            <li>Use native HTML elements whenever possible</li>
+            <li>Provide text alternatives for non-text content</li>
+            <li>Ensure all interactions are keyboard accessible</li>
+            <li>Test with screen readers and other assistive tools</li>
+          </ol>
+          <p class="text-sm text-muted-foreground">Last updated: February 2026 &bull; 5 min read</p>
+        </article>
+      </div>
+    </section>
 
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Headings</h3>
         <CodeBlock code={headingsCode} lang="html" />
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Paragraphs</h3>
         <CodeBlock code={paragraphCode} lang="html" />
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Inline Elements</h3>
         <CodeBlock code={inlineCode} lang="html" />
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Blockquote</h3>
         <CodeBlock code={blockquoteCode} lang="html" />
-      </div>
-
-      <div class="space-y-4">
-        <h3 class="font-heading text-lg font-semibold">Lists</h3>
         <CodeBlock code={listsCode} lang="html" />
       </div>
-    </div>
+    </section>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-      <div class="mw-card p-6 space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Font System</h3>
-          <p class="text-muted-foreground leading-relaxed mb-3">
-            Marrow uses a dual-font system controlled by CSS custom properties:
-          </p>
-          <ul class="list-disc pl-6 space-y-1 leading-7">
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">--marrow-font-heading</code> &mdash; Applied to all headings (h1-h6)</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">--marrow-font-body</code> &mdash; Applied to paragraphs and body text</li>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class / Property</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>font-heading</code></td><td>Apply the heading font family (maps to <code>--marrow-font-heading</code>)</td></tr>
+            <tr><td><code>font-body</code></td><td>Apply the body font family (maps to <code>--marrow-font-body</code>)</td></tr>
+            <tr><td><code>text-muted-foreground</code></td><td>Muted text color for de-emphasized content</td></tr>
+            <tr><td><code>leading-7</code></td><td>Comfortable line height (1.75rem) for body text</td></tr>
+            <tr><td><code>leading-relaxed</code></td><td>Relaxed line height (1.625) for lead paragraphs</td></tr>
+            <tr><td><code>tracking-tight</code></td><td>Tighter letter spacing for headings</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use a logical heading hierarchy (<code>h1</code> through <code>h4</code>) &mdash; never skip levels</li>
+            <li>Ensure sufficient color contrast for muted text against the background</li>
+            <li>Use semantic elements: <code>&lt;strong&gt;</code> for importance, <code>&lt;em&gt;</code> for emphasis, <code>&lt;blockquote&gt;</code> for quotations</li>
+            <li>Link text should be descriptive &mdash; avoid generic "click here" labels</li>
+            <li>Use <code>&lt;code&gt;</code> elements for inline code to convey meaning to screen readers</li>
           </ul>
         </div>
-
-        <div class="mw-separator"></div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Utility Classes</h3>
-          <p class="text-muted-foreground leading-relaxed mb-3">
-            Use these Tailwind classes for typography:
-          </p>
-          <ul class="list-disc pl-6 space-y-1 leading-7">
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">font-heading</code> &mdash; Apply the heading font family</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">font-body</code> &mdash; Apply the body font family</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">text-muted-foreground</code> &mdash; Muted text color</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">leading-7</code> &mdash; Comfortable line height (1.75rem)</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">leading-relaxed</code> &mdash; Relaxed line height (1.625)</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">tracking-tight</code> &mdash; Tighter letter spacing for headings</li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use the dual font system: <code>font-heading</code> for headings, <code>font-body</code> for text</li>
+            <li>Apply <code>tracking-tight</code> to headings for a polished feel</li>
+            <li>Use lead paragraphs (<code>text-xl text-muted-foreground</code>) to introduce sections</li>
+            <li>Keep line height comfortable: <code>leading-7</code> for body, <code>leading-relaxed</code> for leads</li>
+            <li>Configure fonts in <code>marrow.config.js</code> and compile with <code>npx marrow-ui build</code></li>
           </ul>
-        </div>
-
-        <div class="mw-separator"></div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Customization</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Configure fonts in your <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">marrow.config.js</code> file.
-            The theme system supports any Google Font or system font stack. Changes are compiled into CSS custom
-            properties when you run <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">npx marrow-ui build</code>.
-          </p>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

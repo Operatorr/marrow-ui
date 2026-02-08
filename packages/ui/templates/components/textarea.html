@@ -2,20 +2,43 @@
 <!-- A multi-line text input field -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<!-- Default textarea -->
+<!-- Basic textarea with label -->
 <div class="space-y-2">
-  <label class="mw-label">Message</label>
-  <textarea class="mw-textarea"></textarea>
+  <label for="message" class="mw-label">Your message</label>
+  <textarea id="message" class="mw-textarea" placeholder="Share your thoughts..."></textarea>
 </div>
 
-<!-- With placeholder -->
+<!-- With description -->
 <div class="space-y-2">
-  <label class="mw-label">Message</label>
-  <textarea class="mw-textarea" placeholder="Type your message here..."></textarea>
+  <label for="feedback" class="mw-label">Feedback</label>
+  <textarea
+    id="feedback"
+    class="mw-textarea"
+    placeholder="Tell us what you think..."
+  ></textarea>
+  <p class="text-sm text-muted-foreground">Your feedback helps us improve.</p>
 </div>
 
-<!-- Disabled -->
+<!-- With character count (Alpine.js) -->
+<div class="space-y-2" x-data="{ message: '', maxChars: 280 }">
+  <label for="tweet" class="mw-label">Message</label>
+  <textarea
+    id="tweet"
+    class="mw-textarea"
+    x-model="message"
+    :maxlength="maxChars"
+    placeholder="What's happening?"
+  ></textarea>
+  <p class="text-sm text-muted-foreground" x-text="\`\${message.length} / \${maxChars} characters\`"></p>
+</div>
+
+<!-- Disabled state -->
 <div class="space-y-2">
-  <label class="mw-label">Message</label>
-  <textarea class="mw-textarea" disabled placeholder="This textarea is disabled..."></textarea>
+  <label for="disabled-textarea" class="mw-label text-muted-foreground">Comments (Closed)</label>
+  <textarea
+    id="disabled-textarea"
+    class="mw-textarea"
+    disabled
+    placeholder="Comments are currently disabled..."
+  ></textarea>
 </div>

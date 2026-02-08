@@ -1,312 +1,265 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const tooltipCode = `<!-- Tooltip on a button -->
-<div x-data="mwTooltip()" class="relative inline-block">
-  <button class="mw-btn mw-btn-outline"
-          @mouseenter="enter()"
-          @mouseleave="leave()">
-    Hover me
-  </button>
-  <div x-show="show"
-       x-cloak
-       role="tooltip"
-       x-transition:enter="transition ease-out duration-150"
-       x-transition:enter-start="opacity-0 translate-y-1"
-       x-transition:enter-end="opacity-100 translate-y-0"
-       x-transition:leave="transition ease-in duration-100"
-       x-transition:leave-start="opacity-100 translate-y-0"
-       x-transition:leave-end="opacity-0 translate-y-1"
-       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
-    This is a tooltip
-  </div>
-</div>
-
-<!-- Tooltip on an icon button -->
-<div x-data="mwTooltip()" class="relative inline-block">
-  <button class="mw-btn mw-btn-ghost mw-btn-icon"
-          @mouseenter="enter()"
-          @mouseleave="leave()"
-          aria-label="More information">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-  </button>
-  <div x-show="show"
-       x-cloak
-       role="tooltip"
-       x-transition:enter="transition ease-out duration-150"
-       x-transition:enter-start="opacity-0 translate-y-1"
-       x-transition:enter-end="opacity-100 translate-y-0"
-       x-transition:leave="transition ease-in duration-100"
-       x-transition:leave-start="opacity-100 translate-y-0"
-       x-transition:leave-end="opacity-0 translate-y-1"
-       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
-    More information
-  </div>
-</div>
-
-<!-- Tooltip on text -->
-<div x-data="mwTooltip()" class="relative inline-block">
-  <span class="underline decoration-dashed underline-offset-4 cursor-help"
-        @mouseenter="enter()"
-        @mouseleave="leave()">
-    What is this?
-  </span>
-  <div x-show="show"
-       x-cloak
-       role="tooltip"
-       x-transition:enter="transition ease-out duration-150"
-       x-transition:enter-start="opacity-0 translate-y-1"
-       x-transition:enter-end="opacity-100 translate-y-0"
-       x-transition:leave="transition ease-in duration-100"
-       x-transition:leave-start="opacity-100 translate-y-0"
-       x-transition:leave-end="opacity-0 translate-y-1"
-       class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
-    A helpful explanation
-  </div>
-</div>
-
-<!-- Tooltip with different positions -->
-<div class="flex gap-4">
-  <!-- Top tooltip -->
-  <div x-data="mwTooltip()" class="relative inline-block">
-    <button class="mw-btn mw-btn-primary"
-            @mouseenter="enter()"
-            @mouseleave="leave()">
-      Top
-    </button>
-    <div x-show="show"
-         x-cloak
-         role="tooltip"
-         x-transition:enter="transition ease-out duration-150"
-         x-transition:enter-start="opacity-0 translate-y-1"
-         x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition ease-in duration-100"
-         x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 translate-y-1"
-         class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
-      Tooltip on top
-    </div>
-  </div>
-
-  <!-- Bottom tooltip -->
-  <div x-data="mwTooltip()" class="relative inline-block">
-    <button class="mw-btn mw-btn-primary"
-            @mouseenter="enter()"
-            @mouseleave="leave()">
-      Bottom
-    </button>
-    <div x-show="show"
-         x-cloak
-         role="tooltip"
-         x-transition:enter="transition ease-out duration-150"
-         x-transition:enter-start="opacity-0 -translate-y-1"
-         x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition ease-in duration-100"
-         x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 -translate-y-1"
-         class="mw-tooltip absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50">
-      Tooltip on bottom
-    </div>
-  </div>
-</div>`;
+const tooltipCode = loadFull("tooltip");
 ---
 
 <DocsLayout title="Tooltip" description="A popup that displays information on hover" activeComponent="tooltip">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight">Tooltip</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A small popup that appears on hover to provide additional context.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Overlays</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Tooltip</h1>
+      <p class="docs-hero-description mt-3">A small popup that appears on hover to provide additional context.</p>
+    </header>
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card p-6 flex flex-wrap gap-6 items-center">
-        <!-- Tooltip on a button -->
-        <div x-data="mwTooltip()" class="relative inline-block">
-          <button class="mw-btn mw-btn-outline"
-                  @mouseenter="enter()"
-                  @mouseleave="leave()">
-            Hover me
-          </button>
-          <div x-show="show"
-               x-cloak
-               role="tooltip"
-               x-transition:enter="transition ease-out duration-150"
-               x-transition:enter-start="opacity-0 translate-y-1"
-               x-transition:enter-end="opacity-100 translate-y-0"
-               x-transition:leave="transition ease-in duration-100"
-               x-transition:leave-start="opacity-100 translate-y-0"
-               x-transition:leave-end="opacity-0 translate-y-1"
-               class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
-            This is a tooltip
-          </div>
-        </div>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Button & Icon Triggers</p>
+          <div class="flex flex-wrap gap-6 items-center">
+            <!-- Tooltip on a button -->
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-outline"
+                      @mouseenter="enter()"
+                      @mouseleave="leave()">
+                Hover me
+              </button>
+              <div x-show="show"
+                   x-cloak
+                   role="tooltip"
+                   x-transition:enter="transition ease-out duration-150"
+                   x-transition:enter-start="opacity-0 translate-y-1"
+                   x-transition:enter-end="opacity-100 translate-y-0"
+                   x-transition:leave="transition ease-in duration-100"
+                   x-transition:leave-start="opacity-100 translate-y-0"
+                   x-transition:leave-end="opacity-0 translate-y-1"
+                   class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+                This is a tooltip
+              </div>
+            </div>
 
-        <!-- Tooltip on an icon button -->
-        <div x-data="mwTooltip()" class="relative inline-block">
-          <button class="mw-btn mw-btn-ghost mw-btn-icon"
-                  @mouseenter="enter()"
-                  @mouseleave="leave()"
-                  aria-label="More information">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-          </button>
-          <div x-show="show"
-               x-cloak
-               role="tooltip"
-               x-transition:enter="transition ease-out duration-150"
-               x-transition:enter-start="opacity-0 translate-y-1"
-               x-transition:enter-end="opacity-100 translate-y-0"
-               x-transition:leave="transition ease-in duration-100"
-               x-transition:leave-start="opacity-100 translate-y-0"
-               x-transition:leave-end="opacity-0 translate-y-1"
-               class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
-            More information
-          </div>
-        </div>
+            <!-- Tooltip on an icon button -->
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-ghost mw-btn-icon"
+                      @mouseenter="enter()"
+                      @mouseleave="leave()"
+                      aria-label="More information">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              </button>
+              <div x-show="show"
+                   x-cloak
+                   role="tooltip"
+                   x-transition:enter="transition ease-out duration-150"
+                   x-transition:enter-start="opacity-0 translate-y-1"
+                   x-transition:enter-end="opacity-100 translate-y-0"
+                   x-transition:leave="transition ease-in duration-100"
+                   x-transition:leave-start="opacity-100 translate-y-0"
+                   x-transition:leave-end="opacity-0 translate-y-1"
+                   class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+                More information
+              </div>
+            </div>
 
-        <!-- Tooltip on text -->
-        <div x-data="mwTooltip()" class="relative inline-block">
-          <span class="underline decoration-dashed underline-offset-4 cursor-help text-muted-foreground"
-                @mouseenter="enter()"
-                @mouseleave="leave()">
-            What is this?
-          </span>
-          <div x-show="show"
-               x-cloak
-               role="tooltip"
-               x-transition:enter="transition ease-out duration-150"
-               x-transition:enter-start="opacity-0 translate-y-1"
-               x-transition:enter-end="opacity-100 translate-y-0"
-               x-transition:leave="transition ease-in duration-100"
-               x-transition:leave-start="opacity-100 translate-y-0"
-               x-transition:leave-end="opacity-0 translate-y-1"
-               class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
-            A helpful explanation
-          </div>
-        </div>
-
-        <!-- Tooltip with different positions -->
-        <div class="flex gap-4">
-          <!-- Top tooltip -->
-          <div x-data="mwTooltip()" class="relative inline-block">
-            <button class="mw-btn mw-btn-primary"
+            <!-- Tooltip on text -->
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <span class="underline decoration-dashed underline-offset-4 cursor-help text-muted-foreground"
                     @mouseenter="enter()"
                     @mouseleave="leave()">
-              Top
-            </button>
-            <div x-show="show"
-                 x-cloak
-                 role="tooltip"
-                 x-transition:enter="transition ease-out duration-150"
-                 x-transition:enter-start="opacity-0 translate-y-1"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 x-transition:leave="transition ease-in duration-100"
-                 x-transition:leave-start="opacity-100 translate-y-0"
-                 x-transition:leave-end="opacity-0 translate-y-1"
-                 class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
-              Tooltip on top
+                What is this?
+              </span>
+              <div x-show="show"
+                   x-cloak
+                   role="tooltip"
+                   x-transition:enter="transition ease-out duration-150"
+                   x-transition:enter-start="opacity-0 translate-y-1"
+                   x-transition:enter-end="opacity-100 translate-y-0"
+                   x-transition:leave="transition ease-in duration-100"
+                   x-transition:leave-start="opacity-100 translate-y-0"
+                   x-transition:leave-end="opacity-0 translate-y-1"
+                   class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+                A helpful explanation
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Bottom tooltip -->
-          <div x-data="mwTooltip()" class="relative inline-block">
-            <button class="mw-btn mw-btn-primary"
-                    @mouseenter="enter()"
-                    @mouseleave="leave()">
-              Bottom
-            </button>
-            <div x-show="show"
-                 x-cloak
-                 role="tooltip"
-                 x-transition:enter="transition ease-out duration-150"
-                 x-transition:enter-start="opacity-0 -translate-y-1"
-                 x-transition:enter-end="opacity-100 translate-y-0"
-                 x-transition:leave="transition ease-in duration-100"
-                 x-transition:leave-start="opacity-100 translate-y-0"
-                 x-transition:leave-end="opacity-0 -translate-y-1"
-                 class="mw-tooltip absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50">
-              Tooltip on bottom
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Positioning</p>
+          <div class="flex gap-4">
+            <!-- Top tooltip -->
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-primary"
+                      @mouseenter="enter()"
+                      @mouseleave="leave()">
+                Top
+              </button>
+              <div x-show="show"
+                   x-cloak
+                   role="tooltip"
+                   x-transition:enter="transition ease-out duration-150"
+                   x-transition:enter-start="opacity-0 translate-y-1"
+                   x-transition:enter-end="opacity-100 translate-y-0"
+                   x-transition:leave="transition ease-in duration-100"
+                   x-transition:leave-start="opacity-100 translate-y-0"
+                   x-transition:leave-end="opacity-0 translate-y-1"
+                   class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">
+                Tooltip on top
+              </div>
+            </div>
+
+            <!-- Bottom tooltip -->
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-primary"
+                      @mouseenter="enter()"
+                      @mouseleave="leave()">
+                Bottom
+              </button>
+              <div x-show="show"
+                   x-cloak
+                   role="tooltip"
+                   x-transition:enter="transition ease-out duration-150"
+                   x-transition:enter-start="opacity-0 -translate-y-1"
+                   x-transition:enter-end="opacity-100 translate-y-0"
+                   x-transition:leave="transition ease-in duration-100"
+                   x-transition:leave-start="opacity-100 translate-y-0"
+                   x-transition:leave-end="opacity-0 -translate-y-1"
+                   class="mw-tooltip absolute left-1/2 -translate-x-1/2 top-full mt-2 z-50">
+                Tooltip on bottom
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={tooltipCode} lang="html" />
-    </div>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="w-full max-w-sm mx-auto">
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Action Bar</p>
+          <div class="flex items-center justify-center gap-1 rounded-lg border border-border p-2 bg-muted/30">
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" @mouseenter="enter()" @mouseleave="leave()" aria-label="Bold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 12a4 4 0 0 0 0-8H6v8"/><path d="M15 20a4 4 0 0 0 0-8H6v8Z"/></svg>
+              </button>
+              <div x-show="show" x-cloak role="tooltip" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">Bold</div>
+            </div>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" @mouseenter="enter()" @mouseleave="leave()" aria-label="Italic">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
+              </button>
+              <div x-show="show" x-cloak role="tooltip" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">Italic</div>
+            </div>
 
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" @mouseenter="enter()" @mouseleave="leave()" aria-label="Underline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" x2="20" y1="20" y2="20"/></svg>
+              </button>
+              <div x-show="show" x-cloak role="tooltip" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">Underline</div>
+            </div>
+
+            <div class="w-px h-5 bg-border mx-1"></div>
+
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" @mouseenter="enter()" @mouseleave="leave()" aria-label="Align left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="15" x2="3" y1="12" y2="12"/><line x1="17" x2="3" y1="18" y2="18"/></svg>
+              </button>
+              <div x-show="show" x-cloak role="tooltip" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">Align left</div>
+            </div>
+
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" @mouseenter="enter()" @mouseleave="leave()" aria-label="Align center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="17" x2="7" y1="12" y2="12"/><line x1="19" x2="5" y1="18" y2="18"/></svg>
+              </button>
+              <div x-show="show" x-cloak role="tooltip" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">Align center</div>
+            </div>
+
+            <div x-data="mwTooltip()" class="relative inline-block">
+              <button class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" @mouseenter="enter()" @mouseleave="leave()" aria-label="Align right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="21" x2="3" y1="6" y2="6"/><line x1="21" x2="9" y1="12" y2="12"/><line x1="21" x2="7" y1="18" y2="18"/></svg>
+              </button>
+              <div x-show="show" x-cloak role="tooltip" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1" class="mw-tooltip absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50">Align right</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
-          <p class="text-muted-foreground leading-relaxed mt-2">Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwTooltip()"</code>.</p>
-        </div>
+        <CodeBlock code={tooltipCode} lang="html" />
+      </div>
+    </section>
 
-        <div class="mw-card overflow-hidden">
-          <table class="w-full text-sm">
-            <thead class="bg-muted/50 border-b border-border">
-              <tr>
-                <th class="text-left p-3 font-semibold">Property</th>
-                <th class="text-left p-3 font-semibold">Type</th>
-                <th class="text-left p-3 font-semibold">Description</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-border">
-              <tr>
-                <td class="p-3 font-mono text-xs">show</td>
-                <td class="p-3 text-muted-foreground">Boolean</td>
-                <td class="p-3 text-muted-foreground leading-relaxed">Tooltip visibility state</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-mono text-xs">enter()</td>
-                <td class="p-3 text-muted-foreground">Function</td>
-                <td class="p-3 text-muted-foreground leading-relaxed">Show the tooltip</td>
-              </tr>
-              <tr>
-                <td class="p-3 font-mono text-xs">leave()</td>
-                <td class="p-3 text-muted-foreground">Function</td>
-                <td class="p-3 text-muted-foreground leading-relaxed">Hide the tooltip</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Property/Method</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>show</code></td>
+              <td>Boolean</td>
+              <td>Tooltip visibility state</td>
+            </tr>
+            <tr>
+              <td><code>enter()</code></td>
+              <td>Method</td>
+              <td>Show the tooltip</td>
+            </tr>
+            <tr>
+              <td><code>leave()</code></td>
+              <td>Method</td>
+              <td>Hide the tooltip</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>mw-tooltip</code></td>
+              <td>Base tooltip styling with inverted colors, small text, padding, rounded corners, and shadow</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
-          <p class="text-muted-foreground leading-relaxed mt-2">The <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-tooltip</code> class provides the base tooltip styling with foreground background, background text color, small text, padding, rounded corners, and shadow.</p>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Positioning</h3>
-          <p class="text-muted-foreground leading-relaxed mt-2">Tooltips are positioned using Tailwind utility classes. Common patterns include:</p>
-          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
-            <li><strong>Top:</strong> <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">bottom-full mb-2</code> — Places tooltip above the trigger</li>
-            <li><strong>Bottom:</strong> <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">top-full mt-2</code> — Places tooltip below the trigger</li>
-            <li><strong>Centering:</strong> <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">left-1/2 -translate-x-1/2</code> — Centers tooltip horizontally</li>
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Add role="tooltip" to the tooltip element for screen reader support</li>
+            <li>Use aria-label on icon buttons to provide accessible names</li>
+            <li>Add aria-hidden="true" to decorative icons inside buttons</li>
+            <li>Ensure tooltips are triggered on both mouse hover and keyboard focus</li>
           </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="tooltip"</code> to the tooltip element for screen reader support</li>
-            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> on icon buttons to provide accessible names</li>
-            <li>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> to decorative icons inside buttons</li>
-            <li>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-cloak</code> to prevent flash of unstyled content</li>
-            <li>Ensure tooltips are triggered on both mouse hover and keyboard focus for full accessibility</li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use x-cloak to prevent flash of unstyled content</li>
+            <li>Position with bottom-full mb-2 (top) or top-full mt-2 (bottom) and left-1/2 -translate-x-1/2 for centering</li>
+            <li>Keep tooltip text short -- one line, no more than a few words</li>
+            <li>Do not place interactive elements inside tooltips</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

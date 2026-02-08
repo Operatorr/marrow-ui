@@ -1,28 +1,59 @@
 <!-- Marrow UI: Kbd -->
 <!-- Keyboard shortcut indicator for displaying key combinations -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Kbd -->
 <!-- Single key -->
 <kbd class="mw-kbd">K</kbd>
 
 <!-- Key combination -->
 <span class="flex items-center gap-1">
-  <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
+  <kbd class="mw-kbd">⌘</kbd>
   <kbd class="mw-kbd">K</kbd>
 </span>
 
 <!-- Three-key combination -->
 <span class="flex items-center gap-1">
   <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
   <kbd class="mw-kbd">Shift</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
   <kbd class="mw-kbd">P</kbd>
 </span>
 
 <!-- Inline with text -->
-<p>Press <kbd class="mw-kbd">Ctrl</kbd>
-  <span class="text-xs text-muted-foreground">+</span>
-  <kbd class="mw-kbd">K</kbd> to open the command palette.
-</p>
+<p>Press <kbd class="mw-kbd">⌘</kbd> <kbd class="mw-kbd">K</kbd> to open command palette.</p>
+<!-- @section: Kbd Shortcuts -->
+
+<!-- Common shortcuts -->
+<div class="space-y-3">
+  <div class="flex items-center justify-between">
+    <span>Copy</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">C</kbd>
+    </span>
+  </div>
+  <div class="flex items-center justify-between">
+    <span>Paste</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">V</kbd>
+    </span>
+  </div>
+  <div class="flex items-center justify-between">
+    <span>Undo</span>
+    <span class="flex items-center gap-1">
+      <kbd class="mw-kbd">⌘</kbd>
+      <kbd class="mw-kbd">Z</kbd>
+    </span>
+  </div>
+</div>
+<!-- @section: Kbd Usage -->
+
+<div class="mw-menu-item justify-between">
+  <span>Command Palette</span>
+  <span class="flex items-center gap-1">
+    <kbd class="mw-kbd">Ctrl</kbd>
+    <kbd class="mw-kbd">Shift</kbd>
+    <kbd class="mw-kbd">P</kbd>
+  </span>
+</div>

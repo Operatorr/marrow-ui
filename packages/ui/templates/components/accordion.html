@@ -2,13 +2,14 @@
 <!-- A vertically stacked set of interactive headings that reveal content -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Single Accordion -->
 <div x-data="mwAccordion()">
   <!-- Item 1 -->
   <div class="border-b border-border">
-    <button @click="toggle('item-1')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
-      Is it accessible?
-      <svg :class="isOpen('item-1') && 'rotate-180'"
+    <button @click="toggle('shipping')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      What are your shipping options?
+      <svg :class="isOpen('shipping') && 'rotate-180'"
            class="h-4 w-4 shrink-0 transition-transform duration-200"
            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -16,19 +17,19 @@
         <path d="m6 9 6 6 6-6"/>
       </svg>
     </button>
-    <div x-show="isOpen('item-1')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground">
-        Yes. It adheres to the WAI-ARIA design pattern.
+    <div x-show="isOpen('shipping')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
+        We offer standard shipping (5-7 business days), express shipping (2-3 business days), and overnight delivery. Free shipping is available on orders over $50.
       </div>
     </div>
   </div>
 
   <!-- Item 2 -->
   <div class="border-b border-border">
-    <button @click="toggle('item-2')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
-      Is it styled?
-      <svg :class="isOpen('item-2') && 'rotate-180'"
+    <button @click="toggle('returns')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      What is your return policy?
+      <svg :class="isOpen('returns') && 'rotate-180'"
            class="h-4 w-4 shrink-0 transition-transform duration-200"
            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -36,19 +37,19 @@
         <path d="m6 9 6 6 6-6"/>
       </svg>
     </button>
-    <div x-show="isOpen('item-2')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground">
-        Yes. It comes with default styles that match the other components.
+    <div x-show="isOpen('returns')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
+        You can return any unused items within 30 days of purchase for a full refund. Items must be in original condition with tags attached.
       </div>
     </div>
   </div>
 
   <!-- Item 3 -->
   <div class="border-b border-border">
-    <button @click="toggle('item-3')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-all hover:underline">
-      Is it animated?
-      <svg :class="isOpen('item-3') && 'rotate-180'"
+    <button @click="toggle('payment')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      What payment methods do you accept?
+      <svg :class="isOpen('payment') && 'rotate-180'"
            class="h-4 w-4 shrink-0 transition-transform duration-200"
            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
            viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -56,9 +57,129 @@
         <path d="m6 9 6 6 6-6"/>
       </svg>
     </button>
-    <div x-show="isOpen('item-3')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground">
-        Yes. It uses Alpine.js x-collapse for smooth animations.
+    <div x-show="isOpen('payment')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
+        We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, and Google Pay.
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 4 -->
+  <div class="border-b border-border">
+    <button @click="toggle('warranty')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      Do you offer a warranty?
+      <svg :class="isOpen('warranty') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('warranty')" x-collapse>
+      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
+        All products come with a 1-year manufacturer's warranty covering defects in materials and workmanship. Extended warranty options are available at checkout.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- @section: Multi Accordion -->
+
+<div x-data="mwAccordionMulti()">
+  <!-- General Settings -->
+  <div class="border-b border-border">
+    <button @click="toggle('general')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      General Settings
+      <svg :class="isOpen('general') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('general')" x-collapse>
+      <div class="pb-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium">Language</span>
+          <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+            <option>English</option>
+            <option>Spanish</option>
+            <option>French</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium">Timezone</span>
+          <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+            <option>UTC-8 (Pacific)</option>
+            <option>UTC-5 (Eastern)</option>
+            <option>UTC+0 (GMT)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="border-b border-border">
+    <button @click="toggle('notifications')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      Notifications
+      <svg :class="isOpen('notifications') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('notifications')" x-collapse>
+      <div class="pb-4 space-y-3">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" checked class="rounded border-border">
+          <span class="text-sm">Email notifications</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="checkbox" checked class="rounded border-border">
+          <span class="text-sm">Push notifications</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="rounded border-border">
+          <span class="text-sm">SMS notifications</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy -->
+  <div class="border-b border-border">
+    <button @click="toggle('privacy')"
+            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+      Privacy & Security
+      <svg :class="isOpen('privacy') && 'rotate-180'"
+           class="h-4 w-4 shrink-0 transition-transform duration-200"
+           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <div x-show="isOpen('privacy')" x-collapse>
+      <div class="pb-4 space-y-3">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" checked class="rounded border-border">
+          <span class="text-sm">Two-factor authentication</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="rounded border-border">
+          <span class="text-sm">Show activity status</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="checkbox" checked class="rounded border-border">
+          <span class="text-sm">Require password for purchases</span>
+        </label>
       </div>
     </div>
   </div>

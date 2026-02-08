@@ -1,85 +1,87 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const badgeCode = `<!-- Default -->
-<span class="mw-badge mw-badge-default">Default</span>
-
-<!-- Secondary -->
-<span class="mw-badge mw-badge-secondary">Secondary</span>
-
-<!-- Outline -->
-<span class="mw-badge mw-badge-outline">Outline</span>
-
-<!-- Destructive -->
-<span class="mw-badge mw-badge-destructive">Destructive</span>`;
+const badgeCode = loadFull("badge");
 ---
 
 <DocsLayout title="Badge" description="Displays a small label or status indicator" activeComponent="badge">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Badge</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">Displays a small label or status indicator.</p>
-    </div>
-    <div class="mw-separator"></div>
+  <div class="space-y-12">
+
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Buttons & Actions</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Badge</h1>
+      <p class="docs-hero-description mt-3">Displays a small label or status indicator. Use badges to highlight metadata, counts, or statuses inline with other content.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
-        <div class="space-y-6">
-          <!-- Default Variant -->
-          <div class="space-y-2">
-            <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Default</div>
-            <div class="flex items-center gap-3">
-              <span class="mw-badge mw-badge-default">Default</span>
-            </div>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Default -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Default</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="mw-badge mw-badge-default">Default</span>
           </div>
+        </div>
 
-          <!-- Secondary Variant -->
-          <div class="space-y-2">
-            <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Secondary</div>
-            <div class="flex items-center gap-3">
-              <span class="mw-badge mw-badge-secondary">Secondary</span>
-            </div>
+        <!-- Secondary -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Secondary</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="mw-badge mw-badge-secondary">Secondary</span>
           </div>
+        </div>
 
-          <!-- Outline Variant -->
-          <div class="space-y-2">
-            <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Outline</div>
-            <div class="flex items-center gap-3">
-              <span class="mw-badge mw-badge-outline">Outline</span>
-            </div>
+        <!-- Outline -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Outline</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="mw-badge mw-badge-outline">Outline</span>
           </div>
+        </div>
 
-          <!-- Destructive Variant -->
-          <div class="space-y-2">
-            <div class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Destructive</div>
-            <div class="flex items-center gap-3">
-              <span class="mw-badge mw-badge-destructive">Destructive</span>
-            </div>
+        <!-- Destructive -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Destructive</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="mw-badge mw-badge-destructive">Destructive</span>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- In Context -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">In Context</h3>
-      <div class="mw-card">
-        <div class="space-y-8">
-          <!-- Notification Count on Button -->
-          <div class="space-y-3">
-            <div class="text-sm font-medium text-muted-foreground">Notification Count</div>
-            <button class="mw-btn mw-btn-outline relative">
-              Messages
-              <span class="mw-badge mw-badge-destructive absolute -top-2 -right-2">5</span>
-            </button>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-md mx-auto space-y-6">
+          <!-- Notification count on button -->
+          <div class="rounded-lg border border-border bg-card p-5 space-y-4">
+            <div>
+              <h3 class="font-heading text-base font-semibold">Notifications</h3>
+              <p class="text-sm text-muted-foreground mt-1">You have unread messages in your inbox.</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <button class="mw-btn mw-btn-outline relative">
+                Messages
+                <span class="mw-badge mw-badge-destructive absolute -top-2 -right-2">5</span>
+              </button>
+              <button class="mw-btn mw-btn-outline relative">
+                Updates
+                <span class="mw-badge mw-badge-default absolute -top-2 -right-2">12</span>
+              </button>
+            </div>
           </div>
-
-          <!-- Status Labels in List -->
-          <div class="space-y-3">
-            <div class="text-sm font-medium text-muted-foreground">Status Labels</div>
+          <!-- Status list -->
+          <div class="rounded-lg border border-border bg-card p-5 space-y-3">
+            <h3 class="font-heading text-base font-semibold">Environments</h3>
             <div class="space-y-2">
               <div class="flex items-center justify-between p-3 border border-border rounded-lg">
                 <span class="text-sm">Production Server</span>
@@ -93,83 +95,83 @@ const badgeCode = `<!-- Default -->
                 <span class="text-sm">Development Build</span>
                 <span class="mw-badge mw-badge-outline">Archived</span>
               </div>
+              <div class="flex items-center justify-between p-3 border border-border rounded-lg">
+                <span class="text-sm">Legacy API</span>
+                <span class="mw-badge mw-badge-destructive">Deprecated</span>
+              </div>
             </div>
           </div>
-
-          <!-- Version Tags -->
-          <div class="space-y-3">
-            <div class="text-sm font-medium text-muted-foreground">Version Tags</div>
+          <!-- Version tags -->
+          <div class="rounded-lg border border-border bg-card p-5 space-y-3">
+            <h3 class="font-heading text-base font-semibold">Release Tags</h3>
             <div class="flex flex-wrap items-center gap-2">
               <span class="mw-badge mw-badge-default">v2.1.0</span>
               <span class="mw-badge mw-badge-secondary">Beta</span>
               <span class="mw-badge mw-badge-outline">New</span>
-              <span class="mw-badge mw-badge-destructive">Deprecated</span>
+              <span class="mw-badge mw-badge-destructive">Breaking</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={badgeCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <p class="text-muted-foreground leading-relaxed">
-          Badges are compact elements used to display status, counts, or labels. They should be used sparingly to draw attention to important information.
-        </p>
+        <CodeBlock code={badgeCode} lang="html" />
+      </div>
+    </section>
 
-        <div class="space-y-3">
-          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
-          <div class="mw-card overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-border">
-                  <th class="text-left p-3 font-semibold">Class</th>
-                  <th class="text-left p-3 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge</code></td>
-                  <td class="p-3 text-muted-foreground">Base badge class (required)</td>
-                </tr>
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge-default</code></td>
-                  <td class="p-3 text-muted-foreground">Primary colored badge</td>
-                </tr>
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge-secondary</code></td>
-                  <td class="p-3 text-muted-foreground">Secondary colored badge</td>
-                </tr>
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge-outline</code></td>
-                  <td class="p-3 text-muted-foreground">Outlined badge</td>
-                </tr>
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-badge-destructive</code></td>
-                  <td class="p-3 text-muted-foreground">Destructive/red badge for errors or warnings</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-badge</code></td><td>Base badge class (required)</td></tr>
+            <tr><td><code>mw-badge-default</code></td><td>Primary colored badge</td></tr>
+            <tr><td><code>mw-badge-secondary</code></td><td>Secondary colored badge</td></tr>
+            <tr><td><code>mw-badge-outline</code></td><td>Outlined badge with border</td></tr>
+            <tr><td><code>mw-badge-destructive</code></td><td>Destructive/red badge for errors or warnings</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use semantic <code>&lt;span&gt;</code> elements for inline badges</li>
+            <li>Ensure sufficient color contrast -- all variants meet WCAG AA standards</li>
+            <li>When used for status, add <code>aria-label</code> for screen readers to provide context</li>
+            <li>For notification counts, use <code>aria-label</code> to describe the count (e.g., "5 unread messages")</li>
+            <li>Avoid using color alone to convey meaning -- pair badges with descriptive text</li>
+          </ul>
         </div>
-
-        <div class="space-y-3">
-          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed list-disc list-inside">
-            <li>Use semantic HTML elements (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">&lt;span&gt;</code> for inline badges)</li>
-            <li>Ensure sufficient color contrast (all variants meet WCAG AA standards)</li>
-            <li>When used for status, consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> for screen readers</li>
-            <li>For notification counts, use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> to provide context (e.g., "5 unread messages")</li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use badges sparingly to draw attention to important information</li>
+            <li>Keep badge text short -- one or two words at most</li>
+            <li>Use <code>mw-badge-default</code> for positive or active states</li>
+            <li>Use <code>mw-badge-destructive</code> for errors, deprecations, or critical warnings</li>
+            <li>Use <code>mw-badge-secondary</code> for neutral or pending states</li>
+            <li>Use <code>mw-badge-outline</code> for subtle, low-emphasis labels</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

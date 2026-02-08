@@ -2,11 +2,17 @@
 <!-- Resizable panels with a draggable divider -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<div x-data="mwResizable(50)" class="flex h-64 select-none border rounded-md overflow-hidden">
-  <!-- Left Panel -->
-  <div class="overflow-auto p-4" :style="'width:' + split + '%'">
-    <h3 class="font-semibold mb-2">Left Panel</h3>
-    <p class="text-sm text-muted-foreground">Resizable content here.</p>
+<div x-data="mwResizable(30)" class="flex h-96 select-none border rounded-md overflow-hidden">
+  <!-- Left Panel (Sidebar) -->
+  <div class="overflow-auto p-4 bg-muted/30"
+       :style="'width:' + Math.max(10, Math.min(90, split)) + '%'">
+    <h3 class="font-semibold mb-3">Sidebar</h3>
+    <nav class="space-y-2">
+      <a href="#" class="block px-3 py-2 rounded-md bg-primary text-primary-foreground text-sm">Dashboard</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Projects</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Settings</a>
+      <a href="#" class="block px-3 py-2 rounded-md hover:bg-accent text-sm">Team</a>
+    </nav>
   </div>
 
   <!-- Drag Handle -->
@@ -14,9 +20,16 @@
        @mousedown="startDrag($event)"
        @touchstart.prevent="startDrag($event)"></div>
 
-  <!-- Right Panel -->
-  <div class="overflow-auto p-4 flex-1">
-    <h3 class="font-semibold mb-2">Right Panel</h3>
-    <p class="text-sm text-muted-foreground">This fills the remaining space.</p>
+  <!-- Right Panel (Content) -->
+  <div class="overflow-auto p-6 flex-1">
+    <h3 class="font-semibold text-lg mb-2">Main Content</h3>
+    <p class="text-sm text-muted-foreground mb-4">
+      Current split: <span x-text="Math.round(split)"></span>%
+    </p>
+    <p class="text-sm text-muted-foreground leading-relaxed">
+      Drag the divider to adjust the layout. The sidebar is constrained
+      between 10% and 90% width to prevent panels from collapsing entirely.
+      Try resizing to see how the layout adapts.
+    </p>
   </div>
 </div>

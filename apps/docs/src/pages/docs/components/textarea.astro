@@ -1,201 +1,170 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const textareaCode = `<!-- Basic textarea with label -->
-<div class="space-y-2">
-  <label for="message" class="mw-label">Your message</label>
-  <textarea id="message" class="mw-textarea" placeholder="Share your thoughts..."></textarea>
-</div>
-
-<!-- With description -->
-<div class="space-y-2">
-  <label for="feedback" class="mw-label">Feedback</label>
-  <textarea
-    id="feedback"
-    class="mw-textarea"
-    placeholder="Tell us what you think..."
-  ></textarea>
-  <p class="text-sm text-muted-foreground">Your feedback helps us improve.</p>
-</div>
-
-<!-- With character count (Alpine.js) -->
-<div class="space-y-2" x-data="{ message: '', maxChars: 280 }">
-  <label for="tweet" class="mw-label">Message</label>
-  <textarea
-    id="tweet"
-    class="mw-textarea"
-    x-model="message"
-    :maxlength="maxChars"
-    placeholder="What's happening?"
-  ></textarea>
-  <p class="text-sm text-muted-foreground" x-text="\`\${message.length} / \${maxChars} characters\`"></p>
-</div>
-
-<!-- Disabled state -->
-<div class="space-y-2">
-  <label for="disabled-textarea" class="mw-label text-muted-foreground">Comments (Closed)</label>
-  <textarea
-    id="disabled-textarea"
-    class="mw-textarea"
-    disabled
-    placeholder="Comments are currently disabled..."
-  ></textarea>
-</div>`;
+const textareaCode = loadFull("textarea");
 ---
 
 <DocsLayout title="Textarea" description="A multi-line text input field" activeComponent="textarea">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Textarea</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">A multi-line text input for longer form content like messages, descriptions, and comments.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Form Controls</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Textarea</h1>
+      <p class="docs-hero-description mt-3">A multi-line text input for longer form content like messages, descriptions, and comments.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card p-6 space-y-6">
-        <!-- Basic textarea -->
-        <div class="space-y-2">
-          <label for="message" class="mw-label">Your message</label>
-          <textarea id="message" class="mw-textarea max-w-lg" placeholder="Share your thoughts..."></textarea>
-        </div>
-
-        <!-- With description -->
-        <div class="space-y-2">
-          <label for="feedback" class="mw-label">Feedback</label>
-          <textarea
-            id="feedback"
-            class="mw-textarea max-w-lg"
-            placeholder="Tell us what you think..."
-          ></textarea>
-          <p class="text-sm text-muted-foreground">Your feedback helps us improve.</p>
-        </div>
-
-        <!-- With content -->
-        <div class="space-y-2">
-          <label for="bio" class="mw-label">Biography</label>
-          <textarea id="bio" class="mw-textarea max-w-lg">A passionate developer focused on building accessible and performant web applications. Enjoys working with modern JavaScript frameworks and advocating for user-centered design.</textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- With Character Count -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">With Character Count</h3>
-      <div class="mw-card p-6">
-        <div class="space-y-2 max-w-lg" x-data="{ message: '', maxChars: 280 }">
-          <label for="tweet" class="mw-label">Message</label>
-          <textarea
-            id="tweet"
-            class="mw-textarea"
-            x-model="message"
-            :maxlength="maxChars"
-            placeholder="What's happening?"
-          ></textarea>
-          <p class="text-sm text-muted-foreground" x-text="`${message.length} / ${maxChars} characters`"></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Disabled -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Disabled</h3>
-      <div class="mw-card p-6">
-        <div class="space-y-2 max-w-lg">
-          <label for="disabled-textarea" class="mw-label text-muted-foreground">Comments (Closed)</label>
-          <textarea
-            id="disabled-textarea"
-            class="mw-textarea"
-            disabled
-            placeholder="Comments are currently disabled..."
-          ></textarea>
-          <p class="text-sm text-muted-foreground">This field is currently unavailable.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={textareaCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-
-      <div class="space-y-4">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
         <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b">
-                  <th class="text-left p-3 font-semibold">Class</th>
-                  <th class="text-left p-3 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y">
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-textarea</code></td>
-                  <td class="p-3 text-muted-foreground">Base textarea styling with border, padding, focus states, and vertical resize</td>
-                </tr>
-              </tbody>
-            </table>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Basic</p>
+          <div class="space-y-2 max-w-lg">
+            <label for="message" class="mw-label">Your message</label>
+            <textarea id="message" class="mw-textarea" placeholder="Share your thoughts..."></textarea>
           </div>
         </div>
 
         <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Always pair textareas with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">label</code> elements using <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code> attributes</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Use descriptive placeholder text that provides examples, not instructions</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-describedby</code> when including helper text or character counts</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-invalid</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-errormessage</code> for validation states</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Consider setting <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">rows</code> attribute for consistent height (default min-height is 5rem)</span>
-            </li>
-          </ul>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Description</p>
+          <div class="space-y-2 max-w-lg">
+            <label for="feedback" class="mw-label">Feedback</label>
+            <textarea id="feedback" class="mw-textarea" placeholder="Tell us what you think..."></textarea>
+            <p class="text-sm text-muted-foreground">Your feedback helps us improve.</p>
+          </div>
         </div>
 
         <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Best Practices</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Use character counts when enforcing length limits to help users stay within bounds</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Provide helper text below the textarea to explain formatting requirements or usage</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Disable vertical resize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">resize-none</code> only when necessary</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Use appropriate autocomplete attributes for known data types (e.g., <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">autocomplete="street-address"</code>)</span>
-            </li>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Pre-filled Content</p>
+          <div class="space-y-2 max-w-lg">
+            <label for="bio" class="mw-label">Biography</label>
+            <textarea id="bio" class="mw-textarea">A passionate developer focused on building accessible and performant web applications. Enjoys working with modern JavaScript frameworks and advocating for user-centered design.</textarea>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Character Count</p>
+          <div class="space-y-2 max-w-lg" x-data="{ message: '', maxChars: 280 }">
+            <label for="tweet" class="mw-label">Message</label>
+            <textarea
+              id="tweet"
+              class="mw-textarea"
+              x-model="message"
+              :maxlength="maxChars"
+              placeholder="What's happening?"
+            ></textarea>
+            <p class="text-sm text-muted-foreground" x-text="`${message.length} / ${maxChars} characters`"></p>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Disabled</p>
+          <div class="space-y-2 max-w-lg">
+            <label for="disabled-textarea" class="mw-label text-muted-foreground">Comments (Closed)</label>
+            <textarea id="disabled-textarea" class="mw-textarea" disabled placeholder="Comments are currently disabled..."></textarea>
+            <p class="text-sm text-muted-foreground">This field is currently unavailable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="mx-auto max-w-md rounded-lg border border-border bg-card p-6 space-y-6" x-data="{ comment: '', maxChars: 500 }">
+          <div>
+            <h3 class="font-heading text-lg font-semibold">Leave Feedback</h3>
+            <p class="text-sm text-muted-foreground mt-1">We'd love to hear what you think about this feature.</p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="space-y-2">
+              <label for="ctx-name" class="mw-label">Name</label>
+              <input type="text" id="ctx-name" class="mw-input" placeholder="Your name" autocomplete="name" />
+            </div>
+
+            <div class="space-y-2">
+              <label for="ctx-email" class="mw-label">Email</label>
+              <input type="email" id="ctx-email" class="mw-input" placeholder="you@example.com" autocomplete="email" />
+            </div>
+
+            <div class="space-y-2">
+              <label for="ctx-comment" class="mw-label">Comment <span class="text-destructive">*</span></label>
+              <textarea
+                id="ctx-comment"
+                class="mw-textarea"
+                x-model="comment"
+                :maxlength="maxChars"
+                placeholder="Share your thoughts, suggestions, or report an issue..."
+                rows="5"
+                required
+              ></textarea>
+              <div class="flex justify-between">
+                <p class="text-sm text-muted-foreground">Markdown is supported.</p>
+                <p class="text-sm text-muted-foreground" x-text="`${comment.length} / ${maxChars}`"></p>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="mw-btn mw-btn-primary w-full">Submit Feedback</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={textareaCode} lang="html" />
+      </div>
+    </section>
+
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>mw-textarea</code></td><td>Base textarea styling with border, padding, focus states, and vertical resize</td></tr>
+            <tr><td><code>mw-label</code></td><td>Form label styling</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Always pair textareas with <code>label</code> elements using <code>for</code> and <code>id</code> attributes</li>
+            <li>Use descriptive placeholder text that provides examples, not instructions</li>
+            <li>Add <code>aria-describedby</code> when including helper text or character counts</li>
+            <li>Use <code>aria-invalid</code> and <code>aria-errormessage</code> for validation states</li>
+            <li>Consider setting <code>rows</code> attribute for consistent height (default min-height is 5rem)</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use character counts when enforcing length limits to help users stay within bounds</li>
+            <li>Provide helper text below the textarea to explain formatting requirements or usage</li>
+            <li>Disable vertical resize with <code>resize-none</code> only when necessary</li>
+            <li>Use appropriate autocomplete attributes for known data types (e.g., <code>autocomplete="street-address"</code>)</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

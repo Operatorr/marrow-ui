@@ -1,211 +1,275 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const tabsCode = `<div x-data="mwTabs('tab1')">
-  <!-- Tab triggers -->
-  <div class="mw-tabs-list">
-    <button class="mw-tab-trigger"
-            :data-state="isActive('tab1') ? 'active' : ''"
-            @click="setActive('tab1')">Account</button>
-    <button class="mw-tab-trigger"
-            :data-state="isActive('tab2') ? 'active' : ''"
-            @click="setActive('tab2')">Password</button>
-    <button class="mw-tab-trigger"
-            :data-state="isActive('tab3') ? 'active' : ''"
-            @click="setActive('tab3')">Notifications</button>
-  </div>
-
-  <!-- Tab panels -->
-  <div class="mt-4">
-    <div x-show="isActive('tab1')">
-      <h3 class="font-heading font-semibold">Account Settings</h3>
-      <p class="text-sm text-muted-foreground">Update your account information.</p>
-      <!-- Panel content -->
-    </div>
-
-    <div x-show="isActive('tab2')" x-cloak>
-      <h3 class="font-heading font-semibold">Change Password</h3>
-      <p class="text-sm text-muted-foreground">Update your password.</p>
-      <!-- Panel content -->
-    </div>
-
-    <div x-show="isActive('tab3')" x-cloak>
-      <h3 class="font-heading font-semibold">Notification Preferences</h3>
-      <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
-      <!-- Panel content -->
-    </div>
-  </div>
-</div>`;
+const tabsCode = loadFull("tabs");
 ---
 
 <DocsLayout title="Tabs" description="Tabbed navigation for switching between content panels" activeComponent="tabs">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Tabs</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A set of layered content sections, displayed one at a time via tabbed navigation.</p>
-        </div>
+  <div class="space-y-12">
 
-        <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Layout & Containers</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Tabs</h1>
+      <p class="docs-hero-description mt-3">A set of layered content sections, displayed one at a time via tabbed navigation. Use tabs to organize related content without requiring page navigation.</p>
+    </header>
 
-        <!-- Preview -->
-        <section class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card p-6">
-            <div x-data="mwTabs('tab1')">
-              <!-- Tab triggers -->
-              <div class="mw-tabs-list">
-                <button class="mw-tab-trigger"
-                        :data-state="isActive('tab1') ? 'active' : ''"
-                        @click="setActive('tab1')">Account</button>
-                <button class="mw-tab-trigger"
-                        :data-state="isActive('tab2') ? 'active' : ''"
-                        @click="setActive('tab2')">Password</button>
-                <button class="mw-tab-trigger"
-                        :data-state="isActive('tab3') ? 'active' : ''"
-                        @click="setActive('tab3')">Notifications</button>
+    <!-- Preview -->
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
+        <div x-data="mwTabs('tab1')">
+          <!-- Tab triggers -->
+          <div class="mw-tabs-list">
+            <button class="mw-tab-trigger"
+                    :data-state="isActive('tab1') ? 'active' : ''"
+                    @click="setActive('tab1')">Account</button>
+            <button class="mw-tab-trigger"
+                    :data-state="isActive('tab2') ? 'active' : ''"
+                    @click="setActive('tab2')">Password</button>
+            <button class="mw-tab-trigger"
+                    :data-state="isActive('tab3') ? 'active' : ''"
+                    @click="setActive('tab3')">Notifications</button>
+          </div>
+
+          <!-- Tab panels -->
+          <div class="mt-4">
+            <div x-show="isActive('tab1')" class="space-y-4"
+                 x-transition:enter="transition ease-out duration-150"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100">
+              <h3 class="font-heading font-semibold">Account Settings</h3>
+              <p class="text-sm text-muted-foreground">Update your account information and preferences.</p>
+              <div class="space-y-2">
+                <label class="mw-label">Name</label>
+                <input type="text" class="mw-input max-w-sm" placeholder="Your name" value="John Doe">
               </div>
+              <div class="space-y-2">
+                <label class="mw-label">Email</label>
+                <input type="email" class="mw-input max-w-sm" placeholder="Your email" value="john@example.com">
+              </div>
+            </div>
 
-              <!-- Tab panels -->
+            <div x-show="isActive('tab2')" x-cloak class="space-y-4"
+                 x-transition:enter="transition ease-out duration-150"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100">
+              <h3 class="font-heading font-semibold">Change Password</h3>
+              <p class="text-sm text-muted-foreground">Update your password to keep your account secure.</p>
+              <div class="space-y-2">
+                <label class="mw-label">Current Password</label>
+                <input type="password" class="mw-input max-w-sm" placeholder="Current password">
+              </div>
+              <div class="space-y-2">
+                <label class="mw-label">New Password</label>
+                <input type="password" class="mw-input max-w-sm" placeholder="New password">
+              </div>
+            </div>
+
+            <div x-show="isActive('tab3')" x-cloak class="space-y-4"
+                 x-transition:enter="transition ease-out duration-150"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100">
+              <h3 class="font-heading font-semibold">Notification Preferences</h3>
+              <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
+              <div class="flex items-center gap-3" x-data="mwSwitch(true)">
+                <button class="mw-switch"
+                        :data-state="checked ? 'checked' : 'unchecked'"
+                        @click="toggle()"
+                        role="switch"
+                        :aria-checked="checked.toString()">
+                  <span class="mw-switch-thumb"></span>
+                </button>
+                <span class="text-sm">Email notifications</span>
+              </div>
+              <div class="flex items-center gap-3" x-data="mwSwitch()">
+                <button class="mw-switch"
+                        :data-state="checked ? 'checked' : 'unchecked'"
+                        @click="toggle()"
+                        role="switch"
+                        :aria-checked="checked.toString()">
+                  <span class="mw-switch-thumb"></span>
+                </button>
+                <span class="text-sm">Push notifications</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-2xl mx-auto">
+          <div class="rounded-lg border border-border bg-card p-6 space-y-4">
+            <div>
+              <h3 class="font-heading text-lg font-semibold">User Account</h3>
+              <p class="text-sm text-muted-foreground mt-1">Manage your account settings and preferences.</p>
+            </div>
+            <div x-data="mwTabs('acct')">
+              <div class="mw-tabs-list">
+                <button class="mw-tab-trigger" :data-state="isActive('acct') ? 'active' : ''" @click="setActive('acct')">Account</button>
+                <button class="mw-tab-trigger" :data-state="isActive('pwd') ? 'active' : ''" @click="setActive('pwd')">Password</button>
+                <button class="mw-tab-trigger" :data-state="isActive('notif') ? 'active' : ''" @click="setActive('notif')">Notifications</button>
+              </div>
               <div class="mt-4">
-                <div x-show="isActive('tab1')" class="space-y-4">
-                  <h3 class="font-heading font-semibold">Account Settings</h3>
-                  <p class="text-sm text-muted-foreground">Update your account information and preferences.</p>
+                <div x-show="isActive('acct')" class="space-y-4"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100">
                   <div class="space-y-2">
-                    <label class="mw-label">Name</label>
-                    <input type="text" class="mw-input max-w-sm" placeholder="Your name" value="John Doe">
+                    <label class="mw-label">Display Name</label>
+                    <input type="text" class="mw-input" value="Jane Smith">
                   </div>
                   <div class="space-y-2">
-                    <label class="mw-label">Email</label>
-                    <input type="email" class="mw-input max-w-sm" placeholder="Your email" value="john@example.com">
+                    <label class="mw-label">Email Address</label>
+                    <input type="email" class="mw-input" value="jane@example.com" autocomplete="email">
                   </div>
+                  <div class="space-y-2">
+                    <label class="mw-label">Bio</label>
+                    <textarea class="mw-textarea" rows="3" placeholder="Tell us about yourself..."></textarea>
+                  </div>
+                  <button class="mw-btn mw-btn-primary mw-btn-sm">Update Profile</button>
                 </div>
-
-                <div x-show="isActive('tab2')" x-cloak class="space-y-4">
-                  <h3 class="font-heading font-semibold">Change Password</h3>
-                  <p class="text-sm text-muted-foreground">Update your password to keep your account secure.</p>
+                <div x-show="isActive('pwd')" x-cloak class="space-y-4"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100">
                   <div class="space-y-2">
                     <label class="mw-label">Current Password</label>
-                    <input type="password" class="mw-input max-w-sm" placeholder="Current password">
+                    <input type="password" class="mw-input" placeholder="Enter current password">
                   </div>
                   <div class="space-y-2">
                     <label class="mw-label">New Password</label>
-                    <input type="password" class="mw-input max-w-sm" placeholder="New password">
+                    <input type="password" class="mw-input" placeholder="Enter new password">
                   </div>
+                  <div class="space-y-2">
+                    <label class="mw-label">Confirm Password</label>
+                    <input type="password" class="mw-input" placeholder="Confirm new password">
+                  </div>
+                  <button class="mw-btn mw-btn-primary mw-btn-sm">Change Password</button>
                 </div>
-
-                <div x-show="isActive('tab3')" x-cloak class="space-y-4">
-                  <h3 class="font-heading font-semibold">Notification Preferences</h3>
-                  <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
-                  <div class="flex items-center gap-3" x-data="mwSwitch(true)">
-                    <button class="mw-switch"
-                            :data-state="checked ? 'checked' : 'unchecked'"
-                            @click="toggle()"
-                            role="switch"
-                            :aria-checked="checked.toString()">
-                      <span class="mw-switch-thumb"></span>
-                    </button>
-                    <span class="text-sm">Email notifications</span>
+                <div x-show="isActive('notif')" x-cloak class="space-y-4"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0"
+                     x-transition:enter-end="opacity-100">
+                  <div class="flex items-center justify-between py-2">
+                    <div>
+                      <p class="text-sm font-medium">Email Notifications</p>
+                      <p class="text-xs text-muted-foreground">Receive updates via email</p>
+                    </div>
+                    <div x-data="mwSwitch(true)">
+                      <button class="mw-switch" :data-state="checked ? 'checked' : 'unchecked'" @click="toggle()" role="switch" :aria-checked="checked.toString()"><span class="mw-switch-thumb"></span></button>
+                    </div>
                   </div>
-                  <div class="flex items-center gap-3" x-data="mwSwitch()">
-                    <button class="mw-switch"
-                            :data-state="checked ? 'checked' : 'unchecked'"
-                            @click="toggle()"
-                            role="switch"
-                            :aria-checked="checked.toString()">
-                      <span class="mw-switch-thumb"></span>
-                    </button>
-                    <span class="text-sm">Push notifications</span>
+                  <div class="flex items-center justify-between py-2">
+                    <div>
+                      <p class="text-sm font-medium">Push Notifications</p>
+                      <p class="text-xs text-muted-foreground">Receive push notifications in-app</p>
+                    </div>
+                    <div x-data="mwSwitch()">
+                      <button class="mw-switch" :data-state="checked ? 'checked' : 'unchecked'" @click="toggle()" role="switch" :aria-checked="checked.toString()"><span class="mw-switch-thumb"></span></button>
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-between py-2">
+                    <div>
+                      <p class="text-sm font-medium">Marketing Emails</p>
+                      <p class="text-xs text-muted-foreground">Receive promotional content</p>
+                    </div>
+                    <div x-data="mwSwitch()">
+                      <button class="mw-switch" :data-state="checked ? 'checked' : 'unchecked'" @click="toggle()" role="switch" :aria-checked="checked.toString()"><span class="mw-switch-thumb"></span></button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-
-        <!-- Code -->
-        <section class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={tabsCode} lang="html" />
-        </section>
-
-        <!-- Usage -->
-        <section class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-
-          <div class="space-y-6">
-            <div>
-              <h3 class="font-heading text-lg font-semibold mb-3">Alpine.js API</h3>
-              <p class="text-sm text-muted-foreground mb-4">Initialize with <code class="mw-code">x-data="mwTabs(defaultTab)"</code></p>
-              <div class="mw-card overflow-hidden">
-                <table class="w-full text-sm">
-                  <thead class="border-b border-border bg-muted/50">
-                    <tr>
-                      <th class="text-left p-3 font-semibold">Property/Method</th>
-                      <th class="text-left p-3 font-semibold">Type</th>
-                      <th class="text-left p-3 font-semibold">Description</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-border">
-                    <tr>
-                      <td class="p-3"><code class="mw-code">active</code></td>
-                      <td class="p-3">String</td>
-                      <td class="p-3">Currently active tab ID</td>
-                    </tr>
-                    <tr>
-                      <td class="p-3"><code class="mw-code">setActive(tab)</code></td>
-                      <td class="p-3">Function</td>
-                      <td class="p-3">Switch to the specified tab</td>
-                    </tr>
-                    <tr>
-                      <td class="p-3"><code class="mw-code">isActive(tab)</code></td>
-                      <td class="p-3">Function</td>
-                      <td class="p-3">Check if the specified tab is active (returns boolean)</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
-              <div class="mw-card overflow-hidden">
-                <table class="w-full text-sm">
-                  <thead class="border-b border-border bg-muted/50">
-                    <tr>
-                      <th class="text-left p-3 font-semibold">Class</th>
-                      <th class="text-left p-3 font-semibold">Description</th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-border">
-                    <tr>
-                      <td class="p-3"><code class="mw-code">mw-tabs-list</code></td>
-                      <td class="p-3">Container for tab triggers with inline-flex layout, muted background, and rounded corners</td>
-                    </tr>
-                    <tr>
-                      <td class="p-3"><code class="mw-code">mw-tab-trigger</code></td>
-                      <td class="p-3">Individual tab button with transitions and muted-foreground color</td>
-                    </tr>
-                    <tr>
-                      <td class="p-3"><code class="mw-code">mw-tab-trigger[data-state="active"]</code></td>
-                      <td class="p-3">Active tab state with white background, foreground color, and shadow</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
-              <ul class="space-y-2 text-sm text-muted-foreground list-disc list-inside">
-                <li>Tab triggers are keyboard navigable with arrow keys when using proper ARIA attributes</li>
-                <li>Use <code class="mw-code">x-cloak</code> on hidden tab panels to prevent content flash on load</li>
-                <li>Tab panels automatically hide/show with Alpine.js <code class="mw-code">x-show</code> directive</li>
-                <li>Consider adding <code class="mw-code">role="tablist"</code>, <code class="mw-code">role="tab"</code>, and <code class="mw-code">role="tabpanel"</code> for enhanced screen reader support</li>
-                <li>Add <code class="mw-code">aria-selected</code> to tab triggers to indicate active state</li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
+    </section>
+
+    <!-- Code -->
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={tabsCode} lang="html" />
+      </div>
+    </section>
+
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Alpine.js API</p>
+      <div class="overflow-x-auto rounded-lg border border-border mb-6">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Property / Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mwTabs(defaultTab)</code></td><td>Component</td><td>Initialize tabs with a default active tab ID</td></tr>
+            <tr><td><code>active</code></td><td>String</td><td>Currently active tab ID</td></tr>
+            <tr><td><code>setActive(tab)</code></td><td>Method</td><td>Switch to the specified tab</td></tr>
+            <tr><td><code>isActive(tab)</code></td><td>Method</td><td>Check if the specified tab is active (returns boolean)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">CSS Classes</p>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-tabs-list</code></td><td>Container for tab triggers with inline-flex layout, muted background, and rounded corners</td></tr>
+            <tr><td><code>mw-tab-trigger</code></td><td>Individual tab button with transitions and muted-foreground color</td></tr>
+            <tr><td><code>mw-tab-trigger[data-state="active"]</code></td><td>Active tab state with white background, foreground color, and shadow</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Tab triggers are keyboard navigable when using proper ARIA attributes</li>
+            <li>Use <code>x-cloak</code> on hidden tab panels to prevent content flash on page load</li>
+            <li>Consider adding <code>role="tablist"</code>, <code>role="tab"</code>, and <code>role="tabpanel"</code> for enhanced screen reader support</li>
+            <li>Add <code>aria-selected</code> to tab triggers to indicate the active state</li>
+            <li>Tab panels automatically hide/show with Alpine.js <code>x-show</code> directive</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Always provide a default active tab when initializing with <code>mwTabs('tabId')</code></li>
+            <li>Keep tab labels short and descriptive -- ideally one or two words</li>
+            <li>Use tabs when content is related but mutually exclusive (not for sequential steps)</li>
+            <li>Avoid using more than 5-6 tabs; consider a different navigation pattern for more sections</li>
+            <li>Tab panels can contain any content -- forms, tables, lists, etc.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </DocsLayout>

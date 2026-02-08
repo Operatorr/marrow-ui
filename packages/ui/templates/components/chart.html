@@ -1,7 +1,8 @@
 <!-- Marrow UI: Chart -->
-<!-- Simple CSS-based bar chart for visualizing data, with guidance for production charting libraries -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- CSS-only bar chart patterns for simple data visualization using Marrow theme colors -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
+<!-- @section: Horizontal Chart -->
 <div class="mw-card">
   <h3 class="font-heading font-semibold mb-1">Monthly Revenue</h3>
   <p class="text-sm text-muted-foreground mb-4">Jan &ndash; Jun 2025</p>
@@ -27,6 +28,106 @@
       </div>
       <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$5,200</span>
     </div>
-    <!-- Add more bars as needed -->
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Apr</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 90%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$9,000</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">May</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 72%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$7,200</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-muted-foreground w-8 text-right shrink-0">Jun</span>
+      <div class="flex-1 h-7 bg-muted/40 rounded-sm overflow-hidden">
+        <div class="h-full bg-primary rounded-sm" style="width: 100%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground w-12 text-right shrink-0">$10,000</span>
+    </div>
   </div>
 </div>
+<!-- @section: Vertical Chart -->
+
+<div class="mw-card">
+  <h3 class="font-heading font-semibold mb-1">Page Views</h3>
+  <p class="text-sm text-muted-foreground mb-4">Weekly traffic</p>
+  <div class="flex items-end justify-between gap-3 h-40">
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 65%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Mon</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 78%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Tue</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 52%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Wed</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 90%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Thu</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 72%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Fri</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 100%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Sat</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 flex-1">
+      <div class="w-full bg-muted/40 rounded-sm flex-1 flex items-end overflow-hidden">
+        <div class="w-full bg-primary rounded-sm" style="height: 85%;"></div>
+      </div>
+      <span class="text-xs text-muted-foreground">Sun</span>
+    </div>
+  </div>
+</div>
+<!-- @section: Chart.js -->
+
+<!-- Example: Chart.js integration with Marrow UI -->
+<div class="mw-card">
+  <h3 class="font-heading font-semibold mb-4">Analytics Dashboard</h3>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Revenue',
+        data: [6500, 7800, 5200, 9000, 7200, 10000],
+        backgroundColor: 'hsl(var(--marrow-primary))',
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+</script>

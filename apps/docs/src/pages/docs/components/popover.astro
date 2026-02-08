@@ -1,59 +1,26 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const popoverCode = `<div class="relative" x-data="mwPopover()">
-  <!-- Trigger -->
-  <button @click="toggle()" class="mw-btn mw-btn-outline">
-    Open Popover
-  </button>
-
-  <!-- Popover Content -->
-  <div x-show="open" @click.outside="close()" x-cloak
-       x-transition:enter="transition ease-out duration-100"
-       x-transition:enter-start="opacity-0 scale-95"
-       x-transition:enter-end="opacity-100 scale-100"
-       x-transition:leave="transition ease-in duration-75"
-       x-transition:leave-start="opacity-100 scale-100"
-       x-transition:leave-end="opacity-0 scale-95"
-       class="mw-popover absolute left-0 top-full mt-2 z-50 w-80">
-    <div class="space-y-4">
-      <div>
-        <h4 class="font-medium text-sm">Settings</h4>
-        <p class="text-xs text-muted-foreground">Configure the dimensions for this element.</p>
-      </div>
-      <div class="space-y-3">
-        <div class="grid grid-cols-3 items-center gap-3">
-          <label for="popover-width" class="mw-label text-xs">Width</label>
-          <input type="text" id="popover-width" class="mw-input col-span-2" value="100%">
-        </div>
-        <div class="grid grid-cols-3 items-center gap-3">
-          <label for="popover-height" class="mw-label text-xs">Height</label>
-          <input type="text" id="popover-height" class="mw-input col-span-2" value="25px">
-        </div>
-        <div class="grid grid-cols-3 items-center gap-3">
-          <label for="popover-max-width" class="mw-label text-xs">Max Width</label>
-          <input type="text" id="popover-max-width" class="mw-input col-span-2" value="none">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>`;
+const popoverCode = loadFull("popover");
 ---
 
 <DocsLayout title="Popover" description="A floating popover panel anchored to a trigger button" activeComponent="popover">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Popover</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">A floating panel that appears when a trigger button is clicked. Useful for displaying additional content, forms, or settings without leaving the current context.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Overlays</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Popover</h1>
+      <p class="docs-hero-description mt-3">A floating panel that appears when a trigger button is clicked. Useful for displaying additional content, forms, or settings without leaving the current context.</p>
+    </header>
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
         <div class="flex items-center justify-center py-12">
           <div class="relative" x-data="mwPopover()">
             <button @click="toggle()" class="mw-btn mw-btn-outline">
@@ -92,75 +59,126 @@ const popoverCode = `<div class="relative" x-data="mwPopover()">
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={popoverCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Alpine.js API</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">
-            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwPopover()"</code> on the wrapper element.
-          </p>
-        </div>
-
-        <div class="mw-card">
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-border">
-                  <th class="text-left py-3 px-4 font-semibold">Property/Method</th>
-                  <th class="text-left py-3 px-4 font-semibold">Type</th>
-                  <th class="text-left py-3 px-4 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code></td>
-                  <td class="py-3 px-4 text-muted-foreground">Boolean</td>
-                  <td class="py-3 px-4 text-muted-foreground">Controls popover visibility state</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">toggle()</code></td>
-                  <td class="py-3 px-4 text-muted-foreground">Function</td>
-                  <td class="py-3 px-4 text-muted-foreground">Toggles the open state</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code></td>
-                  <td class="py-3 px-4 text-muted-foreground">Function</td>
-                  <td class="py-3 px-4 text-muted-foreground">Closes the popover</td>
-                </tr>
-              </tbody>
-            </table>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="flex items-center justify-center py-8">
+          <div class="flex items-center gap-3">
+            <div class="relative" x-data="mwPopover()">
+              <button @click="toggle()" class="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-sm font-semibold text-primary hover:bg-primary/30 transition-colors" aria-label="View profile">
+                AJ
+              </button>
+              <div x-show="open" @click.outside="close()" x-cloak
+                   x-transition:enter="transition ease-out duration-100"
+                   x-transition:enter-start="opacity-0 scale-95"
+                   x-transition:enter-end="opacity-100 scale-100"
+                   x-transition:leave="transition ease-in duration-75"
+                   x-transition:leave-start="opacity-100 scale-100"
+                   x-transition:leave-end="opacity-0 scale-95"
+                   class="mw-popover absolute right-0 top-full mt-2 z-50 w-72">
+                <div class="flex gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-sm font-semibold text-primary flex-shrink-0">AJ</div>
+                  <div>
+                    <p class="text-sm font-semibold">Alice Johnson</p>
+                    <p class="text-xs text-muted-foreground">alice@example.com</p>
+                  </div>
+                </div>
+                <div class="border-t border-border pt-3 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs text-muted-foreground">Role</span>
+                    <span class="mw-badge mw-badge-sm">Admin</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs text-muted-foreground">Status</span>
+                    <span class="flex items-center gap-1.5 text-xs">
+                      <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                      Online
+                    </span>
+                  </div>
+                </div>
+                <div class="border-t border-border mt-3 pt-3">
+                  <button class="mw-btn mw-btn-outline mw-btn-sm w-full">View Full Profile</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p class="text-sm font-medium">Alice Johnson</p>
+              <p class="text-xs text-muted-foreground">Product Designer</p>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">
-            The popover content uses the <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-popover</code> class, which provides the border, background, padding, shadow, and rounded corners styling.
-          </p>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={popoverCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Property/Method</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>open</code></td>
+              <td>Boolean</td>
+              <td>Controls popover visibility state</td>
+            </tr>
+            <tr>
+              <td><code>toggle()</code></td>
+              <td>Method</td>
+              <td>Toggles the open state</td>
+            </tr>
+            <tr>
+              <td><code>close()</code></td>
+              <td>Method</td>
+              <td>Closes the popover</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>mw-popover</code></td>
+              <td>Styled container with border, background, padding, shadow, and rounded corners</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use @click.outside to close the popover when clicking outside</li>
+            <li>Include x-cloak to prevent flash of unstyled content</li>
+            <li>Ensure form elements inside popovers have proper label/id associations</li>
+            <li>Consider adding aria-haspopup="dialog" and aria-expanded to the trigger button</li>
+          </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Accessibility</h3>
-          <ul class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
-            <li>• Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@click.outside</code> to close the popover when clicking outside</li>
-            <li>• Include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-cloak</code> to prevent flash of unstyled content</li>
-            <li>• Ensure form elements inside popovers have proper labels with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">for</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">id</code> associations</li>
-            <li>• Position popovers with appropriate <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">z-index</code> to layer above other content</li>
-            <li>• Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-haspopup="dialog"</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-expanded</code> attributes to the trigger button for screen reader support</li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Position popovers with appropriate z-index to layer above other content</li>
+            <li>Keep popover content focused -- use a Dialog for complex interactions</li>
+            <li>Use absolute positioning with top-full/bottom-full to anchor near the trigger</li>
+            <li>Avoid nesting popovers inside other popovers</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

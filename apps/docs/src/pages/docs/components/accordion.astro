@@ -1,403 +1,278 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const singleAccordionCode = `<div x-data="mwAccordion()">
-  <!-- Item 1 -->
-  <div class="border-b border-border">
-    <button @click="toggle('shipping')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-      What are your shipping options?
-      <svg :class="isOpen('shipping') && 'rotate-180'"
-           class="h-4 w-4 shrink-0 transition-transform duration-200"
-           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-    <div x-show="isOpen('shipping')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
-        We offer standard shipping (5-7 business days), express shipping (2-3 business days), and overnight delivery. Free shipping is available on orders over $50.
-      </div>
-    </div>
-  </div>
-
-  <!-- Item 2 -->
-  <div class="border-b border-border">
-    <button @click="toggle('returns')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-      What is your return policy?
-      <svg :class="isOpen('returns') && 'rotate-180'"
-           class="h-4 w-4 shrink-0 transition-transform duration-200"
-           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-    <div x-show="isOpen('returns')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
-        You can return any unused items within 30 days of purchase for a full refund. Items must be in original condition with tags attached.
-      </div>
-    </div>
-  </div>
-
-  <!-- Item 3 -->
-  <div class="border-b border-border">
-    <button @click="toggle('payment')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-      What payment methods do you accept?
-      <svg :class="isOpen('payment') && 'rotate-180'"
-           class="h-4 w-4 shrink-0 transition-transform duration-200"
-           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-    <div x-show="isOpen('payment')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
-        We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, and Google Pay.
-      </div>
-    </div>
-  </div>
-
-  <!-- Item 4 -->
-  <div class="border-b border-border">
-    <button @click="toggle('warranty')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-      Do you offer a warranty?
-      <svg :class="isOpen('warranty') && 'rotate-180'"
-           class="h-4 w-4 shrink-0 transition-transform duration-200"
-           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-    <div x-show="isOpen('warranty')" x-collapse>
-      <div class="pb-4 text-sm text-muted-foreground leading-relaxed">
-        All products come with a 1-year manufacturer's warranty covering defects in materials and workmanship. Extended warranty options are available at checkout.
-      </div>
-    </div>
-  </div>
-</div>`;
-
-const multiAccordionCode = `<div x-data="mwAccordionMulti()">
-  <!-- General Settings -->
-  <div class="border-b border-border">
-    <button @click="toggle('general')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-      General Settings
-      <svg :class="isOpen('general') && 'rotate-180'"
-           class="h-4 w-4 shrink-0 transition-transform duration-200"
-           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-    <div x-show="isOpen('general')" x-collapse>
-      <div class="pb-4 space-y-3">
-        <div class="flex items-center justify-between">
-          <span class="text-sm font-medium">Language</span>
-          <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
-            <option>English</option>
-            <option>Spanish</option>
-            <option>French</option>
-          </select>
-        </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm font-medium">Timezone</span>
-          <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
-            <option>UTC-8 (Pacific)</option>
-            <option>UTC-5 (Eastern)</option>
-            <option>UTC+0 (GMT)</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Notifications -->
-  <div class="border-b border-border">
-    <button @click="toggle('notifications')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-      Notifications
-      <svg :class="isOpen('notifications') && 'rotate-180'"
-           class="h-4 w-4 shrink-0 transition-transform duration-200"
-           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-    <div x-show="isOpen('notifications')" x-collapse>
-      <div class="pb-4 space-y-3">
-        <label class="flex items-center gap-2">
-          <input type="checkbox" checked class="rounded border-border">
-          <span class="text-sm">Email notifications</span>
-        </label>
-        <label class="flex items-center gap-2">
-          <input type="checkbox" checked class="rounded border-border">
-          <span class="text-sm">Push notifications</span>
-        </label>
-        <label class="flex items-center gap-2">
-          <input type="checkbox" class="rounded border-border">
-          <span class="text-sm">SMS notifications</span>
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <!-- Privacy -->
-  <div class="border-b border-border">
-    <button @click="toggle('privacy')"
-            class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-      Privacy & Security
-      <svg :class="isOpen('privacy') && 'rotate-180'"
-           class="h-4 w-4 shrink-0 transition-transform duration-200"
-           xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m6 9 6 6 6-6"/>
-      </svg>
-    </button>
-    <div x-show="isOpen('privacy')" x-collapse>
-      <div class="pb-4 space-y-3">
-        <label class="flex items-center gap-2">
-          <input type="checkbox" checked class="rounded border-border">
-          <span class="text-sm">Two-factor authentication</span>
-        </label>
-        <label class="flex items-center gap-2">
-          <input type="checkbox" class="rounded border-border">
-          <span class="text-sm">Show activity status</span>
-        </label>
-        <label class="flex items-center gap-2">
-          <input type="checkbox" checked class="rounded border-border">
-          <span class="text-sm">Require password for purchases</span>
-        </label>
-      </div>
-    </div>
-  </div>
-</div>`;
+const t = loadTemplate("accordion");
+const singleAccordionCode = t.sections.get("Single Accordion")!;
+const multiAccordionCode = t.sections.get("Multi Accordion")!;
 ---
 
 <DocsLayout title="Accordion" description="A vertically stacked set of interactive headings that reveal content" activeComponent="accordion">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Accordion</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A vertically stacked set of interactive headings that each reveal a section of content.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <!-- Hero -->
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Layout & Containers</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Accordion</h1>
+      <p class="docs-hero-description mt-3">A vertically stacked set of interactive headings that each reveal a section of content. Supports single-open and multi-open modes.</p>
+    </header>
 
     <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
-        <div class="w-full max-w-2xl mx-auto" x-data="mwAccordion()">
-          <div class="border-b border-border">
-            <button @click="toggle('shipping')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-              What are your shipping options?
-              <svg :class="isOpen('shipping') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div x-show="isOpen('shipping')" x-collapse>
-              <div class="pb-4 text-sm text-muted-foreground leading-relaxed">We offer standard shipping (5-7 business days), express shipping (2-3 business days), and overnight delivery. Free shipping is available on orders over $50.</div>
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Single Open -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Single Open (Default)</p>
+          <div class="w-full max-w-2xl mx-auto" x-data="mwAccordion()">
+            <div class="border-b border-border">
+              <button @click="toggle('shipping')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                What are your shipping options?
+                <svg :class="isOpen('shipping') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div x-show="isOpen('shipping')" x-collapse>
+                <div class="pb-4 text-sm text-muted-foreground leading-relaxed">We offer standard shipping (5-7 business days), express shipping (2-3 business days), and overnight delivery. Free shipping is available on orders over $50.</div>
+              </div>
             </div>
-          </div>
-          <div class="border-b border-border">
-            <button @click="toggle('returns')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-              What is your return policy?
-              <svg :class="isOpen('returns') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div x-show="isOpen('returns')" x-collapse>
-              <div class="pb-4 text-sm text-muted-foreground leading-relaxed">You can return any unused items within 30 days of purchase for a full refund. Items must be in original condition with tags attached.</div>
+            <div class="border-b border-border">
+              <button @click="toggle('returns')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                What is your return policy?
+                <svg :class="isOpen('returns') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div x-show="isOpen('returns')" x-collapse>
+                <div class="pb-4 text-sm text-muted-foreground leading-relaxed">You can return any unused items within 30 days of purchase for a full refund. Items must be in original condition with tags attached.</div>
+              </div>
             </div>
-          </div>
-          <div class="border-b border-border">
-            <button @click="toggle('payment')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-              What payment methods do you accept?
-              <svg :class="isOpen('payment') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div x-show="isOpen('payment')" x-collapse>
-              <div class="pb-4 text-sm text-muted-foreground leading-relaxed">We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, and Google Pay.</div>
+            <div class="border-b border-border">
+              <button @click="toggle('payment')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                What payment methods do you accept?
+                <svg :class="isOpen('payment') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div x-show="isOpen('payment')" x-collapse>
+                <div class="pb-4 text-sm text-muted-foreground leading-relaxed">We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, and Google Pay.</div>
+              </div>
             </div>
-          </div>
-          <div class="border-b border-border">
-            <button @click="toggle('warranty')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-              Do you offer a warranty?
-              <svg :class="isOpen('warranty') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div x-show="isOpen('warranty')" x-collapse>
-              <div class="pb-4 text-sm text-muted-foreground leading-relaxed">All products come with a 1-year manufacturer's warranty covering defects in materials and workmanship. Extended warranty options are available at checkout.</div>
+            <div class="border-b border-border">
+              <button @click="toggle('warranty')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                Do you offer a warranty?
+                <svg :class="isOpen('warranty') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div x-show="isOpen('warranty')" x-collapse>
+                <div class="pb-4 text-sm text-muted-foreground leading-relaxed">All products come with a 1-year manufacturer's warranty covering defects in materials and workmanship. Extended warranty options are available at checkout.</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Multiple Open Variant -->
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Multiple Open</h3>
-      <p class="text-muted-foreground leading-relaxed">Allow multiple accordion items to be open simultaneously using <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwAccordionMulti()</span>.</p>
-      <div class="mw-card">
-        <div class="w-full max-w-2xl mx-auto" x-data="mwAccordionMulti()">
-          <div class="border-b border-border">
-            <button @click="toggle('general')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-              General Settings
-              <svg :class="isOpen('general') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div x-show="isOpen('general')" x-collapse>
-              <div class="pb-4 space-y-3">
-                <div class="flex items-center justify-between">
-                  <span class="text-sm font-medium">Language</span>
-                  <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
-                    <option>English</option>
-                    <option>Spanish</option>
-                    <option>French</option>
-                  </select>
-                </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-sm font-medium">Timezone</span>
-                  <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
-                    <option>UTC-8 (Pacific)</option>
-                    <option>UTC-5 (Eastern)</option>
-                    <option>UTC+0 (GMT)</option>
-                  </select>
+        <!-- Multiple Open -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Multiple Open</p>
+          <div class="w-full max-w-2xl mx-auto" x-data="mwAccordionMulti()">
+            <div class="border-b border-border">
+              <button @click="toggle('general')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                General Settings
+                <svg :class="isOpen('general') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div x-show="isOpen('general')" x-collapse>
+                <div class="pb-4 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium">Language</span>
+                    <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+                      <option>English</option>
+                      <option>Spanish</option>
+                      <option>French</option>
+                    </select>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-medium">Timezone</span>
+                    <select class="text-sm border border-border rounded-md px-2 py-1 bg-background">
+                      <option>UTC-8 (Pacific)</option>
+                      <option>UTC-5 (Eastern)</option>
+                      <option>UTC+0 (GMT)</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="border-b border-border">
-            <button @click="toggle('notifications')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-              Notifications
-              <svg :class="isOpen('notifications') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div x-show="isOpen('notifications')" x-collapse>
-              <div class="pb-4 space-y-3">
-                <label class="flex items-center gap-2">
-                  <input type="checkbox" checked class="rounded border-border">
-                  <span class="text-sm">Email notifications</span>
-                </label>
-                <label class="flex items-center gap-2">
-                  <input type="checkbox" checked class="rounded border-border">
-                  <span class="text-sm">Push notifications</span>
-                </label>
-                <label class="flex items-center gap-2">
-                  <input type="checkbox" class="rounded border-border">
-                  <span class="text-sm">SMS notifications</span>
-                </label>
+            <div class="border-b border-border">
+              <button @click="toggle('notifications')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                Notifications
+                <svg :class="isOpen('notifications') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div x-show="isOpen('notifications')" x-collapse>
+                <div class="pb-4 space-y-3">
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" checked class="rounded border-border">
+                    <span class="text-sm">Email notifications</span>
+                  </label>
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" checked class="rounded border-border">
+                    <span class="text-sm">Push notifications</span>
+                  </label>
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" class="rounded border-border">
+                    <span class="text-sm">SMS notifications</span>
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="border-b border-border">
-            <button @click="toggle('privacy')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
-              Privacy & Security
-              <svg :class="isOpen('privacy') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div x-show="isOpen('privacy')" x-collapse>
-              <div class="pb-4 space-y-3">
-                <label class="flex items-center gap-2">
-                  <input type="checkbox" checked class="rounded border-border">
-                  <span class="text-sm">Two-factor authentication</span>
-                </label>
-                <label class="flex items-center gap-2">
-                  <input type="checkbox" class="rounded border-border">
-                  <span class="text-sm">Show activity status</span>
-                </label>
-                <label class="flex items-center gap-2">
-                  <input type="checkbox" checked class="rounded border-border">
-                  <span class="text-sm">Require password for purchases</span>
-                </label>
+            <div class="border-b border-border">
+              <button @click="toggle('privacy')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                Privacy & Security
+                <svg :class="isOpen('privacy') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div x-show="isOpen('privacy')" x-collapse>
+                <div class="pb-4 space-y-3">
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" checked class="rounded border-border">
+                    <span class="text-sm">Two-factor authentication</span>
+                  </label>
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" class="rounded border-border">
+                    <span class="text-sm">Show activity status</span>
+                  </label>
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" checked class="rounded border-border">
+                    <span class="text-sm">Require password for purchases</span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- In Context -->
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-2xl mx-auto">
+          <div class="rounded-lg border border-border bg-card p-6 space-y-4">
+            <div>
+              <h3 class="font-heading text-lg font-semibold">Frequently Asked Questions</h3>
+              <p class="text-sm text-muted-foreground mt-1">Find answers to common questions about our service.</p>
+            </div>
+            <div x-data="mwAccordion()">
+              <div class="border-b border-border">
+                <button @click="toggle('faq1')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                  How do I create an account?
+                  <svg :class="isOpen('faq1') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="isOpen('faq1')" x-collapse>
+                  <div class="pb-4 text-sm text-muted-foreground leading-relaxed">Click the "Sign Up" button in the top right corner. Fill in your email address and create a password. You will receive a confirmation email to verify your account.</div>
+                </div>
+              </div>
+              <div class="border-b border-border">
+                <button @click="toggle('faq2')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                  Can I cancel my subscription anytime?
+                  <svg :class="isOpen('faq2') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="isOpen('faq2')" x-collapse>
+                  <div class="pb-4 text-sm text-muted-foreground leading-relaxed">Yes, you can cancel your subscription at any time from your account settings. Your access will continue until the end of the current billing period.</div>
+                </div>
+              </div>
+              <div class="border-b border-border">
+                <button @click="toggle('faq3')" class="flex w-full items-center justify-between py-4 text-left font-medium transition-colors hover:underline">
+                  Is there a free trial available?
+                  <svg :class="isOpen('faq3') && 'rotate-180'" class="h-4 w-4 shrink-0 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div x-show="isOpen('faq3')" x-collapse>
+                  <div class="pb-4 text-sm text-muted-foreground leading-relaxed">We offer a 14-day free trial for all new accounts. No credit card required. You can upgrade to a paid plan at any time during or after the trial.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <h3 class="font-heading text-lg font-semibold">Single Open (Default)</h3>
-      <CodeBlock code={singleAccordionCode} lang="html" />
-    </div>
-
-    <div class="space-y-4">
-      <h3 class="font-heading text-lg font-semibold">Multiple Open</h3>
-      <CodeBlock code={multiAccordionCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
         <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
-          <p class="text-muted-foreground leading-relaxed">The accordion component doesn't use dedicated CSS classes. It's built with Tailwind utility classes and Alpine.js for interactivity.</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Single Open (Default)</p>
+          <CodeBlock code={singleAccordionCode} lang="html" />
         </div>
-
         <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js API</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-border">
-                  <th class="text-left py-2 font-semibold">Function</th>
-                  <th class="text-left py-2 font-semibold">Type</th>
-                  <th class="text-left py-2 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="py-3 font-mono text-xs">mwAccordion()</td>
-                  <td class="py-3 text-muted-foreground">Component</td>
-                  <td class="py-3 text-muted-foreground">Single-open accordion component (only one item can be open at a time)</td>
-                </tr>
-                <tr>
-                  <td class="py-3 font-mono text-xs">mwAccordionMulti()</td>
-                  <td class="py-3 text-muted-foreground">Component</td>
-                  <td class="py-3 text-muted-foreground">Multi-open accordion component (multiple items can be open simultaneously)</td>
-                </tr>
-                <tr>
-                  <td class="py-3 font-mono text-xs">toggle(id)</td>
-                  <td class="py-3 text-muted-foreground">Method</td>
-                  <td class="py-3 text-muted-foreground">Toggle an accordion item open or closed by its ID</td>
-                </tr>
-                <tr>
-                  <td class="py-3 font-mono text-xs">isOpen(id)</td>
-                  <td class="py-3 text-muted-foreground">Method</td>
-                  <td class="py-3 text-muted-foreground">Check if an accordion item is currently open (returns boolean)</td>
-                </tr>
-                <tr>
-                  <td class="py-3 font-mono text-xs">activeItem</td>
-                  <td class="py-3 text-muted-foreground">State</td>
-                  <td class="py-3 text-muted-foreground">Currently open item ID (single-open accordion only, String|null)</td>
-                </tr>
-                <tr>
-                  <td class="py-3 font-mono text-xs">openItems</td>
-                  <td class="py-3 text-muted-foreground">State</td>
-                  <td class="py-3 text-muted-foreground">Array of open item IDs (multi-open accordion only, Array)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Multiple Open</p>
+          <CodeBlock code={multiAccordionCode} lang="html" />
         </div>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <ul class="list-disc list-inside space-y-2 text-muted-foreground leading-relaxed">
-            <li>Accordion buttons use semantic <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">button</span> elements for keyboard navigation</li>
-            <li>Content panels collapse smoothly using Alpine.js <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-collapse</span> directive</li>
-            <li>Chevron icons rotate to indicate open/closed state with appropriate transition timing</li>
+    <!-- API Reference -->
+    <section>
+      <span class="docs-section-label">API Reference</span>
+
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Alpine.js API</p>
+      <div class="overflow-x-auto rounded-lg border border-border mb-6">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Property / Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mwAccordion()</code></td><td>Component</td><td>Single-open accordion (only one item open at a time)</td></tr>
+            <tr><td><code>mwAccordionMulti()</code></td><td>Component</td><td>Multi-open accordion (multiple items open simultaneously)</td></tr>
+            <tr><td><code>toggle(id)</code></td><td>Method</td><td>Toggle an accordion item open or closed by its ID</td></tr>
+            <tr><td><code>isOpen(id)</code></td><td>Method</td><td>Check if an accordion item is currently open (returns boolean)</td></tr>
+            <tr><td><code>activeItem</code></td><td>State</td><td>Currently open item ID (single-open only, String or null)</td></tr>
+            <tr><td><code>openItems</code></td><td>State</td><td>Array of open item IDs (multi-open only)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">CSS Classes</p>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>border-b border-border</code></td><td>Bottom border on each accordion item (Tailwind utilities)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Guidelines -->
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Accordion buttons use semantic <code>&lt;button&gt;</code> elements for keyboard navigation</li>
+            <li>Content panels collapse smoothly using Alpine.js <code>x-collapse</code> directive</li>
+            <li>Chevron icons rotate to indicate open/closed state with transition timing</li>
             <li>Each item should have a unique ID for proper state management</li>
-            <li>Consider adding <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-expanded</span> and <span class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-controls</span> attributes for enhanced screen reader support</li>
+            <li>Consider adding <code>aria-expanded</code> and <code>aria-controls</code> attributes for enhanced screen reader support</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>mwAccordion()</code> when only one section should be visible at a time</li>
+            <li>Use <code>mwAccordionMulti()</code> when users may need to compare or reference multiple sections</li>
+            <li>Keep accordion headings concise and descriptive</li>
+            <li>Accordion content can contain any HTML -- forms, lists, images, etc.</li>
+            <li>Provide enough items to justify using an accordion (at least 3)</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

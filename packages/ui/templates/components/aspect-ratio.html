@@ -1,26 +1,47 @@
 <!-- Marrow UI: Aspect Ratio -->
 <!-- Displays content within a desired ratio using pure CSS -->
-<!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
+<!-- Requires: Tailwind CSS, marrow.css -->
 
-<!-- 16:9 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+<!-- 16:9 Video Aspect Ratio -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
      style="aspect-ratio: 16 / 9;">
-  <img src="your-image.jpg"
-       alt="Description"
+  <img src="your-video-thumbnail.jpg"
+       alt="Video thumbnail"
        class="h-full w-full object-cover" />
 </div>
 
-<!-- 1:1 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
+<!-- 1:1 Square Profile Photo -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
      style="aspect-ratio: 1 / 1;">
+  <img src="your-profile-photo.jpg"
+       alt="Profile photo"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 4:3 Classic Photo -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
+     style="aspect-ratio: 4 / 3;">
+  <img src="your-photo.jpg"
+       alt="Photo description"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- 21:9 Ultra-wide Banner -->
+<div class="overflow-hidden rounded-[var(--marrow-radius)] bg-muted"
+     style="aspect-ratio: 21 / 9;">
+  <img src="your-banner.jpg"
+       alt="Banner image"
+       class="h-full w-full object-cover" />
+</div>
+
+<!-- Using Tailwind Utilities -->
+<div class="aspect-video overflow-hidden rounded-[var(--marrow-radius)] bg-muted">
   <img src="your-image.jpg"
        alt="Description"
        class="h-full w-full object-cover" />
 </div>
 
-<!-- 4:3 Aspect Ratio -->
-<div class="overflow-hidden rounded-[var(--marrow-radius)]"
-     style="aspect-ratio: 4 / 3;">
+<div class="aspect-square overflow-hidden rounded-[var(--marrow-radius)] bg-muted">
   <img src="your-image.jpg"
        alt="Description"
        class="h-full w-full object-cover" />

@@ -2,42 +2,72 @@
 <!-- A group of toggle buttons where one or multiple can be selected -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
+<!-- @section: Single -->
 <!-- Single selection toggle group -->
-<div x-data="mwToggleGroup('single', 'center')"
+<div x-data="mwToggleGroup('single', 'center')" role="group" aria-label="Text alignment"
      class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
   <button class="mw-toggle"
           :data-state="isSelected('left') ? 'on' : 'off'"
-          @click="select('left')">
-    <svg ...>Align Left</svg>
+          @click="select('left')"
+          aria-label="Align Left">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="15" x2="3" y1="12" y2="12"/>
+      <line x1="17" x2="3" y1="18" y2="18"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('center') ? 'on' : 'off'"
-          @click="select('center')">
-    <svg ...>Align Center</svg>
+          @click="select('center')"
+          aria-label="Align Center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="17" x2="7" y1="12" y2="12"/>
+      <line x1="19" x2="5" y1="18" y2="18"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('right') ? 'on' : 'off'"
-          @click="select('right')">
-    <svg ...>Align Right</svg>
+          @click="select('right')"
+          aria-label="Align Right">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="21" x2="3" y1="6" y2="6"/>
+      <line x1="21" x2="9" y1="12" y2="12"/>
+      <line x1="21" x2="7" y1="18" y2="18"/>
+    </svg>
   </button>
 </div>
+<!-- @section: Multiple -->
 
 <!-- Multiple selection toggle group -->
-<div x-data="mwToggleGroup('multiple', ['bold'])"
+<div x-data="mwToggleGroup('multiple', ['bold'])" role="group" aria-label="Text formatting"
      class="inline-flex gap-1 bg-muted rounded-[var(--marrow-radius)] p-1">
   <button class="mw-toggle"
           :data-state="isSelected('bold') ? 'on' : 'off'"
-          @click="select('bold')">
-    <svg ...>Bold</svg>
+          @click="select('bold')"
+          aria-label="Bold">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+      <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('italic') ? 'on' : 'off'"
-          @click="select('italic')">
-    <svg ...>Italic</svg>
+          @click="select('italic')"
+          aria-label="Italic">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" x2="10" y1="4" y2="4"/>
+      <line x1="14" x2="5" y1="20" y2="20"/>
+      <line x1="15" x2="9" y1="4" y2="20"/>
+    </svg>
   </button>
   <button class="mw-toggle"
           :data-state="isSelected('underline') ? 'on' : 'off'"
-          @click="select('underline')">
-    <svg ...>Underline</svg>
+          @click="select('underline')"
+          aria-label="Underline">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 4v6a6 6 0 0 0 12 0V4"/>
+      <line x1="4" x2="20" y1="20" y2="20"/>
+    </svg>
   </button>
 </div>

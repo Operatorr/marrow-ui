@@ -1,100 +1,29 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const commandCode = `<div x-data="mwCommand()" @keydown.window.meta.k.prevent="show()">
-  <!-- Trigger Button -->
-  <button @click="show()" class="mw-btn mw-btn-outline gap-2">
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-    Search...
-    <span class="flex items-center gap-0.5 ml-2">
-      <span class="mw-kbd">⌘</span>
-      <span class="mw-kbd">K</span>
-    </span>
-  </button>
-
-  <!-- Command Palette Overlay -->
-  <template x-teleport="body">
-    <div x-show="open" class="fixed inset-0 z-50" x-cloak>
-      <div class="mw-overlay" @click="close()"></div>
-      <div class="fixed top-[20%] left-1/2 -translate-x-1/2 z-51 w-full max-w-lg"
-        x-transition:enter="transition ease-out duration-150"
-        x-transition:enter-start="opacity-0 scale-95"
-        x-transition:enter-end="opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-100"
-        x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-95"
-        @keydown.escape.window="close()">
-        <div class="bg-popover border border-border rounded-marrow shadow-lg overflow-hidden">
-          <!-- Search Input -->
-          <div class="flex items-center border-b border-border px-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" x-model="search" x-ref="searchInput"
-              x-init="$watch('open', v => { if (v) $nextTick(() => $refs.searchInput.focus()) })"
-              class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none placeholder:text-muted-foreground"
-              placeholder="Type a command or search...">
-          </div>
-
-          <!-- Results -->
-          <div class="max-h-[300px] overflow-y-auto p-1">
-            <!-- Suggestions Group -->
-            <div x-show="matchesSearch('Calendar') || matchesSearch('Search') || matchesSearch('Calculator')">
-              <div class="mw-menu-label">Suggestions</div>
-              <button x-show="matchesSearch('Calendar')" @click="close()" class="mw-menu-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                Calendar
-              </button>
-              <button x-show="matchesSearch('Search')" @click="close()" class="mw-menu-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                Search Emoji
-              </button>
-              <button x-show="matchesSearch('Calculator')" @click="close()" class="mw-menu-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="14"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
-                Calculator
-              </button>
-            </div>
-
-            <div class="mw-menu-separator" x-show="(matchesSearch('Calendar') || matchesSearch('Search') || matchesSearch('Calculator')) && (matchesSearch('Profile') || matchesSearch('Billing') || matchesSearch('Preferences'))"></div>
-
-            <!-- Settings Group -->
-            <div x-show="matchesSearch('Profile') || matchesSearch('Billing') || matchesSearch('Preferences')">
-              <div class="mw-menu-label">Settings</div>
-              <button x-show="matchesSearch('Profile')" @click="close()" class="mw-menu-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Profile
-              </button>
-              <button x-show="matchesSearch('Billing')" @click="close()" class="mw-menu-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-                Billing
-              </button>
-              <button x-show="matchesSearch('Preferences')" @click="close()" class="mw-menu-item">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                Preferences
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </template>
-</div>`;
+const commandCode = loadFull("command");
 ---
 
 <DocsLayout title="Command" description="A command palette overlay for quick navigation and actions, triggered with keyboard shortcuts" activeComponent="command">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Command</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">A command palette overlay for quick navigation and actions, triggered with keyboard shortcuts.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Commands & Menus</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Command</h1>
+      <p class="docs-hero-description mt-3">A command palette overlay for quick navigation and actions, triggered with keyboard shortcuts.</p>
+    </header>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card flex items-center justify-center min-h-[200px]" x-data="mwCommand()" @keydown.window.meta.k.prevent="show()">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage flex items-center justify-center min-h-[200px]" x-data="mwCommand()" @keydown.window.meta.k.prevent="show()">
         <div class="text-center">
           <button @click="show()" class="mw-btn mw-btn-outline gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             Search...
             <span class="flex items-center gap-0.5 ml-2">
               <span class="mw-kbd">⌘</span>
@@ -106,7 +35,13 @@ const commandCode = `<div x-data="mwCommand()" @keydown.window.meta.k.prevent="s
         <!-- Command Palette Overlay -->
         <template x-teleport="body">
           <div x-show="open" class="fixed inset-0 z-50" x-cloak>
-            <div class="mw-overlay" @click="close()"></div>
+            <div class="mw-overlay" @click="close()"
+              x-transition:enter="transition ease-out duration-150"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="transition ease-in duration-100"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"></div>
             <div class="fixed top-[20%] left-1/2 -translate-x-1/2 z-51 w-full max-w-lg"
               x-transition:enter="transition ease-out duration-150"
               x-transition:enter-start="opacity-0 scale-95"
@@ -118,7 +53,7 @@ const commandCode = `<div x-data="mwCommand()" @keydown.window.meta.k.prevent="s
               <div class="bg-popover border border-border rounded-marrow shadow-lg overflow-hidden">
                 <!-- Search Input -->
                 <div class="flex items-center border-b border-border px-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                   <input type="text" x-model="search" x-ref="searchInput" x-init="$watch('open', v => { if (v) $nextTick(() => $refs.searchInput.focus()) })"
                     class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none placeholder:text-muted-foreground"
                     placeholder="Type a command or search...">
@@ -130,15 +65,15 @@ const commandCode = `<div x-data="mwCommand()" @keydown.window.meta.k.prevent="s
                   <div x-show="matchesSearch('Calendar') || matchesSearch('Search') || matchesSearch('Calculator')">
                     <div class="mw-menu-label">Suggestions</div>
                     <button x-show="matchesSearch('Calendar')" @click="close()" class="mw-menu-item">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                       Calendar
                     </button>
                     <button x-show="matchesSearch('Search')" @click="close()" class="mw-menu-item">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                       Search Emoji
                     </button>
                     <button x-show="matchesSearch('Calculator')" @click="close()" class="mw-menu-item">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="14"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="14"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
                       Calculator
                     </button>
                   </div>
@@ -149,15 +84,15 @@ const commandCode = `<div x-data="mwCommand()" @keydown.window.meta.k.prevent="s
                   <div x-show="matchesSearch('Profile') || matchesSearch('Billing') || matchesSearch('Preferences')">
                     <div class="mw-menu-label">Settings</div>
                     <button x-show="matchesSearch('Profile')" @click="close()" class="mw-menu-item">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                       Profile
                     </button>
                     <button x-show="matchesSearch('Billing')" @click="close()" class="mw-menu-item">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
                       Billing
                     </button>
                     <button x-show="matchesSearch('Preferences')" @click="close()" class="mw-menu-item">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
                       Preferences
                     </button>
                   </div>
@@ -167,113 +102,217 @@ const commandCode = `<div x-data="mwCommand()" @keydown.window.meta.k.prevent="s
           </div>
         </template>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={commandCode} lang="html" />
-    </div>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage" x-data="mwCommand()">
+        <!-- App shell with command palette trigger -->
+        <div class="w-full max-w-lg mx-auto">
+          <div class="border border-border rounded-marrow overflow-hidden">
+            <!-- App header bar -->
+            <div class="flex items-center justify-between px-4 py-2.5 border-b border-border bg-muted/30">
+              <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                <span class="text-sm font-medium">Workspace</span>
+              </div>
+              <button @click="show()" class="flex items-center gap-2 px-3 py-1.5 text-sm text-muted-foreground bg-background border border-border rounded-marrow hover:bg-muted/50 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                Search...
+                <span class="flex items-center gap-0.5 ml-4">
+                  <span class="mw-kbd text-[10px]">⌘</span>
+                  <span class="mw-kbd text-[10px]">K</span>
+                </span>
+              </button>
+              <div class="flex items-center gap-2">
+                <div class="mw-avatar mw-avatar-sm">
+                  <span class="text-xs">JD</span>
+                </div>
+              </div>
+            </div>
+            <!-- App body placeholder -->
+            <div class="px-4 py-6 space-y-3">
+              <div class="h-3 bg-muted/50 rounded w-3/4"></div>
+              <div class="h-3 bg-muted/50 rounded w-1/2"></div>
+              <div class="h-3 bg-muted/50 rounded w-5/6"></div>
+              <div class="h-3 bg-muted/50 rounded w-2/3"></div>
+            </div>
+          </div>
+          <p class="text-xs text-muted-foreground mt-3 text-center">Click the search bar or press <kbd class="mw-kbd text-[10px]">⌘</kbd><kbd class="mw-kbd text-[10px]">K</kbd> to open the command palette</p>
+        </div>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
+        <!-- Command Palette Overlay -->
+        <template x-teleport="body">
+          <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+            <div class="mw-overlay" @click="close()"
+              x-transition:enter="transition ease-out duration-150"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="transition ease-in duration-100"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"></div>
+            <div class="fixed top-[20%] left-1/2 -translate-x-1/2 z-51 w-full max-w-lg"
+              x-transition:enter="transition ease-out duration-150"
+              x-transition:enter-start="opacity-0 scale-95"
+              x-transition:enter-end="opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-100"
+              x-transition:leave-start="opacity-100 scale-100"
+              x-transition:leave-end="opacity-0 scale-95"
+              @keydown.escape.window="close()">
+              <div class="bg-popover border border-border rounded-marrow shadow-lg overflow-hidden">
+                <div class="flex items-center border-b border-border px-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  <input type="text" x-model="search" x-ref="searchInput" x-init="$watch('open', v => { if (v) $nextTick(() => $refs.searchInput.focus()) })"
+                    class="flex-1 bg-transparent border-0 px-3 py-3 text-sm outline-none placeholder:text-muted-foreground"
+                    placeholder="Type a command or search...">
+                </div>
+                <div class="max-h-[300px] overflow-y-auto p-1">
+                  <div x-show="matchesSearch('Dashboard') || matchesSearch('Projects') || matchesSearch('Tasks')">
+                    <div class="mw-menu-label">Navigation</div>
+                    <button x-show="matchesSearch('Dashboard')" @click="close()" class="mw-menu-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                      Dashboard
+                    </button>
+                    <button x-show="matchesSearch('Projects')" @click="close()" class="mw-menu-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+                      Projects
+                    </button>
+                    <button x-show="matchesSearch('Tasks')" @click="close()" class="mw-menu-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                      Tasks
+                    </button>
+                  </div>
+                  <div class="mw-menu-separator" x-show="(matchesSearch('Dashboard') || matchesSearch('Projects') || matchesSearch('Tasks')) && (matchesSearch('Profile') || matchesSearch('Settings') || matchesSearch('Sign Out'))"></div>
+                  <div x-show="matchesSearch('Profile') || matchesSearch('Settings') || matchesSearch('Sign Out')">
+                    <div class="mw-menu-label">Account</div>
+                    <button x-show="matchesSearch('Profile')" @click="close()" class="mw-menu-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      Profile
+                    </button>
+                    <button x-show="matchesSearch('Settings')" @click="close()" class="mw-menu-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                      Settings
+                    </button>
+                    <button x-show="matchesSearch('Sign Out')" @click="close()" class="mw-menu-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
 
+    <section>
+      <span class="docs-section-label">Code</span>
       <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js API</h3>
-          <p class="text-muted-foreground leading-relaxed mb-3">
-            Initialize with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-data="mwCommand()"</code>. The component provides the following reactive properties and methods:
-          </p>
-          <div class="mw-card overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead class="border-b border-border">
-                <tr class="text-left">
-                  <th class="p-3 font-semibold">Property/Method</th>
-                  <th class="p-3 font-semibold">Type</th>
-                  <th class="p-3 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="p-3 font-mono text-xs">open</td>
-                  <td class="p-3 text-muted-foreground">Boolean</td>
-                  <td class="p-3 text-muted-foreground">Current visibility state of the command palette</td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-mono text-xs">search</td>
-                  <td class="p-3 text-muted-foreground">String</td>
-                  <td class="p-3 text-muted-foreground">Current search query text</td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-mono text-xs">show()</td>
-                  <td class="p-3 text-muted-foreground">Function</td>
-                  <td class="p-3 text-muted-foreground">Opens the palette and clears any previous search</td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-mono text-xs">close()</td>
-                  <td class="p-3 text-muted-foreground">Function</td>
-                  <td class="p-3 text-muted-foreground">Closes the palette and clears the search input</td>
-                </tr>
-                <tr>
-                  <td class="p-3 font-mono text-xs">matchesSearch(text)</td>
-                  <td class="p-3 text-muted-foreground">Function</td>
-                  <td class="p-3 text-muted-foreground">Returns true if text matches the current search query (case-insensitive)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <CodeBlock code={commandCode} lang="html" />
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
-          <p class="text-muted-foreground leading-relaxed mb-3">
-            The command palette uses the following CSS classes from the Marrow UI system:
-          </p>
-          <div class="mw-card space-y-2 text-sm">
-            <div class="flex items-start gap-3 p-2">
-              <code class="px-1.5 py-0.5 bg-muted rounded text-xs font-mono shrink-0">mw-overlay</code>
-              <span class="text-muted-foreground">Semi-transparent background overlay that covers the entire viewport</span>
-            </div>
-            <div class="flex items-start gap-3 p-2">
-              <code class="px-1.5 py-0.5 bg-muted rounded text-xs font-mono shrink-0">mw-menu-label</code>
-              <span class="text-muted-foreground">Group label styling for command sections</span>
-            </div>
-            <div class="flex items-start gap-3 p-2">
-              <code class="px-1.5 py-0.5 bg-muted rounded text-xs font-mono shrink-0">mw-menu-item</code>
-              <span class="text-muted-foreground">Interactive command item with hover and focus states</span>
-            </div>
-            <div class="flex items-start gap-3 p-2">
-              <code class="px-1.5 py-0.5 bg-muted rounded text-xs font-mono shrink-0">mw-menu-separator</code>
-              <span class="text-muted-foreground">Visual separator between command groups</span>
-            </div>
-            <div class="flex items-start gap-3 p-2">
-              <code class="px-1.5 py-0.5 bg-muted rounded text-xs font-mono shrink-0">mw-kbd</code>
-              <span class="text-muted-foreground">Keyboard shortcut badge styling</span>
-            </div>
-          </div>
-        </div>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Property/Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>open</code></td>
+              <td>Boolean</td>
+              <td>Current visibility state of the command palette</td>
+            </tr>
+            <tr>
+              <td><code>search</code></td>
+              <td>String</td>
+              <td>Current search query text</td>
+            </tr>
+            <tr>
+              <td><code>show()</code></td>
+              <td>Function</td>
+              <td>Opens the palette and clears any previous search</td>
+            </tr>
+            <tr>
+              <td><code>close()</code></td>
+              <td>Function</td>
+              <td>Closes the palette and clears the search input</td>
+            </tr>
+            <tr>
+              <td><code>matchesSearch(text)</code></td>
+              <td>Function</td>
+              <td>Returns true if text matches the current search query (case-insensitive)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>mw-overlay</code></td>
+              <td>Semi-transparent background overlay that covers the entire viewport</td>
+            </tr>
+            <tr>
+              <td><code>mw-menu-label</code></td>
+              <td>Group label styling for command sections</td>
+            </tr>
+            <tr>
+              <td><code>mw-menu-item</code></td>
+              <td>Interactive command item with hover and focus states</td>
+            </tr>
+            <tr>
+              <td><code>mw-menu-separator</code></td>
+              <td>Visual separator between command groups</td>
+            </tr>
+            <tr>
+              <td><code>mw-kbd</code></td>
+              <td>Keyboard shortcut badge styling</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Keyboard Shortcuts</h3>
-          <p class="text-muted-foreground leading-relaxed mb-3">
-            The command palette supports keyboard shortcuts for quick access. Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@keydown.window.meta.k.prevent</code> for macOS (Cmd+K) or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@keydown.window.ctrl.k.prevent</code> for Windows/Linux (Ctrl+K). Press Escape to close the palette.
-          </p>
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Automatic focus management: search input receives focus when palette opens</li>
+            <li>Keyboard navigation: Escape key closes the palette</li>
+            <li>Click-outside to close: clicking the overlay dismisses the palette</li>
+            <li>Semantic button elements for all interactive command items</li>
+            <li>Add <code>aria-hidden="true"</code> to all decorative SVG icons</li>
+            <li>Clear visual grouping with labels and separators</li>
+          </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <div class="space-y-2 text-muted-foreground leading-relaxed">
-            <p>The command component includes several accessibility features:</p>
-            <ul class="list-disc list-inside space-y-1 ml-2">
-              <li>Automatic focus management: search input receives focus when palette opens</li>
-              <li>Keyboard navigation: Escape key closes the palette</li>
-              <li>Click-outside to close: clicking the overlay dismisses the palette</li>
-              <li>Smooth transitions with reduced-motion support through Alpine.js transitions</li>
-              <li>Semantic button elements for all interactive command items</li>
-              <li>Clear visual grouping with labels and separators</li>
-            </ul>
-          </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>@keydown.window.meta.k.prevent</code> for macOS (Cmd+K) or <code>@keydown.window.ctrl.k.prevent</code> for Windows/Linux (Ctrl+K)</li>
+            <li>Group related commands with labels and separators for scannability</li>
+            <li>Include icons alongside command labels for quick visual identification</li>
+            <li>Use <code>x-teleport="body"</code> to render the overlay outside the component tree</li>
+            <li>Keep the search input auto-focused for immediate typing on open</li>
+          </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

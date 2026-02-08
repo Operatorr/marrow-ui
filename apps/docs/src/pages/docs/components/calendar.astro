@@ -1,297 +1,216 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const calendarCode = `<div x-data="mwCalendar()" class="mw-card w-[280px] p-3">
-  <!-- Month Navigation -->
-  <div class="flex items-center justify-between mb-4">
-    <button @click="prevMonth()"
-            class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
-            aria-label="Previous month">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-           aria-hidden="true">
-        <path d="m15 18-6-6 6-6"/>
-      </svg>
-    </button>
-    <span class="text-sm font-medium"
-          x-text="monthName + ' ' + currentYear"
-          role="heading"
-          aria-level="2"
-          aria-live="polite"></span>
-    <button @click="nextMonth()"
-            class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
-            aria-label="Next month">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-           aria-hidden="true">
-        <path d="m9 18 6-6-6-6"/>
-      </svg>
-    </button>
-  </div>
-
-  <!-- Day of week headers -->
-  <div class="grid grid-cols-7 mb-1" role="row">
-    <template x-for="day in ['Su','Mo','Tu','We','Th','Fr','Sa']" :key="day">
-      <div class="text-center text-xs font-medium text-muted-foreground py-1"
-           x-text="day"
-           role="columnheader"></div>
-    </template>
-  </div>
-
-  <!-- Day grid -->
-  <div class="grid grid-cols-7" role="grid" aria-label="Calendar days">
-    <template x-for="(day, index) in days" :key="index">
-      <button
-        @click="selectDate(day)"
-        :disabled="!day"
-        :aria-label="day ? 'Select ' + monthName + ' ' + day + ', ' + currentYear : ''"
-        :aria-pressed="isSelected(day)"
-        :class="{
-          'bg-primary text-primary-foreground hover:bg-primary/90': isSelected(day),
-          'bg-accent': isToday(day) && !isSelected(day),
-          'hover:bg-accent': day && !isSelected(day),
-          'opacity-0 pointer-events-none': !day
-        }"
-        class="h-8 w-8 mx-auto rounded-[var(--marrow-radius)] text-sm
-               flex items-center justify-center
-               transition-[background-color,color,opacity]"
-        role="gridcell"
-        x-text="day || ''">
-      </button>
-    </template>
-  </div>
-
-  <!-- Selected date display -->
-  <div class="mt-4 pt-4 border-t border-border text-sm text-center"
-       x-show="selected"
-       x-transition:enter="transition-[opacity,transform] duration-200"
-       x-transition:enter-start="opacity-0 translate-y-[-8px]"
-       x-transition:enter-end="opacity-100 translate-y-0">
-    <span class="text-muted-foreground">Selected: </span>
-    <span class="font-medium"
-          x-text="selected ? selected.toLocaleDateString('en-US', {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          }) : ''"></span>
-  </div>
-</div>`;
+const calendarCode = loadFull("calendar");
 ---
 
 <DocsLayout title="Calendar" description="An inline date calendar for selecting dates" activeComponent="calendar">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Calendar</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">An inline date calendar for selecting dates with month navigation and keyboard support.</p>
-    </div>
-    <div class="mw-separator"></div>
+  <div class="space-y-12">
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card flex items-center justify-center min-h-[420px]">
-        <div x-data="mwCalendar()" class="mw-card w-[280px] p-3">
-          <!-- Month Navigation -->
-          <div class="flex items-center justify-between mb-4">
-            <button @click="prevMonth()"
-                    class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
-                    aria-label="Previous month">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-            </button>
-            <span class="text-sm font-medium"
-                  x-text="monthName + ' ' + currentYear"
-                  role="heading"
-                  aria-level="2"
-                  aria-live="polite"></span>
-            <button @click="nextMonth()"
-                    class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
-                    aria-label="Next month">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
-          </div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Data Display</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Calendar</h1>
+      <p class="docs-hero-description mt-3">An inline date calendar for selecting dates with month navigation and keyboard support.</p>
+    </header>
 
-          <!-- Day headers -->
-          <div class="grid grid-cols-7 mb-1" role="row">
-            <template x-for="day in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']" x-bind:key="day">
-              <div class="text-center text-xs font-medium text-muted-foreground py-1" x-text="day" role="columnheader"></div>
-            </template>
-          </div>
-
-          <!-- Day grid -->
-          <div class="grid grid-cols-7" role="grid" aria-label="Calendar days">
-            <template x-for="(day, index) in days" x-bind:key="index">
-              <button
-                @click="selectDate(day)"
-                :disabled="!day"
-                :aria-label="day ? 'Select ' + monthName + ' ' + day + ', ' + currentYear : ''"
-                :aria-pressed="isSelected(day)"
-                :class="{
-                  'bg-primary text-primary-foreground hover:bg-primary/90': isSelected(day),
-                  'bg-accent': isToday(day) && !isSelected(day),
-                  'hover:bg-accent': day && !isSelected(day),
-                  'opacity-0 pointer-events-none': !day
-                }"
-                class="h-8 w-8 mx-auto rounded-[var(--marrow-radius)] text-sm flex items-center justify-center transition-[background-color,color,opacity]"
-                role="gridcell"
-                x-text="day || ''">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
+        <div class="flex items-center justify-center min-h-[380px]">
+          <div x-data="mwCalendar()" class="rounded-lg border border-border bg-card p-3 w-[280px]">
+            <!-- Month Navigation -->
+            <div class="flex items-center justify-between mb-4">
+              <button @click="prevMonth()"
+                      class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
+                      aria-label="Previous month">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
               </button>
-            </template>
-          </div>
+              <span class="text-sm font-medium"
+                    x-text="monthName + ' ' + currentYear"
+                    role="heading"
+                    aria-level="2"
+                    aria-live="polite"></span>
+              <button @click="nextMonth()"
+                      class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm"
+                      aria-label="Next month">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
 
-          <!-- Selected date display -->
-          <div class="mt-4 pt-4 border-t border-border text-sm text-center"
-               x-show="selected"
-               x-transition:enter="transition-[opacity,transform] duration-200"
-               x-transition:enter-start="opacity-0 translate-y-[-8px]"
-               x-transition:enter-end="opacity-100 translate-y-0">
-            <span class="text-muted-foreground">Selected: </span>
-            <span class="font-medium"
-                  x-text="selected ? selected.toLocaleDateString('en-US', {
-                    weekday: 'short',
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
-                  }) : ''"></span>
+            <!-- Day headers -->
+            <div class="grid grid-cols-7 mb-1" role="row">
+              <template x-for="day in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']" x-bind:key="day">
+                <div class="text-center text-xs font-medium text-muted-foreground py-1" x-text="day" role="columnheader"></div>
+              </template>
+            </div>
+
+            <!-- Day grid -->
+            <div class="grid grid-cols-7" role="grid" aria-label="Calendar days">
+              <template x-for="(day, index) in days" x-bind:key="index">
+                <button
+                  @click="selectDate(day)"
+                  :disabled="!day"
+                  :aria-label="day ? 'Select ' + monthName + ' ' + day + ', ' + currentYear : ''"
+                  :aria-pressed="isSelected(day)"
+                  :class="{
+                    'bg-primary text-primary-foreground hover:bg-primary/90': isSelected(day),
+                    'bg-accent': isToday(day) && !isSelected(day),
+                    'hover:bg-accent': day && !isSelected(day),
+                    'opacity-0 pointer-events-none': !day
+                  }"
+                  class="h-8 w-8 mx-auto rounded-[var(--marrow-radius)] text-sm flex items-center justify-center transition-[background-color,color,opacity]"
+                  role="gridcell"
+                  x-text="day || ''">
+                </button>
+              </template>
+            </div>
+
+            <!-- Selected date display -->
+            <div class="mt-4 pt-4 border-t border-border text-sm text-center"
+                 x-show="selected"
+                 x-transition:enter="transition-[opacity,transform] duration-200"
+                 x-transition:enter-start="opacity-0 translate-y-[-8px]"
+                 x-transition:enter-end="opacity-100 translate-y-0">
+              <span class="text-muted-foreground">Selected: </span>
+              <span class="font-medium"
+                    x-text="selected ? selected.toLocaleDateString('en-US', {
+                      weekday: 'short',
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric'
+                    }) : ''"></span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={calendarCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js API</h3>
-          <p class="text-muted-foreground leading-relaxed mb-4">
-            The calendar component uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwCalendar()</code> from <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">marrow.js</code> for state management and date selection.
-          </p>
-          <div class="mw-card overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-border">
-                  <th class="text-left py-3 px-4 font-semibold">Property/Method</th>
-                  <th class="text-left py-3 px-4 font-semibold">Type</th>
-                  <th class="text-left py-3 px-4 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">selected</td>
-                  <td class="py-3 px-4 text-muted-foreground">Date | null</td>
-                  <td class="py-3 px-4 text-muted-foreground">Currently selected date</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">currentMonth</td>
-                  <td class="py-3 px-4 text-muted-foreground">Number</td>
-                  <td class="py-3 px-4 text-muted-foreground">Current displayed month (0-11)</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">currentYear</td>
-                  <td class="py-3 px-4 text-muted-foreground">Number</td>
-                  <td class="py-3 px-4 text-muted-foreground">Current displayed year</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">monthName</td>
-                  <td class="py-3 px-4 text-muted-foreground">String (getter)</td>
-                  <td class="py-3 px-4 text-muted-foreground">Formatted month name (e.g., "January")</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">daysInMonth</td>
-                  <td class="py-3 px-4 text-muted-foreground">Number (getter)</td>
-                  <td class="py-3 px-4 text-muted-foreground">Number of days in current month</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">firstDayOfWeek</td>
-                  <td class="py-3 px-4 text-muted-foreground">Number (getter)</td>
-                  <td class="py-3 px-4 text-muted-foreground">Starting day offset (0-6)</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">days</td>
-                  <td class="py-3 px-4 text-muted-foreground">Array (getter)</td>
-                  <td class="py-3 px-4 text-muted-foreground">Array of day numbers with null padding for grid layout</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">selectDate(day)</td>
-                  <td class="py-3 px-4 text-muted-foreground">Function</td>
-                  <td class="py-3 px-4 text-muted-foreground">Select a specific date in the current month</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">isSelected(day)</td>
-                  <td class="py-3 px-4 text-muted-foreground">Function</td>
-                  <td class="py-3 px-4 text-muted-foreground">Check if a day is currently selected</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">isToday(day)</td>
-                  <td class="py-3 px-4 text-muted-foreground">Function</td>
-                  <td class="py-3 px-4 text-muted-foreground">Check if a day is today's date</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">prevMonth()</td>
-                  <td class="py-3 px-4 text-muted-foreground">Function</td>
-                  <td class="py-3 px-4 text-muted-foreground">Navigate to the previous month</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4 font-mono text-xs">nextMonth()</td>
-                  <td class="py-3 px-4 text-muted-foreground">Function</td>
-                  <td class="py-3 px-4 text-muted-foreground">Navigate to the next month</td>
-                </tr>
-              </tbody>
-            </table>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="w-full max-w-2xl mx-auto">
+          <div class="rounded-lg border border-border bg-card p-6 space-y-5">
+            <div>
+              <h3 class="font-heading text-lg font-semibold">Book an Appointment</h3>
+              <p class="text-sm text-muted-foreground mt-1">Select an available date and time for your consultation.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <!-- Calendar -->
+              <div x-data="mwCalendar()">
+                <p class="text-sm font-medium mb-2">Select a Date</p>
+                <div class="rounded-lg border border-border p-3">
+                  <div class="flex items-center justify-between mb-3">
+                    <button @click="prevMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" aria-label="Previous month">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+                    <span class="text-sm font-medium" x-text="monthName + ' ' + currentYear" role="heading" aria-level="2" aria-live="polite"></span>
+                    <button @click="nextMonth()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" aria-label="Next month">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-7 mb-1">
+                    <template x-for="day in ['Su','Mo','Tu','We','Th','Fr','Sa']" x-bind:key="day">
+                      <div class="text-center text-xs font-medium text-muted-foreground py-1" x-text="day"></div>
+                    </template>
+                  </div>
+                  <div class="grid grid-cols-7" role="grid" aria-label="Calendar days">
+                    <template x-for="(day, index) in days" x-bind:key="index">
+                      <button @click="selectDate(day)" :disabled="!day" :aria-label="day ? 'Select ' + monthName + ' ' + day + ', ' + currentYear : ''" :aria-pressed="isSelected(day)" :class="{ 'bg-primary text-primary-foreground hover:bg-primary/90': isSelected(day), 'bg-accent': isToday(day) && !isSelected(day), 'hover:bg-accent': day && !isSelected(day), 'opacity-0 pointer-events-none': !day }" class="h-7 w-7 mx-auto rounded-[var(--marrow-radius)] text-xs flex items-center justify-center transition-[background-color,color,opacity]" role="gridcell" x-text="day || ''"></button>
+                    </template>
+                  </div>
+                </div>
+              </div>
+              <!-- Time Slots -->
+              <div>
+                <p class="text-sm font-medium mb-2">Available Times</p>
+                <div class="grid grid-cols-2 gap-2">
+                  <button class="mw-btn mw-btn-outline mw-btn-sm text-xs">9:00 AM</button>
+                  <button class="mw-btn mw-btn-outline mw-btn-sm text-xs">9:30 AM</button>
+                  <button class="mw-btn mw-btn-primary mw-btn-sm text-xs">10:00 AM</button>
+                  <button class="mw-btn mw-btn-outline mw-btn-sm text-xs">10:30 AM</button>
+                  <button class="mw-btn mw-btn-outline mw-btn-sm text-xs">11:00 AM</button>
+                  <button class="mw-btn mw-btn-outline mw-btn-sm text-xs" disabled>11:30 AM</button>
+                  <button class="mw-btn mw-btn-outline mw-btn-sm text-xs">1:00 PM</button>
+                  <button class="mw-btn mw-btn-outline mw-btn-sm text-xs">1:30 PM</button>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-2 border-t border-border">
+              <button class="mw-btn mw-btn-outline">Cancel</button>
+              <button class="mw-btn mw-btn-primary">Confirm Booking</button>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Navigation buttons include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> for screen readers</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Month/year display uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-live="polite"</code> for announcements</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Day buttons include descriptive <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> with full date</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Selected state indicated with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-pressed</code> attribute</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Grid structure uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="grid"</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="gridcell"</code> for semantic markup</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Today's date is visually highlighted with accent background</span>
-            </li>
-            <li class="flex gap-2">
-              <span class="text-primary mt-1">•</span>
-              <span>Transitions respect <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">prefers-reduced-motion</code> preference</span>
-            </li>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={calendarCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Property / Method</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>selected</code></td><td>Date | null</td><td>Currently selected date</td></tr>
+            <tr><td><code>currentMonth</code></td><td>Number</td><td>Current displayed month (0-11)</td></tr>
+            <tr><td><code>currentYear</code></td><td>Number</td><td>Current displayed year</td></tr>
+            <tr><td><code>monthName</code></td><td>String (getter)</td><td>Formatted month name (e.g., "January")</td></tr>
+            <tr><td><code>daysInMonth</code></td><td>Number (getter)</td><td>Number of days in current month</td></tr>
+            <tr><td><code>firstDayOfWeek</code></td><td>Number (getter)</td><td>Starting day offset (0-6)</td></tr>
+            <tr><td><code>days</code></td><td>Array (getter)</td><td>Array of day numbers with null padding for grid layout</td></tr>
+            <tr><td><code>selectDate(day)</code></td><td>Function</td><td>Select a specific date in the current month</td></tr>
+            <tr><td><code>isSelected(day)</code></td><td>Function</td><td>Check if a day is currently selected</td></tr>
+            <tr><td><code>isToday(day)</code></td><td>Function</td><td>Check if a day is today's date</td></tr>
+            <tr><td><code>prevMonth()</code></td><td>Function</td><td>Navigate to the previous month</td></tr>
+            <tr><td><code>nextMonth()</code></td><td>Function</td><td>Navigate to the next month</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Navigation buttons include <code>aria-label</code> for screen readers</li>
+            <li>Month/year display uses <code>aria-live="polite"</code> for announcements when navigating</li>
+            <li>Day buttons include descriptive <code>aria-label</code> with the full date</li>
+            <li>Selected state is indicated with <code>aria-pressed</code> attribute</li>
+            <li>Grid structure uses <code>role="grid"</code> and <code>role="gridcell"</code> for semantic markup</li>
+            <li>Today's date is visually highlighted with an accent background</li>
           </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Styling</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            The calendar adapts to your theme configuration including border radius, colors, and transitions. Selected dates use the primary color scheme, while today's date uses the accent color. Empty grid cells are hidden with opacity for clean month boundaries.
-          </p>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>mwCalendar()</code> from <code>marrow.js</code> for state management</li>
+            <li>The calendar adapts to your theme configuration including border radius, colors, and transitions</li>
+            <li>Selected dates use the primary color scheme; today uses the accent color</li>
+            <li>Empty grid cells are hidden with opacity for clean month boundaries</li>
+            <li>Combine with time slot selectors for full scheduling interfaces</li>
+          </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

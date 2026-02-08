@@ -5,8 +5,8 @@
 <div x-data="mwSheet()">
   <button @click="show()" class="mw-btn mw-btn-outline">Open Sheet</button>
 
-  <template x-if="open">
-    <div>
+  <template x-teleport="body">
+    <div x-show="open" class="fixed inset-0 z-50" x-cloak>
       <!-- Overlay -->
       <div class="mw-overlay" @click="close()"
            x-transition:enter="transition ease-out duration-300"

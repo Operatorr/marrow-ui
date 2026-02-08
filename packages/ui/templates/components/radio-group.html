@@ -2,27 +2,105 @@
 <!-- A group of radio buttons for selecting a single option from a set -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<div x-data="mwRadioGroup('option1')" class="space-y-3">
-  <label class="mw-label">Notification preference</label>
+<!-- @section: Radio Group -->
+<div x-data="mwRadioGroup('all')" class="space-y-3">
+  <label class="mw-label">Notification preferences</label>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option1')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('all')">
     <div class="mw-radio"
-         :data-state="isSelected('option1') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('all') ? 'checked' : 'unchecked'">
     </div>
     <label class="text-sm cursor-pointer">All notifications</label>
   </div>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option2')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('mentions')">
     <div class="mw-radio"
-         :data-state="isSelected('option2') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('mentions') ? 'checked' : 'unchecked'">
     </div>
-    <label class="text-sm cursor-pointer">Important only</label>
+    <label class="text-sm cursor-pointer">Mentions only</label>
   </div>
 
-  <div class="flex items-center gap-3 cursor-pointer" @click="select('option3')">
+  <div class="flex items-center gap-3 cursor-pointer" @click="select('nothing')">
     <div class="mw-radio"
-         :data-state="isSelected('option3') ? 'checked' : 'unchecked'">
+         :data-state="isSelected('nothing') ? 'checked' : 'unchecked'">
     </div>
-    <label class="text-sm cursor-pointer">None</label>
+    <label class="text-sm cursor-pointer">Nothing</label>
+  </div>
+
+  <p class="text-xs text-muted-foreground">
+    Selected: <span x-text="selected" class="font-medium text-foreground"></span>
+  </p>
+</div>
+<!-- @section: Plan Selection -->
+
+<div x-data="mwRadioGroup('starter')" class="space-y-4">
+  <label class="mw-label">Choose your plan</label>
+
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('starter') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('starter')">
+    <div class="mw-radio mt-0.5"
+         :data-state="isSelected('starter') ? 'checked' : 'unchecked'">
+    </div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Starter</div>
+        <div class="text-sm font-semibold">$0/mo</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        Perfect for side projects and experimentation.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Up to 3 projects<br>
+        • 5 GB storage<br>
+        • Community support
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('pro') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('pro')">
+    <div class="mw-radio mt-0.5"
+         :data-state="isSelected('pro') ? 'checked' : 'unchecked'">
+    </div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Pro</div>
+        <div class="text-sm font-semibold">$19/mo</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        For professionals and growing teams.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Unlimited projects<br>
+        • 100 GB storage<br>
+        • Priority support<br>
+        • Advanced analytics
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-start gap-3 cursor-pointer p-4 rounded-lg border transition-colors"
+       :class="isSelected('enterprise') ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'"
+       @click="select('enterprise')">
+    <div class="mw-radio mt-0.5"
+         :data-state="isSelected('enterprise') ? 'checked' : 'unchecked'">
+    </div>
+    <div class="flex-1">
+      <div class="flex items-center justify-between">
+        <div class="font-semibold">Enterprise</div>
+        <div class="text-sm font-semibold">Custom</div>
+      </div>
+      <div class="text-sm text-muted-foreground mt-1">
+        Custom solutions for large organizations.
+      </div>
+      <div class="text-xs text-muted-foreground mt-2">
+        • Unlimited everything<br>
+        • Custom storage<br>
+        • Dedicated support<br>
+        • SLA & compliance
+      </div>
+    </div>
   </div>
 </div>

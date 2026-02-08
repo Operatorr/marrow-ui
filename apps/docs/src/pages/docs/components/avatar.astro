@@ -1,238 +1,229 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const avatarCode = `<!-- Default Size -->
-<div class="mw-avatar">
-  <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
-</div>
-
-<!-- Small Size -->
-<div class="mw-avatar mw-avatar-sm">
-  <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
-</div>
-
-<!-- Large Size -->
-<div class="mw-avatar mw-avatar-lg">
-  <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
-</div>
-
-<!-- Fallback Initials -->
-<div class="mw-avatar">
-  <span>AJ</span>
-</div>
-
-<!-- Avatar Group (Overlapping) -->
-<div class="flex -space-x-4">
-  <div class="mw-avatar ring-2 ring-background">
-    <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
-  </div>
-  <div class="mw-avatar ring-2 ring-background">
-    <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
-  </div>
-  <div class="mw-avatar ring-2 ring-background">
-    <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
-  </div>
-  <div class="mw-avatar ring-2 ring-background">
-    <span>+3</span>
-  </div>
-</div>
-
-<!-- With Status Indicator -->
-<div class="relative inline-block">
-  <div class="mw-avatar">
-    <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
-  </div>
-  <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-background"></span>
-</div>`;
+const avatarCode = loadFull("avatar");
 ---
 
 <DocsLayout title="Avatar" description="An image element with a fallback for representing the user" activeComponent="avatar">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Avatar</h1>
-      <p class="mt-2 text-muted-foreground leading-relaxed">An image element with a fallback for representing the user.</p>
-    </div>
-    <div class="mw-separator"></div>
+  <div class="space-y-12">
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Preview</h2>
-      <div class="mw-card">
-        <div class="space-y-8">
-          <!-- Sizes -->
-          <div>
-            <h3 class="font-heading text-lg font-semibold mb-4">Sizes</h3>
-            <div class="flex items-end gap-6 flex-wrap">
-              <div class="flex flex-col items-center gap-3">
-                <div class="mw-avatar mw-avatar-sm">
-                  <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
-                </div>
-                <span class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Small</span>
-              </div>
-              <div class="flex flex-col items-center gap-3">
-                <div class="mw-avatar">
-                  <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
-                </div>
-                <span class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Default</span>
-              </div>
-              <div class="flex flex-col items-center gap-3">
-                <div class="mw-avatar mw-avatar-lg">
-                  <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
-                </div>
-                <span class="text-sm font-medium text-muted-foreground uppercase tracking-wider">Large</span>
-              </div>
-            </div>
-          </div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Typography & Micro</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Avatar</h1>
+      <p class="docs-hero-description mt-3">An image element with a fallback for representing the user. Supports multiple sizes, initials fallback, overlapping groups, and status indicators.</p>
+    </header>
 
-          <!-- Fallback Initials -->
-          <div>
-            <h3 class="font-heading text-lg font-semibold mb-4">Fallback Initials</h3>
-            <div class="flex items-center gap-6 flex-wrap">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
+        <!-- Sizes -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Sizes</p>
+          <div class="flex items-end gap-6 flex-wrap">
+            <div class="flex flex-col items-center gap-3">
               <div class="mw-avatar mw-avatar-sm">
-                <span>AJ</span>
-              </div>
-              <div class="mw-avatar">
-                <span>BW</span>
-              </div>
-              <div class="mw-avatar mw-avatar-lg">
-                <span>CS</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Avatar Group -->
-          <div>
-            <h3 class="font-heading text-lg font-semibold mb-4">Avatar Group</h3>
-            <div class="flex -space-x-4">
-              <div class="mw-avatar ring-2 ring-background">
                 <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
               </div>
-              <div class="mw-avatar ring-2 ring-background">
+              <span class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Small</span>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+              <div class="mw-avatar">
                 <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
               </div>
-              <div class="mw-avatar ring-2 ring-background">
+              <span class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Default</span>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+              <div class="mw-avatar mw-avatar-lg">
                 <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
               </div>
-              <div class="mw-avatar ring-2 ring-background">
-                <span>+3</span>
-              </div>
+              <span class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Large</span>
             </div>
           </div>
+        </div>
 
-          <!-- With Status -->
-          <div>
-            <h3 class="font-heading text-lg font-semibold mb-4">With Status Indicator</h3>
-            <div class="flex items-center gap-6 flex-wrap">
-              <!-- Online -->
+        <!-- Fallback Initials -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Fallback Initials</p>
+          <div class="flex items-center gap-6 flex-wrap">
+            <div class="mw-avatar mw-avatar-sm">
+              <span>AJ</span>
+            </div>
+            <div class="mw-avatar">
+              <span>BW</span>
+            </div>
+            <div class="mw-avatar mw-avatar-lg">
+              <span>CS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Avatar Group -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Avatar Group</p>
+          <div class="flex -space-x-4">
+            <div class="mw-avatar ring-2 ring-background">
+              <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
+            </div>
+            <div class="mw-avatar ring-2 ring-background">
+              <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
+            </div>
+            <div class="mw-avatar ring-2 ring-background">
+              <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
+            </div>
+            <div class="mw-avatar ring-2 ring-background">
+              <span>+3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- With Status -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">With Status Indicator</p>
+          <div class="flex items-center gap-6 flex-wrap">
+            <div class="relative inline-block">
+              <div class="mw-avatar">
+                <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
+              </div>
+              <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-background"></span>
+            </div>
+            <div class="relative inline-block">
+              <div class="mw-avatar">
+                <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
+              </div>
+              <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-muted ring-2 ring-background"></span>
+            </div>
+            <div class="relative inline-block">
+              <div class="mw-avatar">
+                <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
+              </div>
+              <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-yellow-500 ring-2 ring-background"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-md mx-auto space-y-6">
+          <h3 class="font-heading text-lg font-semibold">Team Members</h3>
+          <div class="space-y-4">
+            <!-- Member 1 -->
+            <div class="flex items-center gap-3">
               <div class="relative inline-block">
                 <div class="mw-avatar">
                   <img src="https://i.pravatar.cc/150?img=32" alt="Alice Johnson" />
                 </div>
                 <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-background"></span>
               </div>
-              <!-- Offline -->
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium">Alice Johnson</p>
+                <p class="text-xs text-muted-foreground">Lead Designer &bull; Online</p>
+              </div>
+              <span class="mw-badge mw-badge-secondary text-xs">Admin</span>
+            </div>
+            <!-- Member 2 -->
+            <div class="flex items-center gap-3">
               <div class="relative inline-block">
                 <div class="mw-avatar">
                   <img src="https://i.pravatar.cc/150?img=47" alt="Bob Wilson" />
                 </div>
-                <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-muted ring-2 ring-background"></span>
-              </div>
-              <!-- Away -->
-              <div class="relative inline-block">
-                <div class="mw-avatar">
-                  <img src="https://i.pravatar.cc/150?img=12" alt="Carol Smith" />
-                </div>
                 <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-yellow-500 ring-2 ring-background"></span>
               </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium">Bob Wilson</p>
+                <p class="text-xs text-muted-foreground">Frontend Engineer &bull; Away</p>
+              </div>
+              <span class="mw-badge mw-badge-secondary text-xs">Member</span>
+            </div>
+            <!-- Member 3 -->
+            <div class="flex items-center gap-3">
+              <div class="relative inline-block">
+                <div class="mw-avatar">
+                  <span>CS</span>
+                </div>
+                <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-muted ring-2 ring-background"></span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium">Carol Smith</p>
+                <p class="text-xs text-muted-foreground">Backend Engineer &bull; Offline</p>
+              </div>
+              <span class="mw-badge mw-badge-secondary text-xs">Member</span>
+            </div>
+            <!-- Member 4 -->
+            <div class="flex items-center gap-3">
+              <div class="relative inline-block">
+                <div class="mw-avatar">
+                  <img src="https://i.pravatar.cc/150?img=12" alt="David Lee" />
+                </div>
+                <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 ring-2 ring-background"></span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium">David Lee</p>
+                <p class="text-xs text-muted-foreground">Product Manager &bull; Online</p>
+              </div>
+              <span class="mw-badge mw-badge-secondary text-xs">Admin</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Code</h2>
-      <CodeBlock code={avatarCode} lang="html" />
-    </div>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={avatarCode} lang="html" />
+      </div>
+    </section>
 
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight text-pretty">Usage</h2>
-      <div class="mw-card space-y-6">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">CSS Classes</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-border">
-                  <th class="text-left py-3 px-4 font-semibold">Class</th>
-                  <th class="text-left py-3 px-4 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-avatar</code></td>
-                  <td class="py-3 px-4 text-muted-foreground">Base avatar class (2.5rem / 40px)</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-avatar-sm</code></td>
-                  <td class="py-3 px-4 text-muted-foreground">Small size variant (2rem / 32px)</td>
-                </tr>
-                <tr>
-                  <td class="py-3 px-4"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-avatar-lg</code></td>
-                  <td class="py-3 px-4 text-muted-foreground">Large size variant (3rem / 48px)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-avatar</code></td><td>Base avatar class (2.5rem / 40px)</td></tr>
+            <tr><td><code>mw-avatar-sm</code></td><td>Small size variant (2rem / 32px)</td></tr>
+            <tr><td><code>mw-avatar-lg</code></td><td>Large size variant (3rem / 48px)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-3">
-              <span class="text-primary mt-1">•</span>
-              <span>Always provide descriptive <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">alt</code> text for avatar images that includes the user's name</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-primary mt-1">•</span>
-              <span>For decorative avatars, use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">alt=""</code> to hide from screen readers</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-primary mt-1">•</span>
-              <span>When using status indicators, consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-label</code> to communicate online/offline state</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-primary mt-1">•</span>
-              <span>For avatar groups showing user counts, ensure the "+N" text is readable by screen readers</span>
-            </li>
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Always provide descriptive <code>alt</code> text for avatar images that includes the user's name</li>
+            <li>For decorative avatars, use <code>alt=""</code> to hide from screen readers</li>
+            <li>When using status indicators, add <code>aria-label</code> to communicate online/offline state</li>
+            <li>For avatar groups showing user counts, ensure the "+N" text is readable by screen readers</li>
           </ul>
         </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-3">Best Practices</h3>
-          <ul class="space-y-2 text-muted-foreground leading-relaxed">
-            <li class="flex gap-3">
-              <span class="text-primary mt-1">•</span>
-              <span>Use fallback initials when images fail to load or user has no profile picture</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-primary mt-1">•</span>
-              <span>Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">ring-2 ring-background</code> to avatars in groups to create visual separation</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-primary mt-1">•</span>
-              <span>Use negative margins (<code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">-space-x-4</code>) to create overlapping avatar groups</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-primary mt-1">•</span>
-              <span>Status indicators should use absolute positioning relative to the avatar container</span>
-            </li>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use fallback initials when images fail to load or user has no profile picture</li>
+            <li>Add <code>ring-2 ring-background</code> to avatars in groups to create visual separation</li>
+            <li>Use negative margins (<code>-space-x-4</code>) to create overlapping avatar groups</li>
+            <li>Status indicators should use absolute positioning relative to the avatar container</li>
           </ul>
         </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

@@ -18,19 +18,28 @@
 
   <!-- Tab panels -->
   <div class="mt-4">
-    <div x-show="isActive('tab1')">
+    <div x-show="isActive('tab1')"
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100">
       <h3 class="font-heading font-semibold">Account Settings</h3>
       <p class="text-sm text-muted-foreground">Update your account information.</p>
       <!-- Panel content -->
     </div>
 
-    <div x-show="isActive('tab2')" x-cloak>
+    <div x-show="isActive('tab2')" x-cloak
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100">
       <h3 class="font-heading font-semibold">Change Password</h3>
       <p class="text-sm text-muted-foreground">Update your password.</p>
       <!-- Panel content -->
     </div>
 
-    <div x-show="isActive('tab3')" x-cloak>
+    <div x-show="isActive('tab3')" x-cloak
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100">
       <h3 class="font-heading font-semibold">Notification Preferences</h3>
       <p class="text-sm text-muted-foreground">Choose how you want to be notified.</p>
       <!-- Panel content -->

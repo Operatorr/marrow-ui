@@ -1,76 +1,37 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const drawerCode = `<div x-data="mwSheet()">
-  <button @click="show()" class="mw-btn mw-btn-outline">Open Drawer</button>
-
-  <template x-if="open">
-    <div>
-      <div class="mw-overlay" @click="close()"></div>
-      <div class="mw-sheet mw-sheet-bottom rounded-t-lg"
-           @keydown.escape.window="close()"
-           x-transition:enter="transition ease-out duration-300"
-           x-transition:enter-start="translate-y-full"
-           x-transition:enter-end="translate-y-0"
-           x-transition:leave="transition ease-in duration-200"
-           x-transition:leave-start="translate-y-0"
-           x-transition:leave-end="translate-y-full">
-
-        <!-- Drag handle -->
-        <div class="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted-foreground/20 mb-4 mt-1"></div>
-
-        <div class="space-y-2 text-center mb-6">
-          <h3 class="font-heading text-lg font-semibold">Share</h3>
-          <p class="text-sm text-muted-foreground">
-            Share this content with your friends.
-          </p>
-        </div>
-
-        <div class="space-y-3 max-w-sm mx-auto">
-          <button class="mw-btn mw-btn-outline w-full justify-start gap-3">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
-            </svg>
-            Share on Twitter
-          </button>
-          <button class="mw-btn mw-btn-outline w-full justify-start gap-3">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-            Share on Facebook
-          </button>
-          <button class="mw-btn mw-btn-outline w-full justify-start gap-3">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-            </svg>
-            Copy Link
-          </button>
-          <button @click="close()" class="mw-btn mw-btn-secondary w-full mt-2">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </template>
-</div>`;
+const drawerCode = loadFull("drawer");
 ---
 
 <DocsLayout title="Drawer" description="A bottom sheet drawer that slides up from the bottom of the screen" activeComponent="drawer">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Drawer</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">A bottom sheet drawer that slides up from the bottom of the screen, commonly used for mobile-friendly actions and content panels.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Overlays</span>
+        <span class="docs-badge-primary docs-badge">Alpine.js</span>
+      </div>
+      <h1 class="docs-hero-title">Drawer</h1>
+      <p class="docs-hero-description mt-3">A bottom sheet drawer that slides up from the bottom of the screen, commonly used for mobile-friendly actions and content panels.</p>
+    </header>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card flex items-center justify-center min-h-[200px]">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
         <div x-data="mwSheet()">
           <button @click="show()" class="mw-btn mw-btn-outline">Open Drawer</button>
-          <template x-if="open">
-            <div>
-              <div class="mw-overlay" @click="close()"></div>
+          <template x-teleport="body">
+            <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+              <div class="mw-overlay" @click="close()"
+                   x-transition:enter="transition ease-out duration-300"
+                   x-transition:enter-start="opacity-0"
+                   x-transition:enter-end="opacity-100"
+                   x-transition:leave="transition ease-in duration-200"
+                   x-transition:leave-start="opacity-100"
+                   x-transition:leave-end="opacity-0"></div>
               <div class="mw-sheet mw-sheet-bottom rounded-t-lg" @keydown.escape.window="close()"
                    x-transition:enter="transition ease-out duration-300"
                    x-transition:enter-start="translate-y-full"
@@ -79,7 +40,6 @@ const drawerCode = `<div x-data="mwSheet()">
                    x-transition:leave-start="translate-y-0"
                    x-transition:leave-end="translate-y-full">
 
-                <!-- Drag handle visual indicator -->
                 <div class="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted-foreground/20 mb-4 mt-1"></div>
 
                 <div class="space-y-2 text-center mb-6">
@@ -113,76 +73,156 @@ const drawerCode = `<div x-data="mwSheet()">
           </template>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={drawerCode} lang="html" />
-    </div>
-
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">CSS Classes</h3>
-          <p class="text-muted-foreground leading-relaxed mb-3">
-            The drawer component uses the following CSS classes:
-          </p>
-          <ul class="space-y-2 text-muted-foreground">
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-sheet</code> - Base sheet container</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-sheet-bottom</code> - Positions the drawer at the bottom of the screen</li>
-            <li><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-overlay</code> - Semi-transparent backdrop overlay</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Alpine.js API</h3>
-          <p class="text-muted-foreground leading-relaxed mb-3">
-            The drawer uses <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mwSheet()</code> for state management:
-          </p>
-          <div class="mw-card overflow-hidden">
-            <table class="w-full text-sm">
-              <thead class="bg-muted/50">
-                <tr>
-                  <th class="text-left p-3 font-semibold">Property/Method</th>
-                  <th class="text-left p-3 font-semibold">Type</th>
-                  <th class="text-left p-3 font-semibold">Description</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-border">
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">open</code></td>
-                  <td class="p-3 text-muted-foreground">Boolean</td>
-                  <td class="p-3 text-muted-foreground">Current open/closed state</td>
-                </tr>
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">show()</code></td>
-                  <td class="p-3 text-muted-foreground">Function</td>
-                  <td class="p-3 text-muted-foreground">Opens the drawer</td>
-                </tr>
-                <tr>
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">close()</code></td>
-                  <td class="p-3 text-muted-foreground">Function</td>
-                  <td class="p-3 text-muted-foreground">Closes the drawer</td>
-                </tr>
-              </tbody>
-            </table>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="w-full max-w-sm mx-auto">
+          <div class="rounded-lg border border-border overflow-hidden">
+            <!-- Mobile header bar -->
+            <div class="flex items-center justify-between p-3 border-b border-border bg-muted/30">
+              <div x-data="mwSheet()">
+                <button @click="show()" class="mw-btn mw-btn-ghost mw-btn-icon mw-btn-sm" aria-label="Open navigation">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+                <template x-teleport="body">
+                  <div x-show="open" class="fixed inset-0 z-50" x-cloak>
+                    <div class="mw-overlay" @click="close()"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100"
+                         x-transition:leave-end="opacity-0"></div>
+                    <div class="mw-sheet mw-sheet-bottom rounded-t-lg" @keydown.escape.window="close()"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="translate-y-full"
+                         x-transition:enter-end="translate-y-0"
+                         x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="translate-y-0"
+                         x-transition:leave-end="translate-y-full">
+                      <div class="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-muted-foreground/20 mb-4 mt-1"></div>
+                      <nav class="space-y-1">
+                        <a href="#" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium bg-primary/10 text-primary">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                          Dashboard
+                        </a>
+                        <a href="#" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                          Team
+                        </a>
+                        <a href="#" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                          Settings
+                        </a>
+                        <div class="border-t border-border my-2"></div>
+                        <button @click="close()" class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 w-full text-left">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+                          Log out
+                        </button>
+                      </nav>
+                    </div>
+                  </div>
+                </template>
+              </div>
+              <span class="font-heading text-sm font-semibold">Dashboard</span>
+              <div class="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-xs font-semibold text-primary">J</div>
+            </div>
+            <!-- Mini dashboard content -->
+            <div class="p-4 space-y-3">
+              <p class="text-xs text-muted-foreground">Welcome back, John</p>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="rounded-md border border-border p-2">
+                  <p class="text-xs text-muted-foreground">Revenue</p>
+                  <p class="text-sm font-semibold">$4,231</p>
+                </div>
+                <div class="rounded-md border border-border p-2">
+                  <p class="text-xs text-muted-foreground">Users</p>
+                  <p class="text-sm font-semibold">1,204</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div>
-          <h3 class="font-heading text-lg font-semibold mb-2">Accessibility</h3>
-          <ul class="space-y-2 text-muted-foreground">
-            <li>The drawer closes when the Escape key is pressed via <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">@keydown.escape.window</code></li>
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={drawerCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead><tr><th>Property/Method</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>open</code></td>
+              <td>Boolean</td>
+              <td>Current open/closed state</td>
+            </tr>
+            <tr>
+              <td><code>show()</code></td>
+              <td>Method</td>
+              <td>Opens the drawer</td>
+            </tr>
+            <tr>
+              <td><code>close()</code></td>
+              <td>Method</td>
+              <td>Closes the drawer</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-x-auto rounded-lg border border-border mt-4">
+        <table class="docs-api-table">
+          <thead><tr><th>Class</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>mw-sheet</code></td>
+              <td>Base sheet container</td>
+            </tr>
+            <tr>
+              <td><code>mw-sheet-bottom</code></td>
+              <td>Positions the drawer at the bottom of the screen</td>
+            </tr>
+            <tr>
+              <td><code>mw-overlay</code></td>
+              <td>Semi-transparent backdrop overlay</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>The drawer closes when the Escape key is pressed via @keydown.escape.window</li>
             <li>Clicking the overlay backdrop closes the drawer</li>
-            <li>Smooth slide-up animation with <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">x-transition</code> directives</li>
-            <li>Includes a visual drag handle indicator at the top for mobile UX affordance</li>
-            <li>Consider adding <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="dialog"</code> and <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-modal="true"</code> for screen readers</li>
+            <li>Consider adding role="dialog" and aria-modal="true" for screen readers</li>
             <li>Focus should be trapped within the drawer when open for keyboard navigation</li>
           </ul>
         </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Include a visual drag handle indicator at the top for mobile UX affordance</li>
+            <li>Use smooth slide-up animation with x-transition directives</li>
+            <li>Keep drawer content concise -- use a full Sheet for complex forms</li>
+            <li>Provide a cancel or close button inside the drawer for clarity</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </section>
+
   </div>
 </DocsLayout>

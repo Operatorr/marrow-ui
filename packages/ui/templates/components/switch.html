@@ -2,31 +2,8 @@
 <!-- A toggle switch for on/off states -->
 <!-- Requires: Tailwind CSS, Alpine.js, marrow.css, marrow.js -->
 
-<!-- Switch (off by default) -->
-<div class="flex items-center gap-3" x-data="mwSwitch()">
-  <button class="mw-switch"
-          :data-state="checked ? 'checked' : 'unchecked'"
-          @click="toggle()"
-          role="switch"
-          :aria-checked="checked">
-    <span class="mw-switch-thumb"></span>
-  </button>
-  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
-</div>
-
-<!-- Switch (on by default) -->
-<div class="flex items-center gap-3" x-data="mwSwitch(true)">
-  <button class="mw-switch"
-          :data-state="checked ? 'checked' : 'unchecked'"
-          @click="toggle()"
-          role="switch"
-          :aria-checked="checked">
-    <span class="mw-switch-thumb"></span>
-  </button>
-  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
-</div>
-
-<!-- Switch with label -->
+<!-- @section: Switch -->
+<!-- Switch with label and state display -->
 <div class="flex items-center gap-3" x-data="mwSwitch()">
   <button class="mw-switch"
           :data-state="checked ? 'checked' : 'unchecked'"
@@ -36,7 +13,22 @@
           id="airplane-mode">
     <span class="mw-switch-thumb"></span>
   </button>
-  <label for="airplane-mode" class="mw-label cursor-pointer">Airplane Mode</label>
+  <div class="flex items-center gap-2">
+    <label for="airplane-mode" class="mw-label cursor-pointer">Airplane Mode</label>
+    <span class="text-sm text-muted-foreground" x-text="checked ? 'On' : 'Off'"></span>
+  </div>
+</div>
+
+<!-- Switch (default on) -->
+<div class="flex items-center gap-3" x-data="mwSwitch(true)">
+  <button class="mw-switch"
+          :data-state="checked ? 'checked' : 'unchecked'"
+          @click="toggle()"
+          role="switch"
+          :aria-checked="checked">
+    <span class="mw-switch-thumb"></span>
+  </button>
+  <span class="text-sm" x-text="checked ? 'On' : 'Off'"></span>
 </div>
 
 <!-- Disabled switch -->
@@ -49,4 +41,67 @@
     <span class="mw-switch-thumb"></span>
   </button>
   <span class="text-sm text-muted-foreground">Disabled</span>
+</div>
+<!-- @section: Settings -->
+
+<div class="space-y-6">
+  <!-- Wi-Fi -->
+  <div class="flex items-center justify-between" x-data="mwSwitch(true)">
+    <div class="space-y-0.5">
+      <label class="mw-label cursor-pointer">Wi-Fi</label>
+      <p class="text-sm text-muted-foreground">Connect to wireless networks</p>
+    </div>
+    <button class="mw-switch"
+            :data-state="checked ? 'checked' : 'unchecked'"
+            @click="toggle()"
+            role="switch"
+            :aria-checked="checked">
+      <span class="mw-switch-thumb"></span>
+    </button>
+  </div>
+
+  <!-- Bluetooth -->
+  <div class="flex items-center justify-between" x-data="mwSwitch()">
+    <div class="space-y-0.5">
+      <label class="mw-label cursor-pointer">Bluetooth</label>
+      <p class="text-sm text-muted-foreground">Connect to nearby devices</p>
+    </div>
+    <button class="mw-switch"
+            :data-state="checked ? 'checked' : 'unchecked'"
+            @click="toggle()"
+            role="switch"
+            :aria-checked="checked">
+      <span class="mw-switch-thumb"></span>
+    </button>
+  </div>
+
+  <!-- Dark Mode -->
+  <div class="flex items-center justify-between" x-data="mwSwitch(true)">
+    <div class="space-y-0.5">
+      <label class="mw-label cursor-pointer">Dark Mode</label>
+      <p class="text-sm text-muted-foreground">Use dark color scheme</p>
+    </div>
+    <button class="mw-switch"
+            :data-state="checked ? 'checked' : 'unchecked'"
+            @click="toggle()"
+            role="switch"
+            :aria-checked="checked">
+      <span class="mw-switch-thumb"></span>
+    </button>
+  </div>
+
+  <!-- Notifications -->
+  <div class="flex items-center justify-between" x-data="mwSwitch(true)">
+    <div class="space-y-0.5">
+      <label class="mw-label cursor-pointer">Notifications</label>
+      <p class="text-sm text-muted-foreground">Receive app notifications</p>
+    </div>
+    <button class="mw-switch"
+            :data-state="checked ? 'checked' : 'unchecked'"
+            @click="toggle()"
+            role="switch"
+            :aria-checked="checked">
+      <span class="mw-switch-thumb"></span>
+    </button>
+  </div>
 </div>

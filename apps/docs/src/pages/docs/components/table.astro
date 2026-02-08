@@ -1,139 +1,195 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadTemplate } from "../../../utils/template-loader";
 
-const tableCode = `<div class="overflow-x-auto">
-  <table class="mw-table">
-    <thead>
-      <tr>
-        <th>Invoice</th>
-        <th>Status</th>
-        <th>Method</th>
-        <th class="text-right">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="font-medium">INV-001</td>
-        <td><span class="mw-badge mw-badge-default">Paid</span></td>
-        <td class="text-muted-foreground">Credit Card</td>
-        <td class="text-right">$250.00</td>
-      </tr>
-      <tr>
-        <td class="font-medium">INV-002</td>
-        <td><span class="mw-badge mw-badge-outline">Pending</span></td>
-        <td class="text-muted-foreground">PayPal</td>
-        <td class="text-right">$150.00</td>
-      </tr>
-      <tr>
-        <td class="font-medium">INV-003</td>
-        <td><span class="mw-badge mw-badge-default">Paid</span></td>
-        <td class="text-muted-foreground">Bank Transfer</td>
-        <td class="text-right">$350.00</td>
-      </tr>
-      <tr>
-        <td class="font-medium">INV-004</td>
-        <td><span class="mw-badge mw-badge-destructive">Overdue</span></td>
-        <td class="text-muted-foreground">Credit Card</td>
-        <td class="text-right">$450.00</td>
-      </tr>
-      <tr>
-        <td class="font-medium">INV-005</td>
-        <td><span class="mw-badge mw-badge-default">Paid</span></td>
-        <td class="text-muted-foreground">PayPal</td>
-        <td class="text-right">$550.00</td>
-      </tr>
-    </tbody>
-  </table>
-</div>`;
-
-const usageCode = `<table class="mw-table">
-  <thead>
-    <tr>
-      <th>Header 1</th>
-      <th>Header 2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Data 1</td>
-      <td>Data 2</td>
-    </tr>
-  </tbody>
-</table>`;
+const t = loadTemplate("table");
+const tableCode = t.sections.get("Table")!;
+const usageCode = t.sections.get("Usage")!;
 ---
 
 <DocsLayout title="Table" description="A data table for displaying structured information" activeComponent="table">
-      <div class="space-y-8">
-        <div>
-          <h1 class="font-heading text-3xl font-bold tracking-tight">Table</h1>
-          <p class="mt-2 text-lg text-muted-foreground">A responsive data table for displaying rows and columns of structured information.</p>
+  <div class="space-y-12">
+
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Data Display</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Table</h1>
+      <p class="docs-hero-description mt-3">A responsive data table for displaying rows and columns of structured information.</p>
+    </header>
+
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage">
+        <div class="overflow-x-auto">
+          <table class="mw-table">
+            <thead>
+              <tr>
+                <th>Invoice</th>
+                <th>Status</th>
+                <th>Method</th>
+                <th class="text-right">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-medium">INV-001</td>
+                <td><span class="mw-badge mw-badge-default">Paid</span></td>
+                <td class="text-muted-foreground">Credit Card</td>
+                <td class="text-right">$250.00</td>
+              </tr>
+              <tr>
+                <td class="font-medium">INV-002</td>
+                <td><span class="mw-badge mw-badge-outline">Pending</span></td>
+                <td class="text-muted-foreground">PayPal</td>
+                <td class="text-right">$150.00</td>
+              </tr>
+              <tr>
+                <td class="font-medium">INV-003</td>
+                <td><span class="mw-badge mw-badge-default">Paid</span></td>
+                <td class="text-muted-foreground">Bank Transfer</td>
+                <td class="text-right">$350.00</td>
+              </tr>
+              <tr>
+                <td class="font-medium">INV-004</td>
+                <td><span class="mw-badge mw-badge-destructive">Overdue</span></td>
+                <td class="text-muted-foreground">Credit Card</td>
+                <td class="text-right">$450.00</td>
+              </tr>
+              <tr>
+                <td class="font-medium">INV-005</td>
+                <td><span class="mw-badge mw-badge-default">Paid</span></td>
+                <td class="text-muted-foreground">PayPal</td>
+                <td class="text-right">$550.00</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
+    </section>
 
-        <div class="mw-separator"></div>
-
-        <!-- Preview -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-          <div class="mw-card p-0 overflow-hidden">
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="w-full max-w-3xl mx-auto space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="font-heading text-lg font-semibold">Recent Orders</h3>
+              <p class="text-sm text-muted-foreground">Manage and track your customer orders.</p>
+            </div>
+            <button class="mw-btn mw-btn-primary mw-btn-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              Export
+            </button>
+          </div>
+          <div class="rounded-lg border border-border overflow-hidden">
             <div class="overflow-x-auto">
               <table class="mw-table">
                 <thead>
                   <tr>
-                    <th>Invoice</th>
+                    <th>Order</th>
+                    <th>Customer</th>
                     <th>Status</th>
-                    <th>Method</th>
-                    <th class="text-right">Amount</th>
+                    <th>Date</th>
+                    <th class="text-right">Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="font-medium">INV-001</td>
-                    <td><span class="mw-badge mw-badge-default">Paid</span></td>
-                    <td class="text-muted-foreground">Credit Card</td>
-                    <td class="text-right">$250.00</td>
+                    <td class="font-medium">ORD-7291</td>
+                    <td class="text-muted-foreground">Alice Johnson</td>
+                    <td><span class="mw-badge mw-badge-default">Delivered</span></td>
+                    <td class="text-muted-foreground">Jan 15, 2025</td>
+                    <td class="text-right font-medium">$129.99</td>
                   </tr>
                   <tr>
-                    <td class="font-medium">INV-002</td>
-                    <td><span class="mw-badge mw-badge-outline">Pending</span></td>
-                    <td class="text-muted-foreground">PayPal</td>
-                    <td class="text-right">$150.00</td>
+                    <td class="font-medium">ORD-7292</td>
+                    <td class="text-muted-foreground">Bob Smith</td>
+                    <td><span class="mw-badge mw-badge-outline">Shipped</span></td>
+                    <td class="text-muted-foreground">Jan 16, 2025</td>
+                    <td class="text-right font-medium">$249.00</td>
                   </tr>
                   <tr>
-                    <td class="font-medium">INV-003</td>
-                    <td><span class="mw-badge mw-badge-default">Paid</span></td>
-                    <td class="text-muted-foreground">Bank Transfer</td>
-                    <td class="text-right">$350.00</td>
+                    <td class="font-medium">ORD-7293</td>
+                    <td class="text-muted-foreground">Carol White</td>
+                    <td><span class="mw-badge mw-badge-secondary">Processing</span></td>
+                    <td class="text-muted-foreground">Jan 17, 2025</td>
+                    <td class="text-right font-medium">$89.50</td>
                   </tr>
                   <tr>
-                    <td class="font-medium">INV-004</td>
-                    <td><span class="mw-badge mw-badge-destructive">Overdue</span></td>
-                    <td class="text-muted-foreground">Credit Card</td>
-                    <td class="text-right">$450.00</td>
-                  </tr>
-                  <tr>
-                    <td class="font-medium">INV-005</td>
-                    <td><span class="mw-badge mw-badge-default">Paid</span></td>
-                    <td class="text-muted-foreground">PayPal</td>
-                    <td class="text-right">$550.00</td>
+                    <td class="font-medium">ORD-7294</td>
+                    <td class="text-muted-foreground">David Brown</td>
+                    <td><span class="mw-badge mw-badge-destructive">Cancelled</span></td>
+                    <td class="text-muted-foreground">Jan 18, 2025</td>
+                    <td class="text-right font-medium">$450.00</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-        </div>
-
-        <!-- Usage -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-          <CodeBlock code={usageCode} lang="html" />
-        </div>
-
-        <!-- Code -->
-        <div class="space-y-4">
-          <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-          <CodeBlock code={tableCode} lang="html" />
+          <div class="flex items-center justify-between text-sm text-muted-foreground">
+            <span>Showing 4 of 128 orders</span>
+            <div class="flex gap-2">
+              <button class="mw-btn mw-btn-outline mw-btn-sm" disabled>Previous</button>
+              <button class="mw-btn mw-btn-outline mw-btn-sm">Next</button>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={tableCode} lang="html" />
+        <CodeBlock code={usageCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-table</code></td><td>Base table styles with borders, padding, and hover states</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use semantic <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;th&gt;</code>, and <code>&lt;td&gt;</code> elements</li>
+            <li>Add a <code>&lt;caption&gt;</code> element or <code>aria-label</code> to describe the table's purpose</li>
+            <li>Use <code>scope="col"</code> or <code>scope="row"</code> on <code>&lt;th&gt;</code> elements for complex tables</li>
+            <li>Ensure sufficient color contrast for text and badge status indicators</li>
+            <li>Wrap the table in <code>overflow-x-auto</code> for responsive horizontal scrolling on small screens</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Right-align numeric columns (amounts, quantities) for easier scanning</li>
+            <li>Use badges for status columns to provide visual differentiation</li>
+            <li>Keep column count reasonable -- tables with many columns become hard to read on mobile</li>
+            <li>Consider pagination or virtual scrolling for large datasets</li>
+            <li>Use <code>font-medium</code> on primary identifier columns (e.g., invoice numbers)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </DocsLayout>

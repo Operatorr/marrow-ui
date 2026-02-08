@@ -1,103 +1,29 @@
 ---
 import DocsLayout from "../../../layouts/DocsLayout.astro";
 import CodeBlock from "../../../components/CodeBlock.astro";
+import { loadFull } from "../../../utils/template-loader";
 
-const alertCode = `<!-- Default Alert (Info) -->
-<div class="mw-alert">
-  <div class="flex items-start gap-3">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-         class="mt-0.5 shrink-0">
-      <circle cx="12" cy="12" r="10"/>
-      <path d="M12 16v-4"/>
-      <path d="M12 8h.01"/>
-    </svg>
-    <div>
-      <h5 class="font-medium leading-none tracking-tight">CLI Tool Available</h5>
-      <p class="mt-1 text-sm text-muted-foreground">
-        You can add components to your app using the CLI: <code>npx marrow-ui add alert</code>
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- Destructive Alert (Error) -->
-<div class="mw-alert mw-alert-destructive">
-  <div class="flex items-start gap-3">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-         class="mt-0.5 shrink-0">
-      <circle cx="12" cy="12" r="10"/>
-      <line x1="12" x2="12" y1="8" y2="12"/>
-      <line x1="12" x2="12.01" y1="16" y2="16"/>
-    </svg>
-    <div>
-      <h5 class="font-medium leading-none tracking-tight">Form Validation Error</h5>
-      <p class="mt-1 text-sm">
-        Please fix the following errors before submitting: Email address is required.
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- Success Alert -->
-<div class="mw-alert">
-  <div class="flex items-start gap-3">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-         class="mt-0.5 shrink-0 text-green-600">
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-      <polyline points="22 4 12 14.01 9 11.01"/>
-    </svg>
-    <div>
-      <h5 class="font-medium leading-none tracking-tight">Changes Saved</h5>
-      <p class="mt-1 text-sm text-muted-foreground">
-        Your profile settings have been updated successfully.
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- Warning Alert -->
-<div class="mw-alert">
-  <div class="flex items-start gap-3">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-         class="mt-0.5 shrink-0 text-amber-600">
-      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
-      <path d="M12 9v4"/>
-      <path d="M12 17h.01"/>
-    </svg>
-    <div>
-      <h5 class="font-medium leading-none tracking-tight">Unsaved Changes</h5>
-      <p class="mt-1 text-sm text-muted-foreground">
-        You have unsaved changes. Save your work before navigating away from this page.
-      </p>
-    </div>
-  </div>
-</div>`;
+const alertCode = loadFull("alert");
 ---
 
 <DocsLayout title="Alert" description="Displays a callout for important information or feedback" activeComponent="alert">
-  <div class="space-y-8">
-    <div>
-      <h1 class="font-heading text-3xl font-bold tracking-tight text-pretty">Alert</h1>
-      <p class="mt-2 text-lg text-muted-foreground leading-relaxed">Displays a callout for important information or feedback.</p>
-    </div>
+  <div class="space-y-12">
 
-    <div class="mw-separator"></div>
+    <header>
+      <div class="flex items-center gap-3 mb-4">
+        <span class="docs-badge">Feedback & Status</span>
+        <span class="docs-badge-primary docs-badge">Pure CSS</span>
+      </div>
+      <h1 class="docs-hero-title">Alert</h1>
+      <p class="docs-hero-description mt-3">Displays a callout for important information or feedback. Supports default and destructive variants with custom icons for different alert types.</p>
+    </header>
 
-    <!-- Preview -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Preview</h2>
-      <div class="mw-card space-y-4">
+    <section>
+      <span class="docs-section-label">Preview</span>
+      <div class="docs-stage space-y-8">
         <!-- Default Alert (Info) -->
         <div>
-          <p class="mb-2 text-sm font-medium text-muted-foreground uppercase tracking-wider">Default</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Default</p>
           <div class="mw-alert">
             <div class="flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
@@ -117,7 +43,7 @@ const alertCode = `<!-- Default Alert (Info) -->
 
         <!-- Destructive Alert (Error) -->
         <div>
-          <p class="mb-2 text-sm font-medium text-muted-foreground uppercase tracking-wider">Destructive</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Destructive</p>
           <div class="mw-alert mw-alert-destructive">
             <div class="flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
@@ -137,7 +63,7 @@ const alertCode = `<!-- Default Alert (Info) -->
 
         <!-- Success Alert -->
         <div>
-          <p class="mb-2 text-sm font-medium text-muted-foreground uppercase tracking-wider">Success</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Success</p>
           <div class="mw-alert">
             <div class="flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0 text-green-600" aria-hidden="true">
@@ -156,7 +82,7 @@ const alertCode = `<!-- Default Alert (Info) -->
 
         <!-- Warning Alert -->
         <div>
-          <p class="mb-2 text-sm font-medium text-muted-foreground uppercase tracking-wider">Warning</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-3">Warning</p>
           <div class="mw-alert">
             <div class="flex items-start gap-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0 text-amber-600" aria-hidden="true">
@@ -174,62 +100,108 @@ const alertCode = `<!-- Default Alert (Info) -->
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Code -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Code</h2>
-      <CodeBlock code={alertCode} lang="html" />
-    </div>
-
-    <!-- Usage -->
-    <div class="space-y-4">
-      <h2 class="font-heading text-2xl font-semibold tracking-tight">Usage</h2>
-
-      <div class="space-y-4">
-        <div>
-          <h3 class="font-heading text-lg font-semibold">CSS Classes</h3>
-          <div class="mt-2 mw-card overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-border">
-                  <th class="text-left p-3 font-medium">Class</th>
-                  <th class="text-left p-3 font-medium">Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="border-b border-border">
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-alert</code></td>
-                  <td class="p-3 text-muted-foreground">Base alert styles with border and background</td>
-                </tr>
-                <tr class="border-b border-border">
-                  <td class="p-3"><code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">mw-alert-destructive</code></td>
-                  <td class="p-3 text-muted-foreground">Destructive variant with red border and text for errors</td>
-                </tr>
-              </tbody>
-            </table>
+    <section>
+      <span class="docs-section-label">In Context</span>
+      <div class="docs-stage">
+        <div class="max-w-lg mx-auto space-y-4">
+          <div class="rounded-lg border border-border bg-card p-5 space-y-4">
+            <h3 class="font-heading text-base font-semibold">System Status</h3>
+            <div class="space-y-3">
+              <div class="mw-alert">
+                <div class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0 text-green-600" aria-hidden="true">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                  <div>
+                    <h5 class="font-medium leading-none tracking-tight">Database Connected</h5>
+                    <p class="mt-1 text-sm text-muted-foreground">All database clusters are operational and responding normally.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mw-alert">
+                <div class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0 text-amber-600" aria-hidden="true">
+                    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                    <path d="M12 9v4"/>
+                    <path d="M12 17h.01"/>
+                  </svg>
+                  <div>
+                    <h5 class="font-medium leading-none tracking-tight">High Memory Usage</h5>
+                    <p class="mt-1 text-sm text-muted-foreground">Server memory is at 87%. Consider scaling up or optimizing queries.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mw-alert mw-alert-destructive">
+                <div class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" x2="12" y1="8" y2="12"/>
+                    <line x1="12" x2="12.01" y1="16" y2="16"/>
+                  </svg>
+                  <div>
+                    <h5 class="font-medium leading-none tracking-tight">SSL Certificate Expiring</h5>
+                    <p class="mt-1 text-sm">Your SSL certificate expires in 3 days. Renew immediately to avoid downtime.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Accessibility Notes</h3>
-          <div class="mt-2 space-y-2 text-muted-foreground leading-relaxed">
-            <p>• Add <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">role="alert"</code> for time-sensitive or important messages that require immediate user attention</p>
-            <p>• Use <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-live="polite"</code> for non-urgent notifications</p>
-            <p>• Include <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">aria-hidden="true"</code> on decorative icons</p>
-            <p>• Ensure color is not the only indicator of meaning — always include an icon and descriptive text</p>
-            <p>• Maintain sufficient color contrast for text and icons (WCAG AA minimum 4.5:1)</p>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="font-heading text-lg font-semibold">Customization</h3>
-          <p class="mt-2 text-muted-foreground leading-relaxed">
-            The alert component uses semantic color tokens from your <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">marrow.config.js</code> theme.
-            You can customize the appearance by adding custom icons with Tailwind utilities like <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">text-green-600</code> or <code class="px-1.5 py-0.5 bg-muted rounded text-sm font-mono">text-amber-600</code> to indicate success or warning states.
-          </p>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Code</span>
+      <div class="space-y-4">
+        <CodeBlock code={alertCode} lang="html" />
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">API Reference</span>
+      <div class="overflow-x-auto rounded-lg border border-border">
+        <table class="docs-api-table">
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mw-alert</code></td><td>Base alert styles with border and background</td></tr>
+            <tr><td><code>mw-alert-destructive</code></td><td>Destructive variant with red border and text for errors</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <span class="docs-section-label">Guidelines</span>
+      <div class="space-y-4">
+        <div class="docs-note">
+          <p><strong>Accessibility</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Add <code>role="alert"</code> for time-sensitive or important messages that require immediate user attention</li>
+            <li>Use <code>aria-live="polite"</code> for non-urgent notifications</li>
+            <li>Include <code>aria-hidden="true"</code> on decorative icons</li>
+            <li>Ensure color is not the only indicator of meaning -- always include an icon and descriptive text</li>
+            <li>Maintain sufficient color contrast for text and icons (WCAG AA minimum 4.5:1)</li>
+          </ul>
+        </div>
+        <div class="docs-note">
+          <p><strong>Best Practices</strong></p>
+          <ul class="list-disc list-inside mt-2 space-y-1">
+            <li>Use <code>mw-alert-destructive</code> for error messages and critical warnings</li>
+            <li>Add custom icon colors with Tailwind utilities like <code>text-green-600</code> or <code>text-amber-600</code> to indicate success or warning states</li>
+            <li>Keep alert messages concise and actionable</li>
+            <li>The alert component uses semantic color tokens from your <code>marrow.config.js</code> theme</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </div>
 </DocsLayout>
