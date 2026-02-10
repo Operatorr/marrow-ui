@@ -5,9 +5,10 @@
 Marrow UI uses CSS classes prefixed with `mw-` (e.g., `mw-btn`, `mw-card`, `mw-input`). Interactive components use Alpine.js `x-data` directives. All styling is powered by Tailwind CSS with CSS custom properties for theming.
 
 ## Getting Started
-- [Introduction](https://marrow-ui.dev/docs/introduction): Overview, philosophy, and comparison with shadcn/ui
+- [Introduction](https://marrow-ui.dev/docs/introduction): Overview, philosophy, and comparison with React UI kits
 - [Installation](https://marrow-ui.dev/docs/installation): CDN quick start, CLI setup, project configuration
 - [Customization](https://marrow-ui.dev/docs/customization): Theme config file reference — colors, radius, compactness, fonts, shadows
+- [Full Documentation](https://marrow-ui.dev/llms-full.txt): Complete reference with code examples for all 59 components
 
 ## CLI
 - `npx marrow-ui init` — Scaffold config, CSS, and JS files in your project

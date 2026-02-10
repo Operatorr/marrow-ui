@@ -276,9 +276,9 @@ Marrow UI is optimized for AI coding assistants:
 
 When using Cursor, Claude Code, or Copilot, the AI can reference these files to understand how to use Marrow UI correctly.
 
-## Comparison with shadcn/ui
+## How Marrow UI Compares
 
-| Feature | shadcn/ui | Marrow UI |
+| Feature | React UI Kits | Marrow UI |
 |---------|-----------|-----------|
 | Framework | React | HTML + Alpine.js |
 | Styling | Tailwind CSS | Tailwind CSS |

@@ -163,7 +163,7 @@ module.exports = {
   // ─── ICON LIBRARY ───────────────────────────────────────────────────
   // Which Iconify icon set to use by default.
   // Options (from iconify.design):
-  //   "lucide"          -> Clean, consistent (shadcn default)
+  //   "lucide"          -> Clean, consistent (most popular)
   //   "heroicons"       -> Tailwind's official icons
   //   "phosphor"        -> Flexible, 6 weights
   //   "tabler"          -> 4000+ icons, clean
