@@ -1,3 +1,4 @@
 {
-  "framework": "astro"
+  "framework": "astro",
+  "installCommand": "pnpm install"
 }
